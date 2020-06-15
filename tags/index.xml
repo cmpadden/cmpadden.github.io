@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Developer Log</title>
+    <link>https://cmpadden.github.io/tags/</link>
+    <description>Recent content in Tags on Developer Log</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>© 2020 Colton Padden</copyright>
+    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://cmpadden.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>example</title>
+      <link>https://cmpadden.github.io/tags/example/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/tags/example/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>micropython</title>
+      <link>https://cmpadden.github.io/tags/micropython/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/tags/micropython/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mocks</title>
+      <link>https://cmpadden.github.io/tags/mocks/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/tags/mocks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>testing</title>
+      <link>https://cmpadden.github.io/tags/testing/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/tags/testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>archlinux</title>
+      <link>https://cmpadden.github.io/tags/archlinux/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/tags/archlinux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>personal-knowledge-store</title>
+      <link>https://cmpadden.github.io/tags/personal-knowledge-store/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/tags/personal-knowledge-store/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vagrant</title>
+      <link>https://cmpadden.github.io/tags/vagrant/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/tags/vagrant/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://cmpadden.github.io/tags/docker/</link>
+      <pubDate>Thu, 26 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>selinux</title>
+      <link>https://cmpadden.github.io/tags/selinux/</link>
+      <pubDate>Thu, 26 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/tags/selinux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>apu</title>
+      <link>https://cmpadden.github.io/tags/apu/</link>
+      <pubDate>Sat, 21 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/tags/apu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pcengine</title>
+      <link>https://cmpadden.github.io/tags/pcengine/</link>
+      <pubDate>Sat, 21 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/tags/pcengine/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang=''><link rel="icon" href="/favicon.ico">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Create a Persistent Arch Linux Bootable USB with Vagrant - Developer Log</title>
+
+
+
+<meta name="generator" content="Hugo 0.72.0" />
+
+
+
+    
+    <link rel="stylesheet" href="https://cmpadden.github.io/css/styles.min.579269dcaaaf27779ddd23ef93b0c518df796272035f6b1ff1f3fe63de088c72.css" integrity="sha256-V5Jp3KqvJ3ed3SPvk7DFGN95YnIDX2sf8fP+Y94IjHI=">
+
+<body class="flex flex-col min-h-screen bg-grayish"><nav class="flex justify-between text-gray-200 mx-12 mb-2 py-3 font-semibold">
+    <div>
+        <a href="https://cmpadden.github.io/" class="mr-2 px-2 py-2 hover:bg-gray-600 hover:text-white">
+            Home
+        </a>
+    </div>
+    <div class="justify-end">
+        
+        
+        <a href="https://cmpadden.github.io/posts/" class="mr-2 px-2 py-2 hover:bg-gray-600 hover:text-white">Posts</a>
+        
+        <a href="https://twitter.com/coltonpadden" class="mr-2 px-2 py-2 hover:bg-gray-600 hover:text-white">Twitter</a>
+    </div>
+</nav>
+<main class="flex-1 mt-4">
+<article class="rounded shadow-lg bg-gray-300 mx-4 md:mx-16 mb-10 p-10">
+    <h1 class="font-bold sm:text-2xl md:text-3xl lg:text-4xl text-gray-700">Create a Persistent Arch Linux Bootable USB with Vagrant</h1>
+    <p class="sm:text-xs text-sm text-gray-600 flex items-center mb-4">
+        Thursday, Jan 9, 2020
+    </p>
+    <div class="">
+    <h1 id="preface">Preface</h1>
+<p>When installing a linux distribution, it is common for the instructions to have
+the user create a bootable USB, boot from the device, and proceed with the
+installation procedure from that live medium. However, this blog post will
+outline an alternative approach where a virtual machine created with Vagrant
+will be used in lieu of the live medium.</p>
+<p>The original intention was to use Docker for this process &ndash; leveraging the
+<code>--device</code> flag and mounting the target USB device in the Docker container,
+but the underlying hypervisor in Docker Desktop for Mac does not support this.
+<!-- raw HTML omitted --><a href="https://docs.docker.com/docker-for-mac/docker-toolbox/">1</a> <a href="https://github.com/moby/hyperkit">2</a> <a href="https://github.com/docker/for-mac/issues/900">3</a><!-- raw HTML omitted --> While there are workarounds using Docker
+Machine, Vagrant felt like the path of least resistance.</p>
+<h1 id="instructions">Instructions</h1>
+<h2 id="create-an-arch-linux-virtual-machine-with-vagrant">Create an Arch Linux Virtual Machine with Vagrant</h2>
+<p>Get the latest Arch Linux image <!-- raw HTML omitted --><a href="https://app.vagrantup.com/archlinux/boxes/archlinux">4</a><!-- raw HTML omitted --> from the Vagrant Cloud Box
+Catalog.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vagrant box add archlinux/archlinux
+</code></pre></td></tr></table>
+</div>
+</div><p>Determine the USB vendor information for the thumb-drive that we will
+pass-through to the virtual machine. Using the <code>VBoxManage</code> utility that comes
+with Virtual Box, list the devices, and make note of the Vendor and Product ID.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> VBoxManage list usbhost
+</code></pre></td></tr></table>
+</div>
+</div><p>Create a <code>Vagrantfile</code> with <code>archlinx/archlinux</code> as the target box, and the USB
+device information that is passed through. <!-- raw HTML omitted --><a href="https://antonyjepson.wordpress.com/2012/01/26/quickly-attaching-usb-devices-to-virtualbox-guests-using-vboxmanage/">5</a> <a href="https://gist.github.com/dscape/7d829c0c116ef419f963">6</a><!-- raw HTML omitted --> Vagrant
+offers a handy customization parameter <code>vb.customize</code> that calls the
+<code>VBoxManage</code> command under-the-hood, allowing one to enable the guest machine
+to access the host machine&rsquo;s USB devices.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(&#34;2&#34;) do |config|
+  config.vm.box = &#34;archlinux/archlinux&#34;
+  config.vm.provider &#34;virtualbox&#34; do |vb|
+    vb.name = &#34;archlinux&#34;
+    vb.customize [&#39;modifyvm&#39;, :id, &#39;--usb&#39;, &#39;on&#39;]
+    vb.customize [&#39;usbfilter&#39;, &#39;add&#39;, &#39;1&#39;, &#39;--target&#39;, :id, &#39;--name&#39;, &#39;SanDisk Ultra Fit&#39;, &#39;--vendorid&#39;, &#39;0x0781&#39;, &#39;--productid&#39;, &#39;0x5583&#39;]
+  end
+end
+</code></pre></td></tr></table>
+</div>
+</div><p>When virtual machine is brought up, the <code>usbfilter</code> is applied, and the guest
+is able to access to the host machine&rsquo;s USB device that was specified in the
+filter.</p>
+<p>Start the machine, <code>ssh</code> into the guest, and list the devices to confirm that
+the USB device is available (see: <code>/dev/sdb</code>).</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vagrant up
+$ vagrant ssh
+<span style="color:#f92672">[</span>vagrant@archlinux ~<span style="color:#f92672">]</span>$ lsblk
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda      8:0    <span style="color:#ae81ff">0</span>   20G  <span style="color:#ae81ff">0</span> disk
+├─sda1   8:1    <span style="color:#ae81ff">0</span>  1.9G  <span style="color:#ae81ff">0</span> part <span style="color:#f92672">[</span>SWAP<span style="color:#f92672">]</span>
+└─sda2   8:2    <span style="color:#ae81ff">0</span> 18.1G  <span style="color:#ae81ff">0</span> part /
+sdb      8:16   <span style="color:#ae81ff">1</span> 28.7G  <span style="color:#ae81ff">0</span> disk
+└─sdb1   8:17   <span style="color:#ae81ff">1</span>    8G  <span style="color:#ae81ff">0</span> part
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="install-arch-linux-on-the-usb-drive">Install Arch Linux on the USB Drive</h2>
+<p>The <a href="https://wiki.archlinux.org/index.php/Installation_guide">Arch Linux Installation Guide</a> outlines the installation procedure in
+great detail &ndash; the following steps follow this closely with a few alteration
+due to installing onto removable media.</p>
+<h3 id="partition-the-disk-uefi-with-gpt">Partition the Disk (UEFI with GPT)</h3>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@archlinux ~<span style="color:#f92672">]</span><span style="color:#75715e"># fdisk /dev/sdb</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Command (m for help): p
+Disk /dev/sdb: 28.66 GiB, 30752636928 bytes, 60063744 sectors
+Disk model: Ultra Fit
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: E1D6C445-1B79-AB4D-A442-FA4AD6DF4ECC
+
+Device       Start      End  Sectors  Size Type
+/dev/sdb1     2048  1050623  1048576  512M EFI System
+/dev/sdb2  1050624 60063710 59013087 28.1G Linux filesystem
+
+Filesystem/RAID signature on partition 1 will be wiped.
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="format-the-partitions">Format the Partitions</h3>
+<p>The UEFI specification mandates support for FAT file-systems, and FAT32 is
+recommended for removable media. <!-- raw HTML omitted --><a href="https://wiki.archlinux.org/index.php/EFI_system_partition#Format_the_partition">7</a><!-- raw HTML omitted --></p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@archlinux ~<span style="color:#f92672">]</span><span style="color:#75715e"># pacman -Sy dosfstools</span>
+<span style="color:#f92672">[</span>root@archlinux ~<span style="color:#f92672">]</span><span style="color:#75715e"># mkfs.fat -F32 /dev/sdb1</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>As for the root partition, it is recommended to use <code>ext4</code> without a journal to
+reduce the reads and writes to the file-system as this is detrimental to the
+flash-based USB drive. <!-- raw HTML omitted --><a href="https://wiki.archlinux.org/index.php/Install_Arch_Linux_on_a_USB_key#Installation_tweaks">8</a><!-- raw HTML omitted --></p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@archlinux ~<span style="color:#f92672">]</span><span style="color:#75715e"># mkfs.ext4 -O &#34;^has_journal&#34; /dev/sdb2</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mount-the-partitions-and-bootstrap-the-environment">Mount the Partitions and Bootstrap the Environment</h3>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@archlinux ~<span style="color:#f92672">]</span><span style="color:#75715e"># mount /dev/sdb2 /mnt</span>
+<span style="color:#f92672">[</span>root@archlinux ~<span style="color:#f92672">]</span><span style="color:#75715e"># mkdir -p /mnt/boot/efi</span>
+<span style="color:#f92672">[</span>root@archlinux ~<span style="color:#f92672">]</span><span style="color:#75715e"># mount /dev/sdb1 /mnt/boot/efi</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@archlinux ~<span style="color:#f92672">]</span><span style="color:#75715e"># pacman -S arch-install-scripts</span>
+<span style="color:#f92672">[</span>root@archlinux ~<span style="color:#f92672">]</span><span style="color:#75715e"># pacstrap /mnt base linux linux-firmware</span>
+<span style="color:#f92672">[</span>root@archlinux ~<span style="color:#f92672">]</span><span style="color:#75715e"># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="configure-the-new-environment">Configure the New Environment</h3>
+<pre><code>[root@archlinux ~]# arch-chroot /mnt
+</code></pre><pre><code>[root@archlinux /]# ln -sf /usr/share/zoneinfo/US/Eastern /etc/localtime
+[root@archlinux /]# hwclock --systohc
+[root@archlinux /]# sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
+[root@archlinux /]# locale-gen
+[root@archlinux /]# echo &quot;LANG=en_US.UTF-8&quot; &gt; /etc/locale.conf
+</code></pre><pre><code>[root@archlinux /]# hostnamectl set-hostname usb
+[root@archlinux /]# echo &quot;127.0.0.1        localhost&quot; &gt;&gt; /etc/hosts
+[root@archlinux /]# echo &quot;::1              localhost&quot; &gt;&gt; /etc/hosts
+</code></pre><p>Note, one difference here from a standard installation is that the
+<code>--removable</code> flag is specified when installing the GRUB bootloader.
+<!-- raw HTML omitted --><a href="https://wiki.archlinux.org/index.php/GRUB#UEFI_systems">10</a><!-- raw HTML omitted --></p>
+<pre><code>[root@archlinux /]# pacman -S grub
+[root@archlinux /]# grub-install --target=x86_64-efi --efi-directory=/boot/efi  --removable --recheck
+[root@usb /]# grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre><p>Shutdown the virtual machine, restart the host machine, and boot the newly
+created Arch Linux thumb-drive!</p>
+<p>🎉</p>
+<h2 id="side-note">Side-note</h2>
+<p>It was attempted to use the <code>controlvm usbattach</code> command to pass the USB
+device to the guest machine, but this did not work as it expects the virtual
+machine to already be running, and the <code>vb.customize</code> option runs prior to
+booting the machine. <!-- raw HTML omitted --><a href="https://www.vagrantup.com/docs/virtualbox/configuration.html#vboxmanage-customizations">11</a><!-- raw HTML omitted --></p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Command: [&#34;controlvm&#34;, &#34;060a716b-1965-49e2-bc56-12beed5df716&#34;, &#34;usbattach36fc9e60-c465-11cf-8056-444553540000&#34;]
+
+Stderr: VBoxManage.exe: error: Machine &#39;060a716b-1965-49e2-bc56-12beed5df716&#39; is not currently running.
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="references">References</h2>
+<ol>
+<li><a href="https://docs.docker.com/docker-for-mac/docker-toolbox/">Docker Desktop on Mac vs. Docker Toolbox</a></li>
+<li><a href="https://github.com/moby/hyperkit">GitHub - HyperKit</a></li>
+<li><a href="https://github.com/docker/for-mac/issues/900">GitHub - Docker for Mac - Issue #900</a></li>
+<li><a href="https://app.vagrantup.com/archlinux/boxes/archlinux">Vagrant Cloud - Arch Linux</a></li>
+<li><a href="https://antonyjepson.wordpress.com/2012/01/26/quickly-attaching-usb-devices-to-virtualbox-guests-using-vboxmanage/">Attaching USB Devices to VirtualBox Guests using VBoxManage</a></li>
+<li><a href="https://gist.github.com/dscape/7d829c0c116ef419f963">GitHub Gist - Vagrant USB Filter</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/EFI_system_partition#Format_the_partition">Arch Linux Wiki - EFI System Partition - Format Partitions</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Install_Arch_Linux_on_a_USB_key#Installation_tweaks">Arch Linux Wiki - Arch Linux on USB - Installation Tweaks</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Installation_guide">Arch Linux Wiki - Installation Guide</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/GRUB#UEFI_systems">Arch Linux Wiki - GRUB - UEFI Systems</a></li>
+<li><a href="https://www.vagrantup.com/docs/virtualbox/configuration.html#vboxmanage-customizations">Vagrant VBoxManage Customizations </a></li>
+</ol>
+
+    </div>
+</article>
+
+        </main><footer class="bg-white w-full text-center p-4 pin-b text-xs text-gray-900">
+    <p>made with <a href="https://gohugo.io" class="underline hover:text-blue-400">Hugo</a>, <a
+            href="https://tailwindcss.com" class="underline hover:text-blue-400">TailwindCSS</a> and <a
+            href="https://illlustrations.co/" class="underline hover:text-blue-400">Illlustrations</a>
+    </p>
+</footer>
+</body>
+</html>

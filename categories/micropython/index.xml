@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>micropython on Developer Log</title>
+    <link>https://cmpadden.github.io/categories/micropython/</link>
+    <description>Recent content in micropython on Developer Log</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>© 2020 Colton Padden</copyright>
+    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://cmpadden.github.io/categories/micropython/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Unit Testing in MicroPython with Mocks</title>
+      <link>https://cmpadden.github.io/posts/unit-testing-micropython-with-mocks/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/posts/unit-testing-micropython-with-mocks/</guid>
+      <description>Mocking Unit testing code for embedded systems can be challenging. While it&amp;rsquo;s possible to leverage emulators, write side-effect free code, or run tests on the hardware itself, it&amp;rsquo;s often easiest to unit test the code on your personal computer with mocked hardware functionality.
+Mocks allow us to replace the hardware interfacing functionality under-the-hood with predefined results and side-effects. For example, if there is a piece of logic that retrieves values from an accelerometer to get a device&amp;rsquo;s orientation, it would be possible to mock the returned values of the accelerometer &amp;ndash; allowing us to run the unit tests on a device that does not have an accelerometer sensor installed.</description>
+    </item>
+    
+  </channel>
+</rss>

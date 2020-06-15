@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang=''><link rel="icon" href="/favicon.ico">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit Testing in MicroPython with Mocks - Developer Log</title>
+
+
+
+<meta name="generator" content="Hugo 0.72.0" />
+
+
+
+    
+    <link rel="stylesheet" href="https://cmpadden.github.io/css/styles.min.579269dcaaaf27779ddd23ef93b0c518df796272035f6b1ff1f3fe63de088c72.css" integrity="sha256-V5Jp3KqvJ3ed3SPvk7DFGN95YnIDX2sf8fP+Y94IjHI=">
+
+<body class="flex flex-col min-h-screen bg-grayish"><nav class="flex justify-between text-gray-200 mx-12 mb-2 py-3 font-semibold">
+    <div>
+        <a href="https://cmpadden.github.io/" class="mr-2 px-2 py-2 hover:bg-gray-600 hover:text-white">
+            Home
+        </a>
+    </div>
+    <div class="justify-end">
+        
+        
+        <a href="https://cmpadden.github.io/posts/" class="mr-2 px-2 py-2 hover:bg-gray-600 hover:text-white">Posts</a>
+        
+        <a href="https://twitter.com/coltonpadden" class="mr-2 px-2 py-2 hover:bg-gray-600 hover:text-white">Twitter</a>
+    </div>
+</nav>
+<main class="flex-1 mt-4">
+<article class="rounded shadow-lg bg-gray-300 mx-4 md:mx-16 mb-10 p-10">
+    <h1 class="font-bold sm:text-2xl md:text-3xl lg:text-4xl text-gray-700">Unit Testing in MicroPython with Mocks</h1>
+    <p class="sm:text-xs text-sm text-gray-600 flex items-center mb-4">
+        Friday, Feb 7, 2020
+    </p>
+    <div class="">
+    <h1 id="mocking">Mocking</h1>
+<p>Unit testing code for embedded systems can be challenging. While it&rsquo;s possible
+to leverage emulators, write side-effect free code, or run tests on the
+hardware itself, it&rsquo;s often easiest to unit test the code on your personal
+computer with mocked hardware functionality.</p>
+<p>Mocks allow us to replace the hardware interfacing functionality under-the-hood
+with predefined results and side-effects. For example, if there is a piece of
+logic that retrieves values from an accelerometer to get a device&rsquo;s
+orientation, it would be possible to mock the returned values of the
+accelerometer &ndash; allowing us to run the unit tests on a device that does not
+have an accelerometer sensor installed.</p>
+<h1 id="a-micropython-mocking-example">A MicroPython Mocking Example</h1>
+<p>In this example, we will be unit testing a module named <code>time_logger</code>, that
+depends on the MicroPython library <code>utime</code> to log the most recent Epoch time to
+a file.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># time_logger.py</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">TimeLogger</span><span style="color:#111">(</span><span style="color:#111">object</span><span style="color:#111">):</span>
+
+    <span style="color:#00a8c8">def</span> <span style="color:#75af00">save_time</span><span style="color:#111">(</span><span style="color:#111">self</span><span style="color:#111">):</span>
+        <span style="color:#d88200">&#34;&#34;&#34; Overwrite a file with the most recent Epoch timestamp from `utime`
+</span><span style="color:#d88200">        &#34;&#34;&#34;</span>
+        <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;LAST_KNOWN_TIME&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;w+&#34;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">f</span><span style="color:#111">:</span>
+            <span style="color:#111">f</span><span style="color:#f92672">.</span><span style="color:#111">write</span><span style="color:#111">(</span><span style="color:#111">str</span><span style="color:#111">(</span><span style="color:#111">utime</span><span style="color:#f92672">.</span><span style="color:#111">time</span><span style="color:#111">()))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>First, because the <code>utime</code> module is not installed on the machine that the unit
+tests on, we must mock <code>utime</code> module before importing <code>time_logger</code> in our
+unit test file.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># test_time_logger.py</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">unittest</span>
+
+<span style="color:#f92672">from</span> <span style="color:#111">unittest.mock</span> <span style="color:#f92672">import</span> <span style="color:#111">MagicMock</span>
+
+<span style="color:#111">sys</span><span style="color:#f92672">.</span><span style="color:#111">modules</span><span style="color:#111">[</span><span style="color:#d88200">&#39;utime&#39;</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">MagicMock</span><span style="color:#111">()</span>
+<span style="color:#f92672">from</span> <span style="color:#111">time_logger</span> <span style="color:#f92672">import</span> <span style="color:#111">TimeLogger</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Then, we can write a test that patches the <code>utime.time</code> functionality so that
+it returns a value of our choosing &ndash; in this case, <code>1234</code>.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">class</span> <span style="color:#75af00">TestTimeLogger</span><span style="color:#111">(</span><span style="color:#111">unittest</span><span style="color:#f92672">.</span><span style="color:#111">TestCase</span><span style="color:#111">):</span>
+
+    <span style="color:#00a8c8">def</span> <span style="color:#75af00">test_save_time</span><span style="color:#111">(</span><span style="color:#111">self</span><span style="color:#111">):</span>
+        <span style="color:#d88200">&#34;&#34;&#34; Verify that the Epoch time is written to file
+</span><span style="color:#d88200">        &#34;&#34;&#34;</span>
+        <span style="color:#00a8c8">with</span> <span style="color:#111">unittest</span><span style="color:#f92672">.</span><span style="color:#111">mock</span><span style="color:#f92672">.</span><span style="color:#111">patch</span><span style="color:#111">(</span><span style="color:#d88200">&#34;utime.time&#34;</span><span style="color:#111">,</span> <span style="color:#111">return_value</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1234</span><span style="color:#111">):</span>
+            <span style="color:#111">t</span> <span style="color:#f92672">=</span> <span style="color:#111">TimeLogger</span><span style="color:#111">()</span>
+            <span style="color:#111">t</span><span style="color:#f92672">.</span><span style="color:#111">save_time</span><span style="color:#111">()</span>
+            <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;LAST_KNOWN_TIME&#34;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">f</span><span style="color:#111">:</span>
+                <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">assertEqual</span><span style="color:#111">(</span><span style="color:#d88200">&#34;1234&#34;</span><span style="color:#111">,</span> <span style="color:#111">f</span><span style="color:#f92672">.</span><span style="color:#111">read</span><span style="color:#111">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now, when the <code>save_time</code> method gets the latest time from <code>utime.time()</code>, the
+value will be patched to return <code>1234</code>. That value will be written to a file,
+and our unit test will pass!</p>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://docs.python.org/3/library/unittest.html"><code>unittest</code> — Unit testing framework</a></li>
+</ol>
+
+    </div>
+</article>
+
+        </main><footer class="bg-white w-full text-center p-4 pin-b text-xs text-gray-900">
+    <p>made with <a href="https://gohugo.io" class="underline hover:text-blue-400">Hugo</a>, <a
+            href="https://tailwindcss.com" class="underline hover:text-blue-400">TailwindCSS</a> and <a
+            href="https://illlustrations.co/" class="underline hover:text-blue-400">Illlustrations</a>
+    </p>
+</footer>
+</body>
+</html>

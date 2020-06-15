@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang=''><link rel="icon" href="/favicon.ico">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Upgrading the Firmware on the PCEngines APU2 - Developer Log</title>
+
+
+
+<meta name="generator" content="Hugo 0.72.0" />
+
+
+
+    
+    <link rel="stylesheet" href="https://cmpadden.github.io/css/styles.min.579269dcaaaf27779ddd23ef93b0c518df796272035f6b1ff1f3fe63de088c72.css" integrity="sha256-V5Jp3KqvJ3ed3SPvk7DFGN95YnIDX2sf8fP+Y94IjHI=">
+
+<body class="flex flex-col min-h-screen bg-grayish"><nav class="flex justify-between text-gray-200 mx-12 mb-2 py-3 font-semibold">
+    <div>
+        <a href="https://cmpadden.github.io/" class="mr-2 px-2 py-2 hover:bg-gray-600 hover:text-white">
+            Home
+        </a>
+    </div>
+    <div class="justify-end">
+        
+        
+        <a href="https://cmpadden.github.io/posts/" class="mr-2 px-2 py-2 hover:bg-gray-600 hover:text-white">Posts</a>
+        
+        <a href="https://twitter.com/coltonpadden" class="mr-2 px-2 py-2 hover:bg-gray-600 hover:text-white">Twitter</a>
+    </div>
+</nav>
+<main class="flex-1 mt-4">
+<article class="rounded shadow-lg bg-gray-300 mx-4 md:mx-16 mb-10 p-10">
+    <h1 class="font-bold sm:text-2xl md:text-3xl lg:text-4xl text-gray-700">Upgrading the Firmware on the PCEngines APU2</h1>
+    <p class="sm:text-xs text-sm text-gray-600 flex items-center mb-4">
+        Saturday, Dec 21, 2019
+    </p>
+    <div class="">
+    <p>I&rsquo;ve had a <a href="https://pcengines.ch/apu2.htm">PCEngines APU2</a> gathering dust for a
+few years, and have recently decided to dust it off.</p>
+<p>Since the last time the device has been powered on, there have been many great
+improvements to the firmware, and it was very-much due for an upgrade. The
+following steps outline how the firmware was upgraded on the APU from the
+already-installed operating system &ndash; CentOS.</p>
+<p>First, we will connect to the device over the serial port</p>
+<pre><code>screen /dev/tty.usbserial 115200
+</code></pre><p>Then, we will install the <code>flashrom</code> utility that is needed to update the
+firmware. Because it is not available in the default <code>yum</code> repositories, we
+will enable the <em>Extra Packages for Enterprise Linux</em> (EPEL) repository before
+installation.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install epel-release
+sudo yum install flashrom
+</code></pre></td></tr></table>
+</div>
+</div><p>Next, we will download the latest version of the firmware that is compatible
+with the APU2 device from the PC Engines release website:
+<a href="https://pcengines.github.io/">https://pcengines.github.io/</a>.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -O https://3mdeb.com/open-source-firmware/pcengines/apu2/apu2_v4.11.0.1.rom
+</code></pre></td></tr></table>
+</div>
+</div><p>And finally, we will flash the firmware&hellip;</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo flashrom -w apu2_v4.11.0.1.rom -p internal:boardmismatch<span style="color:#f92672">=</span>force
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>References:</strong></p>
+<ul>
+<li><a href="https://pcengines.ch/apu2.htm">https://pcengines.ch/apu2.htm</a></li>
+<li><a href="https://pcengines.github.io/">https://pcengines.github.io/</a></li>
+<li><a href="https://github.com/pcengines/apu2-documentation/blob/master/docs/firmware_flashing.md">https://github.com/pcengines/apu2-documentation/blob/master/docs/firmware_flashing.md</a></li>
+<li><a href="https://github.com/pcengines/apu2-documentation/blob/master/docs/cold_reset.md">https://github.com/pcengines/apu2-documentation/blob/master/docs/cold_reset.md</a></li>
+<li><a href="https://github.com/elad/openbsd-apu2">https://github.com/elad/openbsd-apu2</a></li>
+</ul>
+
+    </div>
+</article>
+
+        </main><footer class="bg-white w-full text-center p-4 pin-b text-xs text-gray-900">
+    <p>made with <a href="https://gohugo.io" class="underline hover:text-blue-400">Hugo</a>, <a
+            href="https://tailwindcss.com" class="underline hover:text-blue-400">TailwindCSS</a> and <a
+            href="https://illlustrations.co/" class="underline hover:text-blue-400">Illlustrations</a>
+    </p>
+</footer>
+</body>
+</html>
