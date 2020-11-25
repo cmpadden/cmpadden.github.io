@@ -2,7 +2,7 @@
 <html lang=''><link rel="icon" href="/favicon.ico">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Posts - Developer Log</title>
+<title>tutorial - Developer Log</title>
 
 
 
@@ -67,109 +67,6 @@ Mocks allow us to replace the hardware interfacing functionality under-the-hood 
                         </span><span
                             class="inline-block bg-gray-200 px-3 py-1 mr-2 text-sm text-blue-500 mr-2 hover:text-black">
                             <a class="tag" href="/tags/tutorial/">tutorial</a>
-                        </span></div>
-
-                </div>
-            </div>
-            
-            <div>
-                <div class="rounded-md shadow-lg bg-gray-300 h-full relative">
-
-                    
-                    <div class="px-4">
-                        <div class="font-bold text-xl py-2">
-                            <a class="gradient-underline" href="https://cmpadden.github.io/posts/persistent-archlinux-usb/">Create a Persistent Arch Linux Bootable USB with Vagrant</a>
-                        </div>
-                        <p class="text-sm text-gray-600 flex items-center">
-                            Thursday, Jan 9, 2020
-                        </p>
-                        <hr />
-
-                    </div>
-
-                    <div class="px-4 pt-4 pb-8 mb-3 rounded-b-md bg-gray-100">
-                        <p class="text-gray-700 text-base">
-                            Preface When installing a linux distribution, it is common for the instructions to have the user create a bootable USB, boot from the device, and proceed with the installation procedure from that live medium. However, this blog post will outline an alternative approach where a virtual machine created with Vagrant will be used in lieu of the live medium.
-The original intention was to use Docker for this process &ndash; leveraging the --device flag and mounting the target USB device in the Docker container, but the underlying hypervisor in Docker Desktop for Mac does not support this.
-                        </p>
-                    </div>
-
-                    
-                    <div class="mb-2 absolute bottom-0 right-0"><span
-                            class="inline-block bg-gray-200 px-3 py-1 mr-2 text-sm text-blue-500 mr-2 hover:text-black">
-                            <a class="tag" href="/tags/vagrant/">vagrant</a>
-                        </span><span
-                            class="inline-block bg-gray-200 px-3 py-1 mr-2 text-sm text-blue-500 mr-2 hover:text-black">
-                            <a class="tag" href="/tags/archlinux/">archlinux</a>
-                        </span></div>
-
-                </div>
-            </div>
-            
-            <div>
-                <div class="rounded-md shadow-lg bg-gray-300 h-full relative">
-
-                    
-                    <div class="px-4">
-                        <div class="font-bold text-xl py-2">
-                            <a class="gradient-underline" href="https://cmpadden.github.io/posts/docker-selinux-volumes/">Docker Volume Permissions with SELinux</a>
-                        </div>
-                        <p class="text-sm text-gray-600 flex items-center">
-                            Thursday, Dec 26, 2019
-                        </p>
-                        <hr />
-
-                    </div>
-
-                    <div class="px-4 pt-4 pb-8 mb-3 rounded-b-md bg-gray-100">
-                        <p class="text-gray-700 text-base">
-                            Unfamiliar with running Docker on a SELinux enabled system, I found myself running into a bunch of file permission errors while creating volumes.
-1  mkdir: can&#39;t create directory &#39;/data&#39;: Permission denied    1 2 3 4 5  $ docker info --format &#39;{{json .SecurityOptions}}&#39; [ &#34;name=seccomp,profile=/etc/docker/seccomp.json&#34;, &#34;name=selinux&#34; ]   It turns out that this can be resolved by appending the :z flag to the volume mappings in the docker-compose.
-                        </p>
-                    </div>
-
-                    
-                    <div class="mb-2 absolute bottom-0 right-0"><span
-                            class="inline-block bg-gray-200 px-3 py-1 mr-2 text-sm text-blue-500 mr-2 hover:text-black">
-                            <a class="tag" href="/tags/docker/">docker</a>
-                        </span><span
-                            class="inline-block bg-gray-200 px-3 py-1 mr-2 text-sm text-blue-500 mr-2 hover:text-black">
-                            <a class="tag" href="/tags/selinux/">selinux</a>
-                        </span></div>
-
-                </div>
-            </div>
-            
-            <div>
-                <div class="rounded-md shadow-lg bg-gray-300 h-full relative">
-
-                    
-                    <div class="px-4">
-                        <div class="font-bold text-xl py-2">
-                            <a class="gradient-underline" href="https://cmpadden.github.io/posts/apu2-firmware-upgrade/">Upgrading the Firmware on the PCEngines APU2</a>
-                        </div>
-                        <p class="text-sm text-gray-600 flex items-center">
-                            Saturday, Dec 21, 2019
-                        </p>
-                        <hr />
-
-                    </div>
-
-                    <div class="px-4 pt-4 pb-8 mb-3 rounded-b-md bg-gray-100">
-                        <p class="text-gray-700 text-base">
-                            I&rsquo;ve had a PCEngines APU2 gathering dust for a few years, and have recently decided to dust it off.
-Since the last time the device has been powered on, there have been many great improvements to the firmware, and it was very-much due for an upgrade. The following steps outline how the firmware was upgraded on the APU from the already-installed operating system &ndash; CentOS.
-First, we will connect to the device over the serial port
-                        </p>
-                    </div>
-
-                    
-                    <div class="mb-2 absolute bottom-0 right-0"><span
-                            class="inline-block bg-gray-200 px-3 py-1 mr-2 text-sm text-blue-500 mr-2 hover:text-black">
-                            <a class="tag" href="/tags/pcengine/">pcengine</a>
-                        </span><span
-                            class="inline-block bg-gray-200 px-3 py-1 mr-2 text-sm text-blue-500 mr-2 hover:text-black">
-                            <a class="tag" href="/tags/apu/">apu</a>
                         </span></div>
 
                 </div>

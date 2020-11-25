@@ -6,11 +6,7 @@
     <description>Recent content in vagrant on Developer Log</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>© 2020 Colton Padden</copyright>
-    <lastBuildDate>Thu, 09 Jan 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://cmpadden.github.io/tags/vagrant/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 09 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://cmpadden.github.io/tags/vagrant/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Create a Persistent Arch Linux Bootable USB with Vagrant</title>
       <link>https://cmpadden.github.io/posts/persistent-archlinux-usb/</link>

@@ -6,20 +6,7 @@
     <description>Recent content in Tags on Developer Log</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>© 2020 Colton Padden</copyright>
-    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://cmpadden.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>example</title>
-      <link>https://cmpadden.github.io/tags/example/</link>
-      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://cmpadden.github.io/tags/example/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://cmpadden.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>micropython</title>
       <link>https://cmpadden.github.io/tags/micropython/</link>
@@ -48,20 +35,20 @@
     </item>
     
     <item>
+      <title>tutorial</title>
+      <link>https://cmpadden.github.io/tags/tutorial/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://cmpadden.github.io/tags/tutorial/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>archlinux</title>
       <link>https://cmpadden.github.io/tags/archlinux/</link>
       <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://cmpadden.github.io/tags/archlinux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>personal-knowledge-store</title>
-      <link>https://cmpadden.github.io/tags/personal-knowledge-store/</link>
-      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://cmpadden.github.io/tags/personal-knowledge-store/</guid>
       <description></description>
     </item>
     

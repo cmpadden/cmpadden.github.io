@@ -6,11 +6,7 @@
     <description>Recent content in selinux on Developer Log</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>© 2020 Colton Padden</copyright>
-    <lastBuildDate>Thu, 26 Dec 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://cmpadden.github.io/tags/selinux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 26 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://cmpadden.github.io/tags/selinux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker Volume Permissions with SELinux</title>
       <link>https://cmpadden.github.io/posts/docker-selinux-volumes/</link>

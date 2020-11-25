@@ -13,17 +13,12 @@
   </url>
   
   <url>
-    <loc>https://cmpadden.github.io/tags/example/</loc>
+    <loc>https://cmpadden.github.io/categories/embedded/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://cmpadden.github.io/tags/micropython/</loc>
-    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://cmpadden.github.io/categories/micropython/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
   </url>
   
@@ -38,12 +33,22 @@
   </url>
   
   <url>
+    <loc>https://cmpadden.github.io/categories/python/</loc>
+    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://cmpadden.github.io/tags/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://cmpadden.github.io/tags/testing/</loc>
+    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://cmpadden.github.io/tags/tutorial/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
   </url>
   
@@ -68,11 +73,6 @@
   </url>
   
   <url>
-    <loc>https://cmpadden.github.io/tags/personal-knowledge-store/</loc>
-    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://cmpadden.github.io/tags/vagrant/</loc>
     <lastmod>2020-01-09T00:00:00+00:00</lastmod>
   </url>
@@ -89,11 +89,6 @@
   
   <url>
     <loc>https://cmpadden.github.io/tags/selinux/</loc>
-    <lastmod>2019-12-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://cmpadden.github.io/categories/sysadmin/</loc>
     <lastmod>2019-12-26T00:00:00+00:00</lastmod>
   </url>
   
