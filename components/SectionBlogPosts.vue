@@ -7,19 +7,31 @@
 
       <div v-for="article of articles" :key="article.slug">
         <NuxtLink :to="{ name: 'posts-slug', params: { slug: article.slug } }">
-          <div class="shadow-lg bg-gray-200 hover:bg-blue-100 mb-2">
+          <div
+            class="
+              shadow-lg
+              hover:bg-blue-200
+              text-white
+              hover:text-black
+              mb-2
+              border
+            "
+          >
             <div class="flex">
-              <div class="flex-grow py-2 pl-4">
+              <div class="flex-grow py-4 pl-4">
                 <div class="font-bold text-xl">
                   {{ article.title }}
                 </div>
 
-                <div class="text-sm text-gray-500">
+                <div class="text-sm">
                   {{ article.date }}
                 </div>
               </div>
 
-              <div v-if="article.tags.includes('tip')" class="flex flex-wrap content-center bg-gray-100 p-4">
+              <div
+                v-if="article.tags.includes('tip')"
+                class="flex flex-wrap content-center p-4"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-6 w-6 hover:text-yellow-800"

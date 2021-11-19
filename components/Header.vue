@@ -3,18 +3,18 @@
     <div class="mx-6 md:mx-12">
       <div class="flex justify-between text-gray-200 pt-3 font-semibold">
         <div>
-          <NuxtLink to="/" class="mr-2 text-white hover:text-pink-600">
+          <NuxtLink to="/" class="mr-2 text-white hover:text-blue-200">
             Home
           </NuxtLink>
         </div>
         <div class="">
           <!-- right-aligned items -->
-          <NuxtLink to="/posts" class="mr-2 text-white hover:text-pink-600">
+          <NuxtLink to="/posts" class="mr-2 text-white hover:text-blue-200">
             Blog
           </NuxtLink>
           <a href="https://github.com/cmpadden" class="mr-2">
             <svg
-              class="inline h-4 w-4 fill-current text-white hover:text-pink-600"
+              class="inline h-4 w-4 fill-current text-white hover:text-blue-200"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
             >
