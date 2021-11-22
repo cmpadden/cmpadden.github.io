@@ -2,6 +2,12 @@
 *                               Customizations                               *
 ******************************************************************************/
 
+// prevent double-tap to zoom when clicking buttons
+// see: https://github.com/tailwindlabs/tailwindcss/discussions/3020
+button {
+  touch-action: manipulation;
+}
+
 .gradient-highlight {
   color: theme('colors.white');
   background-image: linear-gradient(
