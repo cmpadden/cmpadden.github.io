@@ -9,6 +9,7 @@ export default {
     fontFamily: {
       display: ['Gilroy', 'sans-serif'],
       body: ['Graphik', 'sans-serif'],
+      mono: ['ui-monospace', 'SFMono-Regular'],
     },
     borderWidth: {
       default: '1px',
