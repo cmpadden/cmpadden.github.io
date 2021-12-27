@@ -46,7 +46,7 @@ credentials to their default value, you can issue the following command.
 ```
 
 Where `0x3c` is the `<netfn>` argument, a.k.a. the network function code that defines the functional routing for
-messages, and `0x40` is the `<cmd>`. According to section 5.1 of the _[IPMI interface
+messages, and `0x40` is the `<cmd>`. According to section 5.1 of the [IPMI interface
 specification](https://www.intel.com/content/dam/www/public/us/en/documents/product-briefs/ipmi-second-gen-interface-spec-v2-rev1-1.pdf),
 _netfn_ codes ranging from 0x30 to 0x3F are reserved for vendor specific functions. I searched around for some
 Supermicro references on these vendor specific network functions without much luck other than various [support
