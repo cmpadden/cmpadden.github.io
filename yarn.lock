@@ -42,7 +42,7 @@
     semver "^6.3.0"
     source-map "^0.5.0"
 
-"@babel/eslint-parser@^7.12.16", "@babel/eslint-parser@^7.14.7":
+"@babel/eslint-parser@^7.12.16", "@babel/eslint-parser@^7.16.5":
   version "7.16.5"
   resolved "https://registry.yarnpkg.com/@babel/eslint-parser/-/eslint-parser-7.16.5.tgz#48d3485091d6e36915358e4c0d0b2ebe6da90462"
   integrity sha512-mUqYa46lgWqHKQ33Q6LNCGp/wPR3eqOYTUixHFsfrSQqRxH0+WOzca75iEjFr5RDGH1dDz622LaHhLOzOuQRUA==
@@ -1128,7 +1128,7 @@
     std-env "^2.3.0"
     ufo "^0.7.4"
 
-"@nuxt/content@^1.15.0":
+"@nuxt/content@^1.15.1":
   version "1.15.1"
   resolved "https://registry.yarnpkg.com/@nuxt/content/-/content-1.15.1.tgz#bd2c7ff9e9523b6a6a3f4edaec78495acc72a41e"
   integrity sha512-nCTKwNcs59KgwwGQkSW8Z/otoiYX+OKDBjdOLn7tty3WdEfPQYcEkTX6WKP5IVYI976FihZExppRiezkm2N0mQ==
@@ -1323,7 +1323,7 @@
     rc9 "^1.2.0"
     std-env "^2.3.0"
 
-"@nuxt/types@^2.15.2", "@nuxt/types@^2.15.7":
+"@nuxt/types@^2.15.2", "@nuxt/types@^2.15.8":
   version "2.15.8"
   resolved "https://registry.yarnpkg.com/@nuxt/types/-/types-2.15.8.tgz#1249de448f68169fe17e9379ee7b5caa0eb336b0"
   integrity sha512-zBAG5Fy+SIaZIerOVF1vxy1zz16ZK07QSbsuQAjdtEFlvr+vKK+0AqCv8r8DBY5IVqdMIaw5FgNUz5py0xWdPg==
@@ -3393,7 +3393,7 @@ core-js@^2.6.5:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
   integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
-core-js@^3.15.1:
+core-js@^3.20.1:
   version "3.20.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.20.1.tgz#eb1598047b7813572f1dc24b7c6a95528c99eef3"
   integrity sha512-btdpStYFQScnNVQ5slVcr858KP0YWYjV16eGJQw8Gg7CWtu/2qNvIM3qVRIR3n1pK2R9NNOrTevbvAYxajwEjg==
@@ -4353,7 +4353,7 @@ eslint-webpack-plugin@^2.4.1:
     normalize-path "^3.0.0"
     schema-utils "^3.1.1"
 
-eslint@^8.4.1:
+eslint@^8.5.0:
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.5.0.tgz#ddd2c1afd8f412036f87ae2a063d2aa296d3175f"
   integrity sha512-tVGSkgNbOfiHyVte8bCM8OmX+xG9PzVG/B4UCF60zx7j61WIVY/AqJECDgpLD4DbbESD0e174gOg3ZlrX15GDg==
@@ -6088,7 +6088,7 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
-lint-staged@^12.1.2:
+lint-staged@^12.1.4:
   version "12.1.4"
   resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.1.4.tgz#a92ec8509f13018caaafade61d515c2d5873316e"
   integrity sha512-RgDz9nsFsE0/5eL9Vat0AvCuk0+j5mEuzBIVfrRH5FRtt5wibYe8zTjZs2nuqLFrLAGQGYnj8+HJxolcj08i/A==
@@ -7038,7 +7038,7 @@ num2fraction@^1.2.2:
   resolved "https://registry.yarnpkg.com/num2fraction/-/num2fraction-1.2.2.tgz#6f682b6a027a4e9ddfa4564cd2589d1d4e669ede"
   integrity sha1-b2gragJ6Tp3fpFZM0lidHU5mnt4=
 
-nuxt-windicss@^2.0.12:
+nuxt-windicss@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/nuxt-windicss/-/nuxt-windicss-2.2.1.tgz#0d853e43d49e9aa85feedcf589af5e1971364211"
   integrity sha512-K8Fq+iHBoCZt/Z8LF6REe6vAlkxdVvSMN5kEcF+36qfZoIJYasVErfZqWoBHTW1x7MkK9yiLsxrQIlfl/vvSZg==
@@ -7057,7 +7057,7 @@ nuxt-windicss@^2.0.12:
     windicss-analysis "^0.3.5"
     windicss-webpack-plugin "^1.6.2"
 
-nuxt@^2.15.7:
+nuxt@^2.15.8:
   version "2.15.8"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.15.8.tgz#946cba46bdaaf0e3918aa27fd9ea0fed8ed303b0"
   integrity sha512-ceK3qLg/Baj7J8mK9bIxqw9AavrF+LXqwYEreBdY/a4Sj8YV4mIvhqea/6E7VTCNNGvKT2sJ/TTJjtfQ597lTA==
@@ -8238,7 +8238,7 @@ prepend-http@^1.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
 
-"prettier@^1.18.2 || ^2.0.0", prettier@^2.3.2:
+"prettier@^1.18.2 || ^2.0.0", prettier@^2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.5.1.tgz#fff75fa9d519c54cf0fce328c1017d94546bc56a"
   integrity sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==

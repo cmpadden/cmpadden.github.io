@@ -15,23 +15,23 @@
     "*.{js,vue}": "eslint"
   },
   "dependencies": {
-    "@nuxt/content": "^1.15.0",
-    "core-js": "^3.15.1",
-    "nuxt": "^2.15.7"
+    "@nuxt/content": "^1.15.1",
+    "core-js": "^3.20.1",
+    "nuxt": "^2.15.8"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.14.7",
-    "@nuxt/types": "^2.15.7",
+    "@babel/eslint-parser": "^7.16.5",
+    "@nuxt/types": "^2.15.8",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^8.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
-    "eslint": "^8.4.1",
+    "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^3.1.0",
     "eslint-plugin-vue": "^8.2.0",
     "husky": "^7.0.4",
-    "lint-staged": "^12.1.2",
-    "nuxt-windicss": "^2.0.12",
-    "prettier": "^2.3.2"
+    "lint-staged": "^12.1.4",
+    "nuxt-windicss": "^2.2.1",
+    "prettier": "^2.5.1"
   }
 }
