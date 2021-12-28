@@ -50,9 +50,9 @@
             class="
               object-center object-cover
               rounded-full
-              h-40
-              w-40
-              ring ring-blue-200
+              h-32
+              w-32
+              ring-2 ring-white
             "
             src="https://avatars.githubusercontent.com/u/5807118?v=4"
             alt="Colton Padden Avatar"
