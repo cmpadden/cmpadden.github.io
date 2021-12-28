@@ -14,7 +14,7 @@ export default Vue.extend({
     const articles = await $content('articles')
       .only(['title', 'description', 'date', 'img', 'slug', 'author', 'tags'])
       .sortBy('date', 'desc')
-      .limit(3)
+      .limit(5)
       .fetch()
 
     return {
