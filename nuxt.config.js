@@ -37,8 +37,8 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
+    '@nuxtjs/google-analytics',
+    '@nuxt/typescript-build', // https://go.nuxtjs.dev/typescript
     'nuxt-windicss',
   ],
 
@@ -47,4 +47,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  // https://google-analytics.nuxtjs.org/setup
+  googleAnalytics: {
+    id: 'UA-154282803-1'
+  }
 }
