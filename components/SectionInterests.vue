@@ -20,7 +20,7 @@
           <div class="w-full md:w-1/3 p-2">
             <div class="bg-black bg-opacity-50 h-full p-3 border">
               <h3 class="text-xl font-bold text-center pb-2">
-                Air Quality Initiative
+                Air Quality
               </h3>
               <p class="text-base mb-8">
                 I am a founding member and technical adviser to

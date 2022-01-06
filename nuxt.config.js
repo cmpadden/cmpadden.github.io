@@ -30,7 +30,7 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/vue-carbonbadge'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -50,6 +50,6 @@ export default {
 
   // https://google-analytics.nuxtjs.org/setup
   googleAnalytics: {
-    id: 'UA-154282803-1'
-  }
+    id: 'UA-154282803-1',
+  },
 }
