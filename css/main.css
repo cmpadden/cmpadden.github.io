@@ -47,20 +47,20 @@ button {
  * Custom bullet-point coloring
  */
 
-ol,
-ul {
+.custom-list {
   @apply list-disc ml-8;
-}
-
-ul {
   list-style: none; /* Remove default bullets */
 }
 
-ul li::before {
+.custom-list > li::before {
   content: '\2022';
-  color: theme('colors.pink.700');
-  font-weight: bold;
+  color: theme('colors.blue.200');
   display: inline-block;
-  width: 1em;
-  margin-left: -1em;
+  width: 1.5em;
+  margin-left: -1.5em;
+}
+
+code {
+  /* temporary fix to remove strange rendering of text via prism */
+  text-shadow: none;
 }
