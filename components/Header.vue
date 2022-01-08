@@ -8,7 +8,7 @@
               Home
             </NuxtLink>
           </div>
-          <div class="">
+          <div>
             <!-- right-aligned items -->
             <NuxtLink to="/posts" class="mr-2 text-white hover:text-blue-200">
               Blog

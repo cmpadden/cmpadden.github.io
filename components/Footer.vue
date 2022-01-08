@@ -10,7 +10,7 @@
       >
       &amp;
       <a href="https://windicss.org/" class="underline hover:text-blue-400"
-        >Windi CSS</a
+        >WindiCSS</a
       >
     </div>
     <CarbonBadge :dark="true" />

@@ -8,7 +8,7 @@
               <h3 class="text-xl font-bold text-center pb-2">
                 Technical Interests
               </h3>
-              <ul class="text-base">
+              <ul class="custom-list text-base">
                 <li>Data Pipeline Engineering</li>
                 <li>Distributed Systems</li>
                 <li>Embedded Systems</li>

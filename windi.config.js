@@ -7,9 +7,9 @@ export default {
       xl: '1280px',
     },
     fontFamily: {
-      display: ['Gilroy', 'sans-serif'],
+      display: ['Helvetica', 'sans-serif'],
       body: ['Graphik', 'sans-serif'],
-      mono: ['ui-monospace', 'SFMono-Regular'],
+      mono: ['Inconsolata', 'monospace'],
     },
     borderWidth: {
       default: '1px',
@@ -27,6 +27,15 @@ export default {
         96: '24rem',
         128: '32rem',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            ol: {
+              'padding-inline-start': '15px'
+            }
+          }
+        }
+      }
     },
   },
   plugins: [require('windicss/plugin/typography')],
