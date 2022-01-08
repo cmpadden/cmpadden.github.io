@@ -59,3 +59,8 @@ button {
   width: 1.5em;
   margin-left: -1.5em;
 }
+
+code {
+  /* temporary fix to remove strange rendering of text via prism */
+  text-shadow: none;
+}
