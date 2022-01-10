@@ -79,18 +79,15 @@
 <script lang="ts">
 import Vue from 'vue'
 
+// @ts-ignore
+import conjugations from '~/static/1000_french_conjugations.json'
+
 export default Vue.extend({
   layout: 'light',
-  mounted() {
-    // source: https://conjugator.reverso.net/index-french-1-250.html
-    this.$axios
-      .get('/1000_french_conjugations.json')
-      .then((response) => (this.conjugations = response.data))
-  },
   data() {
     return {
       wordIndex: 0,
-      conjugations: [],
+      conjugations,
     }
   },
   computed: {
