@@ -106,8 +106,8 @@
             <td class="p-2 text-left">
               {{
                 event.data[0] === 144 || event.data[0] == 128
-                  ? (event.data[1] | midiNote)
-                  : '-'
+                  ? event.data[1]
+                  : '-' | midiNote
               }}
             </td>
             <td class="p-2 text-left">{{ event.data[2] }}</td>
