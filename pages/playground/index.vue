@@ -2,7 +2,8 @@
   <div class="text-white mx-6 md:mx-12 px-2">
     <div class="grid grid-flow-row auto-rows-max space-y-4">
       <div class="italic">
-        Here you can find small web applications of random experimentation...
+        This is a home for ideas to incubate until they're refactored
+        elsewhere...
       </div>
       <nuxt-link v-for="link in links" :key="link.title" :to="link.link">
         <div class="bg-green-700 bg-opacity-50 h-full p-3 border">
@@ -19,6 +20,12 @@ export default {
   data() {
     return {
       links: [
+        {
+          title: 'MIDI Events',
+          description:
+            'View MIDI events triggered by a MIDI-controller through the Web MIDI API',
+          link: '/playground/midi',
+        },
         {
           title: 'French Conjugations',
           description:

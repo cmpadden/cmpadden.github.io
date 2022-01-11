@@ -10,6 +10,7 @@ export default {
       display: ['Helvetica', 'sans-serif'],
       body: ['Graphik', 'sans-serif'],
       mono: ['Inconsolata', 'monospace'],
+      fantasy: ['Trattatello', 'fantasy'],
     },
     borderWidth: {
       default: '1px',
