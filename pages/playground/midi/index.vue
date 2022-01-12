@@ -38,16 +38,36 @@
                 </div>
                 <div class="mb-2">
                   <div class="font-bold">Inputs:</div>
-                  <div v-for="input in inputs" :key="input.id" class="flex">
-                    <div class="flex-1">{{ input.manufacturer }}</div>
-                    <div class="flex-1">{{ input.name }}</div>
+                  <div
+                    v-if="inputs.length === 0"
+                    class="text-center p-4 italic"
+                  >
+                    No input devices detected :(
+                  </div>
+                  <div v-else>
+                    <div v-for="input in inputs" :key="input.id" class="flex">
+                      <div class="flex-1">{{ input.manufacturer }}</div>
+                      <div class="flex-1">{{ input.name }}</div>
+                    </div>
                   </div>
                 </div>
                 <div class="mb-2">
                   <div class="font-bold">Outputs:</div>
-                  <div v-for="output in outputs" :key="output.id" class="flex">
-                    <div class="flex-1">{{ output.manufacturer }}</div>
-                    <div class="flex-1">{{ output.name }}</div>
+                  <div
+                    v-if="outputs.length === 0"
+                    class="text-center p-4 italic"
+                  >
+                    No output devices detected :(
+                  </div>
+                  <div v-else>
+                    <div
+                      v-for="output in outputs"
+                      :key="output.id"
+                      class="flex"
+                    >
+                      <div class="flex-1">{{ output.manufacturer }}</div>
+                      <div class="flex-1">{{ output.name }}</div>
+                    </div>
                   </div>
                 </div>
               </div>
