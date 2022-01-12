@@ -21,6 +21,11 @@ export default {
     return {
       links: [
         {
+          title: 'MIDI Chord Identifier',
+          description: 'Identify the chords being played by your MIDI device',
+          link: '/playground/chords',
+        },
+        {
           title: 'MIDI Events',
           description:
             'View MIDI events triggered by a MIDI-controller through the Web MIDI API',
