@@ -1,25 +1,18 @@
 <template>
   <section class="container mx-auto mb-4">
-    <div class="mx-6 md:mx-12 p-2">
-      <h1 class="text-4xl font-bold leading-tight text-white py-4">
+    <div class="p-2 mx-6 md:mx-12">
+      <h1 class="py-4 text-4xl font-bold leading-tight text-white">
         Latest Blog Posts
       </h1>
 
       <div v-for="article of articles" :key="article.slug">
         <NuxtLink :to="{ name: 'posts-slug', params: { slug: article.slug } }">
           <div
-            class="
-              shadow-lg
-              hover:bg-blue-200
-              text-white
-              hover:text-black
-              mb-2
-              border
-            "
+            class="mb-2 text-white border border-white shadow-lg hover:bg-blue-200 hover:text-black"
           >
             <div class="flex">
               <div class="flex-grow py-4 pl-4">
-                <div class="font-bold text-xl">
+                <div class="text-xl font-bold">
                   {{ article.title }}
                 </div>
 
@@ -34,7 +27,7 @@
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 hover:text-yellow-800"
+                  class="w-6 h-6 hover:text-yellow-800"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"

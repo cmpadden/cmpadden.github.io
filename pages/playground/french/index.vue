@@ -1,11 +1,11 @@
 <template>
-  <div class="font-mono flex flex-col h-screen">
+  <div class="flex flex-col h-screen font-mono">
     <!-- flex layout reference: https://play.tailwindcss.com/uOnWQzR9tl -->
     <div class="flex flex-1 overflow-hidden">
       <!-- sidebar -->
-      <div class="flex bg-orange-500 w-20">
+      <div class="flex w-20 bg-orange-500">
         <div
-          class="w-20 absolute bottom-10 transform -rotate-90 whitespace-nowrap"
+          class="absolute w-20 bottom-10 transform -rotate-90 whitespace-nowrap"
         >
           <div class="text-4xl font-bold text-white">
             1000 French Conjugations
@@ -13,11 +13,11 @@
         </div>
       </div>
       <!-- main content -->
-      <div class="flex flex-1 flex-col overflow-y-auto bg-orange-100 p-8">
+      <div class="flex flex-col flex-1 p-8 overflow-y-auto bg-orange-100">
         <template v-if="word">
           <!-- dismissible instructions -->
           <div class="flex p-4 bg-orange-500 rounded-xl">
-            <div class="text-center text-white text-xl italic">
+            <div class="text-xl italic text-center text-white">
               Click a word to the left or right to cycle through the 1000 most
               popular French verb conjugations!
             </div>
@@ -26,17 +26,17 @@
           <!-- window over words -->
           <div class="flex p-4">
             <div
-              class="flex-1 text-center text-gray-400 text-2xl select-none"
+              class="flex-1 text-2xl text-center text-gray-400 select-none"
               @click="decWordIndex"
             >
               {{ wordPrev ? wordPrev.word : '-' }}
             </div>
-            <div class="flex-1 text-center text-cyan-600 text-3xl font-bold">
+            <div class="flex-1 text-3xl font-bold text-center text-cyan-600">
               <span class="text-orange-500"> #{{ word.word_popularity }}</span>
               {{ word.word }}
             </div>
             <div
-              class="flex-1 text-center text-gray-400 text-2xl select-none"
+              class="flex-1 text-2xl text-center text-gray-400 select-none"
               @click="incWordIndex"
             >
               {{ wordNext ? wordNext.word : '-' }}
@@ -49,7 +49,7 @@
           >
             <div v-for="(conjs, tense) in word.conjugations" :key="tense">
               <div
-                class="p-4 space-y-3 border-2 border-cyan-600 dark:border-cyan-300 rounded-md h-full shadow shadow-orange-500 bg-white"
+                class="h-full p-4 bg-white border-2 shadow space-y-3 border-cyan-600 dark:border-cyan-300 rounded-md shadow-orange-500"
               >
                 <h1
                   class="text-2xl font-semibold text-gray-700 capitalize dark:text-white"

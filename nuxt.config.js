@@ -5,7 +5,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Colton Padden\'s Personal Website',
+    title: "Colton Padden's Personal Website",
     htmlAttrs: {
       lang: 'en',
     },
@@ -18,16 +18,9 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    // windi preflight
-    'virtual:windi-base.css',
-    // your stylesheets which overrides the preflight
-    '@/static/css/main.css',
-    // windi extras
-    'virtual:windi-components.css',
-    'virtual:windi-utilities.css',
-  ],
+  tailwindcss: {
+    cssPath: '~/static/css/main.css',
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['~/plugins/vue-carbonbadge'],
@@ -39,7 +32,7 @@ export default {
   buildModules: [
     '@nuxtjs/google-analytics',
     '@nuxt/typescript-build', // https://go.nuxtjs.dev/typescript
-    'nuxt-windicss',
+    '@nuxtjs/tailwindcss',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

@@ -1,9 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /******************************************************************************
 *                               Customizations                               *
 ******************************************************************************/
 
-// prevent double-tap to zoom when clicking buttons
-// see: https://github.com/tailwindlabs/tailwindcss/discussions/3020
+/* prevent double-tap to zoom when clicking buttons */
+/* see: https://github.com/tailwindlabs/tailwindcss/discussions/3020 */
 button {
   touch-action: manipulation;
 }
@@ -48,7 +52,7 @@ button {
  */
 
 .custom-list {
-  @apply list-disc ml-8;
+  @apply ml-8 list-disc;
   list-style: none; /* Remove default bullets */
 }
 
