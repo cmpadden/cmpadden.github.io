@@ -1,9 +1,11 @@
 <template>
-  <div class="h-screen bg-gradient-to-b from-green-900 via-purple-900 to-indigo-900 text-white">
+  <div
+    class="h-screen text-white bg-gradient-to-b from-green-900 via-purple-900 to-indigo-900"
+  >
     <!-- Message for unsupported browsers -->
     <div
       v-if="typeof midi === 'undefined'"
-      class="font-light tracking-wide text-center p-4"
+      class="p-4 font-light tracking-wide text-center"
     >
       Unfortunately, the Web MIDI API is
       <a
@@ -20,17 +22,17 @@
         <div class="absolute bottom-16 right-2">
           <div
             v-bind:class="{ hidden: !tooltip, block: tooltip }"
-            class="bg-yellow-200 border-2 border-green-800 z-50 font-normal leading-normal text-sm break-words rounded-lg max-w-md"
+            class="z-50 max-w-md text-sm font-normal leading-normal break-words bg-yellow-200 border-2 border-green-800 rounded-lg"
           >
             <div>
               <div
-                class="bg-green-600 text-white opacity-75 font-semibold p-3 mb-0 border-b border-solid uppercase rounded-t-lg"
+                class="p-3 mb-0 font-semibold text-white uppercase bg-green-600 border-b border-solid rounded-t-lg opacity-75"
               >
                 MIDI Status
               </div>
 
-              <div class="text-orange-900 font-mono p-3">
-                <div class="font-bold mb-2">
+              <div class="p-3 font-mono text-orange-900">
+                <div class="mb-2 font-bold">
                   Enabled:
                   <span>
                     {{ typeof midi !== 'undefined' ? 'Yep!' : 'Nope' }}
@@ -40,7 +42,7 @@
                   <div class="font-bold">Inputs:</div>
                   <div
                     v-if="inputs.length === 0"
-                    class="text-center p-4 italic"
+                    class="p-4 italic text-center"
                   >
                     No input devices detected :(
                   </div>
@@ -55,7 +57,7 @@
                   <div class="font-bold">Outputs:</div>
                   <div
                     v-if="outputs.length === 0"
-                    class="text-center p-4 italic"
+                    class="p-4 italic text-center"
                   >
                     No output devices detected :(
                   </div>
@@ -76,9 +78,8 @@
         </div>
         <div class="absolute bottom-2 right-2">
           <button
-            ref="btnRef"
             @click="tooltip = !tooltip"
-            class="bg-green-800 text-white hover:text-yellow-200 py-1 px-2 rounded-lg shadow hover:shadow-lg"
+            class="px-1 text-green-600 border-green-600 rounded-lg shadow bg-green-50 border-3 hover:text-green-500 hover:shadow-lg"
             type="button"
           >
             <svg
@@ -97,29 +98,32 @@
           </button>
         </div>
       </div>
-      <div class="grid place-items-center h-screen">
+      <!-- display active key pressed in the bottom left of the screen -->
+      <div class="absolute left-4 bottom-4">
+        <div class="flex">
+          <div v-for="note in orderedNotes()" :key="note" class="p-4">
+            {{ note }}
+          </div>
+        </div>
+      </div>
+      <div class="h-screen grid place-items-center">
         <div>
-          <div class="text-center font-semibold tracking-wide text-4xl">
+          <div class="text-4xl font-semibold tracking-wide text-center">
             <!-- <div v-if="activeKeys.size === 0">-</div> -->
             <transition
               enter-active-class="duration-500 ease-out"
-              enter-class="transform opacity-0"
+              enter-class="opacity-0 transform"
               enter-to-class="opacity-100"
               leave-active-class="duration-500"
               leave-class="opacity-100"
-              leave-to-class="transform opacity-0"
+              leave-to-class="opacity-0 transform"
             >
               <!-- note: keys are required for transitions to apply on elements with the same tag -->
-              <div v-if="activeKeys.size !== 0">
+              <div v-if="activeKeys.size > 2">
                 {{ chord() || '?' }}
               </div>
             </transition>
           </div>
-          <!-- <div class="flex"> -->
-          <!--   <div v-for="key in activeKeys.entries()" :key="key[0]" class="p-4"> -->
-          <!--     {{ key[0] }} -->
-          <!--   </div> -->
-          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -196,6 +200,9 @@ export default Vue.extend({
     },
   },
   methods: {
+    orderedNotes(): number[] {
+      return Array.from(this.activeKeys.keys()).sort()
+    },
     chord(): string | undefined {
       // NOTE: this was made a `method` opposed to a `computed` property as it
       // was note reacting to changes to the underlying data. There was an attempt to
@@ -206,24 +213,42 @@ export default Vue.extend({
       // For example, a C-major chord will have a bass note of C, and a shape
       // of [0, 4, 7].
 
-      const orderedNotes = Array.from(this.activeKeys.keys()).sort()
+      const notes = Array.from(this.activeKeys.keys())
 
-      const bassNote: number = orderedNotes[0]
+      const bassNote: number = Math.min.apply(Math, notes)
       const bassNoteLetter: string = NOTE_MAPPINGS[bassNote % 12]
 
       // NOTE: we don't always want to look at the bass note to determine the
       // chord, but instead need to take into consideration inverted chords
 
-      const normalizedNotes: string = orderedNotes
-        .map((n) => n - bassNote)
+      const normalizedNotesWithDupes: number[] = notes.map((n) => {
+        const relativeNote = n - bassNote
+        if (relativeNote >= 12) {
+          return relativeNote % 12
+        } else {
+          return relativeNote
+        }
+      })
+
+      // Remove duplicates as a result of notes in other octaves overlapping
+      const normalizedNotes = [...new Set(normalizedNotesWithDupes)]
+        .sort((a, b) => a - b)
         .join(' ')
+
+      // console.log(normalizedNotes)
 
       const CHORD_MAPPINGS = new Map<string, string>(
         Object.entries({
           '0 2 7': 'sus 2',
+          '0 3 6': 'Diminished',
           '0 3 7 11': 'Minor Major 7th',
           '0 3 7': 'Minor',
+          '0 4 11': 'Major 7th',
+          '0 4 5 7': 'Add 11',
+          '0 4 6': 'Flat Fifth',
+          '0 4 7 10': '7th',
           '0 4 7 11': 'Major 7th',
+          '0 4 7 9': '6th',
           '0 4 7': 'Major',
           '0 4 8': 'Augmented',
           '0 5 7': 'sus 4',
@@ -254,13 +279,3 @@ export default Vue.extend({
   },
 })
 </script>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-</style>
