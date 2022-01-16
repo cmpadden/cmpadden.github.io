@@ -133,21 +133,7 @@
 <script lang="ts">
 import Vue from 'vue'
 
-// http://www.somascape.org/midi/basic/notes.html
-const NOTE_MAPPINGS = [
-  'C',
-  'C# / Db',
-  'D',
-  'D# / Eb',
-  'E',
-  'F',
-  'F# / Bb',
-  'G',
-  'G# / Ab',
-  'A',
-  'A# / Bb',
-  'B',
-]
+import { identify } from 'chords.ts'
 
 export default Vue.extend({
   layout: 'light',
@@ -208,73 +194,10 @@ export default Vue.extend({
       // was note reacting to changes to the underlying data. There was an attempt to
       // resolve this by using `Vue.delete` on the `activeKeys` and to run a
       // `this.$forceUpdate()` but neither of these solutions worked.
-
-      // starting with the bass note of the chord, determine the chord shape.
-      // For example, a C-major chord will have a bass note of C, and a shape
-      // of [0, 4, 7].
-
       const notes = Array.from(this.activeKeys.keys())
 
-      const bassNote: number = Math.min.apply(Math, notes)
-      const bassNoteLetter: string = NOTE_MAPPINGS[bassNote % 12]
-
-      // NOTE: we don't always want to look at the bass note to determine the
-      // chord, but instead need to take into consideration inverted chords
-
-      const normalizedNotesWithDupes: number[] = notes.map((n) => {
-        const relativeNote = n - bassNote
-        if (relativeNote >= 12) {
-          return relativeNote % 12
-        } else {
-          return relativeNote
-        }
-      })
-
-      // Remove duplicates as a result of notes in other octaves overlapping
-      const normalizedNotes = [...new Set(normalizedNotesWithDupes)]
-        .sort((a, b) => a - b)
-        .join(' ')
-
-      // console.log(normalizedNotes)
-
-      const CHORD_MAPPINGS = new Map<string, string>(
-        Object.entries({
-          '0 2 7': 'sus 2',
-          '0 3 6': 'Diminished',
-          '0 3 7 11': 'Minor Major 7th',
-          '0 3 7': 'Minor',
-          '0 4 11': 'Major 7th',
-          '0 4 5 7': 'Add 11',
-          '0 4 6': 'Flat Fifth',
-          '0 4 7 10': '7th',
-          '0 4 7 11': 'Major 7th',
-          '0 4 7 9': '6th',
-          '0 4 7': 'Major',
-          '0 4 8': 'Augmented',
-          '0 5 7': 'sus 4',
-        })
-      )
-      const chord = CHORD_MAPPINGS.get(normalizedNotes)
-
-      return chord ? `${bassNoteLetter} ${chord}` : undefined
-    },
-  },
-  filters: {
-    midiCommand: (value: number) => {
-      // https://www.midi.org/specifications-old/item/table-1-summary-of-midi-message
-      switch (value) {
-        case 144:
-          return 'Note On'
-        case 128:
-          return 'Note Off'
-        default:
-          return value
-      }
-    },
-    midiNote: (value: number) => {
-      // construct note octave string representation where the index of MIDI
-      // note modulus 12 corresponds with note letter
-      return `${NOTE_MAPPINGS[value % 12]} (${Math.floor(value / 12) - 2})`
+      // chord identification has been refactored into the `chords.ts` library
+      return identify(notes).name
     },
   },
 })

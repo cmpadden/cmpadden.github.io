@@ -15,7 +15,7 @@
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["@nuxt/types", "@types/node", "@types/webmidi"]
+    "types": ["@nuxt/types", "@types/node", "@types/webmidi", "chords.ts"]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
 }
