@@ -1,14 +1,15 @@
 <template>
-  <section class="text-white py-12 bg-gradient-to-r from-blackish to-pink-600">
+  <section class="py-12 text-white bg-gradient-to-r from-blackish to-pink-600">
     <div class="container mx-auto">
       <div class="mx-6 md:mx-12">
         <div class="flex flex-wrap-reverse">
-          <div class="w-full md:w-1/3 p-2">
-            <div class="bg-black bg-opacity-50 h-full p-3 border">
-              <h3 class="text-xl font-bold text-center pb-2">
+          <div class="w-full p-2 md:w-1/3">
+            <div class="h-full p-3 bg-black border bg-opacity-70">
+              <h3 class="pb-2 text-xl font-bold text-center">
                 Technical Interests
               </h3>
-              <ul class="custom-list text-base">
+              <hr class="py-2 border-gray-300" />
+              <ul class="text-base custom-list">
                 <li>Data Pipeline Engineering</li>
                 <li>Distributed Systems</li>
                 <li>Embedded Systems</li>
@@ -17,12 +18,11 @@
               </ul>
             </div>
           </div>
-          <div class="w-full md:w-1/3 p-2">
-            <div class="bg-black bg-opacity-50 h-full p-3 border">
-              <h3 class="text-xl font-bold text-center pb-2">
-                Air Quality
-              </h3>
-              <p class="text-base mb-8">
+          <div class="w-full p-2 md:w-1/3">
+            <div class="h-full p-3 bg-black border bg-opacity-70">
+              <h3 class="pb-2 text-xl font-bold text-center">Air Quality</h3>
+              <hr class="py-2 border-gray-300" />
+              <p class="mb-8 text-base text-center">
                 I am a founding member and technical adviser to
                 <a class="underline" href="https://guaq.tech"
                   >Globally Unified Air Quality</a
@@ -31,10 +31,11 @@
               </p>
             </div>
           </div>
-          <div class="w-full md:w-1/3 p-2">
-            <div class="bg-black bg-opacity-50 h-full p-3 border">
-              <h3 class="text-xl font-bold text-center pb-2">Consulting</h3>
-              <p class="text-base mb-8">
+          <div class="w-full p-2 md:w-1/3">
+            <div class="h-full p-3 bg-black border bg-opacity-70">
+              <h3 class="pb-2 text-xl font-bold text-center">Consulting</h3>
+              <hr class="py-2 border-gray-300" />
+              <p class="mb-8 text-base text-center">
                 I worked as a technical consultant for financial institutions
                 and government agencies in the Washington, D.C. area, providing
                 guidance on identity and access management, and big data

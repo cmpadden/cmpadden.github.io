@@ -8,7 +8,7 @@
       <div v-for="article of articles" :key="article.slug">
         <NuxtLink :to="{ name: 'posts-slug', params: { slug: article.slug } }">
           <div
-            class="mb-2 text-white border border-white shadow-lg hover:bg-blue-200 hover:text-black"
+            class="mb-2 text-white bg-black border border-white shadow-lg bg-opacity-30 hover:bg-opacity-70"
           >
             <div class="flex">
               <div class="flex-grow py-4 pl-4">

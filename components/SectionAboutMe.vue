@@ -8,13 +8,7 @@
               Who&#183;Am&#183;I
             </h1>
             <div
-              class="
-                sm:text-base
-                lg:text-lg
-                font-medium
-                tracking-wide
-                text-white
-              "
+              class="sm:text-base lg:text-lg font-medium tracking-wide text-white"
             >
               I am a
               <span class="gradient-highlight"
@@ -35,25 +29,10 @@
           </div>
         </div>
         <div
-          class="
-            hidden
-            md:block
-            w-full
-            md:w-1/3
-            p-12
-            flex flex-col
-            justify-center
-            items-center
-          "
+          class="hidden md:block w-full md:w-1/3 p-12 flex flex-col justify-center items-center"
         >
           <img
-            class="
-              object-center object-cover
-              rounded-full
-              h-32
-              w-32
-              ring-2 ring-white
-            "
+            class="object-center object-cover rounded-full h-32 w-32 ring-2 ring-white"
             src="https://avatars.githubusercontent.com/u/5807118?v=4"
             alt="Colton Padden Avatar"
           />

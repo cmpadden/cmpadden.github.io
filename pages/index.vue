@@ -3,6 +3,7 @@
     <SectionAboutMe />
     <SectionInterests />
     <SectionBlogPosts :articles="articles" />
+    <SectionPlayground />
   </div>
 </template>
 
