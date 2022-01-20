@@ -3097,10 +3097,10 @@ chokidar@^3.4.1, chokidar@^3.4.2, chokidar@^3.5.1, chokidar@^3.5.2:
   optionalDependencies:
     fsevents "~2.3.2"
 
-chords.ts@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/chords.ts/-/chords.ts-0.0.6.tgz#de664523bfadb6fd748fb6a87ff332415e051956"
-  integrity sha512-HvV4TMPRBXyegKXM8AG8vj/fbJgpBMNO5qG3TrEpi8vjBvuH9Xbu8HfrhfSBviPUfE/HgWOLHDUdoH7604ThWw==
+chords.ts@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/chords.ts/-/chords.ts-0.0.8.tgz#95cd1165acf587e2d5f01641dfae7623a99d79bb"
+  integrity sha512-ai9eVnO0aPBL37HMNFYpWvKoaRFMNbmk8/E/7CFGEzZtITokvucqfD1h4kiN7+WZWjVKPowRN4z0JNzsvwW7ng==
 
 chownr@^1.1.1:
   version "1.1.4"
