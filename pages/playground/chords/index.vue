@@ -118,7 +118,7 @@
               leave-class="opacity-100"
               leave-to-class="opacity-0 transform"
             >
-              <div v-if="activeKeys.size >= 2">
+              <div v-if="activeKeys.size >= 1">
                 {{ chord() || '?' }}
               </div>
             </transition>
