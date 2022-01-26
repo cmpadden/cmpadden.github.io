@@ -4,11 +4,11 @@
       <div class="flex flex-wrap">
         <div class="w-full md:w-2/3">
           <div class="p-2">
-            <h1 class="text-4xl font-bold leading-tight text-white pb-4">
+            <h1 class="pb-4 text-4xl font-bold leading-tight text-white">
               Who&#183;Am&#183;I
             </h1>
             <div
-              class="sm:text-base lg:text-lg font-medium tracking-wide text-white"
+              class="font-medium tracking-wide text-white sm:text-base lg:text-lg"
             >
               I am a
               <span class="gradient-highlight"
@@ -29,10 +29,10 @@
           </div>
         </div>
         <div
-          class="hidden md:block w-full md:w-1/3 p-12 flex flex-col justify-center items-center"
+          class="flex flex-col items-center justify-center hidden w-full p-12 md:block md:w-1/3"
         >
           <img
-            class="object-center object-cover rounded-full h-32 w-32 ring-2 ring-white"
+            class="shadow-lg ring-2 ring-white"
             src="https://avatars.githubusercontent.com/u/5807118?v=4"
             alt="Colton Padden Avatar"
           />
