@@ -20,6 +20,7 @@
     "chords.ts": "^0.1.0",
     "core-js": "^3.20.1",
     "nuxt": "^2.15.8",
+    "p5": "^1.4.0",
     "vue-carbonbadge": "^1.1.1"
   },
   "devDependencies": {

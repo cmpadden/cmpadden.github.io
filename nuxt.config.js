@@ -23,7 +23,7 @@ export default {
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/vue-carbonbadge'],
+  plugins: ['~/plugins/vue-carbonbadge', '~/plugins/p5.client.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
