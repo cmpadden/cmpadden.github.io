@@ -6,7 +6,9 @@
       </h1>
       <div class="grid gap-4 grid-cols-1 md:grid-cols-2 grid-rows-auto">
         <nuxt-link v-for="link in links" :key="link.title" :to="link.link">
-          <div class="h-full p-3 bg-black border bg-opacity-30 hover:bg-opacity-70">
+          <div
+            class="h-full p-3 bg-black border bg-opacity-30 hover:bg-opacity-70"
+          >
             <h3 class="pb-2 text-xl font-bold">{{ link.title }}</h3>
             <div class="text-base font-light" v-html="link.description"></div>
           </div>
@@ -21,6 +23,12 @@ export default {
   data() {
     return {
       links: [
+        {
+          title: 'Sine Wave',
+          description:
+            'Demonstration of using p5.js within Vue.js to visualize a sinusoidal wave',
+          link: '/playground/sine',
+        },
         {
           title: 'MIDI Chord Identifier',
           description:
