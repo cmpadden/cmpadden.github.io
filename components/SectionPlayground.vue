@@ -24,10 +24,10 @@ export default {
     return {
       links: [
         {
-          title: 'Sine Wave',
+          title: 'Waves',
           description:
-            'Demonstration of using p5.js within Vue.js to visualize a sinusoidal wave',
-          link: '/playground/sine',
+            'Demonstration of using p5.js within Vue.js to visualize trigonometric functions',
+          link: '/playground/waves',
         },
         {
           title: 'MIDI Chord Identifier',
