@@ -24,6 +24,12 @@ export default {
     return {
       links: [
         {
+          title: 'Microphone Audio Visuals',
+          description:
+            'Visualize the audio from your microphone as a waveform, frequency bars, and a spectrogram',
+          link: '/playground/audio',
+        },
+        {
           title: 'Waves',
           description:
             'Demonstration of using p5.js within Vue.js to visualize trigonometric functions',
