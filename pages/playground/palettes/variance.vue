@@ -53,8 +53,6 @@ export default Vue.extend({
         })
       }
 
-      console.log(hexToInts('#AABBCC'))
-
       const HEIGHT = 400
       const WIDTH = 400
 
