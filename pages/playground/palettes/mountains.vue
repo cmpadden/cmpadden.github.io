@@ -79,6 +79,7 @@ export default Vue.extend({
         s.stroke(255)
         s.strokeWeight(3)
         draw()
+        s.noLoop()
       }
 
       s.mousePressed = () => {
