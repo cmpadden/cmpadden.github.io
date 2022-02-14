@@ -24,13 +24,25 @@ export default {
     return {
       links: [
         {
+          title: 'Sequence Plotter',
+          description:
+            'Plot the fist 10,000 digits of Pi, or any sequence of digits, in 2-dimensional space',
+          link: '/playground/plotter',
+        },
+        {
+          title: 'Noise Mountains',
+          description:
+            'Visualize a gradient of colored waves generated with Perlin noise',
+          link: '/playground/palettes/mountains',
+        },
+        {
           title: 'Microphone Audio Visuals',
           description:
             'Visualize the audio from your microphone as a waveform, frequency bars, and a spectrogram',
           link: '/playground/audio',
         },
         {
-          title: 'Waves',
+          title: 'Trigonometric Waves',
           description:
             'Demonstration of using p5.js within Vue.js to visualize trigonometric functions',
           link: '/playground/waves',
