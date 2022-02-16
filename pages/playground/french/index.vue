@@ -14,13 +14,48 @@
       </div>
       <!-- main content -->
       <div class="flex flex-col flex-1 p-8 overflow-y-auto bg-orange-100">
-        <template v-if="word">
+        <template v-if="conjugations.length > 0 && word">
           <!-- dismissible instructions -->
           <div class="flex p-4 bg-orange-500 rounded-xl">
             <div class="text-xl italic text-center text-white">
               Click a word to the left or right to cycle through the 1000 most
               popular French verb conjugations!
             </div>
+          </div>
+
+          <!-- search -->
+
+          <div class="inline-flex flex-col justify-center py-4 text-gray-500">
+            <input
+              v-model="search"
+              class="p-2 pl-8 border border-2 border-gray-400 rounded-xl focus:outline-none focus:border-orange-500"
+              type="search"
+              autocomplete="off"
+              placeholder="Search Words"
+            />
+            <ul
+              v-if="suggestions.length > 0"
+              class="w-full mt-2 bg-white border border-gray-100"
+            >
+              <li
+                v-for="s in suggestions"
+                :key="s.word"
+                class="relative py-1 pl-8 pr-2 cursor-pointer hover:bg-yellow-50 hover:text-gray-900"
+                @click="searchNavigate(s)"
+              >
+                <svg
+                  class="absolute w-4 h-4 left-2 top-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                  />
+                </svg>
+                {{ s.word }}
+              </li>
+            </ul>
           </div>
 
           <!-- window over words -->
@@ -79,35 +114,79 @@
 <script lang="ts">
 import Vue from 'vue'
 
-// @ts-ignore
-import conjugations from '~/static/1000_french_conjugations.json'
+type Conjugation = {
+  word: string
+  word_popularity: number
+  conjugations: Object
+}
 
 export default Vue.extend({
   layout: 'light',
   data() {
     return {
       wordIndex: 0,
-      conjugations,
+      search: '',
+      suggestions: [] as Object[],
+      conjugations: [] as Conjugation[],
     }
   },
   computed: {
-    word(): string {
+    word(): Conjugation {
       return this.conjugations[this.wordIndex]
     },
-    wordPrev(): string | undefined {
+    wordPrev(): Conjugation | undefined {
       if (this.wordIndex === 0) {
         return undefined
       } else {
         return this.conjugations[this.wordIndex - 1]
       }
     },
-    wordNext(): string | undefined {
+    wordNext(): Conjugation | undefined {
       if (this.wordIndex + 1 === this.conjugations.length) {
         return undefined
       } else {
         return this.conjugations[this.wordIndex + 1]
       }
     },
+  },
+  watch: {
+    search(search) {
+      // this is rather inefficient, especially since it runs on each key-press...
+      this.suggestions = []
+      if (!search) {
+        return
+      }
+
+      // Originally, the plan was to use Intl.Collator, however, I couldn't find an easy way to match sub-strings
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator
+      // const collator = new Intl.Collator('fr', {
+      //   usage: 'search',
+      //   sensitivity: 'base',
+      // })
+      // this.suggestions = this.conjugations.filter(
+      //   (v) => collator.compare(v.word, search) === 0
+      // )
+
+      // https://stackoverflow.com/a/37511463
+      let count = 0
+      this.suggestions = this.conjugations.filter((v) => {
+        // workaround to string-compare without diacritics
+        const match = v.word
+          .normalize('NFD')
+          .replace(/\p{Diacritic}/gu, '')
+          .includes(search)
+        // limit to 5 maximum results
+        if (match && count <= 5) {
+          count++
+          return true
+        }
+        return false
+      })
+    },
+  },
+  created() {
+    // @ts-ignore
+    this.conjugations = require('~/static/1000_french_conjugations.json')
   },
   methods: {
     incWordIndex() {
@@ -119,6 +198,11 @@ export default Vue.extend({
       if (this.wordIndex > 0) {
         this.wordIndex -= 1
       }
+    },
+    searchNavigate(word: Conjugation) {
+      this.search = ''
+      this.suggestions = []
+      this.wordIndex = word.word_popularity - 1
     },
   },
 })
