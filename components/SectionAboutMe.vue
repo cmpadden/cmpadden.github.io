@@ -8,13 +8,25 @@
               Who&#183;Am&#183;I
             </h1>
             <div
-              class="font-medium tracking-wide text-white sm:text-base lg:text-lg"
+              class="font-medium tracking-wide text-white sm:text-base lg:text-lg pb-4"
             >
               I am a
               <span class="gradient-highlight"
-                >data engineer and web developer</span
+                >data engineer, web developer, and tinkerer</span
               >
-              working at Georgetown University's
+              helping build the future of finance at
+              <a
+                class="border-b-2 border-blue-200"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.gemini.com/"
+                >Gemini</a
+              >.
+            </div>
+            <div
+              class="font-medium tracking-wide text-white sm:text-base lg:text-lg"
+            >
+              Previously, I worked at Georgetown University's
               <a
                 class="border-b-2 border-blue-200"
                 target="_blank"
@@ -22,9 +34,9 @@
                 href="https://mccourt.georgetown.edu/research/the-massive-data-institute/"
                 >Massive Data Institute</a
               >
-              in the McCourt School of Public Policy, with a primary focus on
-              building data warehousing and processing solutions for social
-              scientists and researchers to leverage large-scale organic data.
+              building data warehousing and processing solutions to help social
+              scientists and researchers more easily leverage large-scale
+              organic data in their research.
             </div>
           </div>
         </div>
