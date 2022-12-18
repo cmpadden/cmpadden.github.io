@@ -1,5 +1,5 @@
 <template>
   <div>
-    <SectionPlayground />
+    <SectionPlayground showImages />
   </div>
 </template>
