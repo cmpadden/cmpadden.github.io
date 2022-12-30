@@ -29,9 +29,7 @@ jobs:
         run: |
           # TODO - cache pnpm installation
           pnpm install
-          pnpm generate
-          rm -r ./dist
-          mv .output/public ./dist
+          pnpm generate  # files are automatically sym-linked to dist/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
