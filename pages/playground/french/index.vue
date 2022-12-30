@@ -3,7 +3,7 @@
     <!-- flex layout reference: https://play.tailwindcss.com/uOnWQzR9tl -->
     <div class="flex flex-1 overflow-hidden">
       <!-- sidebar -->
-      <div class="flex w-20 bg-orange-500">
+      <div class="flex w-20 bg-amber-500">
         <div
           class="absolute w-20 bottom-10 transform -rotate-90 whitespace-nowrap"
         >
@@ -13,10 +13,10 @@
         </div>
       </div>
       <!-- main content -->
-      <div class="flex flex-col flex-1 p-8 overflow-y-auto bg-orange-100">
+      <div class="flex flex-col flex-1 p-8 overflow-y-auto bg-amber-100">
         <template v-if="conjugations.length > 0 && word">
           <!-- dismissible instructions -->
-          <div class="flex p-4 bg-orange-500 rounded-xl">
+          <div class="flex p-4 bg-amber-500 rounded-xl">
             <div class="text-xl italic text-center text-white">
               Click a word to the left or right to cycle through the 1000 most
               popular French verb conjugations!
@@ -25,10 +25,10 @@
 
           <!-- search -->
 
-          <div class="inline-flex flex-col justify-center py-4 text-gray-500">
+          <div class="inline-flex flex-col justify-center py-4 text-gray-600">
             <input
               v-model="search"
-              class="p-2 pl-8 border border-2 border-gray-400 rounded-xl focus:outline-none focus:border-orange-500"
+              class="p-2 pl-8 border border-2 border-gray-400 rounded-xl focus:outline-none focus:border-amber-500"
               type="search"
               autocomplete="off"
               placeholder="Search Words"
@@ -67,7 +67,7 @@
               {{ wordPrev ? wordPrev.word : "-" }}
             </div>
             <div class="flex-1 text-3xl font-bold text-center text-cyan-600">
-              <span class="text-orange-500"> #{{ word.word_popularity }}</span>
+              <span class="text-amber-500"> #{{ word.word_popularity }}</span>
               {{ word.word }}
             </div>
             <div
@@ -84,15 +84,15 @@
           >
             <div v-for="(conjs, tense) in word.conjugations" :key="tense">
               <div
-                class="h-full p-4 bg-white border-2 shadow space-y-3 border-cyan-600 dark:border-cyan-300 rounded-md shadow-orange-500"
+                class="h-full p-4 bg-white border-2 shadow space-y-3 border-cyan-600 rounded-md shadow-amber-500"
               >
                 <h1
-                  class="text-2xl font-semibold text-gray-700 capitalize dark:text-white"
+                  class="text-2xl font-semibold text-gray-700 capitalize"
                 >
                   {{ tense }}
                 </h1>
 
-                <div class="text-gray-500 dark:text-gray-300">
+                <div class="text-gray-500">
                   <p v-for="(conj, ix) in conjs" :key="ix">
                     <i v-for="(comp, ij) in conj" :key="ij">
                       {{ comp.text }}

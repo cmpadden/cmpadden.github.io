@@ -29,7 +29,6 @@ export default {
         grayish: "#0D2439",
         blackish: "#5E81AC",
         cyan: "#9cdbff",
-        orange: defaultTheme.colors.orange,
       },
     },
   },
