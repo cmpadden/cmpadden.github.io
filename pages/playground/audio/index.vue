@@ -23,16 +23,14 @@
   </div>
 </template>
 
-<script >
-import Vue from 'vue'
-
-export default Vue.extend({
-  layout: 'light',
+<script>
+definePageMeta({ layout: "light" });
+export default {
   data() {
     return {
       dataArray: new Uint8Array(),
       dataArrayHistory: [],
-    }
+    };
   },
   mounted() {
     // TODO - use a single `dataArray` that is bound to the waveform, frequency, and spectrogram components. Still need
@@ -68,5 +66,5 @@ export default Vue.extend({
     //   }
     // },
   },
-})
+};
 </script>

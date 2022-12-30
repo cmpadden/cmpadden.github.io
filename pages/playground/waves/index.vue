@@ -66,10 +66,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
-
-export default Vue.extend({
-  layout: 'light',
+definePageMeta({ layout: "light" });
+export default {
   data() {
     return {
       wave: {
@@ -77,9 +75,7 @@ export default Vue.extend({
         lambda: 266,
         diameter: 15,
       },
-    }
+    };
   },
-})
+};
 </script>
-
-

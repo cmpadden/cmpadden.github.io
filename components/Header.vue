@@ -10,7 +10,7 @@
           </div>
           <div>
             <!-- right-aligned items -->
-            <NuxtLink to="/posts" class="mr-2 text-white hover:text-blue-200">
+            <NuxtLink to="/articles" class="mr-2 text-white hover:text-blue-200">
               Blog
             </NuxtLink>
             <NuxtLink

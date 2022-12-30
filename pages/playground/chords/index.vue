@@ -35,7 +35,7 @@
                 <div class="mb-2 font-bold">
                   Enabled:
                   <span>
-                    {{ typeof midi !== 'undefined' ? 'Yep!' : 'Nope' }}
+                    {{ typeof midi !== "undefined" ? "Yep!" : "Nope" }}
                   </span>
                 </div>
                 <div class="mb-2">
@@ -119,7 +119,7 @@
               leave-to-class="opacity-0 transform"
             >
               <div v-if="activeKeys.size >= 1">
-                {{ chord() || '?' }}
+                {{ chord() || "?" }}
               </div>
             </transition>
           </div>
@@ -130,37 +130,36 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { identify } from "chords.ts";
 
-import { identify } from 'chords.ts'
+definePageMeta({ layout: "light" });
 
-export default Vue.extend({
-  layout: 'light',
+export default {
   mounted() {
     // not all browsers support `requestMIDIAccess`
-    if (typeof navigator.requestMIDIAccess !== 'undefined') {
+    if (typeof navigator.requestMIDIAccess !== "undefined") {
       navigator.requestMIDIAccess().then(
         (access: WebMidi.MIDIAccess) => {
-          this.midi = access
+          this.midi = access;
           this.midi.inputs.forEach((entry: any) => {
             entry.onmidimessage = (event: any) => {
               // key pressed -- add key to active keys
               if (event.data[0] === 144) {
-                this.activeKeys.set(event.data[1], event.data)
-                this.$forceUpdate()
+                this.activeKeys.set(event.data[1], event.data);
+                this.$forceUpdate();
               }
               // key released -- remove key from active keys
               if (event.data[0] === 128) {
-                this.activeKeys.delete(event.data[1])
-                this.$forceUpdate()
+                this.activeKeys.delete(event.data[1]);
+                this.$forceUpdate();
               }
-            }
-          })
+            };
+          });
         },
         (error) => {
-          console.error(error)
+          console.error(error);
         }
-      )
+      );
     }
   },
   data() {
@@ -168,36 +167,36 @@ export default Vue.extend({
       tooltip: false,
       midi: undefined as undefined | WebMidi.MIDIAccess,
       activeKeys: new Map<number, object>(),
-    }
+    };
   },
   computed: {
     inputs(): WebMidi.MIDIInput[] | undefined {
-      if (typeof this.midi !== 'undefined') {
-        return Array.from(this.midi.inputs.values())
+      if (typeof this.midi !== "undefined") {
+        return Array.from(this.midi.inputs.values());
       }
-      return undefined
+      return undefined;
     },
     outputs(): WebMidi.MIDIOutput[] | undefined {
-      if (typeof this.midi !== 'undefined') {
-        return Array.from(this.midi.outputs.values())
+      if (typeof this.midi !== "undefined") {
+        return Array.from(this.midi.outputs.values());
       }
-      return undefined
+      return undefined;
     },
   },
   methods: {
     orderedNotes(): number[] {
-      return Array.from(this.activeKeys.keys()).sort()
+      return Array.from(this.activeKeys.keys()).sort();
     },
     chord(): string | undefined {
       // NOTE: this was made a `method` opposed to a `computed` property as it
       // was note reacting to changes to the underlying data. There was an attempt to
       // resolve this by using `Vue.delete` on the `activeKeys` and to run a
       // `this.$forceUpdate()` but neither of these solutions worked.
-      const notes = Array.from(this.activeKeys.keys())
+      const notes = Array.from(this.activeKeys.keys());
 
       // chord identification has been refactored into the `chords.ts` library
-      return identify(notes).name
+      return identify(notes).name;
     },
   },
-})
+};
 </script>

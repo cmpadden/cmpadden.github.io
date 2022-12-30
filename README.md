@@ -1,23 +1,31 @@
-# Nuxt Blog
+# cmpadden.github.io
 
-## Build Setup
+## Setup
+
+Make sure to install the dependencies:
 
 ```bash
-# install dependencies
-$ yarn install
+pnpm install --shamefully-hoist
+```
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+## Development Server
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+Start the development server on http://localhost:3000
 
-# generate static project
-$ yarn generate
+```bash
+pnpm run dev
+```
+
+## Production
+
+Generate the static website
+
+```bash
+pnpm generate
 ```
 
 ## References
 
-- https://nuxtjs.org
-- https://nuxtjs.org/tutorials/creating-blog-with-nuxt-content/
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

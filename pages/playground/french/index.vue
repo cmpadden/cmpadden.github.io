@@ -64,7 +64,7 @@
               class="flex-1 text-2xl text-center text-gray-400 select-none"
               @click="decWordIndex"
             >
-              {{ wordPrev ? wordPrev.word : '-' }}
+              {{ wordPrev ? wordPrev.word : "-" }}
             </div>
             <div class="flex-1 text-3xl font-bold text-center text-cyan-600">
               <span class="text-orange-500"> #{{ word.word_popularity }}</span>
@@ -74,7 +74,7 @@
               class="flex-1 text-2xl text-center text-gray-400 select-none"
               @click="incWordIndex"
             >
-              {{ wordNext ? wordNext.word : '-' }}
+              {{ wordNext ? wordNext.word : "-" }}
             </div>
           </div>
 
@@ -112,49 +112,48 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-
 type Conjugation = {
-  word: string
-  word_popularity: number
-  conjugations: Object
-}
+  word: string;
+  word_popularity: number;
+  conjugations: Object;
+};
 
-export default Vue.extend({
-  layout: 'light',
+definePageMeta({ layout: "light" });
+
+export default {
   data() {
     return {
       wordIndex: 0,
-      search: '',
+      search: "",
       suggestions: [] as Object[],
       conjugations: [] as Conjugation[],
-    }
+    };
   },
   computed: {
     word(): Conjugation {
-      return this.conjugations[this.wordIndex]
+      return this.conjugations[this.wordIndex];
     },
     wordPrev(): Conjugation | undefined {
       if (this.wordIndex === 0) {
-        return undefined
+        return undefined;
       } else {
-        return this.conjugations[this.wordIndex - 1]
+        return this.conjugations[this.wordIndex - 1];
       }
     },
     wordNext(): Conjugation | undefined {
       if (this.wordIndex + 1 === this.conjugations.length) {
-        return undefined
+        return undefined;
       } else {
-        return this.conjugations[this.wordIndex + 1]
+        return this.conjugations[this.wordIndex + 1];
       }
     },
   },
   watch: {
     search(search) {
       // this is rather inefficient, especially since it runs on each key-press...
-      this.suggestions = []
+      this.suggestions = [];
       if (!search) {
-        return
+        return;
       }
 
       // Originally, the plan was to use Intl.Collator, however, I couldn't find an easy way to match sub-strings
@@ -168,42 +167,47 @@ export default Vue.extend({
       // )
 
       // https://stackoverflow.com/a/37511463
-      let count = 0
+      let count = 0;
       this.suggestions = this.conjugations.filter((v) => {
         // workaround to string-compare without diacritics
         const match = v.word
-          .normalize('NFD')
-          .replace(/\p{Diacritic}/gu, '')
-          .includes(search)
+          .normalize("NFD")
+          .replace(/\p{Diacritic}/gu, "")
+          .includes(search);
         // limit to 5 maximum results
         if (match && count <= 5) {
-          count++
-          return true
+          count++;
+          return true;
         }
-        return false
-      })
+        return false;
+      });
     },
   },
-  created() {
-    // @ts-ignore
-    this.conjugations = require('~/static/1000_french_conjugations.json')
+  async setup() {
+    const { data: conjugations } = await useFetch(
+      "/1000_french_conjugations.json"
+    );
+
+    return {
+      conjugations,
+    };
   },
   methods: {
     incWordIndex() {
       if (this.wordIndex < this.conjugations.length - 1) {
-        this.wordIndex += 1
+        this.wordIndex += 1;
       }
     },
     decWordIndex() {
       if (this.wordIndex > 0) {
-        this.wordIndex -= 1
+        this.wordIndex -= 1;
       }
     },
     searchNavigate(word: Conjugation) {
-      this.search = ''
-      this.suggestions = []
-      this.wordIndex = word.word_popularity - 1
+      this.search = "";
+      this.suggestions = [];
+      this.wordIndex = word.word_popularity - 1;
     },
   },
-})
+};
 </script>

@@ -13,6 +13,5 @@
         >tailwindcss</a
       >
     </div>
-    <CarbonBadge :dark="true" />
   </footer>
 </template>

@@ -33,7 +33,7 @@
                 <div class="font-bold mb-2">
                   Enabled:
                   <span>
-                    {{ typeof midi !== 'undefined' ? 'Yep!' : 'Nope' }}
+                    {{ typeof midi !== "undefined" ? "Yep!" : "Nope" }}
                   </span>
                 </div>
                 <div class="mb-2">
@@ -146,31 +146,29 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
-  layout: 'light',
+definePageMeta({ layout: "light" });
+export default {
   mounted() {
     // not all browsers support `requestMIDIAccess`
-    if (typeof navigator.requestMIDIAccess !== 'undefined') {
+    if (typeof navigator.requestMIDIAccess !== "undefined") {
       navigator.requestMIDIAccess().then(
         (access: WebMidi.MIDIAccess) => {
-          this.midi = access
+          this.midi = access;
           this.midi.inputs.forEach((entry: any) => {
             entry.onmidimessage = (event: any) => {
-              this.events.push(event)
+              this.events.push(event);
 
               // limit the number of events in the array to 10
               if (this.events.length > 15) {
-                this.events.shift()
+                this.events.shift();
               }
-            }
-          })
+            };
+          });
         },
         (error) => {
-          console.error(error)
+          console.error(error);
         }
-      )
+      );
     }
   },
   data() {
@@ -178,20 +176,20 @@ export default Vue.extend({
       tooltip: false,
       midi: undefined as undefined | WebMidi.MIDIAccess,
       events: [] as any[],
-    }
+    };
   },
   computed: {
     inputs(): WebMidi.MIDIInput[] | undefined {
-      if (typeof this.midi !== 'undefined') {
-        return Array.from(this.midi.inputs.values())
+      if (typeof this.midi !== "undefined") {
+        return Array.from(this.midi.inputs.values());
       }
-      return undefined
+      return undefined;
     },
     outputs(): WebMidi.MIDIOutput[] | undefined {
-      if (typeof this.midi !== 'undefined') {
-        return Array.from(this.midi.outputs.values())
+      if (typeof this.midi !== "undefined") {
+        return Array.from(this.midi.outputs.values());
       }
-      return undefined
+      return undefined;
     },
   },
   filters: {
@@ -199,33 +197,33 @@ export default Vue.extend({
       // https://www.midi.org/specifications-old/item/table-1-summary-of-midi-message
       switch (value) {
         case 144:
-          return 'Note On'
+          return "Note On";
         case 128:
-          return 'Note Off'
+          return "Note Off";
         default:
-          return value
+          return value;
       }
     },
     midiNote: (value: number) => {
       // http://www.somascape.org/midi/basic/notes.html
       const noteMappings = [
-        'C',
-        'C# / Db',
-        'D',
-        'D# / Eb',
-        'E',
-        'F',
-        'F# / Bb',
-        'G',
-        'G# / Ab',
-        'A',
-        'A# / Bb',
-        'B',
-      ]
+        "C",
+        "C# / Db",
+        "D",
+        "D# / Eb",
+        "E",
+        "F",
+        "F# / Bb",
+        "G",
+        "G# / Ab",
+        "A",
+        "A# / Bb",
+        "B",
+      ];
       // construct note octave string representation where the index of MIDI
       // note modulus 12 corresponds with note letter
-      return `${noteMappings[value % 12]} (${Math.floor(value / 12) - 2})`
+      return `${noteMappings[value % 12]} (${Math.floor(value / 12) - 2})`;
     },
   },
-})
+};
 </script>

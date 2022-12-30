@@ -1,43 +1,20 @@
 {
-  "name": "padden-personal-website",
-  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-    "prepare": "husky install",
-    "lint": "yarn lint:js"
-  },
-  "lint-staged": {
-    "*.{js,vue}": "eslint"
-  },
-  "dependencies": {
-    "@nuxt/content": "^1.15.1",
-    "@types/webmidi": "^2.0.6",
-    "chords.ts": "^0.1.0",
-    "core-js": "^3.20.1",
-    "nuxt": "^2.15.8",
-    "p5": "^1.4.0",
-    "vue-carbonbadge": "^1.1.1"
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.16.5",
-    "@nuxt/types": "^2.15.8",
-    "@nuxt/typescript-build": "^2.1.0",
-    "@nuxtjs/eslint-config-typescript": "^8.0.0",
-    "@nuxtjs/eslint-module": "^3.0.2",
-    "@nuxtjs/google-analytics": "^2.4.0",
-    "@nuxtjs/tailwindcss": "^4.2.1",
-    "@tailwindcss/typography": "0.4.*",
-    "eslint": "^8.5.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-nuxt": "^3.1.0",
-    "eslint-plugin-vue": "^8.2.0",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.1.4",
-    "prettier": "^2.5.1"
+    "@nuxt/content": "^2.3.0",
+    "@nuxtjs/tailwindcss": "^6.1.3",
+    "@tailwindcss/typography": "^0.5.8",
+    "nuxt": "3.0.0"
+  },
+  "dependencies": {
+    "chords.ts": "^0.1.0",
+    "p5": "^1.5.0"
   }
 }

@@ -38,57 +38,58 @@ export default {
     return {
       links: [
         {
-          title: 'Sequence Plotter',
+          title: "Sequence Plotter",
           description:
-            'Plot the fist 10,000 digits of Pi, or any sequence of digits, in 2-dimensional space',
-          link: '/playground/plotter',
-          img: 'images/previews/plotter.png',
+            "Plot the fist 10,000 digits of Pi, or any sequence of digits, in 2-dimensional space",
+          link: "/playground/plotter",
+          img: "images/previews/plotter.png",
         },
         {
-          title: 'Noise Mountains',
+          title: "Noise Mountains",
           description:
-            'Visualize a gradient of colored waves generated with Perlin noise',
-          link: '/playground/palettes/mountains',
-          img: 'images/previews/noise.png',
+            "Visualize a gradient of colored waves generated with Perlin noise",
+          link: "/playground/palettes/mountains",
+          img: "images/previews/noise.png",
         },
         {
-          title: 'Microphone Audio Visuals',
+          title: "Microphone Audio Visuals",
           description:
-            'Visualize the audio from your microphone as a waveform, frequency bars, and a spectrogram',
-          link: '/playground/audio',
-          img: 'images/previews/microphone.png',
+            "Visualize the audio from your microphone as a waveform, frequency bars, and a spectrogram",
+          link: "/playground/audio",
+          img: "images/previews/microphone.png",
         },
         {
-          title: 'Trigonometric Waves',
+          title: "Trigonometric Waves",
           description:
-            'Demonstration of using p5.js within Vue.js to visualize trigonometric functions',
-          link: '/playground/waves',
-          img: 'images/previews/waves.png',
+            "Demonstration of using p5.js within Vue.js to visualize trigonometric functions",
+          link: "/playground/waves",
+          img: "images/previews/waves.png",
         },
         {
-          title: 'MIDI Chord Identifier',
+          title: "MIDI Chord Identifier",
           description:
-            'Identify the chords being played by your attached MIDI device',
-          link: '/playground/chords',
+            "Identify the chords being played by your attached MIDI device",
+          link: "/playground/chords",
         },
         {
-          title: 'MIDI Events',
+          title: "MIDI Events",
           description:
-            'View the MIDI events triggered by a MIDI-controller through the Web MIDI API',
-          link: '/playground/midi',
+            "View the MIDI events triggered by a MIDI-controller through the Web MIDI API",
+          link: "/playground/midi",
         },
         {
-          title: '1000 French Conjugations',
-          description: 'Study 1000 French verb conjugations',
-          link: '/playground/french',
+          title: "1000 French Conjugations",
+          description:
+            "Search and explore the conjugations of 1000 French verbs",
+          link: "/playground/french",
         },
         {
-          title: 'Matrix Multiplication',
-          description: 'Step through the process of matrix multiplication',
-          link: '/playground/matrix',
+          title: "Matrix Multiplication",
+          description: "Step through the process of matrix multiplication",
+          link: "/playground/matrix",
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
