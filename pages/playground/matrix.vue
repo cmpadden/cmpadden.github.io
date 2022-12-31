@@ -11,14 +11,7 @@
     <!-- Buttons -->
     <div class="m-2 inline-flex space-x-2">
       <button
-        class="
-          bg-blue-200
-          text-blue-800
-          hover:bg-blue-800 hover:text-blue-200
-          font-bold
-          py-2
-          px-4
-        "
+        class="bg-blue-200 text-blue-800 hover:bg-blue-800 hover:text-blue-200 font-bold py-2 px-4"
         :disabled="!started"
         :class="{ 'opacity-25 cursor-not-allowed': !started }"
         @click="decStep"
@@ -40,41 +33,20 @@
       </button>
       <button
         v-if="!done"
-        class="
-          bg-blue-200
-          text-blue-800
-          hover:bg-blue-800 hover:text-blue-200
-          font-bold
-          py-2
-          px-4
-        "
+        class="bg-blue-200 text-blue-800 hover:bg-blue-800 hover:text-blue-200 font-bold py-2 px-4"
         @click="matmul(a, b)"
       >
         Start
       </button>
       <button
         v-if="done"
-        class="
-          bg-orange-200
-          text-orange-800
-          hover:bg-blue-800 hover:text-blue-200
-          font-bold
-          py-2
-          px-4
-        "
+        class="bg-orange-200 text-orange-800 hover:bg-blue-800 hover:text-blue-200 font-bold py-2 px-4"
         @click="generateRandomMatrices"
       >
         Again!
       </button>
       <button
-        class="
-          bg-blue-200
-          text-blue-800
-          hover:bg-blue-800 hover:text-blue-200
-          font-bold
-          py-2
-          px-4
-        "
+        class="bg-blue-200 text-blue-800 hover:bg-blue-800 hover:text-blue-200 font-bold py-2 px-4"
         :disabled="!started"
         :class="{ 'opacity-25 cursor-not-allowed': !started }"
         @click="incStep"
@@ -152,7 +124,7 @@
           <table class="text-center">
             <tr v-for="(row, i) in step['c']" :key="i">
               <td v-for="(col, j) in step['c'][i]" :key="j" class="p-2">
-                {{ step['c'][i][j] }}
+                {{ step["c"][i][j] }}
               </td>
             </tr>
           </table>
@@ -183,60 +155,65 @@
 
 <script>
 // detect accelerometer shake as alternative to space bar?
+definePageMeta({ layout: "light" });
 export default {
-  layout: 'light',
   data() {
     return {
       ix: 0,
       a: [],
       b: [],
       timeline: [],
-    }
+    };
   },
   computed: {
     step() {
       if (this.timeline.length > 0) {
-        return this.timeline[this.ix]
+        return this.timeline[this.ix];
       }
-      return {}
+      return {};
     },
     done() {
-      return this.timeline.length - 1 === this.ix
+      return this.timeline.length - 1 === this.ix;
     },
     started() {
-      return this.timeline.length > 0
+      return this.timeline.length > 0;
     },
   },
   mounted() {
-    this.generateRandomMatrices()
+    this.generateRandomMatrices();
   },
   created() {
     // eslint-disable-next-line nuxt/no-globals-in-created
-    window.addEventListener('keydown', (e) => {
-      if (e.key === ' ') {
-        this.incStep()
-      } else if (e.key === 'Escape') {
-        this.ix = 0
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    // eslint-disable-next-line nuxt/no-globals-in-created
+    window.addEventListener("keydown", (e) => {
+      if (e.key === " ") {
+        this.incStep();
+      } else if (e.key === "Escape") {
+        this.ix = 0;
       }
-    })
+    });
   },
   methods: {
     randomMatrix(n, m) {
-      const matrix = []
+      const matrix = [];
       for (let i = 0; i < n; i++) {
         matrix.push(
           Array(m)
             .fill()
             .map(() => Math.round(Math.random() * 10))
-        )
+        );
       }
-      return matrix
+      return matrix;
     },
     generateRandomMatrices() {
-      this.a = this.randomMatrix(3, 4)
-      this.b = this.randomMatrix(4, 3)
-      this.timeline = []
-      this.ix = 0
+      this.a = this.randomMatrix(3, 4);
+      this.b = this.randomMatrix(4, 3);
+      this.timeline = [];
+      this.ix = 0;
     },
     matmul(a, b) {
       // watch out -- spaghetti below...
@@ -244,32 +221,32 @@ export default {
       // Construct a list of the steps required to perform matrix
       // multiplication. This will be used to step through the state/timeline of
       // the matrix multiplication process.
-      this.timeline = []
+      this.timeline = [];
 
       // Resulting matrix will have the same number of columns as matrix A, and
       // the same number of rows as matrix B
-      const c = []
+      const c = [];
       for (let i = 0; i < a.length; i++) {
-        c.push(Array(b[i].length).fill(0))
+        c.push(Array(b[i].length).fill(0));
       }
 
-      const steps = Array(a.length * b[0].length)
+      const steps = Array(a.length * b[0].length);
 
       a.forEach((_, i) => {
         b[i].forEach((_, j) => {
           // keep track of multiplication operations
-          const multis = []
+          const multis = [];
 
           a[i].forEach((_, k) => {
             // compose multiplication steps (+=)
-            multis.push(`${a[j][k]}*${b[k][i]}`)
-            c[j][i] += a[j][k] * b[k][i]
+            multis.push(`${a[j][k]}*${b[k][i]}`);
+            c[j][i] += a[j][k] * b[k][i];
 
             // update steps as multiplication and addition steps are introduced
-            steps[i * a.length + j] = `${multis.join(' + ')} = ${c[j][i]}`
+            steps[i * a.length + j] = `${multis.join(" + ")} = ${c[j][i]}`;
 
             // clone the result array, otherwise it will be passed by reference
-            const cCopy = JSON.parse(JSON.stringify(c))
+            const cCopy = JSON.parse(JSON.stringify(c));
 
             this.timeline.push({
               row_a: j,
@@ -283,21 +260,21 @@ export default {
               cur_c: c[j][i],
               c: cCopy,
               all_steps: steps.slice(),
-            })
-          })
-        })
-      })
+            });
+          });
+        });
+      });
     },
     incStep() {
       if (this.ix !== this.timeline.length - 1) {
-        this.ix += 1
+        this.ix += 1;
       }
     },
     decStep() {
       if (this.ix > 0) {
-        this.ix -= 1
+        this.ix -= 1;
       }
     },
   },
-}
+};
 </script>

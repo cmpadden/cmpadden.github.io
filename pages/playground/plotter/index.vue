@@ -72,10 +72,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
-
-export default Vue.extend({
-  layout: 'light',
+definePageMeta({ layout: "light" });
+export default {
   data() {
     return {
       height: 0,
@@ -175,5 +173,5 @@ export default Vue.extend({
     // eslint-disable-next-line no-new
     new this.$p5(sketch, 'canvas')
   },
-})
+}
 </script>

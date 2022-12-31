@@ -5,8 +5,8 @@
         Latest Blog Posts
       </h1>
 
-      <div v-for="article of articles" :key="article.slug">
-        <NuxtLink :to="{ name: 'posts-slug', params: { slug: article.slug } }">
+      <div v-for="(article, ix) of articles" :key="ix">
+        <NuxtLink :to="article._path">
           <div
             class="mb-2 text-white bg-black border border-white shadow-lg bg-opacity-30 hover:bg-opacity-70"
           >
@@ -50,6 +50,6 @@
 
 <script>
 export default {
-  props: ['articles'],
-}
+  props: ["articles"],
+};
 </script>

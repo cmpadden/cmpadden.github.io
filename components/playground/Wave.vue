@@ -4,13 +4,11 @@
 </template>
 
 <script>
-import Vue from 'vue'
-
-export default Vue.extend({
+export default {
   props: {
     id: {
       type: String,
-      default: 'canvas',
+      default: "canvas",
     },
     canvasHeight: {
       type: Number,
@@ -18,7 +16,7 @@ export default Vue.extend({
     },
     type: {
       type: String,
-      default: 'sin', // sin, cos, tan
+      default: "sin", // sin, cos, tan
     },
     diameter: {
       type: Number,
@@ -35,35 +33,35 @@ export default Vue.extend({
   },
   mounted() {
     const sketch = (s) => {
-      const HEIGHT = s.windowWidth >= 450 ? this.canvasHeight : 200
-      const WIDTH = s.windowWidth >= 450 ? 800 : 300
+      const HEIGHT = s.windowWidth >= 450 ? this.canvasHeight : 200;
+      const WIDTH = s.windowWidth >= 450 ? 800 : 300;
 
-      let x = 0
-      let y = HEIGHT / 2
+      let x = 0;
+      let y = HEIGHT / 2;
 
       // let R = Math.round(s.random(255))
       // let G = Math.round(s.random(255))
       // let B = Math.round(s.random(255))
 
-      let R = 0
-      const G = 100
-      const B = 125
+      let R = 0;
+      const G = 100;
+      const B = 125;
 
       s.setup = () => {
-        s.createCanvas(WIDTH, HEIGHT)
-        x = -this.diameter
-      }
+        s.createCanvas(WIDTH, HEIGHT);
+        x = -this.diameter;
+      };
 
       s.draw = () => {
-        if (this.type === 'sin') {
-          y = this.amplitude * s.sin(x * (s.TWO_PI / this.lambda)) + HEIGHT / 2
-        } else if (this.type === 'cos') {
-          y = this.amplitude * s.cos(x * (s.TWO_PI / this.lambda)) + HEIGHT / 2
-        } else if (this.type === 'tan') {
-          y = this.amplitude * s.tan(x * (s.TWO_PI / this.lambda)) + HEIGHT / 2
+        if (this.type === "sin") {
+          y = this.amplitude * s.sin(x * (s.TWO_PI / this.lambda)) + HEIGHT / 2;
+        } else if (this.type === "cos") {
+          y = this.amplitude * s.cos(x * (s.TWO_PI / this.lambda)) + HEIGHT / 2;
+        } else if (this.type === "tan") {
+          y = this.amplitude * s.tan(x * (s.TWO_PI / this.lambda)) + HEIGHT / 2;
         } else {
           // unsupported wave type
-          y = HEIGHT / 2
+          y = HEIGHT / 2;
         }
 
         // compute R color channel based on ball's Y position
@@ -75,27 +73,25 @@ export default Vue.extend({
             0,
             255
           )
-        )
+        );
 
-        x = x >= WIDTH + this.diameter ? -this.diameter : x + 1
+        x = x >= WIDTH + this.diameter ? -this.diameter : x + 1;
 
-        s.noStroke()
-        s.fill(s.color(R, G, B))
-        s.ellipse(x, y, this.diameter, this.diameter)
-      }
+        s.noStroke();
+        s.fill(s.color(R, G, B));
+        s.ellipse(x, y, this.diameter, this.diameter);
+      };
 
       s.mousePressed = () => {
-        s.clear()
-      }
-    }
+        s.clear();
+      };
+    };
 
     // eslint-disable-next-line no-new
-    new this.$p5(sketch, this.id)
+    new this.$p5(sketch, this.id);
   },
   data() {
-    return {}
+    return {};
   },
-})
+};
 </script>
-
-
