@@ -184,6 +184,11 @@ export default {
   },
   created() {
     // eslint-disable-next-line nuxt/no-globals-in-created
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener("keydown", (e) => {
       if (e.key === " ") {
         this.incStep();
