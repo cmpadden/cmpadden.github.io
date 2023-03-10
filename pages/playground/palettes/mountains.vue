@@ -20,6 +20,12 @@ export default {
     return {};
   },
   mounted() {
+
+    // There is a bug where multiple p5 canvases are created within canvas div if a
+    // user closely and re-opens the palettes playground. This is a workaround to
+    // remove the children canvas elements within this div.
+    document.getElementById("canvas").textContent = '';
+
     const PALETTE = [
       "#FFBA08",
       "#FAA307",
