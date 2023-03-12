@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas :id="_uid" :width="canvasWidth" :height="canvasHeight"></canvas>
+    <canvas id="spectrogramCanvas" :width="canvasWidth" :height="canvasHeight"></canvas>
   </div>
 </template>
 
@@ -42,8 +42,7 @@ export default {
         this.bufferLength = this.analyser.frequencyBinCount
         this.dataArray = new Uint8Array(this.bufferLength)
 
-        // unique canvas identifier using component ID
-        this.canvas = document.getElementById(this._uid)
+        this.canvas = document.getElementById("spectrogramCanvas")
         this.canvasCtx = this.canvas.getContext('2d')
 
         this.canvasCtx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
