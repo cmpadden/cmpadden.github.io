@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas :id="_uid" :width="canvasWidth" :height="canvasHeight"></canvas>
+    <canvas id="frequencyBarGraphCanvas" :width="canvasWidth" :height="canvasHeight"></canvas>
   </div>
 </template>
 
@@ -26,6 +26,7 @@ export default {
     },
   },
   mounted() {
+
     // Reference implementation from Mozilla's MDN
     // https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API#creating_a_frequency_bar_graph
 
@@ -43,8 +44,7 @@ export default {
         this.bufferLength = this.analyser.frequencyBinCount
         this.dataArray = new Uint8Array(this.bufferLength)
 
-        // unique canvas identifier using component ID
-        this.canvas = document.getElementById(this._uid)
+        this.canvas = document.getElementById("frequencyBarGraphCanvas")
         this.canvasCtx = this.canvas.getContext('2d')
 
         this.canvasCtx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
