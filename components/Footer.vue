@@ -1,9 +1,7 @@
 <template>
-  <footer
-    class="w-full p-4 text-xs text-center text-white bg-gradient-to-l from-blackish to-pink-600 pin-b"
-  >
+  <footer class="w-full p-4 text-xs text-center text-white pin-b">
     <div>&#169; Colton Padden</div>
-    <div class="pb-2">
+    <div class="">
       Made with
       <a href="https://nuxtjs.org/" class="underline hover:text-blue-400"
         >NuxtJS</a
