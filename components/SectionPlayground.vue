@@ -1,18 +1,24 @@
 <template>
-  <section class="container mx-auto mb-4 text-white">
+  <section class="container mx-auto px-4 text-white">
     <h1 class="py-4 text-4xl font-bold leading-tight text-white">
       {{ title }}
     </h1>
     <div
-      class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-auto"
+      class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-auto mb-4"
     >
-      <nuxt-link v-for="link in links" :key="link.title" :to="link.link">
-        <div class="h-full bg-black border bg-opacity-30 hover:bg-opacity-70">
+      <nuxt-link
+        v-for="link in filtered_links"
+        :key="link.title"
+        :to="link.link"
+      >
+        <div
+          class="h-full bg-black border bg-opacity-30 hover:bg-opacity-100 rounded-lg"
+        >
           <div class="p-4">
             <h3 class="pb-2 text-xl font-bold">{{ link.title }}</h3>
             <div class="text-base font-light" v-html="link.description"></div>
           </div>
-          <div v-if="showImages" class="">
+          <div v-if="showImages">
             <img
               class="object-cover w-full shadow-lg h-96"
               :src="link.img || 'images/placeholder.png'"
@@ -21,6 +27,13 @@
         </div>
       </nuxt-link>
     </div>
+    <NuxtLink
+      v-if="linkToPlayground"
+      to="/playground"
+      class="text-blue-400 hover:text-blue-200"
+    >
+      More Experiments...
+    </NuxtLink>
   </section>
 </template>
 
@@ -28,6 +41,14 @@
 export default {
   props: {
     showImages: {
+      type: Boolean,
+      default: false,
+    },
+    limit: {
+      type: Number,
+      default: null,
+    },
+    linkToPlayground: {
       type: Boolean,
       default: false,
     },
@@ -89,6 +110,15 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    filtered_links() {
+      if (this.limit === null || this.limit <= 0) {
+        return this.links;
+      } else {
+        return this.links.slice(0, this.limit);
+      }
+    },
   },
 };
 </script>
