@@ -16,8 +16,8 @@ button {
   color: theme('colors.white');
   background-image: linear-gradient(
     120deg,
-    theme('colors.blue.400') 0%,
-    theme('colors.green.400') 100%
+    theme('colors.sky.700') 0%,
+    theme('colors.teal.700') 100%
   );
   background-repeat: no-repeat;
   background-size: 100% 100%;
