@@ -1,3 +1,21 @@
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+
+const ix = ref(0);
+
+const occupations = ["Data Engineer", "Web Developer", "Musician", "Tinkerer"];
+
+onMounted(() => {
+  setInterval(function () {
+    if (ix.value === occupations.length - 1) {
+      ix.value = 0;
+    } else {
+      ix.value = ix.value + 1;
+    }
+  }, 4000);
+});
+</script>
+
 <template>
   <section class="container mx-auto px-4 mb-8">
     <div class="flex flex-wrap">
@@ -10,9 +28,13 @@
         >
           <p>
             I am a
-            <span class="gradient-highlight"
-              >data engineer, web developer, and tinkerer</span
-            >
+              <!-- todo - use transition element to rotate between values -->
+              <div
+                :key="occupations[ix]"
+                class="gradient-highlight inline-block"
+              >
+                {{ occupations[ix] }}
+              </div>
             helping build the future of finance at
             <a
               class="border-b-2 border-blue-200"
