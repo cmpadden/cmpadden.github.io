@@ -1,7 +1,7 @@
 <template>
-  <section class="contain mx-auto px-4 py-8 text-white bg-mesh-gradient">
+  <section class="text-white bg-mesh-gradient">
     <div
-      class="grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-x-6 md:space-y-0"
+      class="container mx-auto px-4 py-8 grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-x-6 md:space-y-0"
     >
       <div>
         <div
