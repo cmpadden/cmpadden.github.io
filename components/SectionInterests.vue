@@ -1,50 +1,79 @@
 <template>
-  <section class="py-12 text-white bg-gradient-to-r from-blackish to-pink-600">
-    <div class="container mx-auto">
-      <div class="mx-6 md:mx-12">
-        <div class="flex flex-wrap-reverse">
-          <div class="w-full p-2 md:w-1/3">
-            <div class="h-full p-3 bg-black border bg-opacity-70">
-              <h3 class="pb-2 text-xl font-bold text-center">
-                Technical Interests
-              </h3>
-              <hr class="py-2 border-gray-300" />
-              <ul class="text-base custom-list">
-                <li>Data Pipeline Engineering</li>
-                <li>Distributed Systems</li>
-                <li>Embedded Systems</li>
-                <li>Programming Languages</li>
-                <li>Developer Tooling</li>
-              </ul>
-            </div>
-          </div>
-          <div class="w-full p-2 md:w-1/3">
-            <div class="h-full p-3 bg-black border bg-opacity-70">
-              <h3 class="pb-2 text-xl font-bold text-center">Air Quality</h3>
-              <hr class="py-2 border-gray-300" />
-              <p class="mb-8 text-base text-center">
-                I am a founding member and technical adviser to
-                <a class="underline" href="https://guaq.tech"
-                  >Globally Unified Air Quality</a
-                >, a startup aimed at providing low-cost solutions for measuring
-                and analysing air-quality conditions around the world.
-              </p>
-            </div>
-          </div>
-          <div class="w-full p-2 md:w-1/3">
-            <div class="h-full p-3 bg-black border bg-opacity-70">
-              <h3 class="pb-2 text-xl font-bold text-center">Consulting</h3>
-              <hr class="py-2 border-gray-300" />
-              <p class="mb-8 text-base text-center">
-                I worked as a technical consultant for financial institutions
-                and government agencies in the Washington, D.C. area, providing
-                guidance on identity and access management, and big data
-                solutions.
-              </p>
-            </div>
-          </div>
+  <section class="contain mx-auto px-4 py-8 text-white bg-mesh-gradient">
+    <div
+      class="grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-x-6 md:space-y-0"
+    >
+      <div>
+        <div
+          class="h-full bg-black border border-gray-400 bg-opacity-70 rounded-lg drop-shadow-lg"
+        >
+          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-gray-400">
+            Technical Interests
+          </h3>
+          <ul class="text-base custom-list p-2">
+            <li>Data Pipeline Engineering</li>
+            <li>Distributed Systems</li>
+            <li>Embedded Systems</li>
+            <li>Programming Languages</li>
+            <li>Developer Tooling</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div
+          class="h-full bg-black border border-gray-400 bg-opacity-70 rounded-lg drop-shadow-lg"
+        >
+          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-gray-400">
+            Air Quality
+          </h3>
+          <p class="p-2 text-base text-center">
+            I am a founding member and technical adviser to
+            <a class="underline" href="https://guaq.tech"
+              >Globally Unified Air Quality</a
+            >, a startup aimed at providing low-cost solutions for measuring and
+            analysing air-quality conditions around the world.
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          class="h-full bg-black border border-gray-400 bg-opacity-70 rounded-lg drop-shadow-lg"
+        >
+          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-gray-400">
+            Consulting
+          </h3>
+          <p class="p-2 text-base text-center">
+            I worked as a technical consultant for financial institutions and
+            government agencies in the Washington, D.C. area, providing guidance
+            on identity and access management, and big data solutions.
+          </p>
         </div>
       </div>
     </div>
   </section>
 </template>
+
+<style>
+/* https://hypercolor.dev/mesh
+ *
+ * bg-teal-700 2 33 58
+ * bg-sky-700 3 100 80
+ * bg-neutral-600 6 58 12
+ * bg-green-900 48 37 92
+ * bg-slate-300 88 74 62
+ * bg-teal-100 67 90 81
+ */
+.bg-mesh-gradient {
+  background-color: rgb(82, 82, 91);
+  background-image: radial-gradient(
+      at 2% 33%,
+      rgb(15, 118, 110) 0,
+      transparent 58%
+    ),
+    radial-gradient(at 3% 100%, rgb(3, 105, 161) 0, transparent 80%),
+    radial-gradient(at 6% 58%, rgb(82, 82, 82) 0, transparent 12%),
+    radial-gradient(at 48% 37%, rgb(20, 83, 45) 0, transparent 92%),
+    radial-gradient(at 88% 74%, rgb(203, 213, 225) 0, transparent 62%),
+    radial-gradient(at 67% 90%, rgb(204, 251, 241) 0, transparent 81%);
+}
+</style>
