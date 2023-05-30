@@ -12,7 +12,7 @@
           >
             <div class="p-2 flex items-baseline">
               <div class="flex-1 text-xl font-bold">{{ article.title }}</div>
-              <div class="bg-teal-700 text-base px-2">{{ article.date }}</div>
+              <div class="bg-teal-700 text-base px-2 hidden md:block">{{ article.date }}</div>
             </div>
 
             <div class="text-sm p-2">
