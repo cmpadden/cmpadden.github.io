@@ -1,1 +1,0 @@
-import o from"./SectionPlayground.d5fa8812.js";import{_ as n,o as c,c as t,a as r}from"./entry.1a5c9677.js";const _={};function a(s,m){const e=o;return c(),t("div",null,[r(e,{showImages:""})])}const i=n(_,[["render",a]]);export{i as default};
