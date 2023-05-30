@@ -8,7 +8,7 @@
       <div v-for="(article, ix) of articles" :key="ix">
         <NuxtLink :to="article._path">
           <div
-            class="text-white bg-black border border-white shadow-lg bg-opacity-30 hover:bg-opacity-100 rounded-lg"
+            class="text-white bg-black border border-gray-400 shadow-lg bg-opacity-30 hover:bg-opacity-100 rounded-lg"
           >
             <div class="p-2 flex items-baseline">
               <div class="flex-1 text-xl font-bold">{{ article.title }}</div>

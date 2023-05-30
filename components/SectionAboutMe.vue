@@ -28,13 +28,13 @@ onMounted(() => {
         >
           <p>
             I am a
-              <!-- todo - use transition element to rotate between values -->
-              <div
-                :key="occupations[ix]"
-                class="gradient-highlight inline-block"
-              >
-                {{ occupations[ix] }}
-              </div>
+            <!-- todo - use transition element to rotate between values -->
+            <div
+              :key="occupations[ix]"
+              class="gradient-highlight inline-block"
+            >
+              {{ occupations[ix] }}
+            </div>
             helping build the future of finance at
             <a
               class="border-b-2 border-blue-200"

@@ -18,7 +18,7 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
                 class="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 p-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
               >
                 <ChevronDownIcon
-                  class="h-5 w-5 text-white hover:text-teal-700"
+                  class="h-5 w-5 text-white hover:text-blue-400"
                   aria-hidden="true"
                 />
               </HeadlessMenuButton>
@@ -33,7 +33,7 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
               leave-to-class="transform scale-95 opacity-0"
             >
               <HeadlessMenuItems
-                class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-teal-700 text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                class="border absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-grayish text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
                 <div class="px-1 py-1">
                   <HeadlessMenuItem v-slot="{ active }">

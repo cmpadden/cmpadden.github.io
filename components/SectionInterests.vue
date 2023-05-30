@@ -5,9 +5,9 @@
     >
       <div>
         <div
-          class="h-full bg-black border-2 border-white bg-opacity-70 rounded-lg drop-shadow-lg"
+          class="h-full bg-black border border-gray-400 bg-opacity-70 rounded-lg drop-shadow-lg"
         >
-          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-white">
+          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-gray-400">
             Technical Interests
           </h3>
           <ul class="text-base custom-list p-2">
@@ -21,9 +21,9 @@
       </div>
       <div>
         <div
-          class="h-full bg-black border-2 border-white bg-opacity-70 rounded-lg drop-shadow-lg"
+          class="h-full bg-black border border-gray-400 bg-opacity-70 rounded-lg drop-shadow-lg"
         >
-          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-white">
+          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-gray-400">
             Air Quality
           </h3>
           <p class="p-2 text-base text-center">
@@ -37,9 +37,9 @@
       </div>
       <div>
         <div
-          class="h-full bg-black border-2 border-white bg-opacity-70 rounded-lg drop-shadow-lg"
+          class="h-full bg-black border border-gray-400 bg-opacity-70 rounded-lg drop-shadow-lg"
         >
-          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-white">
+          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-gray-400">
             Consulting
           </h3>
           <p class="p-2 text-base text-center">
