@@ -1,5 +1,5 @@
 <template>
-  <section class="container mx-auto px-4 text-white">
+  <section class="container mx-auto text-white">
     <h1 class="py-4 text-4xl font-bold leading-tight text-white">
       {{ title }}
     </h1>

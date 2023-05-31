@@ -1,5 +1,5 @@
 <template>
-  <section class="container mx-auto px-4">
+  <section class="container mx-auto">
     <h1 class="py-4 text-4xl font-bold leading-tight text-white">
       Latest Blog Posts
     </h1>
