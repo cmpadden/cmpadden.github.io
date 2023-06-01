@@ -3,13 +3,17 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
 </script>
 
 <template>
-  <nav class="container mx-auto bg-grayish py-3">
+  <nav class="container mx-auto bg-grayish pt-6">
     <div class="flex justify-between text-gray-200 font-semibold">
-      <div>
-        <NuxtLink to="/" class="mr-2 text-white hover:text-blue-200">
-          Home
-        </NuxtLink>
-      </div>
+      <NuxtLink to="/" class="mr-2 text-white hover:text-blue-200">
+        <div class="flex justify-center items-center">
+          <img
+            src="https://avatars.githubusercontent.com/u/5807118?v=4"
+            alt="Selfie"
+            class="shadow-lg ring-2 ring-blue-400 hover:ring-green-400 max-h-12 rounded-full"
+          />
+        </div>
+      </NuxtLink>
       <div>
         <HeadlessMenu as="div" class="relative inline-block text-left z-50">
           <div>
@@ -36,7 +40,7 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
             >
               <div class="px-1 py-1">
                 <HeadlessMenuItem v-slot="{ active }">
-                  <NuxtLink to="articles">
+                  <a href="articles">
                     <button
                       :class="[
                         active ? 'bg-slate-700 text-white' : 'text-white',
@@ -59,10 +63,10 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
                       </svg>
                       Blog
                     </button>
-                  </NuxtLink>
+                  </a>
                 </HeadlessMenuItem>
                 <HeadlessMenuItem v-slot="{ active }">
-                  <NuxtLink to="playground">
+                  <a href="/playground">
                     <button
                       :class="[
                         active ? 'bg-slate-700 text-white' : 'text-white',
@@ -85,7 +89,7 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
                       </svg>
                       Experiments
                     </button>
-                  </NuxtLink>
+                  </a>
                 </HeadlessMenuItem>
                 <HeadlessMenuItem v-slot="{ active }">
                   <a href="https://github.com/cmpadden">
