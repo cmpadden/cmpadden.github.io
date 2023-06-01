@@ -11,32 +11,32 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
         </NuxtLink>
       </div>
       <div>
-        <div class="">
-          <HeadlessMenu as="div" class="relative inline-block text-left">
-            <div>
-              <HeadlessMenuButton
-                class="inline-flex w-full justify-center rounded-md bg-black bg-opacity-30 p-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-              >
-                <ChevronDownIcon
-                  class="h-5 w-5 text-white hover:text-blue-400"
-                  aria-hidden="true"
-                />
-              </HeadlessMenuButton>
-            </div>
-
-            <transition
-              enter-active-class="transition duration-100 ease-out"
-              enter-from-class="transform scale-95 opacity-0"
-              enter-to-class="transform scale-100 opacity-100"
-              leave-active-class="transition duration-75 ease-in"
-              leave-from-class="transform scale-100 opacity-100"
-              leave-to-class="transform scale-95 opacity-0"
+        <HeadlessMenu as="div" class="relative inline-block text-left z-50">
+          <div>
+            <HeadlessMenuButton
+              class="inline-flex w-full justify-center rounded-md bg-black bg-opacity-30 p-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
             >
-              <HeadlessMenuItems
-                class="border-slate-700 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-black bg-opacity-80 text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-              >
-                <div class="px-1 py-1">
-                  <HeadlessMenuItem v-slot="{ active }">
+              <ChevronDownIcon
+                class="h-5 w-5 text-white hover:text-blue-400"
+                aria-hidden="true"
+              />
+            </HeadlessMenuButton>
+          </div>
+
+          <transition
+            enter-active-class="transition duration-100 ease-out"
+            enter-from-class="transform scale-95 opacity-0"
+            enter-to-class="transform scale-100 opacity-100"
+            leave-active-class="transition duration-75 ease-in"
+            leave-from-class="transform scale-100 opacity-100"
+            leave-to-class="transform scale-95 opacity-0"
+          >
+            <HeadlessMenuItems
+              class="border-slate-700 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-black bg-opacity-80 text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            >
+              <div class="px-1 py-1">
+                <HeadlessMenuItem v-slot="{ active }">
+                  <NuxtLink to="articles">
                     <button
                       :class="[
                         active ? 'bg-slate-700 text-white' : 'text-white',
@@ -57,11 +57,12 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
                           d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
                         />
                       </svg>
-
-                      <NuxtLink to="articles">Blog</NuxtLink>
+                      Blog
                     </button>
-                  </HeadlessMenuItem>
-                  <HeadlessMenuItem v-slot="{ active }">
+                  </NuxtLink>
+                </HeadlessMenuItem>
+                <HeadlessMenuItem v-slot="{ active }">
+                  <NuxtLink to="playground">
                     <button
                       :class="[
                         active ? 'bg-slate-700 text-white' : 'text-white',
@@ -82,11 +83,12 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
                           d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"
                         />
                       </svg>
-
-                      <NuxtLink to="playground">Experiments</NuxtLink>
+                      Experiments
                     </button>
-                  </HeadlessMenuItem>
-                  <HeadlessMenuItem v-slot="{ active }">
+                  </NuxtLink>
+                </HeadlessMenuItem>
+                <HeadlessMenuItem v-slot="{ active }">
+                  <a href="https://github.com/cmpadden">
                     <button
                       :class="[
                         active ? 'bg-slate-700' : '',
@@ -107,15 +109,14 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
                           d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"
                         />
                       </svg>
-
-                      <a href="https://github.com/cmpadden">GitHub</a>
+                      GitHub
                     </button>
-                  </HeadlessMenuItem>
-                </div>
-              </HeadlessMenuItems>
-            </transition>
-          </HeadlessMenu>
-        </div>
+                  </a>
+                </HeadlessMenuItem>
+              </div>
+            </HeadlessMenuItems>
+          </transition>
+        </HeadlessMenu>
       </div>
     </div>
   </nav>
