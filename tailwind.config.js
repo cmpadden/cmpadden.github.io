@@ -2,6 +2,15 @@ import defaultTheme from "tailwindcss/defaultTheme";
 
 export default {
     theme: {
+        container: {
+            padding: {
+                DEFAULT: "2rem",
+                sm: "4rem",
+                lg: "8rem",
+                xl: "10rem",
+                "2xl": "12rem",
+            },
+        },
         extend: {
             screens: {
                 sm: "640px",
@@ -32,13 +41,13 @@ export default {
             },
             keyframes: {
                 wiggle: {
-                    '0%, 100%': { transform: 'rotate(-1deg)' },
-                    '50%': { transform: 'rotate(1deg)' },
-                }
+                    "0%, 100%": { transform: "rotate(-1deg)" },
+                    "50%": { transform: "rotate(1deg)" },
+                },
             },
             animation: {
                 wiggle: "wiggle 2s ease-in-out infinite",
-                'bounce-slow': "bounce 3s"
+                "bounce-slow": "bounce 3s",
             },
         },
     },

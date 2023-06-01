@@ -17,7 +17,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="container mx-auto px-4 mb-8">
+  <section class="container mx-auto mb-8">
     <div class="flex flex-wrap">
       <div class="w-full md:w-2/3">
         <h1 class="pb-4 text-4xl font-bold leading-tight text-white">

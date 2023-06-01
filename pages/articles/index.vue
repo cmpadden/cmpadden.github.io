@@ -1,5 +1,5 @@
 <template>
-  <section class="mx-6 md:mx-12">
+  <section class="container mx-auto">
     <div class="grid grid-cols-4 gap-4">
       <div class="col-span-4 lg:col-span-3">
         <div v-for="article of visible_articles" :key="article._id">

@@ -1,13 +1,13 @@
 <template>
   <section class="text-white bg-mesh-gradient">
     <div
-      class="container mx-auto px-4 py-8 grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-x-6 md:space-y-0"
+      class="container mx-auto py-4 grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-x-6 md:space-y-0"
     >
       <div>
         <div
-          class="h-full bg-black border border-gray-400 bg-opacity-70 rounded-lg drop-shadow-lg"
+          class="h-full bg-black border border-slate-700 bg-opacity-70 rounded-lg drop-shadow-lg"
         >
-          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-gray-400">
+          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-slate-700">
             Technical Interests
           </h3>
           <ul class="text-base custom-list p-2">
@@ -21,9 +21,9 @@
       </div>
       <div>
         <div
-          class="h-full bg-black border border-gray-400 bg-opacity-70 rounded-lg drop-shadow-lg"
+          class="h-full bg-black border border-slate-700 bg-opacity-70 rounded-lg drop-shadow-lg"
         >
-          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-gray-400">
+          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-slate-700">
             Air Quality
           </h3>
           <p class="p-2 text-base text-center">
@@ -37,9 +37,9 @@
       </div>
       <div>
         <div
-          class="h-full bg-black border border-gray-400 bg-opacity-70 rounded-lg drop-shadow-lg"
+          class="h-full bg-black border border-slate-700 bg-opacity-70 rounded-lg drop-shadow-lg"
         >
-          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-gray-400">
+          <h3 class="p-2 text-xl font-bold text-center border-b-2 border-slate-700">
             Consulting
           </h3>
           <p class="p-2 text-base text-center">
