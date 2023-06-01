@@ -19,7 +19,7 @@ onMounted(() => {
 <template>
   <section class="container mx-auto mb-8">
     <div class="flex flex-wrap">
-      <div class="w-full md:w-2/3">
+      <div class="w-full">
         <h1 class="pb-4 text-4xl font-bold leading-tight text-white">
           Who&#183;Am&#183;I
         </h1>
@@ -58,15 +58,6 @@ onMounted(() => {
             scientists and researchers more easily leverage large-scale organic
             data in their research.
           </p>
-        </div>
-      </div>
-      <div class="hidden md:block md:w-1/3">
-        <div class="flex justify-center items-center">
-          <img
-            src="https://avatars.githubusercontent.com/u/5807118?v=4"
-            alt="Image of self"
-            class="shadow-lg ring-2 ring-white max-h-60 rounded-full"
-          />
         </div>
       </div>
     </div>
