@@ -12,7 +12,7 @@
         :to="link.link"
       >
         <div
-          class="h-full bg-black border border-gray-400 bg-opacity-30 hover:bg-opacity-100 rounded-lg"
+          class="h-full bg-black border border-slate-700 bg-opacity-30 hover:bg-opacity-100 rounded-lg"
         >
           <div class="p-4">
             <h3 class="pb-2 text-xl font-bold">{{ link.title }}</h3>
