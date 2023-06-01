@@ -15,7 +15,7 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
           <HeadlessMenu as="div" class="relative inline-block text-left">
             <div>
               <HeadlessMenuButton
-                class="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 p-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                class="inline-flex w-full justify-center rounded-md bg-black bg-opacity-30 p-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
               >
                 <ChevronDownIcon
                   class="h-5 w-5 text-white hover:text-blue-400"
@@ -33,14 +33,14 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
               leave-to-class="transform scale-95 opacity-0"
             >
               <HeadlessMenuItems
-                class="border absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-grayish text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                class="border-slate-700 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-black bg-opacity-80 text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
                 <div class="px-1 py-1">
                   <HeadlessMenuItem v-slot="{ active }">
                     <button
                       :class="[
-                        active ? 'bg-blue-500 text-white' : 'text-white',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                        active ? 'bg-slate-700 text-white' : 'text-white',
+                        'group flex w-full rounded-md items-center px-2 py-2 text-sm',
                       ]"
                     >
                       <svg
@@ -62,8 +62,8 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
                   <HeadlessMenuItem v-slot="{ active }">
                     <button
                       :class="[
-                        active ? 'bg-blue-500 text-white' : 'text-white',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                        active ? 'bg-slate-700' : '',
+                        'group flex w-full rounded-md items-center px-2 py-2 text-sm',
                       ]"
                     >
                       <svg
