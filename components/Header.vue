@@ -40,7 +40,7 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
             >
               <div class="px-1 py-1">
                 <HeadlessMenuItem v-slot="{ active }">
-                  <NuxtLink to="articles">
+                  <a href="articles">
                     <button
                       :class="[
                         active ? 'bg-slate-700 text-white' : 'text-white',
@@ -63,10 +63,10 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
                       </svg>
                       Blog
                     </button>
-                  </NuxtLink>
+                  </a>
                 </HeadlessMenuItem>
                 <HeadlessMenuItem v-slot="{ active }">
-                  <NuxtLink to="playground">
+                  <a href="/playground">
                     <button
                       :class="[
                         active ? 'bg-slate-700 text-white' : 'text-white',
@@ -89,7 +89,7 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
                       </svg>
                       Experiments
                     </button>
-                  </NuxtLink>
+                  </a>
                 </HeadlessMenuItem>
                 <HeadlessMenuItem v-slot="{ active }">
                   <a href="https://github.com/cmpadden">
