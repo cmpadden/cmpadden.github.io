@@ -3,16 +3,18 @@ import { ref, onMounted } from "vue";
 
 const ix = ref(0);
 
-const occupations = ["Data Engineer", "Web Developer", "Musician", "Tinkerer"];
+const OCCUPATIONS = ["Data Engineer", "Web Developer", "Musician", "Tinkerer"];
+
+const OCCUPATION_INTERVAL = 3000
 
 onMounted(() => {
   setInterval(function () {
-    if (ix.value === occupations.length - 1) {
+    if (ix.value === OCCUPATIONS.length - 1) {
       ix.value = 0;
     } else {
       ix.value = ix.value + 1;
     }
-  }, 4000);
+  }, OCCUPATION_INTERVAL);
 });
 </script>
 
@@ -30,10 +32,10 @@ onMounted(() => {
             I am a
             <!-- todo - use transition element to rotate between values -->
             <div
-              :key="occupations[ix]"
+              :key="OCCUPATIONS[ix]"
               class="gradient-highlight inline-block"
             >
-              {{ occupations[ix] }}
+              {{ OCCUPATIONS[ix] }}
             </div>
             helping build the future of finance at
             <a
