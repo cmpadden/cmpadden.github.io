@@ -1,18 +1,34 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 
-const ix = ref(0);
+const counter = ref(0);
+const show = ref(true);
 
 const occupations = ["Data Engineer", "Web Developer", "Musician", "Tinkerer"];
+const pointer = ref(0);
+
+const occupation = computed(() => occupations[pointer.value]);
 
 onMounted(() => {
+  // show for 3 intervals, and hide for 1
   setInterval(function () {
-    if (ix.value === occupations.length - 1) {
-      ix.value = 0;
+    counter.value++;
+    if (counter.value % 3 === 0) {
+      show.value = false;
     } else {
-      ix.value = ix.value + 1;
+      // update computed `occupation` value when show goes from false -> true
+      // to prevent property from updating during transition duration
+      if (!show.value) {
+        if (pointer.value === occupations.length - 1) {
+          pointer.value = 0;
+        } else {
+          pointer.value++;
+        }
+      }
+
+      show.value = true;
     }
-  }, 4000);
+  }, 1000);
 });
 </script>
 
@@ -24,17 +40,29 @@ onMounted(() => {
           Who&#183;Am&#183;I
         </h1>
         <div
-          class="font-medium tracking-wide text-white sm:text-base lg:text-lg pr-4"
+          class="font-medium tracking-wide text-white sm:text-base lg:text-normal pr-4 space-y-4"
         >
-          <p>
+          <div>
             I am a
-            <!-- todo - use transition element to rotate between values -->
-            <div
-              :key="occupations[ix]"
-              class="gradient-highlight inline-block"
-            >
-              {{ occupations[ix] }}
-            </div>
+            <span class="w-36 inline-block">
+              <HeadlessTransitionRoot
+                as="template"
+                appear
+                :show="show"
+                enter="transition transform duration-300 ease-out"
+                enter-from="translate-y-3 opacity-0"
+                enter-to="translate-x-0 opacity-100"
+                leave="transition transform duration-500 ease-in"
+                leave-from="opacity-100"
+                leave-to="-translate-y-3 opacity-0"
+              >
+                <div
+                  class="shadow-xl bg-gradient-to-r from-sky-700 to-teal-700 px-2 w-36 font-extrabold tracking-wide text-center"
+                >
+                  {{ occupation }}
+                </div>
+              </HeadlessTransitionRoot>
+            </span>
             helping build the future of finance at
             <a
               class="border-b-2 border-blue-200"
@@ -43,9 +71,8 @@ onMounted(() => {
               href="https://www.gemini.com/"
               >Gemini</a
             >.
-          </p>
-          <br />
-          <p>
+          </div>
+          <div>
             Previously, I worked at Georgetown University's
             <a
               class="border-b-2 border-blue-200"
@@ -57,7 +84,7 @@ onMounted(() => {
             building data warehousing and processing solutions to help social
             scientists and researchers more easily leverage large-scale organic
             data in their research.
-          </p>
+          </div>
         </div>
       </div>
     </div>
