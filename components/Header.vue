@@ -10,7 +10,7 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
           <img
             src="https://avatars.githubusercontent.com/u/5807118?v=4"
             alt="Selfie"
-            class="ring-2 ring-blue-400 transition duration-500 hover:ring-4 hover:ring-green-400 shadow-lg max-h-12 rounded-full"
+            class="ring-2 ring-sky-700 transition duration-500 hover:ring-4 hover:ring-teal-700 shadow-lg max-h-12 rounded-full"
           />
         </div>
       </NuxtLink>

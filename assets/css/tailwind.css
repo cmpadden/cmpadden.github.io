@@ -25,7 +25,6 @@ button {
   padding: 0.05rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  transition: background-size 0.25s ease-in;
 }
 
 .gradient-underline {
@@ -39,14 +38,12 @@ button {
   background-size: 100% 10%;
   background-position: 0 100%;
   padding: 0.15rem;
-  transition: background-size 500ms ease-in;
 }
 
 /* optional class for animating the gradient when hovered */
 .gradient-hover:hover {
   color: theme('colors.black');
   background-size: 100% 100%;
-  transition: color 500ms linear;
 }
 
 /**
