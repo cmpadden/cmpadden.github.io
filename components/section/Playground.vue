@@ -90,23 +90,27 @@ export default {
           description:
             "Identify the chords being played by your attached MIDI device",
           link: "/playground/chords",
+          img: "images/previews/chord-identifier.png",
         },
         {
           title: "MIDI Events",
           description:
             "View the MIDI events triggered by a MIDI-controller through the Web MIDI API",
           link: "/playground/midi",
+          img: "images/previews/midi-events.png",
         },
         {
           title: "1000 French Conjugations",
           description:
             "Search and explore the conjugations of 1000 French verbs",
           link: "/playground/french",
+          img: "images/previews/french-conjugations.png",
         },
         {
           title: "Matrix Multiplication",
           description: "Step through the process of matrix multiplication",
           link: "/playground/matrix",
+          img: "images/previews/matrix-multiplication.png",
         },
       ],
     };
