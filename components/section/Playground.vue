@@ -1,10 +1,11 @@
 <template>
+  <!-- <section class="container mx-auto text-white bg-[url('/images/topography.svg')]"> -->
   <section class="container mx-auto text-white">
     <h1 class="py-4 text-4xl font-bold leading-tight text-white">
       {{ title }}
     </h1>
     <div
-      class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-auto mb-4"
+      class="grid gap-4 grid-cols-1 lg:grid-cols-2 mb-4"
     >
       <nuxt-link
         v-for="link in filtered_links"
@@ -12,7 +13,7 @@
         :to="link.link"
       >
         <div
-          class="h-full bg-black border border-slate-700 bg-opacity-70 rounded-lg drop-shadow-lg hover:bg-opacity-100 transition duration-500"
+          class="h-full bg-black bg-opacity-70 rounded-xl drop-shadow-lg hover:bg-opacity-100 transition duration-500"
         >
           <div class="p-4">
             <h3 class="pb-2 text-xl font-bold">{{ link.title }}</h3>

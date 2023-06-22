@@ -8,19 +8,20 @@
       <div v-for="(article, ix) of articles" :key="ix">
         <NuxtLink :to="article._path">
           <div
-            class="text-white bg-black border border-slate-700 bg-opacity-70 rounded-lg drop-shadow-lg hover:bg-opacity-100 transition duration-500"
+            class="p-4 space-y-4 text-white bg-black bg-opacity-70 rounded-xl drop-shadow-lg hover:bg-opacity-100 hover:shadow-lg transition duration-500"
           >
-            <div class="p-4 flex items-baseline">
+            <div class="flex items-baseline">
               <div class="flex-1 text-xl font-bold">{{ article.title }}</div>
-              <div class="bg-teal-700 text-base px-2 hidden md:block">
+              <div
+                v-if="show_date"
+                class="bg-teal-700 text-base px-2 hidden md:block"
+              >
                 {{ article.date }}
               </div>
             </div>
 
-            <div class="text-sm p-4">
-              <div class="line-clamp-3">
-                {{ article.description }}
-              </div>
+            <div class="text-sm line-clamp-3">
+              {{ article.description }}
             </div>
           </div>
         </NuxtLink>
@@ -32,8 +33,15 @@
   </section>
 </template>
 
-<script>
-export default {
-  props: ["articles"],
-};
+<script setup>
+const props = defineProps({
+  articles: [],
+});
+
+const show_date = ref(false);
+
+// export default {
+//   props: ["articles"],
+
+// };
 </script>
