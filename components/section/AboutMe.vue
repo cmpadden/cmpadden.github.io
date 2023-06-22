@@ -36,9 +36,6 @@ onMounted(() => {
   <section class="container mx-auto mb-8">
     <div class="flex flex-wrap">
       <div class="w-full">
-        <!-- <h1 class="pb-4 text-4xl font-bold leading-tight text-white"> -->
-        <!--   Who&#183;Am&#183;I -->
-        <!-- </h1> -->
         <div
           class="font-medium tracking-wide text-white sm:text-base lg:text-normal pr-4 space-y-4"
         >
@@ -50,14 +47,14 @@ onMounted(() => {
                 appear
                 :show="show"
                 enter="transition transform duration-300 ease-out"
-                enter-from="translate-y-3 opacity-0"
+                enter-from="translate-y-2 opacity-0"
                 enter-to="translate-x-0 opacity-100"
-                leave="transition transform duration-500 ease-in"
+                leave="transition transform duration-300 ease-in"
                 leave-from="opacity-100"
-                leave-to="-translate-y-3 opacity-0"
+                leave-to="-translate-y-2 opacity-0"
               >
                 <div
-                  class="shadow-xl bg-gradient-to-r from-sky-700 to-teal-700 px-2 w-36 font-extrabold tracking-wide text-center"
+                  class="shadow-xl bg-black/75 rounded-md px-2 w-36 font-extrabold tracking-wide text-center"
                 >
                   {{ occupation }}
                 </div>

@@ -2,7 +2,7 @@
   <section class="text-white bg-[url('/images/topography.svg')]">
   <!-- <section class="text-white"> -->
     <div
-      class="container mx-auto py-4 grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-x-6 md:space-y-0"
+      class="container mx-auto py-8 grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-x-6 md:space-y-0"
     >
       <div>
         <div
