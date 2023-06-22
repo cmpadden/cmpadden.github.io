@@ -46,23 +46,6 @@ button {
   background-size: 100% 100%;
 }
 
-/**
- * Custom bullet-point coloring
- */
-
-.custom-list {
-  @apply ml-8 list-disc;
-  list-style: none; /* Remove default bullets */
-}
-
-.custom-list > li::before {
-  content: '\2022';
-  color: theme('colors.blue.200');
-  display: inline-block;
-  width: 1.5em;
-  margin-left: -1.5em;
-}
-
 code {
   /* temporary fix to remove strange rendering of text via prism */
   text-shadow: none;

@@ -5,32 +5,26 @@
     >
       <div>
         <div
-          class="h-full bg-black border border-slate-700 bg-opacity-70 rounded-lg drop-shadow-lg hover:bg-opacity-100 transition duration-500"
+          class="h-full p-4 bg-black bg-opacity-70 rounded-xl drop-shadow-lg hover:bg-opacity-100 hover:shadow-xl transition duration-500"
         >
-          <h3
-            class="p-2 text-xl font-bold text-center border-b-2 border-slate-700"
-          >
+          <h3 class="text-xl font-bold mb-2 text-center">
             Technical Interests
           </h3>
-          <ul class="text-base custom-list p-2">
-            <li>Data Pipeline Engineering</li>
-            <li>Distributed Systems</li>
-            <li>Embedded Systems</li>
-            <li>Programming Languages</li>
+          <ul class="text-base list-disc ml-6">
             <li>Developer Tooling</li>
+            <li>Programming Languages</li>
+            <li>Web Development</li>
+            <li>Data Engineering</li>
+            <li>Embedded Systems</li>
           </ul>
         </div>
       </div>
       <div>
         <div
-          class="h-full bg-black border border-slate-700 bg-opacity-70 rounded-lg drop-shadow-lg hover:bg-opacity-100 transition duration-500"
+          class="h-full p-4 bg-black bg-opacity-70 rounded-xl drop-shadow-lg hover:bg-opacity-100 hover:shadow-lg transition duration-500"
         >
-          <h3
-            class="p-2 text-xl font-bold text-center border-b-2 border-slate-700"
-          >
-            Air Quality
-          </h3>
-          <p class="p-2 text-base text-center">
+          <h3 class="text-xl font-bold text-center mb-2">Air Quality</h3>
+          <p class="text-base text-center">
             I am a founding member and technical adviser to
             <a class="underline" href="https://guaq.tech"
               >Globally Unified Air Quality</a
@@ -41,14 +35,10 @@
       </div>
       <div>
         <div
-          class="h-full bg-black border border-slate-700 bg-opacity-70 rounded-lg drop-shadow-lg hover:bg-opacity-100 transition duration-500"
+          class="h-full p-4 bg-black bg-opacity-70 rounded-xl drop-shadow-lg hover:bg-opacity-100 hover:shadow-lg transition duration-500"
         >
-          <h3
-            class="p-2 text-xl font-bold text-center border-b-2 border-slate-700"
-          >
-            Consulting
-          </h3>
-          <p class="p-2 text-base text-center">
+          <h3 class="text-xl font-bold text-center mb-2">Consulting</h3>
+          <p class="text-base text-center">
             I worked as a technical consultant for financial institutions and
             government agencies in the Washington, D.C. area, providing guidance
             on identity and access management, and big data solutions.
