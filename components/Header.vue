@@ -3,7 +3,7 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid";
 </script>
 
 <template>
-  <nav class="container mx-auto bg-grayish pt-6">
+  <nav class="container mx-auto pt-6">
     <div class="flex justify-between text-gray-200 font-semibold">
       <NuxtLink to="/" class="mr-2 text-white hover:text-blue-200">
         <div class="flex justify-center items-center">

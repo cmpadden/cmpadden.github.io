@@ -4,7 +4,7 @@
       {{ title }}
     </h1>
     <div
-      class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-auto mb-4"
+      class="grid gap-4 grid-cols-1 lg:grid-cols-2 mb-4"
     >
       <nuxt-link
         v-for="link in filtered_links"
