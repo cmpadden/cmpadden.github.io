@@ -45,7 +45,8 @@ const route = useRoute();
             leave-to-class="transform scale-95 opacity-0"
           >
             <HeadlessMenuItems
-              class="border-slate-700 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-black bg-opacity-80 text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              class="absolute right-0 mt-2 w-56 origin-top-right
+              divide-y divide-gray-100 rounded-md bg-black/80 backdrop-blur-sm text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
             >
               <div class="px-1 py-1">
                 <HeadlessMenuItem v-slot="{ active }">

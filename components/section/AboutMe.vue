@@ -9,11 +9,14 @@ const pointer = ref(0);
 
 const occupation = computed(() => occupations[pointer.value]);
 
+const INTERVAL_DURATION = 1000;
+const INTERVALS_VISIBLE = 4;
+
 onMounted(() => {
   // show for 3 intervals, and hide for 1
   setInterval(function () {
     counter.value++;
-    if (counter.value % 3 === 0) {
+    if (counter.value % INTERVALS_VISIBLE === 0) {
       show.value = false;
     } else {
       // update computed `occupation` value when show goes from false -> true
@@ -28,7 +31,7 @@ onMounted(() => {
 
       show.value = true;
     }
-  }, 1000);
+  }, INTERVAL_DURATION);
 });
 </script>
 
@@ -54,7 +57,7 @@ onMounted(() => {
                 leave-to="-translate-y-2 opacity-0"
               >
                 <div
-                  class="shadow-xl bg-black/75 rounded-md px-2 w-36 font-extrabold tracking-wide text-center"
+                  class="shadow-xl bg-white text-black px-2 w-36 font-extrabold tracking-wide text-center"
                 >
                   {{ occupation }}
                 </div>
