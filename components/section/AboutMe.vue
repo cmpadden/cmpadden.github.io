@@ -36,9 +36,9 @@ onMounted(() => {
   <section class="container mx-auto mb-8">
     <div class="flex flex-wrap">
       <div class="w-full">
-        <h1 class="pb-4 text-4xl font-bold leading-tight text-white">
-          Who&#183;Am&#183;I
-        </h1>
+        <!-- <h1 class="pb-4 text-4xl font-bold leading-tight text-white"> -->
+        <!--   Who&#183;Am&#183;I -->
+        <!-- </h1> -->
         <div
           class="font-medium tracking-wide text-white sm:text-base lg:text-normal pr-4 space-y-4"
         >

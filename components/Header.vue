@@ -1,18 +1,27 @@
 <script setup>
 import { ChevronDownIcon } from "@heroicons/vue/20/solid";
+
+const route = useRoute();
 </script>
 
 <template>
   <nav class="container mx-auto pt-6">
     <div class="flex justify-between text-gray-200 font-semibold">
       <NuxtLink to="/" class="mr-2 text-white hover:text-blue-200">
-        <div class="flex justify-center items-center">
-          <img
-            src="https://avatars.githubusercontent.com/u/5807118?v=4"
-            alt="Selfie"
-            class="ring-2 ring-sky-700 transition duration-500 hover:ring-4 hover:ring-teal-700 shadow-lg max-h-12 rounded-full"
-          />
-        </div>
+        <template v-if="route.name === 'index'">
+          <h1 class="pb-4 text-4xl font-bold leading-tight text-white">
+            Who&#183;Am&#183;I
+          </h1>
+        </template>
+        <template v-else>
+          <div class="flex justify-center items-center">
+            <img
+              src="https://avatars.githubusercontent.com/u/5807118?v=4"
+              alt="Selfie"
+              class="ring-2 ring-sky-700 transition duration-500 hover:ring-4 hover:ring-teal-700 shadow-lg max-h-12 rounded-full"
+            />
+          </div>
+        </template>
       </NuxtLink>
       <div>
         <HeadlessMenu as="div" class="relative inline-block text-left z-50">
