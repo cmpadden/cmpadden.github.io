@@ -50,7 +50,7 @@ const route = useRoute();
             >
               <div class="px-1 py-1">
                 <HeadlessMenuItem v-slot="{ active }">
-                  <a href="articles">
+                  <a href="/articles">
                     <button
                       :class="[
                         active ? 'bg-slate-700 text-white' : 'text-white',
