@@ -1,6 +1,6 @@
 <template>
   <div class="select-none bg-gradient-to-b from-green-800 to-gray-800">
-    <div class="h-screen grid place-items-center">
+    <div class="h-2/3 m-6 grid place-items-center">
       <div class="font-mono text-white">
         <div class="mb-2 border-2 border-white">
           <div id="canvas" />

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen bg-gradient-to-b from-green-100 to-green-50">
+  <div class="h-2/3 bg-gradient-to-b from-green-100 to-green-50">
     <!-- Message for unsupported browsers -->
     <div
       v-if="typeof midi === 'undefined'"
