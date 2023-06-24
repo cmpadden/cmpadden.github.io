@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-screen text-white bg-gradient-to-b from-green-900 via-purple-900 to-indigo-900"
+    class="h-2/3 text-white bg-gradient-to-b from-green-900 via-purple-900 to-indigo-900"
   >
     <!-- Message for unsupported browsers -->
     <div

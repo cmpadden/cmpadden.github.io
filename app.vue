@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <body class="bg-background">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

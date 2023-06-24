@@ -3,22 +3,22 @@
     <div class="grid grid-cols-4 gap-4">
       <div class="col-span-4 lg:col-span-3">
         <div v-for="article of visible_articles" :key="article._id">
-          <div>
-            <div class="shadow-lg bg-gray-300 h-full relative mb-2">
+          <div class="bg-black/50 text-white rounded-xl shadow-xl">
+            <div class="h-full relative mb-2">
               <!-- heading -->
               <div class="px-4 py-2">
-                <div class="font-bold text-xl">
+                <div class="font-bold text-xl mb-2">
                   <NuxtLink class="gradient-underline" :to="article._path">{{
                     article.title
                   }}</NuxtLink>
                 </div>
-                <p class="text-sm text-gray-600 flex items-center">
+                <p class="text-sm flex items-center">
                   {{ article.date }}
                 </p>
               </div>
 
-              <div class="px-4 pt-2 pb-12 mb-3 bg-gray-100">
-                <p class="text-gray-700 prose-sm">
+              <div class="px-4 pb-12 mb-3">
+                <p class="prose-sm">
                   <ContentRenderer
                     class="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto"
                     :value="article"
@@ -31,14 +31,14 @@
               </div>
 
               <!-- tags -->
-              <div class="mb-6 absolute bottom-0 right-0">
+              <div class="mb-4 absolute bottom-0 right-0">
                 <span
                   v-for="tag in article.tags"
                   :key="tag"
                   :class="{
-                    'bg-green-100': selected_tags.includes(tag),
+                    'bg-green-600': selected_tags.includes(tag),
                   }"
-                  class="inline-block bg-gray-200 px-3 py-1 mr-2 text-sm text-blue-500 mr-2 select-none"
+                  class="inline-block bg-black px-3 py-1 text-sm text-cyan mr-2 select-none"
                 >
                   <div class="tag">{{ tag }}</div>
                 </span>
@@ -49,32 +49,32 @@
       </div>
 
       <div class="col-span-4 lg:col-span-1 inline-block">
-        <div class="panel mb-3 bg-white">
-          <p class="font-bold text-xl bg-gray-300 py-2 px-3 mb-0">Categories</p>
+        <div class="mb-3 bg-black/50 text-white rounded-xl">
+          <p class="font-bold text-xl py-2 px-3 mb-0">Categories</p>
           <a
             v-for="category in categories"
             :key="category"
             :class="{
-              'bg-green-100': selected_categories.includes(category),
-              'hover:bg-red-100': selected_categories.includes(category),
+              'bg-green-600': selected_categories.includes(category),
+              'hover:bg-red-600': selected_categories.includes(category),
             }"
-            class="block border-t py-1 px-4 hover:bg-purple-200 text-blue-500 cursor-pointer select-none"
+            class="block border-t border-black py-1 px-4 hover:bg-black text-cyan cursor-pointer select-none"
             @click="toggle_category(category)"
             >{{ category }}</a
           >
         </div>
 
-        <div class="panel mb-3">
-          <p class="font-bold text-xl bg-gray-300 py-2 px-3 mb-0">Tags</p>
-          <div class="panel-block bg-gray-100 border p-2">
+        <div class="mb-3 bg-black/50 text-white rounded-xl">
+          <p class="font-bold text-xl py-2 px-3 mb-0">Tags</p>
+          <div class="p-2">
             <span
               v-for="(tag, ix) in tags"
               :key="ix"
               :class="{
-                'bg-green-100': selected_tags.includes(tag),
-                'hover:bg-red-100': selected_tags.includes(tag),
+                'bg-green-600': selected_tags.includes(tag),
+                'hover:bg-red-600': selected_tags.includes(tag),
               }"
-              class="inline-flex py-2 leading-4 mr-2 mb-2 content-center bg-gray-200 justify-center h-8 px-3 text-sm text-blue-500 hover:bg-purple-200 cursor-pointer select-none"
+              class="inline-flex py-2 leading-4 mr-2 mb-2 content-center bg-black justify-center h-8 px-3 text-sm text-cyan cursor-pointer select-none"
               @click="toggle_tag(tag)"
             >
               <div>{{ tag }}</div>

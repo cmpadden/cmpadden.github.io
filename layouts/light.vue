@@ -1,27 +1,31 @@
 <template>
-  <main class="flex flex-col min-h-screen bg-white font-display">
-    <slot />
-    <div class="absolute top-2 right-2">
+  <main>
+    <div class="bg-background font-display container mx-auto h-screen my-12 lg:my-16">
+      <div class="flex flex-col border-2 bg-white">
+        <slot />
+      </div>
+    </div>
+    <div class="absolute top-2 left-2">
       <nuxt-link
+        as="button"
         to="/playground"
-        class="text-gray-300 hover:text-white p-0.5 bg-gray-800 rounded-full shadow hover:shadow-xl"
-        type="button"
+        class="text-white hover:text-cyan font-bold py-2 px-4 rounded inline-flex items-center"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          viewBox="0 0 1024 1024"
-          class="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6 mr-2"
         >
           <path
-            d="M685.4 354.8c0-4.4-3.6-8-8-8l-66 .3L512 465.6l-99.3-118.4l-66.1-.3c-4.4 0-8 3.5-8 8c0 1.9.7 3.7 1.9 5.2l130.1 155L340.5 670a8.32 8.32 0 0 0-1.9 5.2c0 4.4 3.6 8 8 8l66.1-.3L512 564.4l99.3 118.4l66 .3c4.4 0 8-3.5 8-8c0-1.9-.7-3.7-1.9-5.2L553.5 515l130.1-155c1.2-1.4 1.8-3.3 1.8-5.2z"
-            fill="currentColor"
-          />
-          <path
-            d="M512 65C264.6 65 64 265.6 64 513s200.6 448 448 448s448-200.6 448-448S759.4 65 512 65zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372s372 166.6 372 372s-166.6 372-372 372z"
-            fill="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
           />
         </svg>
+        <span>Back</span>
       </nuxt-link>
     </div>
   </main>
