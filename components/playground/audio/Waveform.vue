@@ -1,91 +1,94 @@
 <template>
   <div>
-    <canvas id="waveformCanvas" :width="canvasWidth" :height="canvasHeight"></canvas>
+    <canvas
+      id="waveformCanvas"
+      :width="canvasWidth"
+      :height="canvasHeight"
+    ></canvas>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Waveform',
-  props: {
-    canvasWidth: {
-      type: Number,
-      default: 750,
-    },
-    canvasHeight: {
-      type: Number,
-      default: 500,
-    },
-    fillStyle: {
-      type: String,
-      default: 'rgba(0,0,0)',
-    },
-    strokeStyle: {
-      type: String,
-      default: 'rgb(255, 255, 255)',
-    },
+<script setup>
+const props = defineProps({
+  canvasWidth: {
+    type: Number,
+    default: 750,
   },
-  mounted() {
-    // Reference implementation from Mozilla's MDN
-    // https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
-
-    navigator.mediaDevices
-      .getUserMedia({ audio: true })
-      .then((stream) => {
-        this.audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-        this.analyser = this.audioCtx.createAnalyser()
-
-        this.source = this.audioCtx.createMediaStreamSource(stream)
-        this.source.connect(this.analyser)
-
-        this.analyser.fftSize = 2048
-
-        this.bufferLength = this.analyser.frequencyBinCount
-        this.dataArray = new Uint8Array(this.bufferLength)
-
-        this.canvas = document.getElementById("waveformCanvas")
-        this.canvasCtx = this.canvas.getContext('2d')
-
-        this.canvasCtx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
-
-        this.draw()
-      })
-      .catch(function (err) {
-        console.error(err)
-      })
+  canvasHeight: {
+    type: Number,
+    default: 500,
   },
-  methods: {
-    draw() {
-      requestAnimationFrame(this.draw)
-
-      this.analyser.getByteTimeDomainData(this.dataArray)
-
-      this.canvasCtx.fillStyle = this.fillStyle
-      this.canvasCtx.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
-
-      this.canvasCtx.lineWidth = 2
-      this.canvasCtx.strokeStyle = this.strokeStyle
-      this.canvasCtx.beginPath()
-
-      const sliceWidth = (this.canvasWidth * 1.0) / this.bufferLength
-      let x = 0
-
-      for (let i = 0; i < this.bufferLength; i++) {
-        const v = this.dataArray[i] / 128.0
-        const y = (v * this.canvasHeight) / 2
-
-        if (i === 0) {
-          this.canvasCtx.moveTo(x, y)
-        } else {
-          this.canvasCtx.lineTo(x, y)
-        }
-
-        x += sliceWidth
-      }
-
-      this.canvasCtx.lineTo(this.canvas.width, this.canvas.height / 2)
-      this.canvasCtx.stroke()
-    },
+  fillStyle: {
+    type: String,
+    default: "rgba(0,0,0)",
   },
-}
+  strokeStyle: {
+    type: String,
+    default: "rgb(255, 255, 255)",
+  },
+});
+
+const draw = function (analyser, dataArray, canvas, canvasCtx, bufferLength) {
+  requestAnimationFrame(() =>
+    draw(analyser, dataArray, canvas, canvasCtx, bufferLength)
+  );
+
+  analyser.getByteTimeDomainData(dataArray);
+
+  canvasCtx.fillStyle = props.fillStyle;
+  canvasCtx.fillRect(0, 0, props.canvasWidth, props.canvasHeight);
+
+  canvasCtx.lineWidth = 2;
+  canvasCtx.strokeStyle = props.strokeStyle;
+  canvasCtx.beginPath();
+
+  const sliceWidth = (props.canvasWidth * 1.0) / bufferLength;
+  let x = 0;
+
+  for (let i = 0; i < bufferLength; i++) {
+    const v = dataArray[i] / 128.0;
+    const y = (v * props.canvasHeight) / 2;
+
+    if (i === 0) {
+      canvasCtx.moveTo(x, y);
+    } else {
+      canvasCtx.lineTo(x, y);
+    }
+
+    x += sliceWidth;
+  }
+
+  canvasCtx.lineTo(canvas.width, canvas.height / 2);
+  canvasCtx.stroke();
+};
+
+onMounted(() => {
+  // Reference implementation from Mozilla's MDN
+  // https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
+
+  navigator.mediaDevices
+    .getUserMedia({ audio: true })
+    .then((stream) => {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const analyser = audioCtx.createAnalyser();
+
+      const source = audioCtx.createMediaStreamSource(stream);
+      source.connect(analyser);
+
+      analyser.fftSize = 2048;
+
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+
+      const canvas = document.getElementById("waveformCanvas");
+      const canvasCtx = canvas.getContext("2d");
+
+      canvasCtx.clearRect(0, 0, props.canvasWidth, props.canvasHeight);
+
+      draw(analyser, dataArray, canvas, canvasCtx, bufferLength);
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+});
 </script>
