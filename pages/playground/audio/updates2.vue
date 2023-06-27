@@ -1,8 +1,8 @@
 <template>
-    <div class="text-white bg-gradient-to-b from-red-900 to-gray-900">
-        <div class="grid place-items-center p-4">
-            <div>
-                <div class="font-bold text-xl">Audio History Buffer</div>
+    <div class="text-white bg-background">
+        <div class="grid grid-cols-1 gap-4 p-4">
+            <div class="bg-black/75 p-4 rounded-xl">
+                <div class="font-bold text-xl mb-2">Audio History Buffer</div>
                 <div>
                     <table class="table-fixed w-full">
                         <thead class="border-b-2">
@@ -43,7 +43,11 @@
                 </div>
             </div>
 
-            <PlaygroundAudioFrequencyBarGraph2 :audioBufferHistory="audioBufferHistory" />
+            <div class="bg-black/75 p-4 rounded-xl">
+                <div class="font-bold text-xl mb-2">Frequency Bar Chart</div>
+                <PlaygroundAudioFrequencyBarGraph2 :audioBufferHistory="audioBufferHistory"
+                    class="border-2 border-gray-400" />
+            </div>
         </div>
     </div>
 </template>

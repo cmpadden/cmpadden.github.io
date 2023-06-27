@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <div class="font-bold text-xl text-white">Frequency Bar Graph</div>
+    <div id="canvasContainer" class="bg-green w-full">
         <canvas id="frequencyBarGraphCanvas" :width="canvasWidth" :height="canvasHeight"></canvas>
     </div>
 </template>
@@ -15,11 +14,9 @@ const props = defineProps({
     },
     canvasWidth: {
         type: Number,
-        default: 750,
     },
     canvasHeight: {
         type: Number,
-        default: 500,
     },
     fillStyle: {
         type: String,
@@ -31,6 +28,8 @@ const props = defineProps({
     },
 });
 
+const BAR_OFFSET_PX = 2;
+
 const map = (n, nMin, nMax, rMin, rMax) => {
     // normalize a number between ranges `nMin` to `nMax` to fall between
     // range `rMin` and `rMax`.
@@ -40,33 +39,46 @@ const map = (n, nMin, nMax, rMin, rMax) => {
 onMounted(() => {
     const canvas = document.getElementById("frequencyBarGraphCanvas");
     const canvasCtx = canvas.getContext("2d");
-    // canvasCtx.clearRect(0, 0, props.canvasWidth, props.canvasHeight);
+
+    // set width and height of canvas if not defined as a prop
+    const container = document.getElementById("canvasContainer");
+    const canvasHeight = props.canvasHeight
+        ? props.canvasHeight
+        : container.clientHeight;
+    const canvasWidth = props.canvasWidth
+        ? props.canvasWidth
+        : container.clientWidth;
+
+    canvas.height = canvasHeight;
+    canvas.width = canvasWidth;
+
+    console.log(canvasHeight, canvasWidth);
+
+    canvasCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    // canvas.width = 250
+    // canvas.height = 250
 
     watch(props.audioBufferHistory, (history) => {
         canvasCtx.fillStyle = props.fillStyle;
-        canvasCtx.fillRect(0, 0, props.canvasWidth, props.canvasHeight);
+        canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-        // const barWidth = props.canvasWidth / props.bufferLength;
-        const barWidth = props.canvasWidth / history[0].length - 1;
+        const audioBuffer = history[0];
+
+        const barWidth = canvasWidth / audioBuffer.length - BAR_OFFSET_PX;
         let x = 0;
 
-        for (let i = 0; i < 1024; i++) {
-            const d = history[0][i];
+        for (let i = 0; i < audioBuffer.length; i++) {
+            const d = audioBuffer[i];
 
             // frequency data is on a scale from 0 to 255, so we must ensure this
             // fits within the canvas
-            const barHeight = map(d, 0, 255, 0, props.canvasHeight);
+            const barHeight = map(d, 0, 255, 0, canvasHeight);
 
-            // canvasCtx.fillStyle = `rgb(${d},${0},${d})`;
-            canvasCtx.fillStyle = `rgb(255, 255, 255)`;
-            canvasCtx.fillRect(
-                x,
-                props.canvasHeight - barHeight,
-                barWidth,
-                barHeight
-            );
+            canvasCtx.fillStyle = `rgb(${d},${d},${d})`;
+            canvasCtx.fillRect(x, canvasHeight - barHeight, barWidth, barHeight);
 
-            x += barWidth + 1;
+            x += barWidth + BAR_OFFSET_PX;
         }
     });
 });
