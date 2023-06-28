@@ -1,92 +1,105 @@
 <template>
-  <div>
-    <canvas id="spectrogramCanvas" :width="canvasWidth" :height="canvasHeight"></canvas>
-  </div>
+    <div>
+        <div id="spectrogram-canvas-container" class="bg-green h-full w-full">
+            <canvas id="spectrogramCanvas" :width="canvasWidth" :height="canvasHeight"></canvas>
+        </div>
+    </div>
 </template>
 
-<script>
-export default {
-  name: 'Spectrogram',
-  props: {
+<script setup>
+const props = defineProps({
+    frequencyDomainBufferHistory: {
+        type: Array,
+    },
     canvasWidth: {
-      type: Number,
-      default: 750,
+        type: Number,
     },
     canvasHeight: {
-      type: Number,
-      default: 500,
+        type: Number,
     },
     fillStyle: {
-      type: String,
-      default: 'rgba(0,0,0)',
+        type: String,
+        default: "rgba(0,0,0)",
     },
-  },
-  data() {
-    return {
-      dataArray: [],
-      dataArrayHistory: [],
-    }
-  },
-  mounted() {
-    navigator.mediaDevices
-      .getUserMedia({ audio: true })
-      .then((stream) => {
-        this.audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-        this.analyser = this.audioCtx.createAnalyser()
+});
 
-        this.source = this.audioCtx.createMediaStreamSource(stream)
-        this.source.connect(this.analyser)
+const map = (n, nMin, nMax, rMin, rMax) => {
+    // normalize a number between ranges `nMin` to `nMax` to fall between
+    // range `rMin` and `rMax`.
+    return ((n - nMin) * (rMax - nMin)) / (nMax - nMin) + rMin;
+};
 
-        this.analyser.fftSize = 256
+const HISTORY_WINDOW_SIZE = 36;
 
-        this.bufferLength = this.analyser.frequencyBinCount
-        this.dataArray = new Uint8Array(this.bufferLength)
+onMounted(() => {
+    const canvas = document.getElementById("spectrogramCanvas");
+    const canvasCtx = canvas.getContext("2d");
 
-        this.canvas = document.getElementById("spectrogramCanvas")
-        this.canvasCtx = this.canvas.getContext('2d')
+    // set width and height of canvas if not defined as a prop
+    const container = document.getElementById("spectrogram-canvas-container");
+    const canvasHeight = props.canvasHeight
+        ? props.canvasHeight
+        : container.clientHeight;
+    const canvasWidth = props.canvasWidth
+        ? props.canvasWidth
+        : container.clientWidth;
 
-        this.canvasCtx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
+    canvas.height = canvasHeight;
+    canvas.width = canvasWidth;
 
-        this.draw()
-      })
-      .catch(function (err) {
-        console.error(err)
-      })
-  },
-  methods: {
-    draw() {
-      requestAnimationFrame(this.draw)
+    canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      this.analyser.getByteFrequencyData(this.dataArray)
+    watch(props.frequencyDomainBufferHistory, (history) => {
+        canvasCtx.fillStyle = props.fillStyle;
+        canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
+        const focusedHistory = history.slice(-HISTORY_WINDOW_SIZE);
 
-      // Keep history of frequency data for rendering -- note, we use the
-      // `slice()` method to create a new copy of the array
-      this.dataArrayHistory.push(this.dataArray.slice())
-      if (this.dataArrayHistory.length > 256) {
-        this.dataArrayHistory.shift()
-      }
+        const pixelWidth = canvasWidth / 128;
+        const pixelHeight = canvasHeight / HISTORY_WINDOW_SIZE;
 
-      this.canvasCtx.fillStyle = this.fillStyle
-      this.canvasCtx.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
-
-      const pixelWidth = this.canvasWidth / this.bufferLength
-      const pixelHeight = this.canvasHeight / 256
-
-      // for each `y` of history, we increment along the height of the canvas
-      // for each `x` we increment along the width
-      for (let y = 0; y < this.dataArrayHistory.length; y++) {
-        for (let x = 0; x < this.dataArrayHistory[y].length; x++) {
-          const d = this.dataArrayHistory[y][x]
-          this.canvasCtx.fillStyle = `rgb(${d},${0},${d})`
-          this.canvasCtx.fillRect(
-            x * pixelWidth,
-            y * pixelHeight,
-            pixelWidth,
-            pixelHeight
-          )
+        // create a circle for each sample point with varying size and color based on
+        // amplitude
+        for (let x = 0; x < 128; x++) {
+            for (let y = 0; y < HISTORY_WINDOW_SIZE; y++) {
+                const d = focusedHistory[y][x];
+                const r = map(d, 0, 255, 1, 4);
+                canvasCtx.fillStyle = `rgb(${d}, 0, ${d})`;
+                canvasCtx.beginPath();
+                canvasCtx.arc(
+                    x * pixelWidth + pixelWidth / 2,
+                    y * pixelHeight + pixelHeight / 2,
+                    r,
+                    0, // arc start
+                    2 * Math.PI // arc end
+                );
+                canvasCtx.fill();
+            }
         }
-      }
-    },
-  },
-}
+    });
+
+    // legacy version which uses solid rectangles
+
+    // watch(props.audioBufferHistory, (history) => {
+    // canvasCtx.fillStyle = props.fillStyle;
+    // canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+    // const pixelWidth = canvasWidth / history[0].length;
+    // const pixelHeight = canvasHeight / history.length;
+
+    // // for each `y` of history, we increment along the height of the canvas
+    // // for each `x` we increment along the width
+    // for (let y = 0; y < history.length; y++) {
+    //     for (let x = 0; x < history[y].length; x++) {
+    //         const d = history[y][x];
+    //         canvasCtx.fillStyle = `rgb(${d / 2},${d},${d})`;
+    //         canvasCtx.fillRect(
+    //             x * pixelWidth,
+    //             y * pixelHeight,
+    //             pixelWidth,
+    //             pixelHeight
+    //         );
+    //     }
+    // }
+    // });
+});
 </script>

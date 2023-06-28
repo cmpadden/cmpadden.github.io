@@ -1,22 +1,64 @@
 <template>
-    <div class="font-mono text-white bg-gradient-to-b from-red-900 to-gray-900">
-        <div class="grid place-items-center p-4">
-            <!-- <div>Raw Data Buffer</div> -->
-            <!-- <div class="mb-2 border-2 border-white"> -->
-            <!--   <div v-for="(d, ix) in dataArrayHistory" :key="ix">{{ d }}</div> -->
-            <!-- </div> -->
-            <div>
-                <div>Waveform</div>
-                <div class="mb-2 border-2 border-white">
-                    <PlaygroundAudioWaveform :canvas-height="150" :canvas-width="canvasWidth" />
+    <div class="container mx-auto font-mono">
+        <div class="text-white bg-background">
+            <div class="grid grid-cols-1 gap-4">
+                <div class="bg-black/75 p-4 rounded-xl">
+                    <div class="font-bold text-xl mb-2">Frequency Domain Bar Chart</div>
+                    <PlaygroundAudioFrequencyBarGraph :audioBufferHistory="frequencyDomainBufferHistory"
+                        class="border-2 border-gray-400" />
                 </div>
-                <div>Frequency Bars</div>
-                <div class="mb-2 border-2 border-white">
-                    <PlaygroundAudioFrequencyBarGraph :canvas-height="250" :canvas-width="canvasWidth" />
+                <div class="bg-black/75 p-4 rounded-xl">
+                    <div class="font-bold text-xl mb-2">Frequency Domain Spectrogram</div>
+                    <PlaygroundAudioSpectrogram :frequencyDomainBufferHistory="frequencyDomainBufferHistory"
+                        class="border-2 border-gray-400 h-72" />
                 </div>
-                <div>Spectrogram</div>
-                <div class="mb-2 border-2 border-white">
-                    <PlaygroundAudioSpectrogram :canvas-height="250" :canvas-width="canvasWidth" />
+                <div class="bg-black/75 p-4 rounded-xl">
+                    <div class="font-bold text-xl mb-2">Time Domain Waveform</div>
+                    <PlaygroundAudioWaveform :timeDomainBufferHistory="timeDomainBufferHistory"
+                        strokeStyle="rgb(255, 0, 255)" class="border-2 border-gray-400 h-72" />
+                </div>
+
+                <!-- Table -->
+                <div class="bg-black/75 p-4 rounded-xl">
+                    <div class="font-bold text-xl mb-2">Time Domain Buffer History</div>
+                    <div>
+                        <table class="table-fixed w-full">
+                            <thead class="border-b-2">
+                                <tr>
+                                    <th class="text-left">Index</th>
+                                    <th class="text-left">Mean</th>
+                                    <th class="text-left">Min</th>
+                                    <th class="text-left">Max</th>
+                                    <th class="text-left">FFT</th>
+                                    <th class="w-2/3 text-right">Data Array</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(data, ix) in timeDomainBufferHistory.slice(-5)" :key="ix">
+                                    <td class="font-bold text-left">{{ ix }}</td>
+                                    <td class="text-left">
+                                        {{
+                                            (
+                                                data.reduce((prev, curr) => prev + curr) / data.length
+                                            ).toFixed(2)
+                                        }}
+                                    </td>
+                                    <td class="text-left">
+                                        {{ Math.min(...data) }}
+                                    </td>
+                                    <td class="text-left">
+                                        {{ Math.max(...data) }}
+                                    </td>
+                                    <td class="text-left">
+                                        {{ data.length }}
+                                    </td>
+                                    <td class="w-2/3 text-right truncate">
+                                        {{ data.slice(0, 8) }} ... {{ data.slice(-8) }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -24,56 +66,67 @@
 </template>
 
 <script setup>
-definePageMeta({ layout: "light" });
+// definePageMeta({ layout: "light" });
 
-let canvasWidth = 750;
+let audioCtx = undefined;
+let analyser = undefined;
+let source = undefined;
 
-// Hacky way to set canvas width to be appropriate on mobile. Should probably update to use
-// `canvas.clientWidth` like other experiments.
-if (window.innerWidth < 400) {
-    canvasWidth = 250;
-}
+let timeDomainBuffer = undefined;
+let timeDomainBufferHistory = ref([]);
 
-// export default {
-//   data() {
-//     return {
-//       dataArray: new Uint8Array(),
-//       dataArrayHistory: [],
-//     };
-//   },
-//   mounted() {
-//     // TODO - use a single `dataArray` that is bound to the waveform, frequency, and spectrogram components. Still need
-//     // to determine how to trigger the render callback on data update...
-//     // navigator.mediaDevices
-//     //   .getUserMedia({ audio: true })
-//     //   .then((stream) => {
-//     //     this.audioCtx = new window.AudioContext()
-//     //     this.analyser = this.audioCtx.createAnalyser()
-//     //     this.source = this.audioCtx.createMediaStreamSource(stream)
-//     //     this.source.connect(this.analyser)
-//     //     this.analyser.fftSize = 2048
-//     //     this.bufferLength = this.analyser.frequencyBinCount
-//     //     this.dataArray = new Uint8Array(this.bufferLength)
-//     //     // repeatedly update time domain data
-//     //     this.analyser_data_callback()
-//     //   })
-//     //   .catch(function (err) {
-//     //     console.error(err)
-//     //   })
-//   },
-//   methods: {
-//     // analyser_data_callback: function () {
-//     //   requestAnimationFrame(this.analyser_data_callback)
-//     //   this.analyser.getByteTimeDomainData(this.dataArray)
-//     //   // Vue is unable to detect updates to `this.dataArray` from
-//     //   // `getByteTimeDomainData` causing reactivity issues -- we make a copy
-//     //   // using `slice` to get around this.
-//     //   // create copy via `.slice()` and push into history array
-//     //   this.dataArrayHistory.push(this.dataArray.slice())
-//     //   if (this.dataArrayHistory.length > 10) {
-//     //     this.dataArrayHistory.shift()
-//     //   }
-//     // },
-//   },
-// };
+let frequencyDomainBuffer = undefined;
+let frequencyDomainBufferHistory = ref([]);
+
+const HISTORY_SCROLLBACK = 256;
+
+const poll_byte_frequency_data = () => {
+    requestAnimationFrame(poll_byte_frequency_data);
+
+    analyser.getByteTimeDomainData(timeDomainBuffer);
+
+    // slice is required to make a copy of the buffer
+    timeDomainBufferHistory.value.push(timeDomainBuffer.slice());
+    if (timeDomainBufferHistory.value.length > HISTORY_SCROLLBACK) {
+        timeDomainBufferHistory.value.shift();
+    }
+
+    analyser.getByteFrequencyData(frequencyDomainBuffer);
+
+    frequencyDomainBufferHistory.value.push(frequencyDomainBuffer.slice());
+    if (frequencyDomainBufferHistory.value.length > HISTORY_SCROLLBACK) {
+        frequencyDomainBufferHistory.value.shift();
+    }
+};
+
+onMounted(async () => {
+    navigator.mediaDevices
+        .getUserMedia({ audio: true })
+        .then((stream) => {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = audioCtx.createAnalyser();
+
+            source = audioCtx.createMediaStreamSource(stream);
+            source.connect(analyser);
+
+            // analyser.fftSize = 256;
+            analyser.fftSize = 2048;
+
+            timeDomainBuffer = new Uint8Array(analyser.frequencyBinCount);
+
+            frequencyDomainBuffer = new Uint8Array(analyser.frequencyBinCount);
+
+            // initialize history
+            for (let i = 0; i < HISTORY_SCROLLBACK; i++) {
+                timeDomainBufferHistory.value.push(
+                    new Uint8Array(analyser.frequencyBinCount)
+                );
+            }
+
+            poll_byte_frequency_data();
+        })
+        .catch(function (err) {
+            console.error(err);
+        });
+});
 </script>
