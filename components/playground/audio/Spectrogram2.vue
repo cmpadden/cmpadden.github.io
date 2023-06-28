@@ -8,7 +8,7 @@
 
 <script setup>
 const props = defineProps({
-    audioBufferHistory: {
+    frequencyDomainBufferHistory: {
         type: Array,
     },
     canvasWidth: {
@@ -49,7 +49,7 @@ onMounted(() => {
 
     canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-    watch(props.audioBufferHistory, (history) => {
+    watch(props.frequencyDomainBufferHistory, (history) => {
         canvasCtx.fillStyle = props.fillStyle;
         canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
         const focusedHistory = history.slice(-HISTORY_WINDOW_SIZE);

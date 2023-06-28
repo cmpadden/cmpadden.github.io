@@ -52,8 +52,6 @@ onMounted(() => {
     canvas.height = canvasHeight;
     canvas.width = canvasWidth;
 
-    console.log(canvasHeight, canvasWidth);
-
     canvasCtx.clearRect(0, 0, canvasWidth, canvasHeight);
 
     watch(props.audioBufferHistory, (history) => {
@@ -73,7 +71,7 @@ onMounted(() => {
             // fits within the canvas
             const barHeight = map(d, 0, 255, 0, canvasHeight);
 
-            canvasCtx.fillStyle = `rgb(${d/2},${d},${d})`;
+            canvasCtx.fillStyle = `rgb(${d},0,${d})`;
             canvasCtx.fillRect(x, canvasHeight - barHeight, barWidth, barHeight);
 
             x += barWidth + BAR_OFFSET_PX;

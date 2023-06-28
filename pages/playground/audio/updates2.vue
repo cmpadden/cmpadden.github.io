@@ -3,7 +3,24 @@
         <div class="text-white bg-background">
             <div class="grid grid-cols-1 gap-4">
                 <div class="bg-black/75 p-4 rounded-xl">
-                    <div class="font-bold text-xl mb-2">Audio History Buffer</div>
+                    <div class="font-bold text-xl mb-2">Frequency Domain Bar Chart</div>
+                    <PlaygroundAudioFrequencyBarGraph2 :audioBufferHistory="frequencyDomainBufferHistory"
+                        class="border-2 border-gray-400" />
+                </div>
+                <div class="bg-black/75 p-4 rounded-xl">
+                    <div class="font-bold text-xl mb-2">Frequency Domain Spectrogram</div>
+                    <PlaygroundAudioSpectrogram2 :frequencyDomainBufferHistory="frequencyDomainBufferHistory"
+                        class="border-2 border-gray-400 h-72" />
+                </div>
+                <div class="bg-black/75 p-4 rounded-xl">
+                    <div class="font-bold text-xl mb-2">Time Domain Waveform</div>
+                    <PlaygroundAudioWaveform2 :timeDomainBufferHistory="timeDomainBufferHistory"
+                        strokeStyle="rgb(255, 0, 255)" class="border-2 border-gray-400 h-72" />
+                </div>
+
+                <!-- Table -->
+                <div class="bg-black/75 p-4 rounded-xl">
+                    <div class="font-bold text-xl mb-2">Time Domain Buffer History</div>
                     <div>
                         <table class="table-fixed w-full">
                             <thead class="border-b-2">
@@ -12,12 +29,12 @@
                                     <th class="text-left">Mean</th>
                                     <th class="text-left">Min</th>
                                     <th class="text-left">Max</th>
-                                    <th class="text-left">Size</th>
+                                    <th class="text-left">FFT</th>
                                     <th class="w-2/3 text-right">Data Array</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(data, ix) in audioBufferHistory.slice(-10)" :key="ix">
+                                <tr v-for="(data, ix) in timeDomainBufferHistory.slice(-5)" :key="ix">
                                     <td class="font-bold text-left">{{ ix }}</td>
                                     <td class="text-left">
                                         {{
@@ -43,17 +60,6 @@
                         </table>
                     </div>
                 </div>
-
-                <div class="bg-black/75 p-4 rounded-xl">
-                    <div class="font-bold text-xl mb-2">Frequency Bar Chart</div>
-                    <PlaygroundAudioFrequencyBarGraph2 :audioBufferHistory="audioBufferHistory"
-                        class="border-2 border-gray-400" />
-                </div>
-                <div class="bg-black/75 p-4 rounded-xl">
-                    <div class="font-bold text-xl mb-2">Frequency Spectrogram</div>
-                    <PlaygroundAudioSpectrogram2 :audioBufferHistory="audioBufferHistory"
-                        class="border-2 border-gray-400 h-72" />
-                </div>
             </div>
         </div>
     </div>
@@ -65,20 +71,31 @@
 let audioCtx = undefined;
 let analyser = undefined;
 let source = undefined;
-let audioBuffer = undefined;
-let audioBufferHistory = ref([]);
+
+let timeDomainBuffer = undefined;
+let timeDomainBufferHistory = ref([]);
+
+let frequencyDomainBuffer = undefined;
+let frequencyDomainBufferHistory = ref([]);
 
 const HISTORY_SCROLLBACK = 256;
 
 const poll_byte_frequency_data = () => {
     requestAnimationFrame(poll_byte_frequency_data);
 
-    analyser.getByteFrequencyData(audioBuffer);
+    analyser.getByteTimeDomainData(timeDomainBuffer);
 
     // slice is required to make a copy of the buffer
-    audioBufferHistory.value.push(audioBuffer.slice());
-    if (audioBufferHistory.value.length > HISTORY_SCROLLBACK) {
-        audioBufferHistory.value.shift();
+    timeDomainBufferHistory.value.push(timeDomainBuffer.slice());
+    if (timeDomainBufferHistory.value.length > HISTORY_SCROLLBACK) {
+        timeDomainBufferHistory.value.shift();
+    }
+
+    analyser.getByteFrequencyData(frequencyDomainBuffer);
+
+    frequencyDomainBufferHistory.value.push(frequencyDomainBuffer.slice());
+    if (frequencyDomainBufferHistory.value.length > HISTORY_SCROLLBACK) {
+        frequencyDomainBufferHistory.value.shift();
     }
 };
 
@@ -92,13 +109,16 @@ onMounted(async () => {
             source = audioCtx.createMediaStreamSource(stream);
             source.connect(analyser);
 
-            analyser.fftSize = 256;
+            // analyser.fftSize = 256;
+            analyser.fftSize = 2048;
 
-            audioBuffer = new Uint8Array(analyser.frequencyBinCount);
+            timeDomainBuffer = new Uint8Array(analyser.frequencyBinCount);
+
+            frequencyDomainBuffer = new Uint8Array(analyser.frequencyBinCount);
 
             // initialize history
             for (let i = 0; i < HISTORY_SCROLLBACK; i++) {
-                audioBufferHistory.value.push(
+                timeDomainBufferHistory.value.push(
                     new Uint8Array(analyser.frequencyBinCount)
                 );
             }
