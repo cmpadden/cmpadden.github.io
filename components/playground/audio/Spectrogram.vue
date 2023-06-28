@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id="spectrogram-canvas-container" class="bg-green h-full w-full">
+        <div id="spectrogram-canvas-container" class="h-full w-full">
             <canvas id="spectrogramCanvas" :width="canvasWidth" :height="canvasHeight"></canvas>
         </div>
     </div>

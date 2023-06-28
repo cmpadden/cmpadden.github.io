@@ -1,6 +1,8 @@
 <template>
-    <div id="canvasContainer" class="bg-green w-full">
+    <div>
+    <div id="bar-graph-container" class="w-full h-full">
         <canvas id="frequencyBarGraphCanvas" :width="canvasWidth" :height="canvasHeight"></canvas>
+    </div>
     </div>
 </template>
 
@@ -41,7 +43,7 @@ onMounted(() => {
     const canvasCtx = canvas.getContext("2d");
 
     // set width and height of canvas if not defined as a prop
-    const container = document.getElementById("canvasContainer");
+    const container = document.getElementById("bar-graph-container");
     const canvasHeight = props.canvasHeight
         ? props.canvasHeight
         : container.clientHeight;
