@@ -54,7 +54,7 @@ onMounted(() => {
     canvas.height = canvasHeight;
     canvas.width = canvasWidth;
 
-    canvasCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
 
     watch(props.audioBufferHistory, (history) => {
         canvasCtx.fillStyle = props.fillStyle;
