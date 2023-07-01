@@ -1,91 +1,80 @@
 <template>
-  <div>
-    <canvas id="waveformCanvas" :width="canvasWidth" :height="canvasHeight"></canvas>
-  </div>
+    <div id="waveform-canvas-container" class="bg-green h-full w-full">
+        <canvas id="waveformCanvas2" :width="canvasWidth" :height="canvasHeight"></canvas>
+    </div>
 </template>
 
-<script>
-export default {
-  name: 'Waveform',
-  props: {
+<script setup>
+const props = defineProps({
+    timeDomainBufferHistory: {
+        type: Array,
+    },
     canvasWidth: {
-      type: Number,
-      default: 750,
+        type: Number,
     },
     canvasHeight: {
-      type: Number,
-      default: 500,
+        type: Number,
     },
     fillStyle: {
-      type: String,
-      default: 'rgba(0,0,0)',
+        type: String,
+        default: "rgba(0,0,0)",
     },
     strokeStyle: {
-      type: String,
-      default: 'rgb(255, 255, 255)',
+        type: String,
+        default: "rgb(255, 255, 255)",
     },
-  },
-  mounted() {
-    // Reference implementation from Mozilla's MDN
-    // https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
+});
 
-    navigator.mediaDevices
-      .getUserMedia({ audio: true })
-      .then((stream) => {
-        this.audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-        this.analyser = this.audioCtx.createAnalyser()
+onMounted(() => {
+    // analyser.fftSize = 2048;
 
-        this.source = this.audioCtx.createMediaStreamSource(stream)
-        this.source.connect(this.analyser)
+    const canvas = document.getElementById("waveformCanvas2");
+    const canvasCtx = canvas.getContext("2d");
 
-        this.analyser.fftSize = 2048
+    const container = document.getElementById("waveform-canvas-container");
+    const canvasHeight = props.canvasHeight
+        ? props.canvasHeight
+        : container.clientHeight;
+    const canvasWidth = props.canvasWidth
+        ? props.canvasWidth
+        : container.clientWidth;
 
-        this.bufferLength = this.analyser.frequencyBinCount
-        this.dataArray = new Uint8Array(this.bufferLength)
+    canvas.height = canvasHeight;
+    canvas.width = canvasWidth;
 
-        this.canvas = document.getElementById("waveformCanvas")
-        this.canvasCtx = this.canvas.getContext('2d')
+    canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-        this.canvasCtx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
+    watch(props.timeDomainBufferHistory, (history) => {
+        canvasCtx.fillStyle = props.fillStyle;
+        canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-        this.draw()
-      })
-      .catch(function (err) {
-        console.error(err)
-      })
-  },
-  methods: {
-    draw() {
-      requestAnimationFrame(this.draw)
+        canvasCtx.lineWidth = 2;
+        canvasCtx.strokeStyle = props.strokeStyle;
+        canvasCtx.beginPath();
 
-      this.analyser.getByteTimeDomainData(this.dataArray)
+        const audioBuffer = history.slice(-1)[0];
+        const bufferLength = audioBuffer.length;
 
-      this.canvasCtx.fillStyle = this.fillStyle
-      this.canvasCtx.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
+        const sliceWidth = canvasWidth / bufferLength;
+        let x = 0;
 
-      this.canvasCtx.lineWidth = 2
-      this.canvasCtx.strokeStyle = this.strokeStyle
-      this.canvasCtx.beginPath()
+        for (let i = 0; i < bufferLength; i++) {
+            const v = audioBuffer[i] / 128.0;
+            const y = (v * canvasHeight) / 2;
 
-      const sliceWidth = (this.canvasWidth * 1.0) / this.bufferLength
-      let x = 0
+            if (i === 0) {
+                canvasCtx.moveTo(x, y);
+            } else {
+                canvasCtx.lineTo(x, y);
+            }
 
-      for (let i = 0; i < this.bufferLength; i++) {
-        const v = this.dataArray[i] / 128.0
-        const y = (v * this.canvasHeight) / 2
-
-        if (i === 0) {
-          this.canvasCtx.moveTo(x, y)
-        } else {
-          this.canvasCtx.lineTo(x, y)
+            x += sliceWidth;
         }
 
-        x += sliceWidth
-      }
+        canvasCtx.lineTo(canvas.width, canvas.height / 2);
+        canvasCtx.stroke();
+    });
+});
 
-      this.canvasCtx.lineTo(this.canvas.width, this.canvas.height / 2)
-      this.canvasCtx.stroke()
-    },
-  },
-}
+onBeforeUnmount(() => { });
 </script>

@@ -1,96 +1,83 @@
 <template>
-  <div>
-    <canvas id="frequencyBarGraphCanvas" :width="canvasWidth" :height="canvasHeight"></canvas>
-  </div>
+    <div>
+    <div id="bar-graph-container" class="w-full h-full">
+        <canvas id="frequencyBarGraphCanvas" :width="canvasWidth" :height="canvasHeight"></canvas>
+    </div>
+    </div>
 </template>
 
-<script>
-export default {
-  name: 'FrequencyBarGraph',
-  props: {
+<script setup>
+// Reference implementation from Mozilla's MDN
+// https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API#creating_a_frequency_bar_graph
+
+const props = defineProps({
+    audioBufferHistory: {
+        type: Array,
+    },
     canvasWidth: {
-      type: Number,
-      default: 750,
+        type: Number,
     },
     canvasHeight: {
-      type: Number,
-      default: 500,
+        type: Number,
     },
     fillStyle: {
-      type: String,
-      default: 'rgba(0,0,0)',
+        type: String,
+        default: "rgba(0,0,0)",
     },
     strokeStyle: {
-      type: String,
-      default: 'rgb(255, 255, 255)',
+        type: String,
+        default: "rgb(255, 255, 255)",
     },
-  },
-  mounted() {
+});
 
-    // Reference implementation from Mozilla's MDN
-    // https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API#creating_a_frequency_bar_graph
+const BAR_OFFSET_PX = 2;
 
-    navigator.mediaDevices
-      .getUserMedia({ audio: true })
-      .then((stream) => {
-        this.audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-        this.analyser = this.audioCtx.createAnalyser()
+const map = (n, nMin, nMax, rMin, rMax) => {
+    // normalize a number between ranges `nMin` to `nMax` to fall between
+    // range `rMin` and `rMax`.
+    return ((n - nMin) * (rMax - nMin)) / (nMax - nMin) + rMin;
+};
 
-        this.source = this.audioCtx.createMediaStreamSource(stream)
-        this.source.connect(this.analyser)
+onMounted(() => {
+    const canvas = document.getElementById("frequencyBarGraphCanvas");
+    const canvasCtx = canvas.getContext("2d");
 
-        this.analyser.fftSize = 256
+    // set width and height of canvas if not defined as a prop
+    const container = document.getElementById("bar-graph-container");
+    const canvasHeight = props.canvasHeight
+        ? props.canvasHeight
+        : container.clientHeight;
+    const canvasWidth = props.canvasWidth
+        ? props.canvasWidth
+        : container.clientWidth;
 
-        this.bufferLength = this.analyser.frequencyBinCount
-        this.dataArray = new Uint8Array(this.bufferLength)
+    canvas.height = canvasHeight;
+    canvas.width = canvasWidth;
 
-        this.canvas = document.getElementById("frequencyBarGraphCanvas")
-        this.canvasCtx = this.canvas.getContext('2d')
+    canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-        this.canvasCtx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
+    watch(props.audioBufferHistory, (history) => {
+        canvasCtx.fillStyle = props.fillStyle;
+        canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-        this.draw()
-      })
-      .catch(function (err) {
-        console.error(err)
-      })
-  },
-  methods: {
-    map(n, nMin, nMax, rMin, rMax) {
-      // normalize a number between ranges `nMin` to `nMax` to fall between
-      // range `rMin` and `rMax`.
-      return ((n - nMin) * (rMax - nMin)) / (nMax - nMin) + rMin
-    },
-    draw() {
-      requestAnimationFrame(this.draw)
+        // the most recent audio buffer is the last item pushed to the array
+        const audioBuffer = history.slice(-1)[0];
 
-      this.analyser.getByteFrequencyData(this.dataArray)
+        const barWidth = canvasWidth / audioBuffer.length - BAR_OFFSET_PX;
+        let x = 0;
 
-      this.canvasCtx.fillStyle = this.fillStyle
-      this.canvasCtx.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
+        for (let i = 0; i < audioBuffer.length; i++) {
+            const d = audioBuffer[i];
 
-      // var barWidth = (this.canvasWidth / this.bufferLength) * 2.5;
-      const barWidth = this.canvasWidth / this.bufferLength
-      let x = 0
+            // frequency data is on a scale from 0 to 255, so we must ensure this
+            // fits within the canvas
+            const barHeight = map(d, 0, 255, 0, canvasHeight);
 
-      for (let i = 0; i < this.bufferLength; i++) {
-        const d = this.dataArray[i]
+            canvasCtx.fillStyle = `rgb(${d},0,${d})`;
+            canvasCtx.fillRect(x, canvasHeight - barHeight, barWidth, barHeight);
 
-        // frequency data is on a scale from 0 to 255, so we must ensure this
-        // fits within the canvas
-        const barHeight = this.map(d, 0, 255, 0, this.canvasHeight)
-
-        this.canvasCtx.fillStyle = `rgb(${d},${0},${d})`
-        this.canvasCtx.fillRect(
-          x,
-          this.canvasHeight - barHeight,
-          barWidth,
-          barHeight
-        )
-
-        x += barWidth + 1
-      }
-    },
-  },
-}
+            x += barWidth + BAR_OFFSET_PX;
+        }
+    });
+});
 </script>
