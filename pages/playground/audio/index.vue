@@ -5,22 +5,23 @@
         <!-- Controls -->
         <div class="col-span-3 space-x-2">
           <div
-            class="inline-block rounded-lg bg-black px-6 py-2 text-xs uppercase text-white shadow-lg shadow-green-400/25 transition duration-150 ease-in-out hover:shadow-white/25 hover:cursor-pointer"
+            class="inline-block rounded-lg bg-black px-6 py-2 text-sm font-bold uppercase text-white shadow-lg shadow-green-400/25 transition duration-150 ease-in-out hover:shadow-white/25 hover:cursor-pointer"
             @click="enable_audio_monitoring"
           >
             Enable
           </div>
           <div
-            class="inline-block rounded-lg bg-black px-6 py-2 text-xs uppercase text-white shadow-lg shadow-red-400/25 transition duration-150 ease-in-out hover:shadow-white/25 hover:cursor-pointer"
+            class="inline-block rounded-lg bg-black px-6 py-2 text-sm font-bold uppercase text-white shadow-lg shadow-red-400/25 transition duration-150 ease-in-out hover:shadow-white/25 hover:cursor-pointer"
             @click="disable_audio_monitoring"
           >
             Disable
           </div>
         </div>
         <div class="bg-black/75 p-4 rounded-xl col-span-3 lg:col-span-1">
-          <div class="font-bold text-xl mb-2">Frequency Bar Chart</div>
-          <PlaygroundAudioFrequencyBarGraph
-            :audioBufferHistory="frequencyDomainBufferHistory"
+          <div class="font-bold text-xl mb-2">Time Domain Waveform</div>
+          <PlaygroundAudioWaveform
+            :timeDomainBufferHistory="timeDomainBufferHistory"
+            strokeStyle="rgb(255, 0, 255)"
             class="border-2 border-gray-400 h-72"
           />
         </div>
@@ -32,10 +33,9 @@
           />
         </div>
         <div class="bg-black/75 p-4 rounded-xl col-span-3 lg:col-span-1">
-          <div class="font-bold text-xl mb-2">Time Domain Waveform</div>
-          <PlaygroundAudioWaveform
-            :timeDomainBufferHistory="timeDomainBufferHistory"
-            strokeStyle="rgb(255, 0, 255)"
+          <div class="font-bold text-xl mb-2">Frequency Bar Chart</div>
+          <PlaygroundAudioFrequencyBarGraph
+            :audioBufferHistory="frequencyDomainBufferHistory"
             class="border-2 border-gray-400 h-72"
           />
         </div>
@@ -45,14 +45,14 @@
           <div class="font-bold text-xl mb-2">Frequency Buffer History</div>
           <div>
             <table class="table-fixed w-full">
-              <thead class="border-b-2">
+              <thead class="border-b-2 collapse md:visible">
                 <tr>
                   <th class="text-left">Index</th>
                   <th class="text-left">Mean</th>
                   <th class="text-left">Min</th>
                   <th class="text-left">Max</th>
                   <th class="text-left">FFT</th>
-                  <th class="w-2/3 text-right">Buffer</th>
+                  <th class="text-right">Buffer</th>
                 </tr>
               </thead>
               <tbody>
@@ -91,14 +91,14 @@
           <div class="font-bold text-xl mb-2">Time Domain Buffer History</div>
           <div>
             <table class="table-fixed w-full">
-              <thead class="border-b-2">
+              <thead class="border-b-2 collapse md:visible">
                 <tr>
                   <th class="text-left">Index</th>
                   <th class="text-left">Mean</th>
                   <th class="text-left">Min</th>
                   <th class="text-left">Max</th>
                   <th class="text-left">FFT</th>
-                  <th class="w-2/3 text-right">Buffer</th>
+                  <th class="text-right">Buffer</th>
                 </tr>
               </thead>
               <tbody>
