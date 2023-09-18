@@ -1,1 +1,0 @@
-import{_ as t,o as e,c as o,b as c}from"./entry.11f8fb72.js";const n={},s={class:"w-full p-4 text-xs text-center font-bold text-white pin-b"},_=c("a",{href:"https://github.com/cmpadden/cmpadden.github.io"},"\xA9 Colton Padden",-1),a=[_];function r(d,i){return e(),o("footer",s,a)}const p=t(n,[["render",r]]);export{p as default};
