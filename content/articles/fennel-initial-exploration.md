@@ -7,6 +7,17 @@ tags: ["lisp", "hammerspoon", "fennel"]
 categories: ["lisp"]
 ---
 
+A while back I read an introductory book on Lisp programming titled, "The Little
+Schemer". This book opened my mind to new (to me) programming paradigms, and left me
+with a strong desire to find a way to incorporate Lisp programming into my every day
+life. It took some time, but I believe I've found what I've been looking for: Fennel.
+
+<!--more-->
+
+The [Fennel][1] programming language is a dialect of Lisp that boasts compatibility with
+Lua, and it just so happens that two of my favorite applications are configured with
+exactly that language: [Hammerspoon][2], and [Neovim][3].
+
 <div>
   <img
     class="h-48 rounded-lg shadow-md"
@@ -14,15 +25,6 @@ categories: ["lisp"]
     alt="Dall-E Generated Image of Fennel and a Hammer"
   >
 </div>
-
-A while back I read an introductory book on Lisp programming titled, "The Little
-Schemer". This book opened my mind to new (to me) programming paradigms, and left me
-with a strong desire to find a way to incorporate Lisp programming into my every day
-life. It took some time, but I believe I've found what I've been looking for: Fennel.
-
-The [Fennel][1] programming language is a dialect of Lisp that boasts compatibility with
-Lua, and it just so happens that two of my favorite applications are configured with
-exactly that language: [Hammerspoon][2], and [Neovim][3].
 
 ## Initial Observations
 
