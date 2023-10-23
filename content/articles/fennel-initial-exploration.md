@@ -81,7 +81,7 @@ function sleep(ms)
 end
 ```
 
-```fennel
+```lisp
 (fn sleep [ms]
   (os.execute (.. "sleep " (/ (tonumber ms) 1000))))
 ```

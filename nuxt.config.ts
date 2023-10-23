@@ -6,4 +6,15 @@ export default defineNuxtConfig({
   headlessui: {
     prefix: "Headless",
   },
+  content: {
+    highlight: {
+      theme: 'solarized-dark',
+      preload: [
+          'python',
+          'lua',
+          'bash',
+          'lisp',
+      ]
+    }
+  }
 });
