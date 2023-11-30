@@ -5,6 +5,7 @@ draft: false
 date: "2023-10-22"
 tags: ["lisp", "hammerspoon", "fennel"]
 categories: ["lisp"]
+cover_image: '/images/dall-e-fennel-hammer.jpeg'
 ---
 
 A while back I read an introductory book on Lisp programming titled, "The Little
@@ -17,14 +18,6 @@ life. It took some time, but I believe I've found what I've been looking for: Fe
 The [Fennel][1] programming language is a dialect of Lisp that boasts compatibility with
 Lua, and it just so happens that two of my favorite applications are configured with
 exactly that language: [Hammerspoon][2], and [Neovim][3].
-
-<div>
-  <img
-    class="h-48 rounded-lg shadow-md"
-    src="/images/dall-e-fennel-hammer.jpeg"
-    alt="Dall-E Generated Image of Fennel and a Hammer"
-  >
-</div>
 
 ## Initial Observations
 

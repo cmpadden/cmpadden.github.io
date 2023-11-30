@@ -4,15 +4,34 @@
 const route = useRoute();
 
 const { data } = await useAsyncData("page-data", () =>
-  queryContent(route.path).findOne()
+  queryContent(route.path).findOne(),
 );
 </script>
 
 <template>
   <div class="container mx-auto">
     <article class="shadow-lg bg-gray-200 mb-10 p-10">
-      <h1 class="font-bold text-3xl text-gray-700">{{ data.title }}</h1>
-      <p class="text-sm text-gray-600 flex items-center mb-4">{{ data.date }}</p>
+      <!-- https://content.nuxt.com/components/content-slot -->
+      <div class="flex flex-auto">
+        <!-- header image -->
+        <template v-if="data.cover_image">
+          <img
+            class="m-4 h-16 rounded-full border-2 border-black"
+            :src="data.cover_image"
+            alt="Dall-E Generated Image of Fennel and a Hammer"
+          />
+        </template>
+
+        <!-- header title / subtitle -->
+        <div class="flex items-center">
+          <div>
+            <h1 class="font-bold text-3xl text-gray-700">{{ data.title }}</h1>
+            <p class="text-sm text-gray-600 flex items-center">
+              {{ data.date }}
+            </p>
+          </div>
+        </div>
+      </div>
       <!-- https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width -->
       <article class="prose max-w-none">
         <ContentRenderer
