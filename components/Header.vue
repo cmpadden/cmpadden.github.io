@@ -6,22 +6,13 @@ const route = useRoute();
 
 <template>
   <nav class="container mx-auto pt-6">
-    <div class="flex justify-between text-gray-200 font-semibold">
-      <NuxtLink to="/" class="mr-2 text-white hover:text-blue-200">
-        <template v-if="route.name === 'index'">
-          <h1 class="pb-4 text-4xl font-bold leading-tight text-white">
-            Who&#183;Am&#183;I
-          </h1>
-        </template>
-        <template v-else>
-          <div class="flex justify-center items-center">
-            <img
-              src="https://avatars.githubusercontent.com/u/5807118?v=4"
-              alt="Selfie"
-              class="ring-2 ring-sky-700 transition duration-500 hover:ring-4 hover:ring-teal-700 shadow-lg max-h-12 rounded-full"
-            />
-          </div>
-        </template>
+    <div class="flex items-end justify-between text-gray-200 font-semibold">
+      <NuxtLink
+        to="/"
+        class="mr-2 text-2xl text-white font-bold leading-tight hover:text-blue-200"
+        as="div"
+      >
+        Who&#183;Am&#183;I
       </NuxtLink>
       <div>
         <HeadlessMenu as="div" class="relative inline-block text-left z-50">
@@ -45,8 +36,7 @@ const route = useRoute();
             leave-to-class="transform scale-95 opacity-0"
           >
             <HeadlessMenuItems
-              class="absolute right-0 mt-2 w-56 origin-top-right
-              divide-y divide-gray-100 rounded-md bg-black/80 backdrop-blur-sm text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-black/80 backdrop-blur-sm text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
             >
               <div class="px-1 py-1">
                 <HeadlessMenuItem v-slot="{ active }">
