@@ -9,14 +9,14 @@ const { data } = await useAsyncData("page-data", () =>
 </script>
 
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto" v-if="data">
     <article class="shadow-lg bg-gray-200 mb-10 p-10">
       <!-- https://content.nuxt.com/components/content-slot -->
       <div class="flex flex-auto">
         <!-- header image -->
         <template v-if="data.cover_image">
           <img
-            class="m-4 h-16 rounded-full border-2 border-black"
+            class="mr-4 h-16 border-2 border-black"
             :src="data.cover_image"
             alt="Dall-E Generated Image of Fennel and a Hammer"
           />
@@ -33,11 +33,8 @@ const { data } = await useAsyncData("page-data", () =>
         </div>
       </div>
       <!-- https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width -->
-      <article class="prose max-w-none">
-        <ContentRenderer
-          class="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto"
-          :value="data"
-        >
+      <article class="prose prose-sm max-w-none prose-a:no-underline">
+        <ContentRenderer>
           <ContentRendererMarkdown :value="data" />
         </ContentRenderer>
       </article>

@@ -1,5 +1,5 @@
 ---
-title: 'Initial Exploration of Fennel: Extending Hammerspoon'
+title: 'Fennel Impressions with Hammerspoon'
 description: 'My first impressions of Fennel for configuring Hammerspoon'
 draft: false
 date: "2023-10-22"
