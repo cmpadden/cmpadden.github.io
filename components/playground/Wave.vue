@@ -71,8 +71,8 @@ export default {
             -this.amplitude + HEIGHT / 2,
             this.amplitude + HEIGHT / 2,
             0,
-            255
-          )
+            255,
+          ),
         );
 
         x = x >= WIDTH + this.diameter ? -this.diameter : x + 1;

@@ -3,24 +3,24 @@
     <div class="grid grid-cols-4 gap-4">
       <div class="col-span-4 lg:col-span-3">
         <div v-for="article of visible_articles" :key="article._id">
-          <div class="bg-black/50 text-white rounded-xl shadow-xl">
-            <div class="h-full relative mb-2">
+          <div class="rounded-xl bg-black/50 text-white shadow-xl">
+            <div class="relative mb-2 h-full">
               <!-- heading -->
               <div class="px-4 py-2">
-                <div class="font-bold text-xl mb-2">
+                <div class="mb-2 text-xl font-bold">
                   <NuxtLink class="gradient-underline" :to="article._path">{{
                     article.title
                   }}</NuxtLink>
                 </div>
-                <p class="text-sm flex items-center">
+                <p class="flex items-center text-sm">
                   {{ article.date }}
                 </p>
               </div>
 
-              <div class="px-4 pb-12 mb-3">
+              <div class="mb-3 px-4 pb-12">
                 <p class="prose-sm">
                   <ContentRenderer
-                    class="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto"
+                    class="prose prose-sm mx-auto sm:prose lg:prose-lg xl:prose-2xl"
                     :value="article"
                   >
                     <ContentRendererMarkdown
@@ -31,14 +31,14 @@
               </div>
 
               <!-- tags -->
-              <div class="mb-4 absolute bottom-0 right-0">
+              <div class="absolute bottom-0 right-0 mb-4">
                 <span
                   v-for="tag in article.tags"
                   :key="tag"
                   :class="{
                     'bg-green-600': selected_tags.includes(tag),
                   }"
-                  class="inline-block bg-black px-3 py-1 text-sm text-cyan mr-2 select-none"
+                  class="mr-2 inline-block select-none bg-black px-3 py-1 text-sm text-cyan"
                 >
                   <div class="tag">{{ tag }}</div>
                 </span>
@@ -48,9 +48,9 @@
         </div>
       </div>
 
-      <div class="col-span-4 lg:col-span-1 inline-block">
-        <div class="mb-3 bg-black/50 text-white rounded-xl">
-          <p class="font-bold text-xl py-2 px-3 mb-0">Categories</p>
+      <div class="col-span-4 inline-block lg:col-span-1">
+        <div class="mb-3 rounded-xl bg-black/50 text-white">
+          <p class="mb-0 px-3 py-2 text-xl font-bold">Categories</p>
           <a
             v-for="category in categories"
             :key="category"
@@ -58,14 +58,14 @@
               'bg-green-600': selected_categories.includes(category),
               'hover:bg-red-600': selected_categories.includes(category),
             }"
-            class="block border-t border-black py-1 px-4 hover:bg-black text-cyan cursor-pointer select-none"
+            class="block cursor-pointer select-none border-t border-black px-4 py-1 text-cyan hover:bg-black"
             @click="toggle_category(category)"
             >{{ category }}</a
           >
         </div>
 
-        <div class="mb-3 bg-black/50 text-white rounded-xl">
-          <p class="font-bold text-xl py-2 px-3 mb-0">Tags</p>
+        <div class="mb-3 rounded-xl bg-black/50 text-white">
+          <p class="mb-0 px-3 py-2 text-xl font-bold">Tags</p>
           <div class="p-2">
             <span
               v-for="(tag, ix) in tags"
@@ -74,7 +74,7 @@
                 'bg-green-600': selected_tags.includes(tag),
                 'hover:bg-red-600': selected_tags.includes(tag),
               }"
-              class="inline-flex py-2 leading-4 mr-2 mb-2 content-center bg-black justify-center h-8 px-3 text-sm text-cyan cursor-pointer select-none"
+              class="mb-2 mr-2 inline-flex h-8 cursor-pointer select-none content-center justify-center bg-black px-3 py-2 text-sm leading-4 text-cyan"
               @click="toggle_tag(tag)"
             >
               <div>{{ tag }}</div>
@@ -126,7 +126,7 @@ export default {
           this.articles
             .map((article) => article.categories)
             .flat()
-            .sort()
+            .sort(),
         ),
       ];
     },
@@ -137,7 +137,7 @@ export default {
           this.articles
             .map((article) => article.tags)
             .flat()
-            .sort()
+            .sort(),
         ),
       ];
     },
@@ -147,7 +147,7 @@ export default {
         if (this.selected_categories.length > 0) {
           if (
             !this.selected_categories.every((c) =>
-              article.categories.includes(c)
+              article.categories.includes(c),
             )
           ) {
             return false;
@@ -177,7 +177,7 @@ export default {
     toggle_category(cat) {
       if (this.selected_categories.includes(cat)) {
         this.selected_categories = this.selected_categories.filter(
-          (el) => el !== cat
+          (el) => el !== cat,
         );
       } else {
         this.selected_categories.push(cat);

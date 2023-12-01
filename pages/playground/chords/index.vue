@@ -1,11 +1,11 @@
 <template>
   <div
-    class="h-2/3 text-white bg-gradient-to-b from-green-900 via-purple-900 to-indigo-900"
+    class="h-2/3 bg-gradient-to-b from-green-900 via-purple-900 to-indigo-900 text-white"
   >
     <!-- Message for unsupported browsers -->
     <div
       v-if="typeof midi === 'undefined'"
-      class="p-4 font-light tracking-wide text-center"
+      class="p-4 text-center font-light tracking-wide"
     >
       Unfortunately, the Web MIDI API is
       <a
@@ -22,11 +22,11 @@
         <div class="absolute bottom-16 right-2">
           <div
             v-bind:class="{ hidden: !tooltip, block: tooltip }"
-            class="z-50 max-w-md text-sm font-normal leading-normal break-words bg-yellow-200 border-2 border-green-800 rounded-lg"
+            class="z-50 max-w-md break-words rounded-lg border-2 border-green-800 bg-yellow-200 text-sm font-normal leading-normal"
           >
             <div>
               <div
-                class="p-3 mb-0 font-semibold text-white uppercase bg-green-600 border-b border-solid rounded-t-lg opacity-75"
+                class="mb-0 rounded-t-lg border-b border-solid bg-green-600 p-3 font-semibold uppercase text-white opacity-75"
               >
                 MIDI Status
               </div>
@@ -42,7 +42,7 @@
                   <div class="font-bold">Inputs:</div>
                   <div
                     v-if="inputs.length === 0"
-                    class="p-4 italic text-center"
+                    class="p-4 text-center italic"
                   >
                     No input devices detected :(
                   </div>
@@ -57,7 +57,7 @@
                   <div class="font-bold">Outputs:</div>
                   <div
                     v-if="outputs.length === 0"
-                    class="p-4 italic text-center"
+                    class="p-4 text-center italic"
                   >
                     No output devices detected :(
                   </div>
@@ -79,14 +79,14 @@
         <div class="absolute bottom-2 right-2">
           <button
             @click="tooltip = !tooltip"
-            class="px-1 text-green-600 border-green-600 rounded-lg shadow bg-green-50 border-3 hover:text-green-500 hover:shadow-lg"
+            class="border-3 rounded-lg border-green-600 bg-green-50 px-1 text-green-600 shadow hover:text-green-500 hover:shadow-lg"
             type="button"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
               viewBox="0 0 20 20"
-              class="w-10 h-10"
+              class="h-10 w-10"
             >
               <g fill="none">
                 <path
@@ -99,16 +99,16 @@
         </div>
       </div>
       <!-- display active key pressed in the bottom left of the screen -->
-      <div class="absolute left-4 bottom-4">
+      <div class="absolute bottom-4 left-4">
         <div class="flex">
           <div v-for="note in orderedNotes()" :key="note" class="p-4">
             {{ note }}
           </div>
         </div>
       </div>
-      <div class="h-screen grid place-items-center">
+      <div class="grid h-screen place-items-center">
         <div>
-          <div class="text-4xl font-semibold tracking-wide text-center">
+          <div class="text-center text-4xl font-semibold tracking-wide">
             <!-- <div v-if="activeKeys.size === 0">-</div> -->
             <transition
               enter-active-class="duration-500 ease-out"
@@ -158,7 +158,7 @@ export default {
         },
         (error) => {
           console.error(error);
-        }
+        },
       );
     }
   },

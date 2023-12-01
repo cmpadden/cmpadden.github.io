@@ -40,11 +40,11 @@ onMounted(() => {
     <div class="flex flex-wrap">
       <div class="w-full">
         <div
-          class="font-medium tracking-wide text-white sm:text-base lg:text-normal space-y-4"
+          class="lg:text-normal space-y-4 font-medium tracking-wide text-white sm:text-base"
         >
           <div>
             I am a
-            <span class="w-36 inline-block">
+            <span class="inline-block w-36">
               <HeadlessTransitionRoot
                 as="template"
                 appear
@@ -57,7 +57,7 @@ onMounted(() => {
                 leave-to="-translate-y-2 opacity-0"
               >
                 <div
-                  class="shadow-xl bg-white text-black px-2 w-36 font-extrabold tracking-wide text-center"
+                  class="w-36 bg-white px-2 text-center font-extrabold tracking-wide text-black shadow-xl"
                 >
                   {{ occupation }}
                 </div>

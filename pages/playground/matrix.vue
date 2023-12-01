@@ -11,9 +11,9 @@
     <!-- Buttons -->
     <div class="m-2 inline-flex space-x-2">
       <button
-        class="bg-blue-200 text-blue-800 hover:bg-blue-800 hover:text-blue-200 font-bold py-2 px-4"
+        class="bg-blue-200 px-4 py-2 font-bold text-blue-800 hover:bg-blue-800 hover:text-blue-200"
         :disabled="!started"
-        :class="{ 'opacity-25 cursor-not-allowed': !started }"
+        :class="{ 'cursor-not-allowed opacity-25': !started }"
         @click="decStep"
       >
         <svg
@@ -33,22 +33,22 @@
       </button>
       <button
         v-if="!done"
-        class="bg-blue-200 text-blue-800 hover:bg-blue-800 hover:text-blue-200 font-bold py-2 px-4"
+        class="bg-blue-200 px-4 py-2 font-bold text-blue-800 hover:bg-blue-800 hover:text-blue-200"
         @click="matmul(a, b)"
       >
         Start
       </button>
       <button
         v-if="done"
-        class="bg-orange-200 text-orange-800 hover:bg-blue-800 hover:text-blue-200 font-bold py-2 px-4"
+        class="bg-orange-200 px-4 py-2 font-bold text-orange-800 hover:bg-blue-800 hover:text-blue-200"
         @click="generateRandomMatrices"
       >
         Again!
       </button>
       <button
-        class="bg-blue-200 text-blue-800 hover:bg-blue-800 hover:text-blue-200 font-bold py-2 px-4"
+        class="bg-blue-200 px-4 py-2 font-bold text-blue-800 hover:bg-blue-800 hover:text-blue-200"
         :disabled="!started"
-        :class="{ 'opacity-25 cursor-not-allowed': !started }"
+        :class="{ 'cursor-not-allowed opacity-25': !started }"
         @click="incStep"
       >
         <svg
@@ -70,9 +70,9 @@
 
     <!-- Matrices -->
     <div class="flex flex-wrap">
-      <div class="w-34 sm:w-min m-2 border border-gray-400">
-        <div class="font-bold text-center bg-gray-200 p-4">Matrix A</div>
-        <div class="p-4 flex justify-center items-center">
+      <div class="w-34 m-2 border border-gray-400 sm:w-min">
+        <div class="bg-gray-200 p-4 text-center font-bold">Matrix A</div>
+        <div class="flex items-center justify-center p-4">
           <table class="text-center">
             <tr v-for="(row, i) in a" :key="i">
               <td
@@ -91,9 +91,9 @@
           </table>
         </div>
       </div>
-      <div class="w-34 sm:w-min m-2 border border-gray-400">
-        <div class="font-bold text-center bg-gray-200 p-4">Matrix B</div>
-        <div class="p-4 flex justify-center items-center">
+      <div class="w-34 m-2 border border-gray-400 sm:w-min">
+        <div class="bg-gray-200 p-4 text-center font-bold">Matrix B</div>
+        <div class="flex items-center justify-center p-4">
           <table class="text-center">
             <tr v-for="(row, i) in b" :key="i">
               <td
@@ -116,11 +116,11 @@
       <!-- Result -->
       <div
         v-if="started"
-        class="w-72 sm:w-min m-2 border border-gray-400"
+        class="m-2 w-72 border border-gray-400 sm:w-min"
         :class="{ 'bg-green-200': done }"
       >
-        <div class="font-bold text-center bg-gray-200 p-4">Result</div>
-        <div class="p-4 flex justify-center items-center">
+        <div class="bg-gray-200 p-4 text-center font-bold">Result</div>
+        <div class="flex items-center justify-center p-4">
           <table class="text-center">
             <tr v-for="(row, i) in step['c']" :key="i">
               <td v-for="(col, j) in step['c'][i]" :key="j" class="p-2">
@@ -134,9 +134,9 @@
       <!-- Log of all steps -->
       <div
         v-if="started"
-        class="w-72 m-2 p-2 border border-gray-400 bg-gray-100"
+        class="m-2 w-72 border border-gray-400 bg-gray-100 p-2"
       >
-        <div class="font-bold text-center">Steps</div>
+        <div class="text-center font-bold">Steps</div>
         <div class="font-mono">
           <div v-for="(s, i) in step['all_steps']" :key="i">
             {{ s }}
@@ -184,7 +184,7 @@ export default {
   },
   created() {
     // eslint-disable-next-line nuxt/no-globals-in-created
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
 
@@ -204,7 +204,7 @@ export default {
         matrix.push(
           Array(m)
             .fill()
-            .map(() => Math.round(Math.random() * 10))
+            .map(() => Math.round(Math.random() * 10)),
         );
       }
       return matrix;

@@ -6,16 +6,16 @@ const route = useRoute();
 
 <template>
   <nav class="container mx-auto py-6">
-    <div class="flex items-end justify-between text-gray-200 font-semibold">
+    <div class="flex items-end justify-between font-semibold text-gray-200">
       <NuxtLink
         to="/"
-        class="mr-2 text-2xl text-white font-bold leading-tight hover:text-blue-200"
+        class="mr-2 text-2xl font-bold leading-tight text-white hover:text-blue-200"
         as="div"
       >
         Who&#183;Am&#183;I
       </NuxtLink>
       <div>
-        <HeadlessMenu as="div" class="relative inline-block text-left z-50">
+        <HeadlessMenu as="div" class="relative z-50 inline-block text-left">
           <div>
             <HeadlessMenuButton
               class="inline-flex w-full justify-center rounded-md bg-black bg-opacity-30 p-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
@@ -36,7 +36,7 @@ const route = useRoute();
             leave-to-class="transform scale-95 opacity-0"
           >
             <HeadlessMenuItems
-              class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-black/80 backdrop-blur-sm text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-black/80 text-white shadow-lg ring-1 ring-black ring-opacity-5 backdrop-blur-sm focus:outline-none"
             >
               <div class="px-1 py-1">
                 <HeadlessMenuItem v-slot="{ active }">
@@ -44,11 +44,11 @@ const route = useRoute();
                     <button
                       :class="[
                         active ? 'bg-slate-700 text-white' : 'text-white',
-                        'group flex w-full rounded-md items-center px-2 py-2 text-sm',
+                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
                       <svg
-                        class="inline mr-2 h-5 w-5"
+                        class="mr-2 inline h-5 w-5"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -70,11 +70,11 @@ const route = useRoute();
                     <button
                       :class="[
                         active ? 'bg-slate-700 text-white' : 'text-white',
-                        'group flex w-full rounded-md items-center px-2 py-2 text-sm',
+                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
                       <svg
-                        class="inline mr-2 h-5 w-5"
+                        class="mr-2 inline h-5 w-5"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -96,11 +96,11 @@ const route = useRoute();
                     <button
                       :class="[
                         active ? 'bg-slate-700' : '',
-                        'group flex w-full rounded-md items-center px-2 py-2 text-sm',
+                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
                       <svg
-                        class="inline mr-2 h-5 w-5"
+                        class="mr-2 inline h-5 w-5"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"

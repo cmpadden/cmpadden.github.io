@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-col h-screen font-mono">
+  <div class="flex h-screen flex-col font-mono">
     <!-- flex layout reference: https://play.tailwindcss.com/uOnWQzR9tl -->
     <div class="flex flex-1 overflow-hidden">
       <!-- sidebar -->
       <div class="flex w-20 bg-amber-500">
         <div
-          class="absolute w-20 bottom-10 transform -rotate-90 whitespace-nowrap"
+          class="absolute bottom-10 w-20 -rotate-90 transform whitespace-nowrap"
         >
           <div class="text-4xl font-bold text-white">
             1000 French Conjugations
@@ -13,11 +13,11 @@
         </div>
       </div>
       <!-- main content -->
-      <div class="flex flex-col flex-1 p-8 overflow-y-auto bg-amber-100">
+      <div class="flex flex-1 flex-col overflow-y-auto bg-amber-100 p-8">
         <template v-if="conjugations.length > 0 && word">
           <!-- dismissible instructions -->
-          <div class="flex p-4 bg-amber-500 rounded-xl">
-            <div class="text-xl italic text-center text-white">
+          <div class="flex rounded-xl bg-amber-500 p-4">
+            <div class="text-center text-xl italic text-white">
               Click a word to the left or right to cycle through the 1000 most
               popular French verb conjugations!
             </div>
@@ -28,23 +28,23 @@
           <div class="inline-flex flex-col justify-center py-4 text-gray-600">
             <input
               v-model="search"
-              class="p-2 pl-8 border border-2 border-gray-400 rounded-xl focus:outline-none focus:border-amber-500"
+              class="rounded-xl border border-2 border-gray-400 p-2 pl-8 focus:border-amber-500 focus:outline-none"
               type="search"
               autocomplete="off"
               placeholder="Search Words"
             />
             <ul
               v-if="suggestions.length > 0"
-              class="w-full mt-2 bg-white border border-gray-100"
+              class="mt-2 w-full border border-gray-100 bg-white"
             >
               <li
                 v-for="s in suggestions"
                 :key="s.word"
-                class="relative py-1 pl-8 pr-2 cursor-pointer hover:bg-yellow-50 hover:text-gray-900"
+                class="relative cursor-pointer py-1 pl-8 pr-2 hover:bg-yellow-50 hover:text-gray-900"
                 @click="searchNavigate(s)"
               >
                 <svg
-                  class="absolute w-4 h-4 left-2 top-2"
+                  class="absolute left-2 top-2 h-4 w-4"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
@@ -61,17 +61,17 @@
           <!-- window over words -->
           <div class="flex p-4">
             <div
-              class="flex-1 text-2xl text-center text-gray-400 select-none"
+              class="flex-1 select-none text-center text-2xl text-gray-400"
               @click="decWordIndex"
             >
               {{ wordPrev ? wordPrev.word : "-" }}
             </div>
-            <div class="flex-1 text-3xl font-bold text-center text-cyan-600">
+            <div class="text-cyan-600 flex-1 text-center text-3xl font-bold">
               <span class="text-amber-500"> #{{ word.word_popularity }}</span>
               {{ word.word }}
             </div>
             <div
-              class="flex-1 text-2xl text-center text-gray-400 select-none"
+              class="flex-1 select-none text-center text-2xl text-gray-400"
               @click="incWordIndex"
             >
               {{ wordNext ? wordNext.word : "-" }}
@@ -80,15 +80,13 @@
 
           <!-- conjugations -->
           <div
-            class="grid grid-cols-1 gap-8 xl:gap-12 md:grid-cols-3 xl:grid-cols-4"
+            class="grid grid-cols-1 gap-8 md:grid-cols-3 xl:grid-cols-4 xl:gap-12"
           >
             <div v-for="(conjs, tense) in word.conjugations" :key="tense">
               <div
-                class="h-full p-4 bg-white border-2 shadow space-y-3 border-cyan-600 rounded-md shadow-amber-500"
+                class="border-cyan-600 h-full space-y-3 rounded-md border-2 bg-white p-4 shadow shadow-amber-500"
               >
-                <h1
-                  class="text-2xl font-semibold text-gray-700 capitalize"
-                >
+                <h1 class="text-2xl font-semibold capitalize text-gray-700">
                   {{ tense }}
                 </h1>
 
@@ -185,7 +183,7 @@ export default {
   },
   async setup() {
     const { data: conjugations } = await useFetch(
-      "/1000_french_conjugations.json"
+      "/1000_french_conjugations.json",
     );
 
     return {

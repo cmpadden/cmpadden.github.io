@@ -1,11 +1,11 @@
 <template>
   <div class="select-none bg-gradient-to-b from-green-800 to-gray-800">
-    <div class="h-screen grid place-items-center">
+    <div class="grid h-screen place-items-center">
       <div class="font-mono text-white">
         <div class="mb-2 border-2 border-white">
           <div id="canvas" />
         </div>
-        <div class="w-48 my-2 text-center md:w-full">
+        <div class="my-2 w-48 text-center md:w-full">
           m-ary tree based tiling
         </div>
       </div>

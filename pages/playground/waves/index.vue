@@ -1,30 +1,30 @@
 <template>
   <div class="bg-gradient-to-b from-green-800 to-gray-800">
-    <div class="h-screen grid place-items-center">
+    <div class="grid h-screen place-items-center">
       <div class="font-mono text-white">
-        <div class="items-end my-2 md:flex">
+        <div class="my-2 items-end md:flex">
           <div class="flex-none md:flex-1">y(x) = A sin((2π / λ) x)</div>
           <div class="hidden md:block">
-            <label for="aInput" class="inline-block form-label">A</label>
+            <label for="aInput" class="form-label inline-block">A</label>
             <input
               id="aInput"
               v-model.number="wave.amplitude"
               type="number"
-              class="w-16 p-2 bg-transparent border-2 border-white focus:outline-none"
+              class="w-16 border-2 border-white bg-transparent p-2 focus:outline-none"
             />
-            <label for="lInput" class="inline-block form-label">λ</label>
+            <label for="lInput" class="form-label inline-block">λ</label>
             <input
               id="lInput"
               v-model.number="wave.lambda"
               type="number"
-              class="w-16 p-2 bg-transparent border-2 border-white focus:outline-none"
+              class="w-16 border-2 border-white bg-transparent p-2 focus:outline-none"
             />
-            <label for="dInput" class="inline-block form-label">◒</label>
+            <label for="dInput" class="form-label inline-block">◒</label>
             <input
               id="dInput"
               v-model.number="wave.diameter"
               type="number"
-              class="w-16 p-2 bg-transparent border-2 border-white focus:outline-none"
+              class="w-16 border-2 border-white bg-transparent p-2 focus:outline-none"
             />
           </div>
         </div>
@@ -57,7 +57,7 @@
             :lambda="wave.lambda"
           />
         </div>
-        <div class="w-48 my-2 md:w-full">
+        <div class="my-2 w-48 md:w-full">
           Click or tap anywhere to clear the canvas!
         </div>
       </div>
