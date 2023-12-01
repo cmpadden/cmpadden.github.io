@@ -5,7 +5,7 @@ const route = useRoute();
 </script>
 
 <template>
-  <nav class="container mx-auto pt-6">
+  <nav class="container mx-auto py-6">
     <div class="flex items-end justify-between text-gray-200 font-semibold">
       <NuxtLink
         to="/"

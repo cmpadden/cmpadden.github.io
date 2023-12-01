@@ -36,11 +36,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="container mx-auto mb-8">
+  <section class="container mx-auto pb-8">
     <div class="flex flex-wrap">
       <div class="w-full">
         <div
-          class="font-medium tracking-wide text-white sm:text-base lg:text-normal pr-4 space-y-4"
+          class="font-medium tracking-wide text-white sm:text-base lg:text-normal space-y-4"
         >
           <div>
             I am a

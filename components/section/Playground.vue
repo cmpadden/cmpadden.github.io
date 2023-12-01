@@ -1,40 +1,42 @@
 <template>
   <!-- <section class="container mx-auto text-white bg-[url('/images/topography.svg')]"> -->
-  <section class="container mx-auto text-white">
-    <h1 class="py-4 text-4xl font-bold leading-tight text-white">
-      {{ title }}
-    </h1>
-    <div
-      class="grid gap-4 grid-cols-1 lg:grid-cols-2 mb-4"
-    >
-      <nuxt-link
-        v-for="link in filtered_links"
-        :key="link.title"
-        :to="link.link"
-      >
-        <div
-          class="h-full bg-black bg-opacity-70 rounded-xl drop-shadow-lg hover:bg-opacity-100 transition duration-500"
+  <section class="bg-emerald-950 border-b-2 border-b-emerald-900 py-8">
+    <div class="container mx-auto text-white space-y-4">
+      <h1 class="text-3xl font-bold leading-tight text-white">
+        {{ title }}
+      </h1>
+      <div class="grid gap-4 grid-cols-1 lg:grid-cols-2 mb-4">
+        <nuxt-link
+          v-for="link in filtered_links"
+          :key="link.title"
+          :to="link.link"
         >
-          <div class="p-4">
-            <h3 class="pb-2 text-xl font-bold">{{ link.title }}</h3>
-            <div class="text-base font-light" v-html="link.description"></div>
+          <div
+            class="h-full bg-black bg-opacity-70 rounded-xl drop-shadow-lg hover:ring-white hover:ring-1"
+          >
+            <div class="p-4">
+              <h3 class="pb-2 text-xl font-bold">{{ link.title }}</h3>
+              <div class="text-base font-light" v-html="link.description"></div>
+            </div>
+            <div v-if="showImages">
+              <img
+                class="object-fill w-full max-h-96 shadow-lg rounded-b-xl"
+                :src="link.img || 'images/placeholder.png'"
+              />
+            </div>
           </div>
-          <div v-if="showImages">
-            <img
-              class="object-cover w-full shadow-lg h-96"
-              :src="link.img || 'images/placeholder.png'"
-            />
-          </div>
-        </div>
-      </nuxt-link>
+        </nuxt-link>
+      </div>
+      <div>
+        <NuxtLink
+          v-if="linkToPlayground"
+          to="/playground"
+          class="text-blue-400 hover:text-blue-200"
+        >
+          More Experiments...
+        </NuxtLink>
+      </div>
     </div>
-    <NuxtLink
-      v-if="linkToPlayground"
-      to="/playground"
-      class="text-blue-400 hover:text-blue-200"
-    >
-      More Experiments...
-    </NuxtLink>
   </section>
 </template>
 

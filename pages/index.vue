@@ -19,7 +19,7 @@ const data = await queryContent()
   <div>
     <SectionAboutMe />
     <SectionInterests />
-    <SectionPlayground :limit="4" showImages linkToPlayground />
     <SectionBlogPosts :articles="data" />
+    <SectionPlayground :limit="4" showImages linkToPlayground />
   </div>
 </template>

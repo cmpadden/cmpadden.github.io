@@ -49,6 +49,9 @@ export default {
         wiggle: "wiggle 2s ease-in-out infinite",
         "bounce-slow": "bounce 3s",
       },
+      scale: {
+        '102': '1.02'
+      }
     },
   },
   plugins: [require("@tailwindcss/typography")],

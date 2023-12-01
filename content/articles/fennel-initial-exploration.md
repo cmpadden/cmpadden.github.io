@@ -1,6 +1,5 @@
 ---
 title: 'Fennel Impressions with Hammerspoon'
-description: 'My first impressions of Fennel for configuring Hammerspoon'
 draft: false
 date: "2023-10-22"
 tags: ["lisp", "hammerspoon", "fennel"]
