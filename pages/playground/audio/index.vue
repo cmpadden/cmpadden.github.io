@@ -1,51 +1,51 @@
 <template>
   <div class="container mx-auto font-mono">
-    <div class="text-white bg-background">
+    <div class="bg-background text-white">
       <div class="grid grid-cols-3 gap-4">
         <!-- Controls -->
         <div class="col-span-3 space-x-2">
           <div
-            class="inline-block rounded-lg bg-black px-6 py-2 text-sm font-bold uppercase text-white shadow-lg shadow-green-400/25 transition duration-150 ease-in-out hover:shadow-white/25 hover:cursor-pointer"
+            class="inline-block rounded-lg bg-black px-6 py-2 text-sm font-bold uppercase text-white shadow-lg shadow-green-400/25 transition duration-150 ease-in-out hover:cursor-pointer hover:shadow-white/25"
             @click="enable_audio_monitoring"
           >
             Enable
           </div>
           <div
-            class="inline-block rounded-lg bg-black px-6 py-2 text-sm font-bold uppercase text-white shadow-lg shadow-red-400/25 transition duration-150 ease-in-out hover:shadow-white/25 hover:cursor-pointer"
+            class="inline-block rounded-lg bg-black px-6 py-2 text-sm font-bold uppercase text-white shadow-lg shadow-red-400/25 transition duration-150 ease-in-out hover:cursor-pointer hover:shadow-white/25"
             @click="disable_audio_monitoring"
           >
             Disable
           </div>
         </div>
-        <div class="bg-black/75 p-4 rounded-xl col-span-3 lg:col-span-1">
-          <div class="font-bold text-xl mb-2">Time Domain Waveform</div>
+        <div class="col-span-3 rounded-xl bg-black/75 p-4 lg:col-span-1">
+          <div class="mb-2 text-xl font-bold">Time Domain Waveform</div>
           <PlaygroundAudioWaveform
             :timeDomainBufferHistory="timeDomainBufferHistory"
             strokeStyle="rgb(255, 0, 255)"
-            class="border-2 border-gray-400 h-72"
+            class="h-72 border-2 border-gray-400"
           />
         </div>
-        <div class="bg-black/75 p-4 rounded-xl col-span-3 lg:col-span-1">
-          <div class="font-bold text-xl mb-2">Frequency Spectrogram</div>
+        <div class="col-span-3 rounded-xl bg-black/75 p-4 lg:col-span-1">
+          <div class="mb-2 text-xl font-bold">Frequency Spectrogram</div>
           <PlaygroundAudioSpectrogram
             :frequencyDomainBufferHistory="frequencyDomainBufferHistory"
-            class="border-2 border-gray-400 h-72"
+            class="h-72 border-2 border-gray-400"
           />
         </div>
-        <div class="bg-black/75 p-4 rounded-xl col-span-3 lg:col-span-1">
-          <div class="font-bold text-xl mb-2">Frequency Bar Chart</div>
+        <div class="col-span-3 rounded-xl bg-black/75 p-4 lg:col-span-1">
+          <div class="mb-2 text-xl font-bold">Frequency Bar Chart</div>
           <PlaygroundAudioFrequencyBarGraph
             :audioBufferHistory="frequencyDomainBufferHistory"
-            class="border-2 border-gray-400 h-72"
+            class="h-72 border-2 border-gray-400"
           />
         </div>
 
         <!-- Frequency Domain Table -->
-        <div class="bg-black/75 p-4 rounded-xl col-span-3">
-          <div class="font-bold text-xl mb-2">Frequency Buffer History</div>
+        <div class="col-span-3 rounded-xl bg-black/75 p-4">
+          <div class="mb-2 text-xl font-bold">Frequency Buffer History</div>
           <div>
-            <table class="table-fixed w-full">
-              <thead class="border-b-2 collapse md:visible">
+            <table class="w-full table-fixed">
+              <thead class="collapse border-b-2 md:visible">
                 <tr>
                   <th class="text-left">Index</th>
                   <th class="text-left">Mean</th>
@@ -60,7 +60,7 @@
                   v-for="(data, ix) in frequencyDomainBufferHistory.slice(-10)"
                   :key="ix"
                 >
-                  <td class="font-bold text-left">{{ ix }}</td>
+                  <td class="text-left font-bold">{{ ix }}</td>
                   <td class="text-left">
                     {{
                       (
@@ -77,7 +77,7 @@
                   <td class="text-left">
                     {{ data.length }}
                   </td>
-                  <td class="text-right truncate">
+                  <td class="truncate text-right">
                     {{ data.slice(0, 4) }} ... {{ data.slice(-4) }}
                   </td>
                 </tr>
@@ -87,11 +87,11 @@
         </div>
 
         <!-- Time Domain Table -->
-        <div class="bg-black/75 p-4 rounded-xl col-span-3">
-          <div class="font-bold text-xl mb-2">Time Domain Buffer History</div>
+        <div class="col-span-3 rounded-xl bg-black/75 p-4">
+          <div class="mb-2 text-xl font-bold">Time Domain Buffer History</div>
           <div>
-            <table class="table-fixed w-full">
-              <thead class="border-b-2 collapse md:visible">
+            <table class="w-full table-fixed">
+              <thead class="collapse border-b-2 md:visible">
                 <tr>
                   <th class="text-left">Index</th>
                   <th class="text-left">Mean</th>
@@ -106,7 +106,7 @@
                   v-for="(data, ix) in timeDomainBufferHistory.slice(-10)"
                   :key="ix"
                 >
-                  <td class="font-bold text-left">{{ ix }}</td>
+                  <td class="text-left font-bold">{{ ix }}</td>
                   <td class="text-left">
                     {{
                       (
@@ -123,7 +123,7 @@
                   <td class="text-left">
                     {{ data.length }}
                   </td>
-                  <td class="text-right truncate">
+                  <td class="truncate text-right">
                     {{ data.slice(0, 4) }} ... {{ data.slice(-4) }}
                   </td>
                 </tr>
@@ -198,14 +198,14 @@ const enable_audio_monitoring = () => {
       // initialize time domain history
       for (let i = 0; i < HISTORY_SCROLLBACK; i++) {
         timeDomainBufferHistory.value.push(
-          new Uint8Array(analyser.frequencyBinCount)
+          new Uint8Array(analyser.frequencyBinCount),
         );
       }
 
       // initialize frequency domain history
       for (let i = 0; i < HISTORY_SCROLLBACK; i++) {
         frequencyDomainBufferHistory.value.push(
-          new Uint8Array(analyser.frequencyBinCount)
+          new Uint8Array(analyser.frequencyBinCount),
         );
       }
 

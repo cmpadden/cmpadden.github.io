@@ -15,7 +15,7 @@ export default {
 
 <template>
   <div
-    class="min-h-screen bg-gradeint-to-r from-blue-400 to-indigo-500 flex items-center justify-center"
+    class="bg-gradeint-to-r flex min-h-screen items-center justify-center from-blue-400 to-indigo-500"
   >
     <HeadlessTransitionRoot
       as="template"
@@ -28,7 +28,7 @@ export default {
       leave-to="opacity-0"
     >
       <div
-        class="bg-white rounded-2xl shadow-xl flex items-center p-4 w-96 space-x-4"
+        class="flex w-96 items-center space-x-4 rounded-2xl bg-white p-4 shadow-xl"
       >
         <HeadlessTransitionChild
           as="img"
@@ -38,7 +38,7 @@ export default {
           leave="transition transform duration-300 ease-in"
           leave-from="opacity-100"
           leave-to="opacity-0"
-          class="h-16 w-16 rounded-full ring ring-offset-2 ring-indigo-500 ring-opacity-50"
+          class="h-16 w-16 rounded-full ring ring-indigo-500 ring-opacity-50 ring-offset-2"
           src="/images/placeholder.png"
         />
         <HeadlessTransitionChild
@@ -57,10 +57,10 @@ export default {
       </div>
     </HeadlessTransitionRoot>
     <div
-      class="absolute top-0 my-4 inset-x-0 w-full flex items-center justify-center"
+      class="absolute inset-x-0 top-0 my-4 flex w-full items-center justify-center"
     >
       <button
-        class="bg-blue-200 px-4 py-1.5 rounded-lg text-sm font-medium text-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-600 hover:bg-blue-100"
+        class="rounded-lg bg-blue-200 px-4 py-1.5 text-sm font-medium text-indigo-900 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
         @click="show = !show"
       >
         {{ show ? "Hide" : "Show" }} profile

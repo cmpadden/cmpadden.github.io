@@ -1,17 +1,19 @@
 <template>
-  <section class="text-white bg-[url('/images/topography.svg')] bg-emerald-900">
-  <!-- <section class="text-white"> -->
+  <section class="bg-emerald-900 bg-[url('/images/topography.svg')] text-white">
+    <!-- <section class="text-white"> -->
     <div
-      class="container mx-auto py-8 grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-x-6 md:space-y-0"
+      class="container mx-auto grid grid-cols-1 space-y-6 py-8 md:grid-cols-3 md:space-x-6 md:space-y-0"
     >
       <div>
         <div
-          class="h-full p-4 backdrop-blur-sm bg-black/80 rounded-xl drop-shadow-lg hover:bg-opacity-100 hover:shadow-lg transition duration-500"
+          class="h-full rounded-xl bg-black/80 p-4 drop-shadow-lg backdrop-blur-sm transition duration-500 hover:bg-opacity-100 hover:shadow-lg"
         >
-          <h3 class="text-xl font-bold mb-2 text-center">
+          <h3 class="mb-2 text-center text-xl font-bold">
             Technical Interests
           </h3>
-          <ul class="list-image-[url('/images/right-arrow-small.svg')] list-inside">
+          <ul
+            class="list-inside list-image-[url('/images/right-arrow-small.svg')]"
+          >
             <li>Developer Tooling</li>
             <li>Programming Languages</li>
             <li>Web Development</li>
@@ -22,10 +24,10 @@
       </div>
       <div>
         <div
-          class="h-full p-4 backdrop-blur-sm bg-black/80 rounded-xl drop-shadow-lg hover:bg-opacity-100 hover:shadow-lg transition duration-500"
+          class="h-full rounded-xl bg-black/80 p-4 drop-shadow-lg backdrop-blur-sm transition duration-500 hover:bg-opacity-100 hover:shadow-lg"
         >
-          <h3 class="text-xl font-bold text-center mb-2">Air Quality</h3>
-          <p class="text-base text-justify tracking-tight">
+          <h3 class="mb-2 text-center text-xl font-bold">Air Quality</h3>
+          <p class="text-justify text-base tracking-tight">
             I am a founding member and technical adviser to
             <a class="underline" href="https://guaq.tech"
               >Globally Unified Air Quality</a
@@ -36,10 +38,10 @@
       </div>
       <div>
         <div
-          class="h-full p-4 backdrop-blur-sm bg-black/80 rounded-xl drop-shadow-lg hover:bg-opacity-100 hover:shadow-lg transition duration-500"
+          class="h-full rounded-xl bg-black/80 p-4 drop-shadow-lg backdrop-blur-sm transition duration-500 hover:bg-opacity-100 hover:shadow-lg"
         >
-          <h3 class="text-xl font-bold text-center mb-2">Consulting</h3>
-          <p class="text-base text-justify tracking-tight">
+          <h3 class="mb-2 text-center text-xl font-bold">Consulting</h3>
+          <p class="text-justify text-base tracking-tight">
             I worked as a technical consultant for financial institutions and
             government agencies in the Washington, D.C. area, providing guidance
             on identity and access management, and big data solutions.

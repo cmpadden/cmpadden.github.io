@@ -1,24 +1,12 @@
 <template>
   <div>
-    <div class="relative flex w-full flex-wrap items-stretch mb-3">
+    <div class="relative mb-3 flex w-full flex-wrap items-stretch">
       <input
         v-model="searchQuery"
         type="search"
         autocomplete="off"
         placeholder="Search Articles"
-        class="
-          p-3
-          placeholder-gray-400
-          text-gray-600
-          relative
-          bg-white bg-white
-          rounded
-          text-sm
-          border border-gray-400
-          outline-none
-          focus:outline-none focus:ring
-          w-full
-        "
+        class="relative w-full rounded border border-gray-400 bg-white bg-white p-3 text-sm text-gray-600 placeholder-gray-400 outline-none focus:outline-none focus:ring"
       />
     </div>
 
@@ -36,21 +24,21 @@
 export default {
   data() {
     return {
-      searchQuery: '',
+      searchQuery: "",
       articles: [],
-    }
+    };
   },
   watch: {
     async searchQuery(searchQuery) {
       if (!searchQuery) {
-        this.articles = []
-        return
+        this.articles = [];
+        return;
       }
-      this.articles = await this.$content('articles')
+      this.articles = await this.$content("articles")
         .limit(6)
         .search(searchQuery)
-        .fetch()
+        .fetch();
     },
   },
-}
+};
 </script>
