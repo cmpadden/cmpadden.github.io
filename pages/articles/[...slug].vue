@@ -12,20 +12,19 @@ const { data } = await useAsyncData("page-data", () =>
   <div class="container mx-auto" v-if="data">
     <article class="mb-10 bg-gray-200 p-10 shadow-lg">
       <!-- https://content.nuxt.com/components/content-slot -->
-      <div class="flex flex-auto">
+      <div class="flex flex-auto items-center">
         <!-- header image -->
         <template v-if="data.cover_image">
           <img
             class="mr-4 h-16 border-2 border-black"
             :src="data.cover_image"
-            alt="Dall-E Generated Image of Fennel and a Hammer"
           />
         </template>
 
         <!-- header title / subtitle -->
         <div class="flex items-center">
           <div>
-            <h1 class="text-3xl font-bold text-gray-700">{{ data.title }}</h1>
+            <h1 class="text-xl md:text-3xl font-bold text-gray-700">{{ data.title }}</h1>
             <p class="flex items-center text-sm text-gray-600">
               {{ data.date }}
             </p>
