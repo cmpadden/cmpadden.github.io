@@ -20,7 +20,7 @@ export default defineNuxtConfig({
   nitro: {
     // render server-side routes as static content
     prerender: {
-      routes: ['/sitemap.xml']
+      routes: ['/sitemap.xml', '/atom']
     }
   }
 });
