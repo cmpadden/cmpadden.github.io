@@ -16,5 +16,11 @@ export default defineNuxtConfig({
           'lisp',
       ]
     }
+  },
+  nitro: {
+    // render server-side routes as static content
+    prerender: {
+      routes: ['/sitemap.xml']
+    }
   }
 });
