@@ -32,7 +32,7 @@ const { data } = await useAsyncData("page-data", () =>
         </div>
       </div>
       <!-- https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width -->
-      <article class="prose prose-sm max-w-none prose-a:no-underline">
+      <article class="prose prose-sm max-w-none prose-a:no-underline prose-a:text-blue-800 hover:prose-a:text-blue-600">
         <ContentRenderer>
           <ContentRendererMarkdown :value="data" />
         </ContentRenderer>
