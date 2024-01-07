@@ -8,20 +8,20 @@ export default defineNuxtConfig({
   },
   content: {
     // Disable highlighting until interoperability with by the Tailwind Typography plugin is sorted
-    highlight: false
-    // highlight: {
-    //   theme: 'solarized-dark',
-    //   preload: [
-    //       'bash',
-    //       'json',
-    //       'lisp',
-    //       'lua',
-    //       'python',
-    //       'shell',
-    //       'js',
-    //       'ts',
-    //   ]
-    // }
+    // highlight: false
+    highlight: {
+      theme: 'github-light',
+      preload: [
+          'bash',
+          'json',
+          'lisp',
+          'lua',
+          'python',
+          'shell',
+          'js',
+          'ts',
+      ]
+    }
   },
   nitro: {
     // render server-side routes as static content
