@@ -27,6 +27,8 @@ export default defineEventHandler(async (event) => {
 
     const articles = await serverQueryContent(event).find();
 
+    articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
     articles.forEach((article) => {
       feed.addItem({
         title: article.title ? article.title : "Missing Title",
