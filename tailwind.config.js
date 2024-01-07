@@ -49,7 +49,23 @@ export default {
       },
       scale: {
         '102': '1.02'
-      }
+      },
+      typography: {
+        // Disable styling for code blocks as handled by @nuxt/content Shikiji integration:
+        //  - https://content.nuxt.com/usage/markdown#code-highlighting
+        //  - https://github.com/tailwindlabs/tailwindcss-typography/issues/32#issuecomment-666683597
+        default: {
+          css: {
+	    pre: false,
+	    code: false,
+	    'pre code': false,
+            'code::before': false,
+	    'code::after': false,
+	    'code::before': false,
+	    'code::after': false,
+          },
+        },
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],

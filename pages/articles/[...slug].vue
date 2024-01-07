@@ -31,8 +31,11 @@ const { data } = await useAsyncData("page-data", () =>
           </div>
         </div>
       </div>
-      <!-- https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width -->
-      <article class="prose prose-sm max-w-none prose-a:no-underline prose-a:text-blue-800 hover:prose-a:text-blue-600">
+      <!--
+        - Remove maximum width of prose content: https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width
+        - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
+      -->
+      <article class="prose prose-sm max-w-none prose-a:no-underline prose-a:text-blue-800 hover:prose-a:text-blue-600 prose-pre:bg-white">
         <ContentRenderer>
           <ContentRendererMarkdown :value="data" />
         </ContentRenderer>
@@ -40,3 +43,13 @@ const { data } = await useAsyncData("page-data", () =>
     </article>
   </div>
 </template>
+
+<style>
+/*
+   For some reason min-height is set to 1rem in ProsePre.vue of @nuxt/content, override
+       this for more suitable code block line height
+   https://github.com/nuxt/content/blob/056da889a28c2f8cfe622a2848a652324b4c32c8/src/runtime/components/Prose/ProsePre.vue#L43 */
+pre code .line {
+    min-height: 0.25rem !important;
+}
+</style>
