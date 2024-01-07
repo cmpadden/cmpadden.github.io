@@ -7,7 +7,13 @@
 
       <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div v-for="(article, ix) of articles" :key="ix">
-          <NuxtLink :to="article._path">
+          <!--
+              Specify `external` to force the link to be considered as external. This
+              resolves an issue where navigating to a blog post would load the previous
+              post if the user clicked the back button -- this unexpected behavior is
+              still not entirely understood, but at least this is a workaround.
+          -->
+          <NuxtLink :to="article._path" external>
             <div
               class="space-y-4 rounded-xl bg-black bg-opacity-70 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
             >
