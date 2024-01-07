@@ -4,7 +4,7 @@ draft: false
 date: "2024-01-06"
 tags: ["nuxt", "rss"]
 categories: ["programming"]
-cover_image: ''
+cover_image: '/images/nuxt-content-rss-feed.jpg'
 ---
 
 If you are a user of [Nuxt Content](https://content.nuxt.com/) and you wish to configure an RSS feed for your website, it's a surprisingly straight forward process! In this article, we will walk through the code changes required to host an RSS feed for both a statically generated, and Universal Nuxt application.
