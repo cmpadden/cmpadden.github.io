@@ -44,19 +44,19 @@ Then, let's get the latest version of `whisper.cpp`, download the English Whispe
 
 ```sh
 # Clone the `whisper.cpp` repository
-git clone --depth 1 git@github.com:ggerganov/whisper.cpp && cd whisper.cpp
+ $ git clone --depth 1 git@github.com:ggerganov/whisper.cpp && cd whisper.cpp
 
 # Download the English Whisper model in `ggml` format
-bash ./models/download-ggml-model.sh base.en
+ $ bash ./models/download-ggml-model.sh base.en
 
 # Build the main example
-make
+ $ make
 ```
 
 And finally, let's transcribe that podcast!
 
 ```sh
-./main \
+ $ ./main \
     -m ~/workspace/whisper.cpp/models/ggml-base.en.bin \
     -f ~/Downloads/podcast-16khz.wav \
     --output-vtt \
