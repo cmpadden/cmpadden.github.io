@@ -17,13 +17,18 @@
             <div
               class="space-y-4 rounded-xl bg-black bg-opacity-70 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
             >
-              <div class="flex items-baseline">
-                <div class="flex-1 text-xl font-bold">{{ article.title }}</div>
-                <div
-                  v-if="show_date"
-                  class="hidden bg-teal-700 px-2 text-base md:block"
-                >
-                  {{ article.date }}
+              <div class="">
+                <div class="flex-1 text-lg font-bold md:text-xl">
+                  {{ article.title }}
+                </div>
+                <div v-if="show_dates" class="text-sm font-light text-gray-400">
+                  {{
+                    new Date(article.date).toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })
+                  }}
                 </div>
               </div>
 
@@ -46,12 +51,6 @@
 <script setup>
 const props = defineProps({
   articles: [],
+  show_dates: false,
 });
-
-const show_date = ref(false);
-
-// export default {
-//   props: ["articles"],
-
-// };
 </script>
