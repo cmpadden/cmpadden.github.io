@@ -4,7 +4,7 @@ import { ref, onMounted, computed } from "vue";
 const counter = ref(0);
 const show = ref(true);
 
-const occupations = ["Data Engineer", "Web Developer", "Musician", "Tinkerer"];
+const occupations = ["Data Engineer", "Developer Advocate", "Web Developer", "Musician", "Tinkerer"];
 const pointer = ref(0);
 
 const occupation = computed(() => occupations[pointer.value]);
@@ -44,7 +44,7 @@ onMounted(() => {
         >
           <div>
             I am a
-            <span class="inline-block w-36">
+            <span class="inline-block w-48">
               <HeadlessTransitionRoot
                 as="template"
                 appear
@@ -57,23 +57,30 @@ onMounted(() => {
                 leave-to="-translate-y-2 opacity-0"
               >
                 <div
-                  class="w-36 bg-white px-2 text-center font-extrabold tracking-wide text-black shadow-xl"
+                  class="w-48 bg-white px-2 text-center font-extrabold tracking-wide text-black shadow-xl"
                 >
                   {{ occupation }}
                 </div>
               </HeadlessTransitionRoot>
             </span>
-            helping build the future of finance at
+            helping lead the way of modern data orchestration at
+            <a
+              class="border-b-2 border-blue-200"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://dagster.io/"
+              >Dagster</a
+            >.
+          </div>
+          <div>
+            Previously, I worked at
             <a
               class="border-b-2 border-blue-200"
               target="_blank"
               rel="noopener noreferrer"
               href="https://www.gemini.com/"
               >Gemini</a
-            >.
-          </div>
-          <div>
-            Previously, I worked at Georgetown University's
+            > building the future of finance, and before that at Georgetown University's
             <a
               class="border-b-2 border-blue-200"
               target="_blank"
@@ -83,7 +90,7 @@ onMounted(() => {
             >
             building data warehousing and processing solutions to help social
             scientists and researchers more easily leverage large-scale organic
-            data in their research.
+            data.
           </div>
         </div>
       </div>
