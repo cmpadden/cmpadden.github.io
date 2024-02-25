@@ -75,7 +75,7 @@ And finally, let's transcribe that podcast!
 
 A full podcast transcribed in ~80 seconds on an M1 Mac Mini -- not too bad!
 
-```txt
+```
 # out.vtt
 
 00:00:00.000 --> 00:00:06.480

@@ -35,7 +35,7 @@ const { data } = await useAsyncData("page-data", () =>
         - Remove maximum width of prose content: https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width
         - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
       -->
-      <article class="prose prose-sm max-w-none prose-a:no-underline prose-a:text-blue-800 hover:prose-a:text-blue-600 prose-pre:bg-white">
+      <article class="prose prose-sm max-w-none prose-a:no-underline prose-a:text-blue-800 hover:prose-a:text-blue-600 prose-pre:bg-white prose-pre:text-black">
         <ContentRenderer>
           <ContentRendererMarkdown :value="data" />
         </ContentRenderer>
