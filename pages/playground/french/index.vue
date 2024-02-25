@@ -12,9 +12,10 @@
           </div>
         </div>
       </div>
+
       <!-- main content -->
       <div class="flex flex-1 flex-col overflow-y-auto bg-amber-100 p-8">
-        <template v-if="conjugations.length > 0 && word">
+        <template v-if="conjugations && conjugations.length > 0 && word">
           <!-- dismissible instructions -->
           <div class="flex rounded-xl bg-amber-500 p-4">
             <div class="text-center text-xl italic text-white">
@@ -61,7 +62,7 @@
           <!-- window over words -->
           <div class="flex p-4">
             <div
-              class="flex-1 select-none text-center text-2xl text-gray-400"
+              class="flex-1 select-none text-center text-2xl text-gray-400 cursor-pointer"
               @click="decWordIndex"
             >
               {{ wordPrev ? wordPrev.word : "-" }}
@@ -71,7 +72,7 @@
               {{ word.word }}
             </div>
             <div
-              class="flex-1 select-none text-center text-2xl text-gray-400"
+              class="flex-1 select-none text-center text-2xl text-gray-400 cursor-pointer"
               @click="incWordIndex"
             >
               {{ wordNext ? wordNext.word : "-" }}
@@ -109,7 +110,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 type Conjugation = {
   word: string;
   word_popularity: number;
@@ -118,94 +119,78 @@ type Conjugation = {
 
 definePageMeta({ layout: "light" });
 
-export default {
-  data() {
-    return {
-      wordIndex: 0,
-      search: "",
-      suggestions: [] as Object[],
-      conjugations: [] as Conjugation[],
-    };
-  },
-  computed: {
-    word(): Conjugation {
-      return this.conjugations[this.wordIndex];
-    },
-    wordPrev(): Conjugation | undefined {
-      if (this.wordIndex === 0) {
-        return undefined;
-      } else {
-        return this.conjugations[this.wordIndex - 1];
-      }
-    },
-    wordNext(): Conjugation | undefined {
-      if (this.wordIndex + 1 === this.conjugations.length) {
-        return undefined;
-      } else {
-        return this.conjugations[this.wordIndex + 1];
-      }
-    },
-  },
-  watch: {
-    search(search) {
-      // this is rather inefficient, especially since it runs on each key-press...
-      this.suggestions = [];
-      if (!search) {
-        return;
-      }
+const wordIndex = ref<number>(0);
+const search = ref("");
+const suggestions = ref([]);
 
-      // Originally, the plan was to use Intl.Collator, however, I couldn't find an easy way to match sub-strings
-      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator
-      // const collator = new Intl.Collator('fr', {
-      //   usage: 'search',
-      //   sensitivity: 'base',
-      // })
-      // this.suggestions = this.conjugations.filter(
-      //   (v) => collator.compare(v.word, search) === 0
-      // )
+const { data: conjugations } = await useFetch(
+  "/1000_french_conjugations.json",
+  {
+    transform: (value) => {
+      return value as Conjugation[];
+    },
+  },
+);
 
-      // https://stackoverflow.com/a/37511463
-      let count = 0;
-      this.suggestions = this.conjugations.filter((v) => {
-        // workaround to string-compare without diacritics
-        const match = v.word
-          .normalize("NFD")
-          .replace(/\p{Diacritic}/gu, "")
-          .includes(search);
-        // limit to 5 maximum results
-        if (match && count <= 5) {
-          count++;
-          return true;
-        }
-        return false;
-      });
-    },
-  },
-  async setup() {
-    const { data: conjugations } = await useFetch(
-      "/1000_french_conjugations.json",
-    );
+const word = computed(() => {
+  if (conjugations.value) {
+    return conjugations.value[wordIndex.value];
+  }
+});
 
-    return {
-      conjugations,
-    };
-  },
-  methods: {
-    incWordIndex() {
-      if (this.wordIndex < this.conjugations.length - 1) {
-        this.wordIndex += 1;
-      }
-    },
-    decWordIndex() {
-      if (this.wordIndex > 0) {
-        this.wordIndex -= 1;
-      }
-    },
-    searchNavigate(word: Conjugation) {
-      this.search = "";
-      this.suggestions = [];
-      this.wordIndex = word.word_popularity - 1;
-    },
-  },
+const wordPrev = computed(() => {
+  if (conjugations.value === null) {
+    return undefined;
+  }
+  return wordIndex.value === 0
+    ? undefined
+    : conjugations.value[wordIndex.value - 1];
+});
+
+const wordNext = computed(() => {
+  if (conjugations.value === null) {
+    return undefined;
+  }
+  return wordIndex.value + 1 === conjugations.value.length
+    ? undefined
+    : conjugations.value[wordIndex.value + 1];
+});
+
+watch(search, (value: string) => {
+  suggestions.value = [];
+  if (!value) {
+    return;
+  }
+
+  let count = 0;
+  suggestions.value = conjugations.value.filter((v: Conjugation) => {
+    const match = v.word
+      .normalize("NFD")
+      .replace(/\p{Diacritic}/gu, "")
+      .includes(value);
+    if (match && count <= 5) {
+      count++;
+      return true;
+    }
+    return false;
+  });
+});
+
+const incWordIndex = () => {
+  if (conjugations.value && wordIndex.value < conjugations.value.length - 1) {
+    wordIndex.value += 1;
+  }
+};
+
+const decWordIndex = () => {
+  if (wordIndex.value > 0) {
+    wordIndex.value -= 1;
+  }
+};
+
+const searchNavigate = (word: Conjugation) => {
+  search.value = "";
+  suggestions.value = [];
+  wordIndex.value = word.word_popularity - 1;
 };
 </script>
