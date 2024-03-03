@@ -2,7 +2,8 @@
 definePageMeta({ layout: "empty" });
 
 const visible = ref(false);
-const index = ref(0);
+const index1 = ref(0);
+const index2 = ref(0);
 
 const modulus_value = (list, index) => {
   return list[index % list.length];
@@ -10,9 +11,16 @@ const modulus_value = (list, index) => {
 
 onMounted(() => {
   setInterval(function () {
-    index.value += 1;
-  }, 2000);
+    // alternate incrementing indexes
+    if (index1.value > index2.value) {
+      index2.value += 1;
+    } else {
+      index1.value += 1;
+    }
+  }, 1500);
 });
+
+const title = "TL;DR";
 
 // list of 25 interesting hobbies for the adrenaline junky
 const hobbies = [
@@ -71,17 +79,9 @@ const professions = [
   "Adventure tour guide",
   "Art curator",
 ];
-
-const title = "TL;DR";
-const attributes = [
-  { title: "Name", value: ["Colton"] },
-  { title: "Profession", value: professions },
-  { title: "Hobbies", value: hobbies },
-];
 </script>
 
 <template>
-  {{ index }}
   <div
     v-if="visible"
     class="absolute bottom-2 right-2 h-24 w-24"
@@ -98,15 +98,26 @@ const attributes = [
       >
         <div class="mb-2 font-extrabold tracking-wide">{{ title }}</div>
         <div class="mb-4 space-y-2 text-sm">
-          <div
-            v-for="attr in attributes"
-            :key="attr.title"
-            class="flex items-center"
-          >
-            <div class="flex-none pr-2">{{ attr.title }}</div>
+          <!-- name -->
+          <div class="flex items-center">
+            <div class="flex-none pr-2">Name</div>
+            <div class="flex-grow border-b border-dotted"></div>
+            <div class="flex-none pl-2">Colton</div>
+          </div>
+          <!-- profession -->
+          <div class="flex items-center">
+            <div class="flex-none pr-2">Profession</div>
             <div class="flex-grow border-b border-dotted"></div>
             <div class="flex-none pl-2">
-              {{ modulus_value(attr.value, index) }}
+              {{ modulus_value(professions, index1) }}
+            </div>
+          </div>
+          <!-- hobbies -->
+          <div class="flex items-center">
+            <div class="flex-none pr-2">Hobby</div>
+            <div class="flex-grow border-b border-dotted"></div>
+            <div class="flex-none pl-2">
+              {{ modulus_value(hobbies, index2) }}
             </div>
           </div>
         </div>
