@@ -7,6 +7,7 @@
         </div>
         <div class="my-2 md:w-full">
           <textarea
+            readonly
             v-model="sequence"
             class="block h-24 w-full border-2 border-white bg-black p-2 text-white placeholder:italic placeholder:text-slate-400 focus:border-2 focus:border-yellow-500 focus:outline-none sm:text-sm"
             placeholder="Enter a sequence of numbers..."
@@ -14,57 +15,77 @@
           />
         </div>
 
-        <div class="grid-rows-auto my-2 grid grid-cols-2 gap-4 md:grid-rows-1">
+        <div
+          class="grid-rows-auto my-2 grid grid-cols-2 gap-4 border-2 border-white p-2 md:grid-rows-1"
+        >
           <div class="flex flex-col">
-            <label for="distanceInput" class="text-right">Line Length</label>
+            <label for="distanceInput" class="text-right"
+              >Segment Length [{{ distance }}]</label
+            >
             <input
               id="distanceInput"
               v-model.number="distance"
-              type="number"
-              class="border-2 border-white bg-black p-1 text-right focus:outline-none"
               @change="render(sketch)"
+              type="range"
+              min="1"
+              max="25"
+              class="accent-black"
             />
           </div>
           <div class="flex flex-col">
-            <label for="strokeInput" class="text-right">Stroke Width</label>
+            <label for="strokeInput" class="text-right"
+              >Stroke Width [{{ strokeWidth }}]</label
+            >
             <input
               id="strokeInput"
               v-model.number="strokeWidth"
-              type="number"
-              class="border-2 border-white bg-black p-1 text-right focus:outline-none"
               @change="render(sketch)"
+              type="range"
+              min="1"
+              max="10"
+              class="accent-black"
             />
           </div>
           <div class="flex flex-col">
-            <label for="startingXInput" class="text-right">Starting X</label>
+            <label for="startingXInput" class="text-right"
+              >X Position [{{ startingX }}]</label
+            >
             <input
               id="startingXInput"
               v-model.number="startingX"
-              type="number"
-              class="border-2 border-white bg-black p-1 text-right focus:outline-none"
               @change="render(sketch)"
+              type="range"
+              min="0"
+              max="500"
+              class="accent-black"
             />
           </div>
           <div class="flex flex-col">
-            <label for="startingYInput" class="text-right">Starting Y</label>
+            <label for="startingYInput" class="text-right"
+              >Y Position [{{ startingY }}]</label
+            >
             <input
               id="startingYInput"
               v-model.number="startingY"
-              type="number"
-              class="border-2 border-white bg-black p-1 text-right focus:outline-none"
               @change="render(sketch)"
+              type="range"
+              min="0"
+              max="500"
+              class="accent-black"
             />
           </div>
           <div class="flex flex-col">
             <label for="startingAngleInput" class="text-right"
-              >Starting Angle</label
+              >Angle [{{ startingAngle }}]</label
             >
             <input
               id="startingAngleInput"
               v-model.number="startingAngle"
-              type="number"
-              class="border-2 border-white bg-black p-1 text-right focus:outline-none"
               @change="render(sketch)"
+              type="range"
+              min="-180"
+              max="180"
+              class="accent-black"
             />
           </div>
         </div>
@@ -80,7 +101,7 @@ export default {
     return {
       height: 0,
       width: 0,
-      distance: 2.5,
+      distance: 3,
       strokeWidth: 1.0,
       startingX: 125,
       startingY: 150,
@@ -117,7 +138,7 @@ export default {
       s.strokeWeight(this.strokeWidth);
 
       s.clear();
-      s.background(PALETTE[8]);
+      s.background(PALETTE[9]);
 
       s.beginShape();
       s.vertex(cursor.x, cursor.y);
