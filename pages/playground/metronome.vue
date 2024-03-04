@@ -1,4 +1,10 @@
 <script setup>
+// Feature Ideas
+// - start/stop button
+// - different beep on 5th tick
+// - tap to find bpm
+// - show clickeable sequencer (eg. [x][ ][ ][ ])
+
 definePageMeta({ layout: "empty" });
 
 const params = reactive({
@@ -7,6 +13,7 @@ const params = reactive({
   frequency_max: 1000,
   frequency_steps: 20,
   bpm: 90,
+  paused: true,
 });
 
 let audio_context;
@@ -23,14 +30,27 @@ const bpm_to_ms = (bpm) => {
 
 const start = () => {
   clearInterval(metronome_interval_id);
-  metronome_interval_id = setInterval(() => {
-    oscillator.frequency.value = params.frequency;
+  if (!params.paused) {
+    metronome_interval_id = setInterval(() => {
+      oscillator.frequency.value = params.frequency;
 
-    // fade-in and fade-out to prevent undesired click
-    gain_node.gain.setValueAtTime(0, audio_context.currentTime);
-    gain_node.gain.linearRampToValueAtTime(1, audio_context.currentTime + 0.05);
-    gain_node.gain.linearRampToValueAtTime(0, audio_context.currentTime + 0.1);
-  }, bpm_to_ms(params.bpm));
+      // fade-in and fade-out to prevent undesired click
+      gain_node.gain.setValueAtTime(0, audio_context.currentTime);
+      gain_node.gain.linearRampToValueAtTime(
+        1,
+        audio_context.currentTime + 0.05,
+      );
+      gain_node.gain.linearRampToValueAtTime(
+        0,
+        audio_context.currentTime + 0.1,
+      );
+    }, bpm_to_ms(params.bpm));
+  }
+};
+
+const toggle = () => {
+  params.paused = !params.paused;
+  start();
 };
 
 const adjust_bpm = (value) => {
@@ -56,6 +76,21 @@ onMounted(() => {
 <template>
   <main class="flex h-screen justify-center bg-white">
     <div class="space-y-2 p-2">
+      <!-- start / stop -->
+      <div>
+        <button
+          class="button p-2 text-xs font-bold lowercase text-white"
+          :class="{
+            'bg-green-900': params.paused,
+            'bg-red-900': !params.paused,
+          }"
+          @click="toggle"
+        >
+          {{ params.paused ? "resume" : "stop" }}
+        </button>
+      </div>
+
+      <!-- bpm controls -->
       <div class="flex justify-center border-2 border-gray-400 p-2">
         <div class="flex space-x-2">
           <div class="flex items-center">
