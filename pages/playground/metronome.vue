@@ -16,6 +16,11 @@ const params = reactive({
   paused: true,
 });
 
+const sequencer = reactive({
+  index: 0,
+  toggles: [true, true, true, true],
+});
+
 let audio_context;
 let oscillator;
 let gain_node;
@@ -30,22 +35,30 @@ const bpm_to_ms = (bpm) => {
 
 const start = () => {
   clearInterval(metronome_interval_id);
-  if (!params.paused) {
-    metronome_interval_id = setInterval(() => {
-      oscillator.frequency.value = params.frequency;
-
-      // fade-in and fade-out to prevent undesired click
-      gain_node.gain.setValueAtTime(0, audio_context.currentTime);
-      gain_node.gain.linearRampToValueAtTime(
-        1,
-        audio_context.currentTime + 0.05,
-      );
-      gain_node.gain.linearRampToValueAtTime(
-        0,
-        audio_context.currentTime + 0.1,
-      );
-    }, bpm_to_ms(params.bpm));
+  if (params.paused) {
+    return;
   }
+  metronome_interval_id = setInterval(() => {
+    // update frequency
+    oscillator.frequency.value = params.frequency;
+
+    // track sequencer index
+    sequencer.index += 1;
+    if (sequencer.index > sequencer.toggles.length - 1) {
+      sequencer.index = 0;
+    }
+
+    // alter gain if sequencer toggle is enabled / disabled
+    let g = 1;
+    if (!sequencer.toggles[sequencer.index]) {
+      g = 0.15;
+    }
+
+    // fade-in and fade-out to prevent undesired click
+    gain_node.gain.setValueAtTime(0, audio_context.currentTime);
+    gain_node.gain.linearRampToValueAtTime(g, audio_context.currentTime + 0.05);
+    gain_node.gain.linearRampToValueAtTime(0, audio_context.currentTime + 0.1);
+  }, bpm_to_ms(params.bpm));
 };
 
 const toggle = () => {
@@ -76,26 +89,40 @@ onMounted(() => {
 <template>
   <main class="flex h-screen justify-center bg-white">
     <div class="space-y-2 p-2">
-      <!-- start / stop -->
-      <div>
-        <button
-          class="button p-2 text-xs font-bold lowercase text-white"
-          :class="{
-            'bg-green-900': params.paused,
-            'bg-red-900': !params.paused,
-          }"
-          @click="toggle"
-        >
-          {{ params.paused ? "resume" : "stop" }}
-        </button>
+      <!-- sequencer -->
+      <div class="flex justify-center border-2 border-gray-400 p-2 shadow-lg">
+        <!-- start / stop -->
+        <div class="grow">
+          <button
+            class="button p-2 text-xs font-bold lowercase text-white"
+            :class="{
+              'bg-green-500': params.paused,
+              'bg-red-500': !params.paused,
+            }"
+            @click="toggle"
+          >
+            {{ params.paused ? "resume" : "stop" }}
+          </button>
+        </div>
+
+        <div class="space-x-4">
+          <template v-for="(_step, index) in sequencer.toggles" :key="index">
+            <input
+              v-model="sequencer.toggles[index]"
+              type="checkbox"
+              class="accent-yellow-300"
+              :class="{ 'ring-4 ring-red-500': sequencer.index == index }"
+            />
+          </template>
+        </div>
       </div>
 
       <!-- bpm controls -->
-      <div class="flex justify-center border-2 border-gray-400 p-2">
+      <div class="flex justify-center border-2 border-gray-400 p-2 shadow-lg">
         <div class="flex space-x-2">
           <div class="flex items-center">
             <button
-              class="button rounded-full bg-gradient-to-r from-red-500 to-blue-500 px-2 text-white"
+              class="button rounded-full bg-gradient-to-r from-red-500 to-yellow-500 px-2 text-white"
               @click="adjust_bpm(-10)"
             >
               -
@@ -108,7 +135,7 @@ onMounted(() => {
 
           <div class="flex items-center">
             <button
-              class="button rounded-full bg-gradient-to-r from-red-500 to-blue-500 px-2 text-white"
+              class="button rounded-full bg-gradient-to-r from-red-500 to-yellow-500 px-2 text-white"
               @click="adjust_bpm(10)"
             >
               +
@@ -118,11 +145,11 @@ onMounted(() => {
       </div>
 
       <!-- Frequency -->
-      <div class="border-2 border-gray-400 p-2">
+      <div class="border-2 border-gray-400 p-2 shadow-lg">
         <div class="flex">
           <div class="flex-1 font-bold">
             Frequency
-            <span class="bg-yellow-200 px-2"> {{ params.frequency }} </span>
+            <span class="bg-yellow-300 px-2"> {{ params.frequency }} </span>
           </div>
         </div>
         <div class="flex space-x-2">
