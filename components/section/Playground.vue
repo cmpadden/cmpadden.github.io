@@ -61,6 +61,13 @@ export default {
       title: "Experiments",
       links: [
         {
+          title: "Metronome",
+          description:
+            "A simple metronome for tracking tempo.",
+          link: "/playground/metronome",
+          img: "/images/previews/metronome.png",
+        },
+        {
           title: "Sequence Plotter",
           description:
             "Plot the fist 10,000 digits of Pi, or any sequence of digits, in 2-dimensional space",
