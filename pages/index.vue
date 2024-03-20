@@ -20,6 +20,6 @@ const data = await queryContent()
     <SectionAboutMe />
     <SectionInterests />
     <SectionBlogPosts :articles="data" :show_dates="true" />
-    <SectionPlayground :limit="4" showImages linkToPlayground />
+    <SectionPlayground :limit="6" showImages linkToPlayground />
   </div>
 </template>
