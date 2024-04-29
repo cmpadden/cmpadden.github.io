@@ -1,8 +1,16 @@
+<script setup>
+import { ChevronRightIcon } from "@heroicons/vue/16/solid";
+
+const props = defineProps({
+  articles: [],
+  show_dates: false, });
+</script>
+
 <template>
-  <section class="border-b-2 border-b-emerald-900 py-8">
+  <section class="bg-emerald-950 bg-[url('/images/noise.svg')] text-white">
     <div class="container mx-auto space-y-4">
       <h1 class="text-3xl font-bold leading-tight text-white">
-        Latest Blog Posts
+        Blog Posts
       </h1>
 
       <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -40,17 +48,10 @@
         </div>
       </div>
       <div>
-        <NuxtLink to="/articles" class="mt-8 text-blue-400 hover:text-blue-200">
-          More Posts...
+        <NuxtLink to="/articles" class="mt-4 flex text-blue-400 hover:text-red-400 font-bold">
+          More <ChevronRightIcon class="h-6 w-6" aria-hidden="true" />
         </NuxtLink>
       </div>
     </div>
   </section>
 </template>
-
-<script setup>
-const props = defineProps({
-  articles: [],
-  show_dates: false,
-});
-</script>
