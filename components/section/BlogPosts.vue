@@ -48,7 +48,7 @@ const props = defineProps({
         </div>
       </div>
       <div>
-        <NuxtLink to="/articles" class="mt-4 flex text-blue-400 hover:text-red-400 font-bold">
+        <NuxtLink to="/articles" class="mt-4 flex text-red-200 hover:text-red-400 font-bold">
           More <ChevronRightIcon class="h-6 w-6" aria-hidden="true" />
         </NuxtLink>
       </div>
