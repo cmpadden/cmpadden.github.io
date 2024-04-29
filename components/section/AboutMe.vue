@@ -65,7 +65,7 @@ onMounted(() => {
             </span>
             helping lead the way of modern data orchestration at
             <a
-              class="border-b-2 border-blue-200"
+              class="border-b-2 border-red-200"
               target="_blank"
               rel="noopener noreferrer"
               href="https://dagster.io/"
@@ -75,14 +75,14 @@ onMounted(() => {
           <div>
             Previously, I worked at
             <a
-              class="border-b-2 border-blue-200"
+              class="border-b-2 border-red-200"
               target="_blank"
               rel="noopener noreferrer"
               href="https://www.gemini.com/"
               >Gemini</a
             > building the future of finance, and before that at Georgetown University's
             <a
-              class="border-b-2 border-blue-200"
+              class="border-b-2 border-red-200"
               target="_blank"
               rel="noopener noreferrer"
               href="https://mccourt.georgetown.edu/research/the-massive-data-institute/"

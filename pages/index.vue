@@ -18,8 +18,10 @@ const data = await queryContent()
 <template>
   <div>
     <SectionAboutMe />
-    <SectionInterests />
-    <SectionBlogPosts :articles="data" :show_dates="true" />
-    <SectionPlayground :limit="6" showImages linkToPlayground />
+    <div class="bg-emerald-950 bg-[url('/images/noise.svg')]">
+      <SectionInterests />
+      <SectionBlogPosts :articles="data" :show_dates="true" />
+      <SectionPlayground :limit="6" showImages linkToPlayground />
+    </div>
   </div>
 </template>

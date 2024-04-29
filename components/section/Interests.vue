@@ -1,6 +1,5 @@
 <template>
-  <!-- <section class="bg-emerald-900 bg-[url('/images/topography.svg')] text-white"> -->
-  <section class="bg-emerald-950 bg-[url('/images/noise.svg')] text-white">
+  <section class="text-white">
     <div class="bg-gradient-to-b from-background to-transparent">
       <div
         class="container mx-auto grid grid-cols-1 space-y-6 py-8 md:grid-cols-3 md:space-x-6 md:space-y-0"
