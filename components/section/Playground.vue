@@ -90,7 +90,7 @@ const filtered_links = computed(() => {
 </script>
 
 <template>
-  <section class="bg-emerald-950 bg-[url('/images/noise.svg')] text-white">
+  <section class="text-white">
     <div class="container mx-auto space-y-4 py-8 text-white">
       <h1 class="text-3xl font-bold leading-tight text-white">
         {{ title }}
@@ -104,7 +104,7 @@ const filtered_links = computed(() => {
           <div
             class="h-full rounded-xl bg-black bg-opacity-70 drop-shadow-lg hover:ring-1 hover:ring-white"
           >
-            <div class="p-4">
+            <div class="min-h-28 px-4 pt-4">
               <h3 class="pb-2 text-xl font-bold">{{ link.title }}</h3>
               <div class="text-base font-light line-clamp-2" v-html="link.description"></div>
             </div>

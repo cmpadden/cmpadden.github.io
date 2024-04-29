@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <section class="bg-emerald-950 bg-[url('/images/noise.svg')] text-white">
+  <section>
     <div class="container mx-auto space-y-4">
       <h1 class="text-3xl font-bold leading-tight text-white">
         Blog Posts
