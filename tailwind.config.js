@@ -20,7 +20,7 @@ export default {
         display: ["Helvetica", "sans-serif"],
         body: ["Graphik", "sans-serif"],
         mono: ["Inconsolata", "monospace"],
-        fantasy: ["Trattatello", "fantasy"],
+        fantasy: ["Milk and Honey", "fantasy"],
       },
       borderWidth: {
         default: "1px",
