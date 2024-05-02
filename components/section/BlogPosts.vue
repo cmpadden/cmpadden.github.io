@@ -9,8 +9,8 @@ const props = defineProps({
 <template>
   <section>
     <div class="container mx-auto space-y-4">
-      <h1 class="text-3xl font-bold leading-tight text-white">
-        Blog Posts
+      <h1 class="text-3xl text-white font-mono font-semibold underline underline-offset-4 decoration-orange-500">
+        blog posts
       </h1>
 
       <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -48,7 +48,7 @@ const props = defineProps({
         </div>
       </div>
       <div>
-        <NuxtLink to="/articles" class="mt-4 flex text-red-200 hover:text-red-400 font-bold">
+        <NuxtLink to="/articles" class="mt-4 flex text-white hover:text-red-400 font-bold">
           More <ChevronRightIcon class="h-6 w-6" aria-hidden="true" />
         </NuxtLink>
       </div>

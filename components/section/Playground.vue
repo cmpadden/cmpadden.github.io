@@ -92,7 +92,7 @@ const filtered_links = computed(() => {
 <template>
   <section class="text-white">
     <div class="container mx-auto space-y-4 py-8 text-white">
-      <h1 class="text-3xl font-bold leading-tight text-white">
+      <h1 class="text-3xl font-mono font-semibold lowercase underline underline-offset-4 decoration-orange-500">
         {{ title }}
       </h1>
       <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -120,7 +120,7 @@ const filtered_links = computed(() => {
       <div v-if="linkToPlayground">
         <NuxtLink
           to="/playground"
-          class="mt-4 flex font-bold text-red-200 hover:text-red-400"
+          class="mt-4 flex font-bold text-white hover:text-red-400"
         >
           More <ChevronRightIcon class="h-6 w-6" aria-hidden="true" />
         </NuxtLink>
