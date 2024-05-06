@@ -3,15 +3,19 @@ import { ChevronRightIcon } from "@heroicons/vue/16/solid";
 
 const props = defineProps({
   articles: [],
-  show_dates: false, });
+  show_dates: false,
+});
 </script>
 
 <template>
   <section>
     <div class="container mx-auto space-y-4">
-      <h1 class="text-3xl text-white font-mono font-semibold underline underline-offset-4 decoration-orange-500">
+      <NuxtLink
+        to="/articles"
+        class="font-mono text-3xl font-semibold text-white underline decoration-orange-500 underline-offset-4"
+      >
         blog posts
-      </h1>
+      </NuxtLink>
 
       <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div v-for="(article, ix) of articles" :key="ix">
@@ -48,7 +52,10 @@ const props = defineProps({
         </div>
       </div>
       <div>
-        <NuxtLink to="/articles" class="mt-4 flex text-white hover:text-red-400 font-bold">
+        <NuxtLink
+          to="/articles"
+          class="mt-4 flex font-bold text-red-200 hover:text-red-400"
+        >
           More <ChevronRightIcon class="h-6 w-6" aria-hidden="true" />
         </NuxtLink>
       </div>
