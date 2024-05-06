@@ -50,3 +50,15 @@ code {
   /* temporary fix to remove strange rendering of text via prism */
   text-shadow: none;
 }
+
+
+@layer base {
+  @font-face {
+    font-family: Mafins;
+    src: url('/fonts/Mafins.otf');
+  }
+  @font-face {
+    font-family: Milk and Honey;
+    src: url('/fonts/Milk and Honey.otf');
+  }
+}

@@ -126,7 +126,7 @@ const filtered_links = computed(() => {
       <div v-if="linkToPlayground">
         <NuxtLink
           to="/playground"
-          class="mt-4 flex font-bold text-red-200 hover:text-red-400"
+          class="mt-4 flex font-bold text-white hover:text-red-400"
         >
           More <ChevronRightIcon class="h-6 w-6" aria-hidden="true" />
         </NuxtLink>

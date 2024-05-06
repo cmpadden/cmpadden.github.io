@@ -6,13 +6,13 @@ const route = useRoute();
 
 <template>
   <nav class="container mx-auto py-6">
-    <div class="flex items-end justify-between font-semibold text-gray-200">
+    <div class="flex items-end justify-between text-gray-200">
       <NuxtLink
         to="/"
-        class="mr-2 text-2xl font-bold leading-tight text-white hover:text-blue-200"
+        class="text-3xl text-white hover:text-orange-500 font-mono font-semibold underline underline-offset-4 decoration-orange-500"
         as="div"
       >
-        Who&#183;Am&#183;I
+        who&#183;am&#183;i
       </NuxtLink>
       <div>
         <HeadlessMenu as="div" class="relative z-50 inline-block text-left">
