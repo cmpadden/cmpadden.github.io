@@ -92,9 +92,12 @@ const filtered_links = computed(() => {
 <template>
   <section class="text-white">
     <div class="container mx-auto space-y-4 py-8 text-white">
-      <h1 class="text-3xl font-bold leading-tight text-white">
+      <NuxtLink
+        to="/playground"
+        class="font-mono text-3xl font-semibold lowercase underline decoration-orange-500 underline-offset-4"
+      >
         {{ title }}
-      </h1>
+      </NuxtLink>
       <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <nuxt-link
           v-for="link in filtered_links"
@@ -106,7 +109,10 @@ const filtered_links = computed(() => {
           >
             <div class="min-h-28 px-4 pt-4">
               <h3 class="pb-2 text-xl font-bold">{{ link.title }}</h3>
-              <div class="text-base font-light line-clamp-2" v-html="link.description"></div>
+              <div
+                class="line-clamp-2 text-base font-light"
+                v-html="link.description"
+              ></div>
             </div>
             <div v-if="showImages">
               <img
