@@ -105,8 +105,9 @@ export default {
         "summary",
       ])
       .sort({ date: -1 })
-      .limit(5)
       .find();
+
+      // .limit(5)
 
     return {
       articles,
