@@ -19,6 +19,12 @@ const props = defineProps({
 const title = "Experiments";
 const links = [
   {
+    title: "wm.spoon",
+    description: "Hammerpoon Window Manager",
+    link: "https://github.com/cmpadden/wm.spoon",
+    img: "/images/previews/wm.spoon.png",
+  },
+  {
     title: "Metronome",
     description: "A simple metronome for tracking tempo.",
     link: "/playground/metronome",
