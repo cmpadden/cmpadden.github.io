@@ -1,5 +1,5 @@
 ---
-title: 'Initial exploration of Nix'
+title: 'My very first impression of Nix'
 draft: false
 date: "2024-06-06"
 tags: ["nix", "nixos", "nix-dawin"]
@@ -348,3 +348,141 @@ At this point, I'm not familiar with what a `nix-shell` is, but the man page sta
 
 And the `-p` flag sets up an environment with the specified packages present -- in this case the `nix-info` package.
 
+---
+
+Now that we having a working installation of Nix in our environment, let's return to the `nix-darwin` documentation and continue where we left off.
+
+In the _Flakes_ section of the README, there is a set of instructions for getting started from scratch. First, we create a configuration directory:
+
+```sh
+mkdir ~/.config/nix-darwin && cd ~/.config/nix-darwin
+```
+
+Then it suggests we run the `nix flake init` command with a template.
+
+```sh
+nix flake init --template nix-darwin
+```
+
+This resulted in the following error:
+
+```sh
+$ nix flake init --template nix-darwin
+error: experimental Nix feature 'nix-command' is disabled; add '--extra-experimental-features nix-command' to enable it
+```
+
+After adding that flag, it resulted in _another_ error:
+
+```sh
+$ nix flake init --template nix-darwin --extra-experimental-features nix-command
+error: experimental Nix feature 'flakes' is disabled; add '--extra-experimental-features flakes' to enable it
+```
+
+But after adding both features, it wrote a _flake.nix_ file.
+
+
+```sh
+$ nix flake init \
+    --template nix-darwin \
+    --extra-experimental-features nix-command \
+    --extra-experimental-features flakes
+wrote: /Users/colton/.config/nix-darwin/flake.nix
+```
+
+Of which the contents can be seen here:
+
+```txt
+{
+  description = "Example Darwin system flake";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  outputs = inputs@{ self, nix-darwin, nixpkgs }:
+  let
+    configuration = { pkgs, ... }: {
+      # List packages installed in system profile. To search by name, run:
+      # $ nix-env -qaP | grep wget
+      environment.systemPackages =
+        [ pkgs.vim
+        ];
+
+      # Auto upgrade nix package and the daemon service.
+      services.nix-daemon.enable = true;
+      # nix.package = pkgs.nix;
+
+      # Necessary for using flakes on this system.
+      nix.settings.experimental-features = "nix-command flakes";
+
+      # Create /etc/zshrc that loads the nix-darwin environment.
+      programs.zsh.enable = true;  # default shell on catalina
+      # programs.fish.enable = true;
+
+      # Set Git commit hash for darwin-version.
+      system.configurationRevision = self.rev or self.dirtyRev or null;
+
+      # Used for backwards compatibility, please read the changelog before changing.
+      # $ darwin-rebuild changelog
+      system.stateVersion = 4;
+
+      # The platform the configuration will be used on.
+      nixpkgs.hostPlatform = "x86_64-darwin";
+    };
+  in
+  {
+    # Build darwin flake using:
+    # $ darwin-rebuild build --flake .#simple
+    darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
+      modules = [ configuration ];
+    };
+
+    # Expose the package set, including overlays, for convenience.
+    darwinPackages = self.darwinConfigurations."simple".pkgs;
+  };
+}
+```
+
+The instructions suggest to replace occurrences of _simple_ with my host name, but, I'm going to skip that step for the time being.
+
+```sh
+# skipped recommended replacement
+sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
+```
+
+It also recommends updating the `nixpkgs.hostPlatform` to `aarch64-darwin` if my machine runs on Apple Silicon -- that suggestion I _will_ perform.
+
+```sh
+sed -i '' "s/x86_64-darwin/aarch64-darwin/" flake.nix
+```
+
+With the `flake.nix` file created, let's install `nix-darwin`!
+
+```sh
+$ nix run nix-darwin -- switch --flake ~/.config/nix-darwin
+error: experimental Nix feature 'nix-command' is disabled; add '--extra-experimental-features nix-command' to enable it
+```
+
+Once again I ran into the _experimental features_ error. Let's see how that setting can be made permanent...
+
+It looks like there's an answer on one of the `nix-darwin` GitHub issues that states that the initial flake installation will make these settings permanent, but the flags are required for the first flake install.
+
+https://github.com/LnL7/nix-darwin/issues/740#issuecomment-1718313148
+
+
+```sh
+$ nix \
+    --extra-experimental-features 'nix-command flakes' \
+    run nix-darwin -- switch --flake ~/.config/nix-darwin
+warning: creating lock file '/Users/colton/.config/nix-darwin/flake.lock':
+• Added input 'nix-darwin':
+    'github:LnL7/nix-darwin/c0d5b8c54d6828516c97f6be9f2d00c63a363df4?narHash=sha256-vo5k2wQekfeoq/2aleQkBN41dQiQHNTniZeVONWiWLs%3D' (2024-05-29)
+• Added input 'nix-darwin/nixpkgs':
+    follows 'nixpkgs'
+• Added input 'nixpkgs':
+    'github:NixOS/nixpkgs/31f40991012489e858517ec20102f033e4653afb?narHash=sha256-HlvsMH8BNgdmQCwbBDmWp5/DfkEQYhXZHagJQCgbJU0%3D' (2024-06-06)
+building the system configuration...
+error: flake 'path:/Users/colton/.config/nix-darwin?lastModified=1717817588&narHash=sha256-2yAlnXcUYtEVW2w0tf%2BBIxh9xUt9tEdpnQZmf63GRV0%3D' does not provide attribute 'packages.aarch64-darwin.darwinConfigurations.mini.system', 'legacyPackages.aarch64-darwin.darwinConfigurations.mini.system' or 'darwinConfigurations.mini.system'
+```
