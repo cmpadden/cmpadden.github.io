@@ -1,6 +1,6 @@
 ---
 title: 'My very first impression of Nix'
-draft: false
+draft: true
 date: "2024-06-06"
 tags: ["nix", "nixos", "nix-dawin"]
 categories: ["configuration"]
@@ -10,7 +10,7 @@ For years I've heard respected engineers give praise to NixOS, and its declarati
 
 In this article I am going to document my initial experience, warts and all, in exploring [nix-darwin](https://github.com/LnL7/nix-darwin). A set of Nix modules that claim to bring an experience similar to NixOS to macOS.
 
-## Installation
+# Installation
 
 My very first entry point into this exploration is the [README file of the LnL7/nix-darwin](https://github.com/LnL7/nix-darwin) repository.
 
@@ -445,14 +445,13 @@ Of which the contents can be seen here:
 }
 ```
 
-The instructions suggest to replace occurrences of _simple_ with my host name, but, I'm going to skip that step for the time being.
+The instructions suggest to replace occurrences of _simple_ with my host name:
 
 ```sh
-# skipped recommended replacement
 sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
 ```
 
-It also recommends updating the `nixpkgs.hostPlatform` to `aarch64-darwin` if my machine runs on Apple Silicon -- that suggestion I _will_ perform.
+It also recommends updating the `nixpkgs.hostPlatform` to `aarch64-darwin` if my machine runs on Apple Silicon:
 
 ```sh
 sed -i '' "s/x86_64-darwin/aarch64-darwin/" flake.nix
@@ -476,13 +475,40 @@ https://github.com/LnL7/nix-darwin/issues/740#issuecomment-1718313148
 $ nix \
     --extra-experimental-features 'nix-command flakes' \
     run nix-darwin -- switch --flake ~/.config/nix-darwin
-warning: creating lock file '/Users/colton/.config/nix-darwin/flake.lock':
-• Added input 'nix-darwin':
-    'github:LnL7/nix-darwin/c0d5b8c54d6828516c97f6be9f2d00c63a363df4?narHash=sha256-vo5k2wQekfeoq/2aleQkBN41dQiQHNTniZeVONWiWLs%3D' (2024-05-29)
-• Added input 'nix-darwin/nixpkgs':
-    follows 'nixpkgs'
-• Added input 'nixpkgs':
-    'github:NixOS/nixpkgs/31f40991012489e858517ec20102f033e4653afb?narHash=sha256-HlvsMH8BNgdmQCwbBDmWp5/DfkEQYhXZHagJQCgbJU0%3D' (2024-06-06)
 building the system configuration...
-error: flake 'path:/Users/colton/.config/nix-darwin?lastModified=1717817588&narHash=sha256-2yAlnXcUYtEVW2w0tf%2BBIxh9xUt9tEdpnQZmf63GRV0%3D' does not provide attribute 'packages.aarch64-darwin.darwinConfigurations.mini.system', 'legacyPackages.aarch64-darwin.darwinConfigurations.mini.system' or 'darwinConfigurations.mini.system'
+Password:
+setting up /run via /etc/synthetic.conf...
+user defaults...
+setting up user launchd services...
+setting up /Applications/Nix Apps...
+setting up pam...
+applying patches...
+setting up /etc...
+system defaults...
+setting up launchd services...
+creating service org.nixos.activate-system
+reloading service org.nixos.nix-daemon
+reloading nix-daemon...
+waiting for nix-daemon
+waiting for nix-daemon
+configuring networking...
+setting nvram variables...
 ```
+
+With `nix-darwin` installed, let's confirm that the experimental features are enabled globally in `/etc/nix/nix.conf`.
+
+```sh
+$ grep experimental-features /etc/nix/nix.conf
+8:experimental-features = nix-command flakes
+```
+
+Success!
+
+# Configuration
+
+Now that we have Nix and `nix-darwin` installed on our system, let's explore configuration.
+
+After running the `switch` command, it appears that many of the packages I'm accustomed to are no longer on my PATH. Let's modify the _flakes.nix_ file to include some packages -- using `nix-env -qAP` to list available packages.
+
+Abort!
+
