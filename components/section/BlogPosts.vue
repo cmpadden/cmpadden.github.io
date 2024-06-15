@@ -1,6 +1,4 @@
 <script setup>
-import { ChevronRightIcon } from "@heroicons/vue/16/solid";
-
 const props = defineProps({
   articles: [],
   show_dates: false,
@@ -8,7 +6,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <section>
+  <section class="bg-gradient-to-b from-background to-transparent">
     <div class="container mx-auto space-y-4">
       <NuxtLink
         to="/articles"
@@ -19,13 +17,7 @@ const props = defineProps({
 
       <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div v-for="(article, ix) of articles" :key="ix">
-          <!--
-              Specify `external` to force the link to be considered as external. This
-              resolves an issue where navigating to a blog post would load the previous
-              post if the user clicked the back button -- this unexpected behavior is
-              still not entirely understood, but at least this is a workaround.
-          -->
-          <NuxtLink :to="article._path" external>
+          <NuxtLink :to="article._path">
             <div
               class="space-y-4 rounded-xl bg-black bg-opacity-70 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
             >
@@ -52,12 +44,7 @@ const props = defineProps({
         </div>
       </div>
       <div>
-        <NuxtLink
-          to="/articles"
-          class="mt-4 flex font-bold text-red-200 hover:text-red-400"
-        >
-          More <ChevronRightIcon class="h-6 w-6" aria-hidden="true" />
-        </NuxtLink>
+        <MoreLink to="/articles" />
       </div>
     </div>
   </section>

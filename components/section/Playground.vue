@@ -1,6 +1,4 @@
 <script setup>
-import { ChevronRightIcon } from "@heroicons/vue/16/solid";
-
 const props = defineProps({
   showImages: {
     type: Boolean,
@@ -96,7 +94,7 @@ const filtered_links = computed(() => {
 </script>
 
 <template>
-  <section class="text-white">
+  <section class="bg-gradient-to-b from-transparent to-background text-white">
     <div class="container mx-auto space-y-4 py-8 text-white">
       <NuxtLink
         to="/playground"
@@ -130,12 +128,7 @@ const filtered_links = computed(() => {
         </nuxt-link>
       </div>
       <div v-if="linkToPlayground">
-        <NuxtLink
-          to="/playground"
-          class="mt-4 flex font-bold text-white hover:text-red-400"
-        >
-          More <ChevronRightIcon class="h-6 w-6" aria-hidden="true" />
-        </NuxtLink>
+        <MoreLink to="/playground" />
       </div>
     </div>
   </section>

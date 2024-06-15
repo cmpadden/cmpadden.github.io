@@ -8,9 +8,11 @@
               <!-- heading -->
               <div class="px-4 py-2">
                 <div class="mb-2 text-xl font-bold">
-                  <NuxtLink class="gradient-underline" :to="article._path">{{
-                    article.title
-                  }}</NuxtLink>
+                  <NuxtLink
+                    class="border-b-2 border-orange-500 hover:text-orange-500"
+                    :to="article._path"
+                    >{{ article.title }}</NuxtLink
+                  >
                 </div>
                 <p class="flex items-center text-sm">
                   {{ article.date }}
@@ -38,7 +40,7 @@
                   :class="{
                     'bg-green-600': selected_tags.includes(tag),
                   }"
-                  class="mr-2 inline-block select-none bg-black px-3 py-1 text-sm text-cyan"
+                  class="mr-2 inline-block select-none bg-black px-3 py-1 text-sm text-orange-200"
                 >
                   <div class="tag">{{ tag }}</div>
                 </span>
@@ -58,7 +60,7 @@
               'bg-green-600': selected_categories.includes(category),
               'hover:bg-red-600': selected_categories.includes(category),
             }"
-            class="block cursor-pointer select-none border-t border-black px-4 py-1 text-cyan hover:bg-black"
+            class="block cursor-pointer select-none border-t border-black px-4 py-1 text-orange-200 hover:bg-black"
             @click="toggle_category(category)"
             >{{ category }}</a
           >
@@ -74,7 +76,7 @@
                 'bg-green-600': selected_tags.includes(tag),
                 'hover:bg-red-600': selected_tags.includes(tag),
               }"
-              class="mb-2 mr-2 inline-flex h-8 cursor-pointer select-none content-center justify-center bg-black px-3 py-2 text-sm leading-4 text-cyan"
+              class="mb-2 mr-2 inline-flex h-8 cursor-pointer select-none content-center justify-center bg-black px-3 py-2 text-sm leading-4 text-orange-200"
               @click="toggle_tag(tag)"
             >
               <div>{{ tag }}</div>
@@ -107,7 +109,7 @@ export default {
       .sort({ date: -1 })
       .find();
 
-      // .limit(5)
+    // .limit(5)
 
     return {
       articles,

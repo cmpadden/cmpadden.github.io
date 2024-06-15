@@ -19,7 +19,9 @@ const data = await queryContent()
   <div>
     <SectionAboutMe />
     <div class="bg-emerald-950 bg-[url('/images/noise.svg')]">
-      <SectionInterests />
+      <template v-if="false">
+        <SectionInterests />
+      </template>
       <SectionBlogPosts :articles="data" :show_dates="true" />
       <SectionPlayground :limit="6" showImages linkToPlayground />
     </div>

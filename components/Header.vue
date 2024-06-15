@@ -9,7 +9,7 @@ const route = useRoute();
     <div class="flex items-end justify-between text-gray-200">
       <NuxtLink
         to="/"
-        class="text-3xl text-white hover:text-orange-500 font-mono font-semibold underline underline-offset-4 decoration-orange-500"
+        class="font-mono text-3xl font-semibold text-white underline decoration-orange-500 underline-offset-4 hover:text-orange-500"
         as="div"
       >
         who&#183;am&#183;i

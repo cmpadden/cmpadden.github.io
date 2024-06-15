@@ -62,7 +62,7 @@
           <!-- window over words -->
           <div class="flex p-4">
             <div
-              class="flex-1 select-none text-center text-2xl text-gray-400 cursor-pointer"
+              class="flex-1 cursor-pointer select-none text-center text-2xl text-gray-400"
               @click="decWordIndex"
             >
               {{ wordPrev ? wordPrev.word : "-" }}
@@ -72,7 +72,7 @@
               {{ word.word }}
             </div>
             <div
-              class="flex-1 select-none text-center text-2xl text-gray-400 cursor-pointer"
+              class="flex-1 cursor-pointer select-none text-center text-2xl text-gray-400"
               @click="incWordIndex"
             >
               {{ wordNext ? wordNext.word : "-" }}
