@@ -1,15 +1,17 @@
 <template>
   <main>
-    <div class="bg-background font-display container mx-auto h-screen my-12 lg:my-16">
+    <div
+      class="container mx-auto my-12 h-screen bg-background font-display lg:my-16"
+    >
       <div class="flex flex-col border-2 bg-white">
         <slot />
       </div>
     </div>
-    <div class="absolute top-2 left-2">
+    <div class="absolute left-2 top-2">
       <nuxt-link
         as="button"
         to="/playground"
-        class="text-white hover:text-cyan font-bold py-2 px-4 rounded inline-flex items-center"
+        class="inline-flex items-center rounded px-4 py-2 font-bold text-white hover:text-cyan"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +19,7 @@
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="w-6 h-6 mr-2"
+          class="mr-2 h-6 w-6"
         >
           <path
             stroke-linecap="round"

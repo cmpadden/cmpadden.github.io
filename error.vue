@@ -1,7 +1,7 @@
 <template>
-  <body class="flex flex-col min-h-screen font-display bg-background">
+  <body class="flex min-h-screen flex-col bg-background font-display">
     <Header />
-    <main class="flex-1 mt-4">
+    <main class="mt-4 flex-1">
       <div class="flex justify-center">
         <HeadlessTransitionRoot
           show
@@ -14,8 +14,8 @@
           leave-from="opacity-100"
           leave-to="-translate-x-8 opacity-0"
         >
-          <div class="bg-black/50 rounded-xl shadow-lg p-6 text-center">
-            <div class="text-6xl text-white font-extrabold tracking-widest">
+          <div class="rounded-xl bg-black/50 p-6 text-center shadow-lg">
+            <div class="text-6xl font-extrabold tracking-widest text-white">
               Yikes!
             </div>
             <div class="text-base text-gray-200">
