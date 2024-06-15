@@ -1,5 +1,5 @@
 <script setup>
-import { ChevronRightIcon } from "@heroicons/vue/16/solid";
+import { LinkIcon } from "@heroicons/vue/16/solid";
 
 const props = defineProps({
     to: {
@@ -10,9 +10,11 @@ const props = defineProps({
 </script>
 
 <template>
-    <NuxtLink :to="props.to" class="mt-4 flex font-bold text-orange-200 hover:text-red-200">
-        More
-        <ChevronRightIcon class="h-6 w-6" aria-hidden="true" />
-    </NuxtLink>
+    <div class="flex justify-end">
+        <NuxtLink :to="props.to" class="flex items-center font-bold text-sm text-white hover:text-orange-500">
+            More
+            <LinkIcon class="ml-1 h-5 w-5" aria-hidden="true" />
+        </NuxtLink>
+    </div>
 </template>
 
