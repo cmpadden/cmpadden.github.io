@@ -4,7 +4,13 @@ import { ref, onMounted, computed } from "vue";
 const counter = ref(0);
 const show = ref(true);
 
-const occupations = ["Data Engineer", "Developer Advocate", "Web Developer", "Musician", "Tinkerer"];
+const occupations = [
+  "Data Engineer",
+  "Developer Advocate",
+  "Web Developer",
+  "Musician",
+  "Tinkerer",
+];
 const pointer = ref(0);
 
 const occupation = computed(() => occupations[pointer.value]);
@@ -80,7 +86,9 @@ onMounted(() => {
               rel="noopener noreferrer"
               href="https://www.gemini.com/"
               >Gemini</a
-            > building the future of finance, and before that at Georgetown University's
+            >
+            building the future of finance, and before that at Georgetown
+            University's
             <a
               class="border-b-2 border-red-200"
               target="_blank"
