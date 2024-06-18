@@ -10,7 +10,7 @@ const props = defineProps({
     <div class="container mx-auto space-y-4">
       <NuxtLink
         to="/articles"
-        class="font-mono text-3xl font-semibold text-white underline decoration-orange-500 underline-offset-4"
+        class="font-mono text-3xl font-semibold text-white underline decoration-orange-500 underline-offset-4 hover:text-orange-500"
       >
         blog posts
       </NuxtLink>

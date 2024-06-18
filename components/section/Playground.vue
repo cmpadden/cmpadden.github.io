@@ -29,27 +29,27 @@ const links = [
     img: "/images/previews/metronome.png",
   },
   {
-    title: "French Conjugations",
+    title: "Conjugations",
     description: "Search and explore the conjugations of 1000 French verbs",
     link: "/playground/french",
     img: "/images/previews/french-conjugations.png",
   },
   {
-    title: "Noise Mountains",
+    title: "Mountains",
     description:
       "Visualize a gradient of colored waves generated with Perlin noise",
     link: "/playground/palettes/mountains",
     img: "/images/previews/noise.png",
   },
   {
-    title: "Audio Visualizations",
+    title: "Spectrogram",
     description:
       "Visualize the audio from your microphone as a waveform, frequency bars, and a spectrogram",
     link: "/playground/audio",
     img: "/images/previews/microphone.png",
   },
   {
-    title: "Trigonometric Waves",
+    title: "Waves",
     description:
       "Demonstration of using p5.js within Vue.js to visualize trigonometric functions",
     link: "/playground/waves",
@@ -98,11 +98,11 @@ const filtered_links = computed(() => {
     <div class="container mx-auto space-y-4 py-8 text-white">
       <NuxtLink
         to="/playground"
-        class="font-mono text-3xl font-semibold lowercase underline decoration-orange-500 underline-offset-4"
+        class="font-mono text-3xl font-semibold lowercase underline decoration-orange-500 underline-offset-4 hover:text-orange-500"
       >
         {{ title }}
       </NuxtLink>
-      <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <nuxt-link
           v-for="link in filtered_links"
           :key="link.title"
@@ -120,7 +120,7 @@ const filtered_links = computed(() => {
             </div>
             <div v-if="showImages">
               <img
-                class="h-48 w-full rounded-b-xl object-cover"
+                class="h-40 w-full rounded-b-xl object-cover object-top grayscale hover:grayscale-0"
                 :src="link.img || 'images/placeholder.png'"
               />
             </div>
