@@ -17,6 +17,12 @@ const props = defineProps({
 const title = "Experiments";
 const links = [
   {
+    title: "Conway",
+    description: "Conway's Game of Life",
+    link: "/playground/conway",
+    img: "/images/previews/conway.png",
+  },
+  {
     title: "wm.spoon",
     description: "Hammerpoon Window Manager",
     link: "https://github.com/cmpadden/wm.spoon",
