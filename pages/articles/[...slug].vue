@@ -21,24 +21,33 @@ const { data } = await useAsyncData("page-data", () =>
           />
         </template>
 
-        <!-- header title / subtitle -->
-        <div class="flex items-center">
+        <div class="space-y-2">
           <div>
             <h1 class="text-xl font-bold text-gray-700 md:text-3xl">
               {{ data.title }}
             </h1>
-            <p class="flex items-center text-sm text-gray-600">
-              {{ data.date }}
-            </p>
           </div>
+          <div>
+            <div class="flex space-x-2">
+              <div
+                class="rounded-md bg-background px-2 text-sm font-bold text-white"
+                v-for="(tag, ix) in data.tags"
+                :key="ix"
+              >
+                {{ tag }}
+              </div>
+            </div>
+          </div>
+          <!-- <div class="text-sm text-gray-600">Published {{ data.date }}</div> -->
         </div>
       </div>
+      <div class="my-4 border-b border-gray-400" />
       <!--
         - Remove maximum width of prose content: https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width
         - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
       -->
       <article
-        class="prose prose-sm max-w-none prose-a:text-blue-800 prose-a:no-underline hover:prose-a:text-blue-600 prose-pre:bg-white prose-pre:text-black"
+        class="prose max-w-none prose-a:font-bold prose-a:no-underline hover:prose-a:text-orange-500 prose-pre:bg-white prose-pre:text-black"
       >
         <ContentRenderer>
           <ContentRendererMarkdown :value="data" />

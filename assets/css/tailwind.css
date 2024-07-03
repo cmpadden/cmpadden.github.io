@@ -12,45 +12,10 @@ button {
   touch-action: manipulation;
 }
 
-.gradient-highlight {
-  color: theme('colors.white');
-  background-image: linear-gradient(
-    120deg,
-    theme('colors.sky.700') 0%,
-    theme('colors.teal.700') 100%
-  );
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: 0 100%;
-  padding: 0.05rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-.gradient-underline {
-  background-image: linear-gradient(
-    120deg,
-    theme('colors.blue.400') 0%,
-    theme('colors.blue.200') 100%
-  );
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-size: 100% 10%;
-  background-position: 0 100%;
-  padding: 0.15rem;
-}
-
-/* optional class for animating the gradient when hovered */
-.gradient-hover:hover {
-  color: theme('colors.black');
-  background-size: 100% 100%;
-}
-
 code {
   /* temporary fix to remove strange rendering of text via prism */
   text-shadow: none;
 }
-
 
 @layer base {
   @font-face {
