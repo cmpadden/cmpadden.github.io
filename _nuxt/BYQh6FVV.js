@@ -1,1 +1,0 @@
-import{c as e,o as t,b as o}from"./DNAUWOUZ.js";const s={class:"flex h-[1024px] justify-center border-2 border-gray-500"},c=o("iframe",{src:"https://cmpadden.github.io/conway/",width:"100%",height:"100%"},null,-1),a=[c],d={__name:"conway",setup(r){return(n,_)=>(t(),e("main",s,a))}};export{d as default};
