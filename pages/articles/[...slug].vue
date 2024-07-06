@@ -16,9 +16,12 @@ const { data } = await useAsyncData("page-data", () =>
           <!-- categories -->
           <div>
             <div class="text-xs uppercase text-gray-400">Category</div>
-            <div class="flex space-x-2">
+            <!-- columns when small, inline when md or larger -->
+            <div
+              class="flex flex-col space-y-2 md:flex md:flex-row md:space-x-2 md:space-y-0"
+            >
               <NuxtLink
-                class="rounded-md bg-background px-2 text-sm font-bold text-white hover:cursor-pointer hover:bg-orange-500"
+                class="w-min rounded-md bg-background px-2 text-sm font-bold text-white hover:cursor-pointer hover:bg-orange-500"
                 v-for="(category, ix) in data.categories"
                 :key="ix"
                 :to="`/articles?category=${category}`"
@@ -34,9 +37,12 @@ const { data } = await useAsyncData("page-data", () =>
           <!-- tags -->
           <div>
             <div class="text-xs uppercase text-gray-400">Tags</div>
-            <div class="flex space-x-2">
+            <!-- columns when small, inline when md or larger -->
+            <div
+              class="flex flex-col space-y-2 md:flex md:flex-row md:space-x-2 md:space-y-0"
+            >
               <NuxtLink
-                class="rounded-md bg-background px-2 text-sm font-bold text-white hover:cursor-pointer hover:bg-orange-500"
+                class="w-min rounded-md bg-background px-2 text-sm font-bold text-white hover:cursor-pointer hover:bg-orange-500"
                 v-for="(tag, ix) in data.tags"
                 :key="ix"
                 :to="`/articles?tag=${tag}`"
