@@ -29,13 +29,14 @@ const { data } = await useAsyncData("page-data", () =>
           </div>
           <div>
             <div class="flex space-x-2">
-              <div
-                class="rounded-md bg-background px-2 text-sm font-bold text-white"
+              <NuxtLink
+                class="rounded-md bg-background px-2 text-sm font-bold text-white hover:cursor-pointer"
                 v-for="(tag, ix) in data.tags"
                 :key="ix"
+                :to="`/articles?tag=${tag}`"
               >
                 {{ tag }}
-              </div>
+              </NuxtLink>
             </div>
           </div>
           <!-- <div class="text-sm text-gray-600">Published {{ data.date }}</div> -->

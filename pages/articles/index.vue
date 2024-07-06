@@ -1,4 +1,23 @@
 <script setup>
+const route = useRoute();
+
+// optionally load `category` or `tag` query parameter when instantiating selection refs
+//
+// examples
+//
+//     localhost:3000/articles?category=embedded
+//     localhost:3000/articles?tag=embedded
+
+const selectedCategories = ref([]);
+if (route.query.category) {
+    selectedCategories.value = [route.query.category]
+}
+
+const selectedTags = ref([]);
+if (route.query.tag) {
+    selectedTags.value = [route.query.tag]
+}
+
 const { data: articles } = await useAsyncData("articles", () =>
   queryContent()
     .only([
@@ -18,11 +37,6 @@ const { data: articles } = await useAsyncData("articles", () =>
     .sort({ date: -1 })
     .find(),
 );
-
-console.log(articles.value);
-
-const selectedTags = ref([]);
-const selectedCategories = ref([]);
 
 const categories = computed(() => {
   return [
@@ -106,7 +120,8 @@ function toggleCategory(cat) {
                 </p>
               </div>
 
-              <div class="mb-3 px-4 pb-12">
+              <!-- <div class="mb-3 px-4 pb-12"> -->
+              <div class="mb-3 px-4">
                 <p class="prose-sm">
                   <ContentRenderer
                     class="prose prose-sm mx-auto sm:prose lg:prose-lg xl:prose-2xl"
@@ -119,24 +134,25 @@ function toggleCategory(cat) {
                 </p>
               </div>
 
-              <!-- tags -->
-              <div class="absolute bottom-0 right-0 mb-4">
-                <span
-                  v-for="tag in article.tags"
-                  :key="tag"
-                  :class="{
-                    'bg-orange-500': selectedTags.includes(tag),
-                  }"
-                  class="mr-2 inline-block select-none bg-black px-3 py-1 text-sm text-orange-200"
-                >
-                  <div class="tag">{{ tag }}</div>
-                </span>
-              </div>
+              <!-- temporarily hide tags on posts -->
+              <template v-if="false">
+                <div class="absolute bottom-0 right-0 mb-4">
+                  <span
+                    v-for="tag in article.tags"
+                    :key="tag"
+                    :class="{
+                      'bg-orange-500': selectedTags.includes(tag),
+                    }"
+                    class="mr-2 inline-block select-none bg-black px-3 py-1 text-sm text-orange-200"
+                  >
+                    <div class="tag">{{ tag }}</div>
+                  </span>
+                </div>
+              </template>
             </div>
           </div>
         </div>
       </div>
-
       <div class="col-span-4 inline-block lg:col-span-1">
         <div class="mb-3 rounded-xl bg-black/50 text-white">
           <p class="mb-0 px-3 py-2 text-xl font-bold">Categories</p>
