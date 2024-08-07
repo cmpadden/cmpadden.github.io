@@ -5,123 +5,101 @@ const route = useRoute();
 </script>
 
 <template>
-  <nav class="container mx-auto py-6">
-    <div class="flex items-end justify-between text-gray-200">
-      <NuxtLink
-        to="/"
-        class="font-mono text-3xl font-semibold text-white underline decoration-orange-500 underline-offset-4 hover:text-orange-500"
-        as="div"
-      >
-        who&#183;am&#183;i
-      </NuxtLink>
-      <div>
-        <HeadlessMenu as="div" class="relative z-50 inline-block text-left">
-          <div>
-            <HeadlessMenuButton
-              class="inline-flex w-full justify-center rounded-md bg-black bg-opacity-30 p-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-            >
-              <ChevronDownIcon
-                class="h-5 w-5 text-white hover:text-blue-400"
-                aria-hidden="true"
-              />
-            </HeadlessMenuButton>
-          </div>
+    <nav class="container mx-auto py-6">
+        <div class="flex items-end justify-between text-gray-200">
+            <NuxtLink to="/"
+                class="font-mono text-3xl font-semibold text-white underline decoration-orange-500 underline-offset-4 hover:text-orange-500"
+                as="div">
+                who&#183;am&#183;i
+            </NuxtLink>
+            <div>
+                <HeadlessMenu as="div" class="relative z-50 inline-block text-left">
+                    <div>
+                        <HeadlessMenuButton
+                            class="inline-flex w-full justify-center rounded-md bg-black bg-opacity-30 p-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                            <ChevronDownIcon class="h-5 w-5 text-white hover:text-blue-400" aria-hidden="true" />
+                        </HeadlessMenuButton>
+                    </div>
 
-          <transition
-            enter-active-class="transition duration-100 ease-out"
-            enter-from-class="transform scale-95 opacity-0"
-            enter-to-class="transform scale-100 opacity-100"
-            leave-active-class="transition duration-75 ease-in"
-            leave-from-class="transform scale-100 opacity-100"
-            leave-to-class="transform scale-95 opacity-0"
-          >
-            <HeadlessMenuItems
-              class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-black/80 text-white shadow-lg ring-1 ring-black ring-opacity-5 backdrop-blur-sm focus:outline-none"
-            >
-              <div class="px-1 py-1">
-                <HeadlessMenuItem v-slot="{ active }">
-                  <a href="/articles">
-                    <button
-                      :class="[
-                        active ? 'bg-slate-700 text-white' : 'text-white',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                      ]"
-                    >
-                      <svg
-                        class="mr-2 inline h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                        />
-                      </svg>
-                      Blog
-                    </button>
-                  </a>
-                </HeadlessMenuItem>
-                <HeadlessMenuItem v-slot="{ active }">
-                  <a href="/playground">
-                    <button
-                      :class="[
-                        active ? 'bg-slate-700 text-white' : 'text-white',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                      ]"
-                    >
-                      <svg
-                        class="mr-2 inline h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"
-                        />
-                      </svg>
-                      Experiments
-                    </button>
-                  </a>
-                </HeadlessMenuItem>
-                <HeadlessMenuItem v-slot="{ active }">
-                  <a href="https://github.com/cmpadden">
-                    <button
-                      :class="[
-                        active ? 'bg-slate-700' : '',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                      ]"
-                    >
-                      <svg
-                        class="mr-2 inline h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"
-                        />
-                      </svg>
-                      GitHub
-                    </button>
-                  </a>
-                </HeadlessMenuItem>
-              </div>
-            </HeadlessMenuItems>
-          </transition>
-        </HeadlessMenu>
-      </div>
-    </div>
-  </nav>
+                    <transition enter-active-class="transition duration-100 ease-out"
+                        enter-from-class="transform scale-95 opacity-0" enter-to-class="transform scale-100 opacity-100"
+                        leave-active-class="transition duration-75 ease-in"
+                        leave-from-class="transform scale-100 opacity-100"
+                        leave-to-class="transform scale-95 opacity-0">
+                        <HeadlessMenuItems
+                            class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-black/80 text-white shadow-lg ring-1 ring-black ring-opacity-5 backdrop-blur-sm focus:outline-none">
+                            <div class="px-1 py-1">
+                                <HeadlessMenuItem v-slot="{ active }">
+                                    <a href="/articles">
+                                        <button :class="[
+                                            active ? 'bg-slate-700 text-white' : 'text-white',
+                                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                        ]">
+                                            <svg class="mr-2 inline h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                            </svg>
+                                            Blog
+                                        </button>
+                                    </a>
+                                </HeadlessMenuItem>
+                                <HeadlessMenuItem v-slot="{ active }">
+                                    <a href="/playground">
+                                        <button :class="[
+                                            active ? 'bg-slate-700 text-white' : 'text-white',
+                                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                        ]">
+                                            <svg class="mr-2 inline h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                                            </svg>
+                                            Experiments
+                                        </button>
+                                    </a>
+                                </HeadlessMenuItem>
+                                <HeadlessMenuItem v-slot="{ active }">
+                                    <a href="https://github.com/cmpadden">
+                                        <button :class="[
+                                            active ? 'bg-slate-700' : '',
+                                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                        ]">
+                                            <svg class="mr-2 inline h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
+                                            </svg>
+                                            GitHub
+                                        </button>
+                                    </a>
+                                </HeadlessMenuItem>
+                                <HeadlessMenuItem v-slot="{ active }">
+                                    <a href="/talks">
+                                        <button :class="[
+                                            active ? 'bg-slate-700' : '',
+                                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                        ]">
+
+                                            <svg class="mr-2 inline h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                                            </svg>
+
+                                            Talks
+                                        </button>
+                                    </a>
+                                </HeadlessMenuItem>
+                            </div>
+                        </HeadlessMenuItems>
+                    </transition>
+                </HeadlessMenu>
+            </div>
+        </div>
+    </nav>
 </template>
