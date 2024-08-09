@@ -48,11 +48,11 @@ const formatDate = function (date) {
                             {{ talk.subtitle }}
                         </div>
                         <div class="flex">
-                            <a class="text-xs text-gray-500 uppercase hover:text-orange-500 hover:cursor-pointer"
+                            <a class="text-xs text-gray-400 uppercase hover:text-orange-500 hover:cursor-pointer"
                                 :href="talk.href">
                                 [slides]
                             </a>
-                            <a class="text-xs text-gray-500 uppercase hover:text-orange-500 hover:cursor-pointer"
+                            <a class="text-xs text-gray-400 uppercase hover:text-orange-500 hover:cursor-pointer"
                                 :href="talk.video_href">
                                 [video]
                             </a>

@@ -10,181 +10,138 @@ const route = useRoute();
 
 const selectedCategories = ref([]);
 if (route.query.category) {
-    selectedCategories.value = [route.query.category]
+    selectedCategories.value = [route.query.category];
 }
 
 const selectedTags = ref([]);
 if (route.query.tag) {
-    selectedTags.value = [route.query.tag]
+    selectedTags.value = [route.query.tag];
 }
 
+const showTags = ref(true);
+
 const { data: articles } = await useAsyncData("articles", () =>
-  queryContent()
-    .only([
-      "_id",
-      "_path",
-      "title",
-      "description",
-      "date",
-      "img",
-      "author",
-      "tags",
-      "categories",
-      "img",
-      "excerpt",
-      "summary",
-    ])
-    .sort({ date: -1 })
-    .find(),
+    queryContent()
+        .only([
+            "_id",
+            "_path",
+            "title",
+            "description",
+            "date",
+            "img",
+            "author",
+            "tags",
+            "categories",
+            "img",
+            "excerpt",
+            "summary",
+        ])
+        .sort({ date: -1 })
+        .find(),
 );
 
 const categories = computed(() => {
-  return [
-    ...new Set(
-      articles.value
-        .map((article) => article.categories)
-        .flat()
-        .sort(),
-    ),
-  ];
+    return [
+        ...new Set(
+            articles.value
+                .map((article) => article.categories)
+                .flat()
+                .sort(),
+        ),
+    ];
 });
 
 const tags = computed(() => {
-  return [
-    ...new Set(
-      articles.value
-        .map((article) => article.tags)
-        .flat()
-        .sort(),
-    ),
-  ];
+    return [
+        ...new Set(
+            articles.value
+                .map((article) => article.tags)
+                .flat()
+                .sort(),
+        ),
+    ];
 });
 
 const visibleArticles = computed(() => {
-  return articles.value.filter((article) => {
-    if (selectedCategories.value.length > 0) {
-      if (
-        !selectedCategories.value.every((c) => article.categories.includes(c))
-      ) {
-        return false;
-      }
-    }
+    return articles.value.filter((article) => {
+        if (selectedCategories.value.length > 0) {
+            if (
+                !selectedCategories.value.every((c) => article.categories.includes(c))
+            ) {
+                return false;
+            }
+        }
 
-    if (selectedTags.value.length > 0) {
-      if (!selectedTags.value.every((t) => article.tags.includes(t))) {
-        return false;
-      }
-    }
+        if (selectedTags.value.length > 0) {
+            if (!selectedTags.value.every((t) => article.tags.includes(t))) {
+                return false;
+            }
+        }
 
-    return true;
-  });
+        return true;
+    });
 });
 
 function toggleTag(tag) {
-  if (selectedTags.value.includes(tag)) {
-    selectedTags.value = selectedTags.value.filter((el) => el !== tag);
-  } else {
-    selectedTags.value.push(tag);
-  }
+    if (selectedTags.value.includes(tag)) {
+        selectedTags.value = selectedTags.value.filter((el) => el !== tag);
+    } else {
+        selectedTags.value.push(tag);
+    }
 }
 
 function toggleCategory(cat) {
-  if (selectedCategories.value.includes(cat)) {
-    selectedCategories.value = selectedCategories.value.filter(
-      (el) => el !== cat,
-    );
-  } else {
-    selectedCategories.value.push(cat);
-  }
+    if (selectedCategories.value.includes(cat)) {
+        selectedCategories.value = selectedCategories.value.filter(
+            (el) => el !== cat,
+        );
+    } else {
+        selectedCategories.value.push(cat);
+    }
 }
 </script>
 
 <template>
-  <section class="container mx-auto">
-    <div class="grid grid-cols-4 gap-4">
-      <div class="col-span-4 lg:col-span-3">
-        <div v-for="article of visibleArticles" :key="article._id">
-          <div class="rounded-xl bg-black/50 text-white shadow-xl">
-            <div class="relative mb-2 h-full">
-              <!-- heading -->
-              <div class="px-4 py-2">
-                <div class="mb-2 text-xl font-bold">
-                  <NuxtLink
-                    class="border-b-2 border-orange-500 hover:text-orange-500"
-                    :to="article._path"
-                    >{{ article.title }}</NuxtLink
-                  >
-                </div>
-                <p class="flex items-center text-sm">
-                  {{ article.date }}
-                </p>
-              </div>
+    <section class="container mx-auto font-mono text-white">
 
-              <!-- <div class="mb-3 px-4 pb-12"> -->
-              <div class="mb-3 px-4">
-                <p class="prose-sm">
-                  <ContentRenderer
-                    class="prose prose-sm mx-auto sm:prose lg:prose-lg xl:prose-2xl"
-                    :value="article"
-                  >
-                    <ContentRendererMarkdown
-                      :value="{ body: article.excerpt }"
-                    />
-                  </ContentRenderer>
-                </p>
-              </div>
-
-              <!-- temporarily hide tags on posts -->
-              <template v-if="false">
-                <div class="absolute bottom-0 right-0 mb-4">
-                  <span
-                    v-for="tag in article.tags"
-                    :key="tag"
-                    :class="{
-                      'bg-orange-500': selectedTags.includes(tag),
-                    }"
-                    class="mr-2 inline-block select-none bg-black px-3 py-1 text-sm text-orange-200"
-                  >
-                    <div class="tag">{{ tag }}</div>
-                  </span>
+        <h1 class="text-2xl font-extrabold my-6">Blog</h1>
+        <div class="grid grid-cols-4 gap-4">
+            <div class="col-span-4 lg:col-span-3">
+                <div class="grid grid-cols-10 gap-y-4 lg:gap-y-6">
+                    <template v-for="article in visibleArticles" :key="article._id">
+                        <div class="col-span-10 lg:col-span-2">{{ article.date }}</div>
+                        <div class="col-span-10 lg:col-span-8">
+                            <div class="flex-col space-y-2">
+                                <NuxtLink class="text-orange-500" :to="article._path">{{ article.title }}</NuxtLink>
+                                <ContentRenderer :value="article">
+                                    <ContentRendererMarkdown class="text-gray-400 text-xs line-clamp-5"
+                                        :value="{ body: article.excerpt }" />
+                                </ContentRenderer>
+                            </div>
+                        </div>
+                    </template>
                 </div>
-              </template>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-span-4 inline-block lg:col-span-1">
-        <div class="mb-3 rounded-xl bg-black/50 text-white">
-          <p class="mb-0 px-3 py-2 text-xl font-bold">Categories</p>
-          <a
-            v-for="category in categories"
-            :key="category"
-            :class="{
-              'bg-orange-500': selectedCategories.includes(category),
-            }"
-            class="block cursor-pointer select-none border-t border-black px-4 py-1 text-orange-200 hover:bg-black"
-            @click="toggleCategory(category)"
-            >{{ category }}</a
-          >
-        </div>
+            <div class="col-span-4 lg:col-span-1 border-l border-gray-700 pl-4">
+                <div class="space-y-2 my-2">
+                    <p class="text-xl font-bold">Categories</p>
+                    <div v-for="category in categories" :key="category" :class="{
+                        'bg-orange-500rtext-white': selectedCategories.includes(category),
+                    }" class="text-sm text-gray-400 p-1 cursor-pointer hover:bg-orange-500 hover:text-white"
+                        @click="toggleCategory(category)">{{ category }}
+                    </div>
+                </div>
 
-        <div class="mb-3 rounded-xl bg-black/50 text-white">
-          <p class="mb-0 px-3 py-2 text-xl font-bold">Tags</p>
-          <div class="p-2">
-            <span
-              v-for="(tag, ix) in tags"
-              :key="ix"
-              :class="{
-                'bg-orange-500': selectedTags.includes(tag),
-              }"
-              class="mb-2 mr-2 inline-flex h-8 cursor-pointer select-none content-center justify-center bg-black px-3 py-2 text-sm leading-4 text-orange-200"
-              @click="toggleTag(tag)"
-            >
-              <div>{{ tag }}</div>
-            </span>
-          </div>
+                <div v-if="showTags" class="space-y-2 my-2">
+                    <p class="text-xl font-bold">Tags</p>
+                    <div v-for="(tag, ix) in tags" :key="ix" :class="{
+                        'bg-orange-500 text-white': selectedTags.includes(tag),
+                    }" class="text-sm text-gray-400 p-1 cursor-pointer select-none hover:bg-orange-500 hover:text-white"
+                        @click="toggleTag(tag)">
+                        {{ tag }}
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </template>
