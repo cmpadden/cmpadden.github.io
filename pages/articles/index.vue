@@ -10,138 +10,152 @@ const route = useRoute();
 
 const selectedCategories = ref([]);
 if (route.query.category) {
-    selectedCategories.value = [route.query.category];
+  selectedCategories.value = [route.query.category];
 }
 
 const selectedTags = ref([]);
 if (route.query.tag) {
-    selectedTags.value = [route.query.tag];
+  selectedTags.value = [route.query.tag];
 }
 
 const showTags = ref(true);
 
 const { data: articles } = await useAsyncData("articles", () =>
-    queryContent()
-        .only([
-            "_id",
-            "_path",
-            "title",
-            "description",
-            "date",
-            "img",
-            "author",
-            "tags",
-            "categories",
-            "img",
-            "excerpt",
-            "summary",
-        ])
-        .sort({ date: -1 })
-        .find(),
+  queryContent()
+    .only([
+      "_id",
+      "_path",
+      "title",
+      "description",
+      "date",
+      "img",
+      "author",
+      "tags",
+      "categories",
+      "img",
+      "excerpt",
+      "summary",
+    ])
+    .sort({ date: -1 })
+    .find(),
 );
 
 const categories = computed(() => {
-    return [
-        ...new Set(
-            articles.value
-                .map((article) => article.categories)
-                .flat()
-                .sort(),
-        ),
-    ];
+  return [
+    ...new Set(
+      articles.value
+        .map((article) => article.categories)
+        .flat()
+        .sort(),
+    ),
+  ];
 });
 
 const tags = computed(() => {
-    return [
-        ...new Set(
-            articles.value
-                .map((article) => article.tags)
-                .flat()
-                .sort(),
-        ),
-    ];
+  return [
+    ...new Set(
+      articles.value
+        .map((article) => article.tags)
+        .flat()
+        .sort(),
+    ),
+  ];
 });
 
 const visibleArticles = computed(() => {
-    return articles.value.filter((article) => {
-        if (selectedCategories.value.length > 0) {
-            if (
-                !selectedCategories.value.every((c) => article.categories.includes(c))
-            ) {
-                return false;
-            }
-        }
+  return articles.value.filter((article) => {
+    if (selectedCategories.value.length > 0) {
+      if (
+        !selectedCategories.value.every((c) => article.categories.includes(c))
+      ) {
+        return false;
+      }
+    }
 
-        if (selectedTags.value.length > 0) {
-            if (!selectedTags.value.every((t) => article.tags.includes(t))) {
-                return false;
-            }
-        }
+    if (selectedTags.value.length > 0) {
+      if (!selectedTags.value.every((t) => article.tags.includes(t))) {
+        return false;
+      }
+    }
 
-        return true;
-    });
+    return true;
+  });
 });
 
 function toggleTag(tag) {
-    if (selectedTags.value.includes(tag)) {
-        selectedTags.value = selectedTags.value.filter((el) => el !== tag);
-    } else {
-        selectedTags.value.push(tag);
-    }
+  if (selectedTags.value.includes(tag)) {
+    selectedTags.value = selectedTags.value.filter((el) => el !== tag);
+  } else {
+    selectedTags.value.push(tag);
+  }
 }
 
 function toggleCategory(cat) {
-    if (selectedCategories.value.includes(cat)) {
-        selectedCategories.value = selectedCategories.value.filter(
-            (el) => el !== cat,
-        );
-    } else {
-        selectedCategories.value.push(cat);
-    }
+  if (selectedCategories.value.includes(cat)) {
+    selectedCategories.value = selectedCategories.value.filter(
+      (el) => el !== cat,
+    );
+  } else {
+    selectedCategories.value.push(cat);
+  }
 }
 </script>
 
 <template>
-    <section class="container mx-auto font-mono text-white">
-
-        <h1 class="text-2xl font-extrabold my-6">Blog</h1>
-        <div class="grid grid-cols-4 gap-4">
-            <div class="col-span-4 lg:col-span-3">
-                <div class="grid grid-cols-10 gap-y-4 lg:gap-y-6">
-                    <template v-for="article in visibleArticles" :key="article._id">
-                        <div class="col-span-10 lg:col-span-2">{{ article.date }}</div>
-                        <div class="col-span-10 lg:col-span-8">
-                            <div class="flex-col space-y-2">
-                                <NuxtLink class="text-orange-500" :to="article._path">{{ article.title }}</NuxtLink>
-                                <ContentRenderer :value="article">
-                                    <ContentRendererMarkdown class="text-gray-400 text-xs line-clamp-5"
-                                        :value="{ body: article.excerpt }" />
-                                </ContentRenderer>
-                            </div>
-                        </div>
-                    </template>
-                </div>
+  <section class="container mx-auto font-mono text-white">
+    <h1 class="my-6 text-2xl font-extrabold">Blog</h1>
+    <div class="grid grid-cols-4 gap-4">
+      <div class="col-span-4 lg:col-span-3">
+        <div class="grid grid-cols-10 gap-y-4 lg:gap-y-6">
+          <template v-for="article in visibleArticles" :key="article._id">
+            <div class="col-span-10 lg:col-span-2">{{ article.date }}</div>
+            <div class="col-span-10 lg:col-span-8">
+              <div class="flex-col space-y-2">
+                <NuxtLink class="text-orange-500" :to="article._path">{{
+                  article.title
+                }}</NuxtLink>
+                <ContentRenderer :value="article">
+                  <ContentRendererMarkdown
+                    class="line-clamp-5 text-xs text-gray-400"
+                    :value="{ body: article.excerpt }"
+                  />
+                </ContentRenderer>
+              </div>
             </div>
-            <div class="col-span-4 lg:col-span-1 border-l border-gray-700 pl-4">
-                <div class="space-y-2 my-2">
-                    <p class="text-xl font-bold">Categories</p>
-                    <div v-for="category in categories" :key="category" :class="{
-                        'bg-orange-500rtext-white': selectedCategories.includes(category),
-                    }" class="text-sm text-gray-400 p-1 cursor-pointer hover:bg-orange-500 hover:text-white"
-                        @click="toggleCategory(category)">{{ category }}
-                    </div>
-                </div>
-
-                <div v-if="showTags" class="space-y-2 my-2">
-                    <p class="text-xl font-bold">Tags</p>
-                    <div v-for="(tag, ix) in tags" :key="ix" :class="{
-                        'bg-orange-500 text-white': selectedTags.includes(tag),
-                    }" class="text-sm text-gray-400 p-1 cursor-pointer select-none hover:bg-orange-500 hover:text-white"
-                        @click="toggleTag(tag)">
-                        {{ tag }}
-                    </div>
-                </div>
-            </div>
+          </template>
         </div>
-    </section>
+      </div>
+      <div class="col-span-4 border-l border-gray-700 pl-4 lg:col-span-1">
+        <div class="my-2 space-y-2">
+          <p class="text-xl font-bold">Categories</p>
+          <div
+            v-for="category in categories"
+            :key="category"
+            :class="{
+              'bg-orange-500rtext-white': selectedCategories.includes(category),
+            }"
+            class="cursor-pointer p-1 text-sm text-gray-400 hover:bg-orange-500 hover:text-white"
+            @click="toggleCategory(category)"
+          >
+            {{ category }}
+          </div>
+        </div>
+
+        <div v-if="showTags" class="my-2 space-y-2">
+          <p class="text-xl font-bold">Tags</p>
+          <div
+            v-for="(tag, ix) in tags"
+            :key="ix"
+            :class="{
+              'bg-orange-500 text-white': selectedTags.includes(tag),
+            }"
+            class="cursor-pointer select-none p-1 text-sm text-gray-400 hover:bg-orange-500 hover:text-white"
+            @click="toggleTag(tag)"
+          >
+            {{ tag }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
