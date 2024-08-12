@@ -18,19 +18,19 @@ const title = "Experiments";
 const links = [
   {
     title: "Conway",
-    description: "Conway's Game of Life",
+    description: "Conway's game of life written in vanilla Javascript",
     link: "/playground/conway",
     img: "/images/previews/conway.png",
   },
   {
     title: "wm.spoon",
-    description: "Hammerpoon Window Manager",
+    description: "Window manager for Hammer Spoon written in Lua",
     link: "https://github.com/cmpadden/wm.spoon",
     img: "/images/previews/wm.spoon.png",
   },
   {
     title: "Metronome",
-    description: "A simple metronome for tracking tempo.",
+    description: "A simple metronome for tracking tempo in the browser",
     link: "/playground/metronome",
     img: "/images/previews/metronome.png",
   },
@@ -108,27 +108,28 @@ const filtered_links = computed(() => {
       >
         {{ title }}
       </NuxtLink>
-      <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <nuxt-link
+          class="h-full drop-shadow-lg hover:ring-1 hover:ring-white"
           v-for="link in filtered_links"
           :key="link.title"
           :to="link.link"
         >
+          <img
+            class="grayscale-1 h-full w-full object-cover"
+            :src="link.img || 'images/placeholder.png'"
+          />
           <div
-            class="h-full rounded-xl bg-black bg-opacity-70 drop-shadow-lg hover:ring-1 hover:ring-white"
+            class="absolute inset-0 flex items-center justify-center bg-gray-500/50"
           >
-            <div class="min-h-28 px-4 pt-4">
-              <h3 class="pb-2 text-xl font-bold">{{ link.title }}</h3>
+            <div class="m-2 bg-black/70 p-2">
+              <h3 class="text-xl font-bold text-orange-500">
+                {{ link.title }}
+              </h3>
               <div
-                class="line-clamp-2 text-base font-light"
+                class="line-clamp-2 text-sm text-gray-300"
                 v-html="link.description"
               ></div>
-            </div>
-            <div v-if="showImages">
-              <img
-                class="h-40 w-full rounded-b-xl object-cover object-top grayscale hover:grayscale-0"
-                :src="link.img || 'images/placeholder.png'"
-              />
             </div>
           </div>
         </nuxt-link>
