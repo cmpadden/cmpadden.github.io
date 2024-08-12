@@ -1,1 +1,0 @@
-import{a as o}from"./B_b28hQT.js";import{l as c,c as n,i as t,o as a}from"./srIK2VoM.js";const r={};function s(_,i){const e=o;return a(),n("div",null,[t(e,{showImages:""})])}const l=c(r,[["render",s]]);export{l as default};
