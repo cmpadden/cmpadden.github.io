@@ -6,19 +6,17 @@ const route = useRoute();
 
 <template>
   <nav class="container mx-auto py-6">
-    <div class="flex items-end justify-between text-gray-200">
-      <NuxtLink
-        to="/"
-        class="font-mono text-3xl font-semibold text-white underline decoration-orange-500 underline-offset-4 hover:text-orange-500"
-        as="div"
-      >
-        who&#183;am&#183;i
+    <div class="flex items-baseline text-gray-200">
+      <NuxtLink to="/" class="flex-1">
+        <SvgBarcode class="text-white hover:text-orange-500" />
       </NuxtLink>
 
+
+      <!-- End -->
       <div class="flex items-center">
         <NuxtLink to="https://github.com/cmpadden">
           <svg
-            class="mr-2 inline h-6 w-6 hover:text-orange-500"
+            class="mr-2 inline h-6 w-6 hover:text-orange-300"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
