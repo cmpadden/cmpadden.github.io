@@ -1,1 +1,0 @@
-import{a as o}from"./Dfp1O5Ct.js";import{l as c,c as n,i as t,o as a}from"./CPDSrs4A.js";const r={};function s(_,i){const e=o;return a(),n("div",null,[t(e,{showImages:""})])}const l=c(r,[["render",s]]);export{l as default};
