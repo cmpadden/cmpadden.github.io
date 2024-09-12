@@ -6,11 +6,10 @@ const route = useRoute();
 
 <template>
   <nav class="container mx-auto py-6">
-    <div class="flex items-baseline text-gray-200">
-      <NuxtLink to="/" class="flex-1">
-        <SvgBarcode class="text-white hover:text-orange-500" />
+    <div class="flex items-center text-gray-200">
+      <NuxtLink to="/" class="flex-1 ">
+        <SvgBarcode class="text-white hover:text-orange-500 w-32 md:w-64" />
       </NuxtLink>
-
 
       <!-- End -->
       <div class="flex items-center">
