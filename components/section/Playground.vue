@@ -120,7 +120,7 @@ const filtered_links = computed(() => {
             :src="link.img || 'images/placeholder.png'"
           />
           <div
-            class="absolute top-0 h-full flex items-center justify-center bg-gray-500/50"
+            class="absolute top-0 flex h-full items-center justify-center bg-gray-500/50"
           >
             <div class="m-2 bg-black/70 p-2">
               <h3 class="text-xl font-bold text-orange-500">
