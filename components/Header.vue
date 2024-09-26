@@ -8,7 +8,7 @@ const route = useRoute();
   <nav class="container mx-auto py-6">
     <div class="flex items-center text-gray-200">
       <NuxtLink to="/" class="flex-1 ">
-        <SvgBarcode class="text-white hover:text-orange-500 w-32 md:w-64" />
+        <SvgBarcode class="w-32 md:w-64" />
       </NuxtLink>
 
       <!-- End -->

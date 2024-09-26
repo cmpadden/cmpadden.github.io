@@ -1,5 +1,5 @@
 <template>
-    <svg width="366" height="24" viewBox="0 0 366 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="hover:text-orange-500" width="366" height="24" viewBox="0 0 366 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
             d="M0 76V0.47998H11.52V76H0ZM23.04 76V0.47998H34.56V76H23.04ZM38.4 76V0.47998H42.24V76H38.4ZM46.08 76V0.47998H49.92V76H46.08ZM53.76 76V0.47998H57.6V76H53.76Z"
             fill="currentColor" />

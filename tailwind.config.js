@@ -20,7 +20,9 @@ export default {
         display: ["Helvetica", "sans-serif"],
         body: ["Graphik", "sans-serif"],
         mono: ["Inconsolata", "monospace"],
-        fantasy: ["Milk and Honey", "fantasy"],
+        fantasy: ["fantasy"],
+        milk: ["Milk and Honey"],
+        mafins: ["Mafins"],
       },
       borderWidth: {
         default: "1px",
