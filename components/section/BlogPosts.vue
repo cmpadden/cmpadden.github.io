@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps({
-  articles: [],
+  articles: Object,
   show_dates: false,
 });
 </script>
