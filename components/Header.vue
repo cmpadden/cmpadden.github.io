@@ -13,7 +13,7 @@ const route = useRoute();
 
       <!-- End -->
       <div class="flex items-center">
-        <NuxtLink to="https://bsky.app/colton.boo">
+        <NuxtLink to="https://bsky.app/profile/colton.boo">
           <svg
             class="mr-2 inline h-6 w-6 hover:text-orange-300"
             xmlns="http://www.w3.org/2000/svg"
