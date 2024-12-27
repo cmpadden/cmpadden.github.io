@@ -6,7 +6,7 @@
         type="search"
         autocomplete="off"
         placeholder="Search Articles"
-        class="relative w-full rounded border border-gray-400 bg-white bg-white p-3 text-sm text-gray-600 placeholder-gray-400 outline-none focus:outline-none focus:ring"
+        class="relative w-full rounded border border-gray-400 bg-white p-3 text-sm text-gray-600 placeholder-gray-400 outline-none focus:outline-none focus:ring"
       />
     </div>
 

@@ -14,7 +14,6 @@ const props = defineProps({
   },
 });
 
-const title = "Experiments";
 const links = [
   {
     title: "Conway",
@@ -104,9 +103,9 @@ const filtered_links = computed(() => {
     <div class="container mx-auto space-y-4 py-8 text-white">
       <NuxtLink
         to="/playground"
-        class="font-mono text-3xl font-semibold lowercase underline decoration-orange-500 underline-offset-4 hover:text-orange-500"
+        class="font-milk text-2xl text-white underline decoration-orange-500 decoration-2"
       >
-        {{ title }}
+        Experiments
       </NuxtLink>
       <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <nuxt-link

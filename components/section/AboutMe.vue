@@ -43,10 +43,10 @@
 
 <template>
   <section class="container mx-auto pb-8">
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap rounded-lg bg-white/20 p-4">
       <div class="w-full">
         <div
-          class="lg:text-normal space-y-4 text-justify font-medium tracking-wide text-white sm:text-base"
+          class="lg:text-normal space-y-4 text-justify text-white sm:text-base"
         >
           <template v-if="false">
             <div>
