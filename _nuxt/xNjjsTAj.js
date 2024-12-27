@@ -1,1 +1,0 @@
-import{a as o}from"./CFm_cf98.js";import{m as c,c as n,i as t,o as a}from"./nJJO8dFm.js";const r={};function s(_,m){const e=o;return a(),n("div",null,[t(e,{showImages:""})])}const d=c(r,[["render",s]]);export{d as default};
