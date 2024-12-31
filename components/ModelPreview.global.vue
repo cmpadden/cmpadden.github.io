@@ -1,15 +1,14 @@
 <template>
-    <div id="canvas" class="h-full" />
+    <div id="canvas" class="h-64" />
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { $p5 } = useNuxtApp();
 
-const props = defineProps({
-    path: String,
-});
+const { path, backgroundColor = 100 } = defineProps < { path: string, backgroundColor?: Number } > ()
 
 onMounted(() => {
+console.log(backgroundColor);
     const sketch = (s) => {
         const c = document.getElementById("canvas");
 
@@ -21,7 +20,7 @@ onMounted(() => {
         let rotate = true;
 
         s.preload = () => {
-            model = s.loadModel(props.path, true);
+            model = s.loadModel(path, true);
         };
 
         s.setup = () => {
@@ -33,7 +32,7 @@ onMounted(() => {
         };
 
         s.draw = () => {
-            s.background(100);
+            s.background(backgroundColor);
             s.lights();
 
             if (rotate) {
