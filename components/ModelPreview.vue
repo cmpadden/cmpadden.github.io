@@ -33,7 +33,7 @@ onMounted(() => {
         };
 
         s.draw = () => {
-            s.background(200);
+            s.background(100);
             s.lights();
 
             if (rotate) {
