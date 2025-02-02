@@ -17,7 +17,9 @@ const data = await queryContent()
 
 <template>
   <div>
-    <SectionAboutMe />
+    <template v-if="false">
+      <SectionAboutMe />
+    </template>
     <div class="bg-emerald-950 bg-[url('/images/noise.svg')]">
       <template v-if="false">
         <SectionInterests />

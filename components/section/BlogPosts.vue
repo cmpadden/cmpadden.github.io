@@ -8,12 +8,14 @@ const props = defineProps({
 <template>
   <section class="bg-gradient-to-b from-background to-transparent">
     <div class="container mx-auto space-y-4">
-      <NuxtLink
-        to="/articles"
-        class="font-milk text-2xl text-white underline decoration-orange-500 decoration-2"
-      >
-        Blog Posts
-      </NuxtLink>
+      <template v-if="false">
+        <NuxtLink
+          to="/articles"
+          class="font-milk text-2xl text-white underline decoration-orange-500 decoration-2"
+        >
+          Blog Posts
+        </NuxtLink>
+      </template>
 
       <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div v-for="(article, ix) of articles" :key="ix">
@@ -25,7 +27,7 @@ const props = defineProps({
                     -->
           <NuxtLink :to="article._path" external>
             <div
-              class="h-full space-y-4 rounded-lg bg-white/20 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
+              class="h-full space-y-4 bg-white/20 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
             >
               <div>
                 <div class="flex-1 text-lg font-bold md:text-xl">
