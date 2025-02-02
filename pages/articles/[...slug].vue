@@ -18,19 +18,19 @@ if (data.value === null || route.path in REDIRECTS) {
 </script>
 
 <template>
-  <div class="container mx-auto" v-if="data">
-    <article class="mb-10 bg-gray-200 p-10 shadow-lg">
+  <div class="container mx-auto text-white" v-if="data">
+    <article class="mb-10 shadow-lg">
       <div class="space-y-6">
         <div class="flex space-x-2">
           <!-- categories -->
           <div>
-            <div class="text-xs uppercase text-gray-400">Category</div>
+            <div class="text-xs uppercase text-gray-400 mb-2">Category</div>
             <!-- columns when small, inline when md or larger -->
             <div
-              class="flex flex-col space-y-2 md:flex md:flex-row md:space-x-2 md:space-y-0"
+              class="flex flex-row space-x-2"
             >
               <NuxtLink
-                class="w-min rounded-md bg-background px-2 text-sm font-bold text-white hover:cursor-pointer hover:bg-orange-500"
+                class="w-min rounded-md bg-background pr-2 text-sm font-bold hover:cursor-pointer hover:bg-orange-500"
                 v-for="(category, ix) in data.categories"
                 :key="ix"
                 :to="`/articles?category=${category}`"
@@ -45,13 +45,13 @@ if (data.value === null || route.path in REDIRECTS) {
 
           <!-- tags -->
           <div>
-            <div class="text-xs uppercase text-gray-400">Tags</div>
+            <div class="text-xs uppercase text-gray-400 mb-2">Tags</div>
             <!-- columns when small, inline when md or larger -->
             <div
-              class="flex flex-col space-y-2 md:flex md:flex-row md:space-x-2 md:space-y-0"
+              class="flex flex-row md:space-x-2"
             >
               <NuxtLink
-                class="w-min rounded-md bg-background px-2 text-sm font-bold text-white hover:cursor-pointer hover:bg-orange-500"
+                class="w-min rounded-md bg-background pr-2 text-sm font-bold hover:cursor-pointer hover:bg-orange-500"
                 v-for="(tag, ix) in data.tags"
                 :key="ix"
                 :to="`/articles?tag=${tag}`"
@@ -72,7 +72,7 @@ if (data.value === null || route.path in REDIRECTS) {
             />
           </template>
 
-          <h1 class="text-xl font-bold text-gray-700 md:text-3xl">
+          <h1 class="text-xl font-bold md:text-3xl">
             {{ data.title }}
           </h1>
         </div>
@@ -84,7 +84,8 @@ if (data.value === null || route.path in REDIRECTS) {
         - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
       -->
       <article
-        class="prose max-w-none prose-a:font-bold prose-a:no-underline hover:prose-a:text-orange-500 prose-pre:bg-white prose-pre:text-black"
+        class="prose max-w-none prose-a:font-bold prose-a:no-underline prose-a:text-orange-500
+        hover:prose-a:text-orange-200 prose-pre:bg-black prose-code:text-white text-gray-300"
       >
         <ContentRenderer>
           <ContentRendererMarkdown :value="data" />

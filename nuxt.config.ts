@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     // Disable highlighting until interoperability with by the Tailwind Typography plugin is sorted
     // highlight: false
     highlight: {
-      theme: 'github-light',
+      theme: 'github-dark',
       preload: [
           'bash',
           'json',
