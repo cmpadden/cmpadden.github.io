@@ -1,1 +1,0 @@
-import{c as t,b as r,o}from"./CeWMybk1.js";const a={class:"flex h-[1024px] justify-center border-2 border-gray-500"},i={__name:"conway",setup(s){return(n,e)=>(o(),t("main",a,e[0]||(e[0]=[r("iframe",{src:"https://cmpadden.github.io/conway/",width:"100%",height:"100%"},null,-1)])))}};export{i as default};
