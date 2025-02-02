@@ -24,11 +24,9 @@ if (data.value === null || route.path in REDIRECTS) {
         <div class="flex space-x-2">
           <!-- categories -->
           <div>
-            <div class="text-xs uppercase text-gray-400 mb-2">Category</div>
+            <div class="mb-2 text-xs uppercase text-gray-400">Category</div>
             <!-- columns when small, inline when md or larger -->
-            <div
-              class="flex flex-row space-x-2"
-            >
+            <div class="flex flex-row space-x-2">
               <NuxtLink
                 class="w-min rounded-md bg-background pr-2 text-sm font-bold hover:cursor-pointer hover:bg-orange-500"
                 v-for="(category, ix) in data.categories"
@@ -45,11 +43,9 @@ if (data.value === null || route.path in REDIRECTS) {
 
           <!-- tags -->
           <div>
-            <div class="text-xs uppercase text-gray-400 mb-2">Tags</div>
+            <div class="mb-2 text-xs uppercase text-gray-400">Tags</div>
             <!-- columns when small, inline when md or larger -->
-            <div
-              class="flex flex-row md:space-x-2"
-            >
+            <div class="flex flex-row md:space-x-2">
               <NuxtLink
                 class="w-min rounded-md bg-background pr-2 text-sm font-bold hover:cursor-pointer hover:bg-orange-500"
                 v-for="(tag, ix) in data.tags"
@@ -84,8 +80,7 @@ if (data.value === null || route.path in REDIRECTS) {
         - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
       -->
       <article
-        class="prose max-w-none prose-a:font-bold prose-a:no-underline prose-a:text-orange-500
-        hover:prose-a:text-orange-200 prose-pre:bg-black prose-code:text-white text-gray-300"
+        class="prose max-w-none text-gray-300 prose-a:font-bold prose-a:text-orange-500 prose-a:no-underline hover:prose-a:text-orange-200 prose-code:text-white prose-pre:bg-black"
       >
         <ContentRenderer>
           <ContentRendererMarkdown :value="data" />
