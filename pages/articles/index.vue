@@ -103,7 +103,9 @@ function toggleCategory(cat) {
 
 <template>
   <section class="container mx-auto font-mono text-white">
-    <h1 class="my-6 text-2xl font-extrabold">Blog</h1>
+    <template v-if="false">
+      <h1 class="my-6 text-2xl font-extrabold">Blog</h1>
+    </template>
     <div class="grid grid-cols-4 gap-4">
       <div class="col-span-4 lg:col-span-3">
         <div class="grid grid-cols-10 gap-y-4 lg:gap-y-6">
@@ -132,7 +134,7 @@ function toggleCategory(cat) {
             v-for="category in categories"
             :key="category"
             :class="{
-              'bg-orange-500rtext-white': selectedCategories.includes(category),
+              'bg-orange-500 text-white': selectedCategories.includes(category),
             }"
             class="cursor-pointer p-1 text-sm text-gray-400 hover:bg-orange-500 hover:text-white"
             @click="toggleCategory(category)"

@@ -19,62 +19,55 @@ if (data.value === null || route.path in REDIRECTS) {
 
 <template>
   <div class="container mx-auto text-white" v-if="data">
-    <article class="mb-10 shadow-lg">
-      <div class="space-y-6">
-        <div class="flex space-x-2">
-          <!-- categories -->
-          <div>
-            <div class="mb-2 text-xs uppercase text-gray-400">Category</div>
-            <!-- columns when small, inline when md or larger -->
-            <div class="flex flex-row space-x-2">
-              <NuxtLink
-                class="w-min rounded-md bg-background pr-2 text-sm font-bold hover:cursor-pointer hover:bg-orange-500"
-                v-for="(category, ix) in data.categories"
-                :key="ix"
-                :to="`/articles?category=${category}`"
-              >
-                {{ category }}
-              </NuxtLink>
-            </div>
-          </div>
+    <article class="mb-10 space-y-6 shadow-lg">
+      <!-- title -->
+      <div class="flex">
+        <!-- https://content.nuxt.com/components/content-slot -->
+        <template v-if="data.cover_image">
+          <img
+            class="mr-4 h-16 border-2 border-black"
+            :src="data.cover_image"
+          />
+        </template>
 
-          <!-- delimiter -->
-          <div class="border-r border-gray-400"></div>
-
-          <!-- tags -->
-          <div>
-            <div class="mb-2 text-xs uppercase text-gray-400">Tags</div>
-            <!-- columns when small, inline when md or larger -->
-            <div class="flex flex-row md:space-x-2">
-              <NuxtLink
-                class="w-min rounded-md bg-background pr-2 text-sm font-bold hover:cursor-pointer hover:bg-orange-500"
-                v-for="(tag, ix) in data.tags"
-                :key="ix"
-                :to="`/articles?tag=${tag}`"
-              >
-                {{ tag }}
-              </NuxtLink>
-            </div>
-          </div>
-        </div>
-
-        <!-- title -->
-        <div class="flex">
-          <!-- https://content.nuxt.com/components/content-slot -->
-          <template v-if="data.cover_image">
-            <img
-              class="mr-4 h-16 border-2 border-black"
-              :src="data.cover_image"
-            />
-          </template>
-
-          <h1 class="text-xl font-bold md:text-3xl">
-            {{ data.title }}
-          </h1>
-        </div>
-        <!-- <div class="text-sm text-gray-600">Published {{ data.date }}</div> -->
+        <h1 class="text-xl font-bold md:text-3xl">
+          {{ data.title }}
+        </h1>
       </div>
-      <!-- <div class="my-4 border-b border-gray-400" /> -->
+
+      <!-- Meta -->
+      <div class="flex space-x-2">
+        <div>
+          <div class="mb-2 text-xs uppercase text-gray-400">Category</div>
+          <div class="flex flex-row space-x-2">
+            <NuxtLink
+              class="mr-2 w-min rounded-md bg-background text-sm font-bold hover:cursor-pointer hover:text-orange-500"
+              v-for="(category, ix) in data.categories"
+              :key="ix"
+              :to="`/articles?category=${category}`"
+            >
+              {{ category }}
+            </NuxtLink>
+          </div>
+        </div>
+
+        <div class="border-r border-gray-400"></div>
+
+        <div>
+          <div class="mb-2 text-xs uppercase text-gray-400">Tags</div>
+          <div class="flex flex-row md:space-x-2">
+            <NuxtLink
+              class="mr-2 w-min rounded-md bg-background text-sm font-bold hover:cursor-pointer hover:text-orange-500"
+              v-for="(tag, ix) in data.tags"
+              :key="ix"
+              :to="`/articles?tag=${tag}`"
+            >
+              {{ tag }}
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
+
       <!--
         - Remove maximum width of prose content: https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width
         - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`

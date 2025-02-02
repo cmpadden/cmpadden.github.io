@@ -6,7 +6,7 @@
       >
         <div>
           <div
-            class="h-full rounded-xl bg-black/70 p-4 drop-shadow-lg backdrop-blur-sm transition duration-500 hover:bg-opacity-100 hover:shadow-lg"
+            class="h-full rounded-xl bg-white/20 p-4 drop-shadow-lg backdrop-blur-sm transition duration-500 hover:bg-opacity-100 hover:shadow-lg"
           >
             <h3 class="mb-2 text-center text-xl font-bold">
               Technical Interests
@@ -24,7 +24,7 @@
         </div>
         <div>
           <div
-            class="h-full rounded-xl bg-black/80 p-4 drop-shadow-lg backdrop-blur-sm transition duration-500 hover:bg-opacity-100 hover:shadow-lg"
+            class="h-full rounded-xl bg-white/20 p-4 drop-shadow-lg backdrop-blur-sm transition duration-500 hover:bg-opacity-100 hover:shadow-lg"
           >
             <h3 class="mb-2 text-center text-xl font-bold">Air Quality</h3>
             <p class="break-all text-base">
@@ -38,7 +38,7 @@
         </div>
         <div>
           <div
-            class="h-full rounded-xl bg-black/80 p-4 drop-shadow-lg backdrop-blur-sm transition duration-500 hover:bg-opacity-100 hover:shadow-lg"
+            class="h-full rounded-xl bg-white/20 p-4 drop-shadow-lg backdrop-blur-sm transition duration-500 hover:bg-opacity-100 hover:shadow-lg"
           >
             <h3 class="mb-2 text-center text-xl font-bold">Consulting</h3>
             <p class="break-all text-base">
