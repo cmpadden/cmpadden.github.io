@@ -101,12 +101,15 @@ const filtered_links = computed(() => {
 <template>
   <section class="bg-gradient-to-b from-transparent to-background text-white">
     <div class="container mx-auto space-y-4 py-8 text-white">
-      <NuxtLink
-        to="/playground"
-        class="font-milk text-2xl text-white underline decoration-orange-500 decoration-2"
-      >
-        Experiments
-      </NuxtLink>
+      <template v-if="false">
+        <NuxtLink
+          to="/playground"
+          class="font-milk text-2xl text-white underline decoration-orange-500 decoration-2"
+        >
+          Experiments
+        </NuxtLink>
+      </template>
+
       <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <nuxt-link
           class="relative drop-shadow-lg hover:ring-1 hover:ring-white"
@@ -121,7 +124,7 @@ const filtered_links = computed(() => {
           <div
             class="absolute top-0 flex h-full w-full items-center justify-center bg-gray-500/50"
           >
-            <div class="m-2 bg-black/70 p-2">
+            <div class="m-2 bg-black/50 p-2">
               <h3 class="text-xl font-bold text-orange-500">
                 {{ link.title }}
               </h3>

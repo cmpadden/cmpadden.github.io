@@ -11,7 +11,7 @@ const props = defineProps({
       <template v-if="false">
         <NuxtLink
           to="/articles"
-          class="font-milk text-2xl text-white underline decoration-orange-500 decoration-2"
+          class="font-milk text-xl text-white hover:underline hover:decoration-orange-500 hover:decoration-2"
         >
           Blog Posts
         </NuxtLink>
