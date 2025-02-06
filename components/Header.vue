@@ -9,9 +9,11 @@ const route = useRoute();
     <div class="flex items-center text-gray-200">
       <NuxtLink to="/" class="flex-1">
         <div
-          class="font-milk text-2xl font-extrabold text-white underline decoration-orange-500 decoration-2"
+          class="size-8 w-fit rounded-sm border-b-8 border-orange-500 bg-orange-200 text-orange-500 shadow-md duration-300 ease-in hover:-skew-x-12 hover:border-orange-200 hover:bg-orange-500 hover:text-orange-200"
         >
-          Colton's Blog
+          <div class="translate-y-0.5 px-2 font-milk">
+            Blog &amp; Experiments
+          </div>
         </div>
       </NuxtLink>
 
@@ -88,34 +90,6 @@ const route = useRoute();
                 </HeadlessMenuItem>
 
                 <HeadlessMenuItem v-slot="{ active }">
-                  <a href="/talks">
-                    <button
-                      :class="[
-                        active ? 'bg-orange-500/50' : '',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                      ]"
-                    >
-                      <svg
-                        class="mr-2 inline h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"
-                        />
-                      </svg>
-
-                      Talks
-                    </button>
-                  </a>
-                </HeadlessMenuItem>
-
-                <HeadlessMenuItem v-slot="{ active }">
                   <a href="/playground">
                     <button
                       :class="[
@@ -138,6 +112,33 @@ const route = useRoute();
                         />
                       </svg>
                       Experiments
+                    </button>
+                  </a>
+                </HeadlessMenuItem>
+
+                <HeadlessMenuItem v-slot="{ active }">
+                  <a href="/talks">
+                    <button
+                      :class="[
+                        active ? 'bg-orange-500/50' : '',
+                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                      ]"
+                    >
+                      <svg
+                        class="mr-2 inline h-5 w-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"
+                        />
+                      </svg>
+                      Talks
                     </button>
                   </a>
                 </HeadlessMenuItem>
