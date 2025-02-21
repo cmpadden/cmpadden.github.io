@@ -2,6 +2,14 @@
 const talks = [
   {
     title: "Dagster Deep Dive",
+    subtitle: "Building Breakthrough AI Applications with Not Diamond",
+    date: new Date("2025-2-11"),
+    href_slides:
+      "https://github.com/dagster-io/talks/blob/main/slides/deep-dive-not-diamond.pdf",
+    href_video: "https://www.youtube.com/watch?v=iwAhzS4EMkw"
+  },
+  {
+    title: "Dagster Deep Dive",
     subtitle: "Orchestrating ML Workloads with Dagster & Modal",
     date: new Date("2024-9-24"),
     href_slides:
