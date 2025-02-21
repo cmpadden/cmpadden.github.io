@@ -10,6 +10,14 @@ const talks = [
   },
   {
     title: "Dagster Deep Dive",
+    subtitle: "Shifting Left and Moving Forward with MotherDuck",
+    date: new Date("2025-1-15"),
+    href_slides: "https://github.com/dagster-io/talks/blob/88651b705102e0558908e333495b4c21451310ca/slides/deep-dive-motherduck-atproto-demo.pdf",
+    href_code: "https://github.com/dagster-io/dagster/tree/aadfade92c7faebb0a92bd7006c4eb1934cd1982/examples/docs_projects/project_atproto_dashboard",
+    href_video: "https://youtu.be/z3trqkKPbsI?feature=shared"
+  },
+  {
+    title: "Dagster Deep Dive",
     subtitle: "Orchestrating ML Workloads with Dagster & Modal",
     date: new Date("2024-9-24"),
     href_slides:
