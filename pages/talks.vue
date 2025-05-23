@@ -1,6 +1,13 @@
 <script setup>
 const talks = [
   {
+    title: "MDS Fest 3.0",
+    subtitle: "Abstractions: Enabling Data Teams Through Reduced Complexity",
+    date: new Date("2025-5-5"),
+    href_slides: "/slides/abstractions.pdf",
+    href_video: "https://www.secoda.co/mds-fest-3-0/abstractions-enabling-data-teams-through-reduced-complexity"
+  },
+  {
     title: "Dagster Deep Dive",
     subtitle: "Building Breakthrough AI Applications with Not Diamond",
     date: new Date("2025-2-11"),

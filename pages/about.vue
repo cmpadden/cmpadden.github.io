@@ -1,8 +1,8 @@
 <template>
-  <div class="container mx-auto space-y-4">
+  <div class="container mx-auto space-y-5 rounded-lg bg-white/20 py-5">
     <SectionAboutMe />
     <div class="flex flex-row items-center justify-center">
-      <div class="text-orange-500/50 hover:text-orange-500">
+      <div class="text-orange-500">
         <svg class="h-8 w-8" viewBox="0 0 512 512" fill="currentColor">
           <g>
             <path
