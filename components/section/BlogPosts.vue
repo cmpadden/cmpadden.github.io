@@ -20,14 +20,14 @@ const props = defineProps({
       <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div v-for="(article, ix) of articles" :key="ix">
           <!--
-                      Specify `external` to force the link to be considered as external. This
-                      resolves an issue where navigating to a blog post would load the previous
-                      post if the user clicked the back button -- this unexpected behavior is
-                      still not entirely understood, but at least this is a workaround.
-                    -->
+            Specify `external` to force the link to be considered as external. This
+            resolves an issue where navigating to a blog post would load the previous
+            post if the user clicked the back button -- this unexpected behavior is
+            still not entirely understood, but at least this is a workaround.
+          -->
           <NuxtLink :to="article._path" external>
             <div
-              class="h-full space-y-4 bg-white/20 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
+              class="h-full space-y-4 bg-white/20 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white rounded-lg"
             >
               <div>
                 <div class="flex-1 text-lg font-bold md:text-xl">

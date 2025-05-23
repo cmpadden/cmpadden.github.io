@@ -112,20 +112,20 @@ const filtered_links = computed(() => {
 
       <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <nuxt-link
-          class="relative drop-shadow-lg hover:ring-1 hover:ring-white"
+          class="relative drop-shadow-lg hover:ring-1 hover:ring-white rounded-lg"
           v-for="link in filtered_links"
           :key="link.title"
           :to="link.link"
         >
           <img
-            class="grayscale-1 h-full w-full object-cover"
+            class="grayscale-1 h-full w-full object-cover rounded-lg"
             :src="link.img || 'images/placeholder.png'"
           />
           <div
-            class="absolute top-0 flex h-full w-full items-center justify-center bg-gray-500/50"
+            class="absolute bottom-0 flex w-full items-center justify-center"
           >
-            <div class="m-2 bg-black/50 p-2">
-              <h3 class="text-xl font-bold text-orange-500">
+            <div class="bg-gray-800/80 py-2 px-6 rounded-b-lg">
+              <h3 class="text-xl font-bold text-white">
                 {{ link.title }}
               </h3>
               <div
