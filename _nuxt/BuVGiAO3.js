@@ -1,1 +1,0 @@
-import{c as t,a as r,o as a}from"./DRk_5XHb.js";const o={class:"flex h-[1024px] justify-center border-2 border-gray-500"},i={__name:"conway",setup(s){return(n,e)=>(a(),t("main",o,e[0]||(e[0]=[r("iframe",{src:"https://cmpadden.github.io/conway/",width:"100%",height:"100%"},null,-1)])))}};export{i as default};
