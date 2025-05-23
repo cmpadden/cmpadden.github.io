@@ -8,16 +8,6 @@ const route = useRoute();
   <nav class="container mx-auto py-6">
     <div class="flex items-center text-gray-200">
       <div class="flex-1" />
-      <!-- <NuxtLink to="/" class="flex-1"> -->
-      <!--   <div -->
-      <!--     class="size-8 w-fit rounded-sm border-b-8 border-orange-500 bg-orange-200 text-orange-500 shadow-md duration-300 ease-in hover:-skew-x-12 hover:border-orange-200 hover:bg-orange-500 hover:text-orange-200" -->
-      <!--   > -->
-      <!--     <div class="translate-y-0.5 px-2 font-milk"> -->
-      <!--       Blog &amp; Experiments -->
-      <!--     </div> -->
-      <!--   </div> -->
-      <!-- </NuxtLink> -->
-
       <div class="flex items-center space-x-2">
         <HeadlessMenu as="div" class="relative z-50 inline-block text-left">
           <div>
@@ -43,6 +33,7 @@ const route = useRoute();
                     <button
                       :class="[
                         active ? 'bg-orange-500/50 text-white' : 'text-white',
+                        $route.path === '/' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
@@ -64,6 +55,7 @@ const route = useRoute();
                     <button
                       :class="[
                         active ? 'bg-orange-500/50 text-white' : 'text-white',
+                        $route.path === '/about' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
@@ -89,6 +81,7 @@ const route = useRoute();
                     <button
                       :class="[
                         active ? 'bg-orange-500/50 text-white' : 'text-white',
+                        $route.path === '/articles' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
@@ -116,6 +109,7 @@ const route = useRoute();
                     <button
                       :class="[
                         active ? 'bg-orange-500/50 text-white' : 'text-white',
+                        $route.path === '/playground' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
@@ -143,6 +137,7 @@ const route = useRoute();
                     <button
                       :class="[
                         active ? 'bg-orange-500/50' : '',
+                        $route.path === '/talks' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
