@@ -118,7 +118,7 @@ const filtered_links = computed(() => {
           :to="link.link"
         >
           <img
-            class="grayscale-1 h-full w-full object-cover rounded-lg"
+            class="grayscale-1 h-64 w-full object-cover rounded-lg bg-gray-800"
             :src="link.img || 'images/placeholder.png'"
           />
           <div
