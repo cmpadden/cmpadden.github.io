@@ -1,8 +1,7 @@
-import { serverQueryContent } from '#content/server';
 import { SitemapStream, streamToPromise } from 'sitemap';
 
 export default defineEventHandler(async (event) => {
-    const articles = await serverQueryContent(event).find();
+    const articles = await queryCollection(event, 'content').find();
 
     const sitemap = new SitemapStream({ hostname: 'https://cmpadden.github.io' });
 

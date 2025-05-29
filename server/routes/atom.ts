@@ -1,10 +1,9 @@
-import { serverQueryContent } from '#content/server';
 import { Feed } from 'feed';
 
 const BASE_URL = "https://cmpadden.github.io"
 const AUTHOR_NAME = "Colton Padden"
 
-export default defineEventHandler(async (event) => {
+export default queryCollection(async (event, 'content') => {
 
     const feed = new Feed({
       title: "cmpadden.github.io",

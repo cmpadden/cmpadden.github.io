@@ -23,7 +23,9 @@ export default defineNuxtConfig({
           'js',
           'ts',
       ]
-    }
+    },
+    // https://github.com/nuxt/content/issues/3249#issuecomment-2778749735
+    experimental: { nativeSqlite: true }
   },
 
   nitro: {
