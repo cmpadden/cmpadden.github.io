@@ -1,5 +1,5 @@
 <script setup>
-const data = await queryContent()
+const data = await queryCollection('content')
   .only([
     "_id",
     "_path",

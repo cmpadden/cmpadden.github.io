@@ -21,7 +21,7 @@ if (route.query.tag) {
 const showTags = ref(true);
 
 const { data: articles } = await useAsyncData("articles", () =>
-  queryContent()
+  queryCollection('content')
     .only([
       "_id",
       "_path",

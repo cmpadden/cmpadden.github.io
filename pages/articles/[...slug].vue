@@ -2,7 +2,7 @@
 const route = useRoute();
 
 const { data } = await useAsyncData("page-data", () =>
-  queryContent(route.path).findOne(),
+  queryCollection(route.path).findOne(),
 );
 
 const REDIRECTS = {};
