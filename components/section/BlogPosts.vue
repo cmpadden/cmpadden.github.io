@@ -6,7 +6,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <section class="bg-gradient-to-b from-background to-transparent">
+  <section class="bg-gradient-to-b from-background to-transparent py-2">
     <div class="container mx-auto space-y-4">
       <template v-if="false">
         <NuxtLink
