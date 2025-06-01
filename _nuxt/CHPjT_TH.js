@@ -1,0 +1,1 @@
+import{c as t,a as r,o}from"./1FmnzlcH.js";const s={class:"flex h-[768px] justify-center border-2 border-gray-500"},c={__name:"metronome",setup(a){return(m,e)=>(o(),t("main",s,e[0]||(e[0]=[r("iframe",{src:"https://simple-tempo.com",width:"100%",height:"100%"},null,-1)])))}};export{c as default};
