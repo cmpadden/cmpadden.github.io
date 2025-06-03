@@ -21,23 +21,7 @@ if (route.query.tag) {
 const showTags = ref(true);
 
 const { data: articles } = await useAsyncData("articles", () =>
-  queryContent()
-    .only([
-      "_id",
-      "_path",
-      "title",
-      "description",
-      "date",
-      "img",
-      "author",
-      "tags",
-      "categories",
-      "img",
-      "excerpt",
-      "summary",
-    ])
-    .sort({ date: -1 })
-    .find(),
+  queryCollection("content").order("date", "DESC").all(),
 );
 
 const categories = computed(() => {
@@ -110,18 +94,18 @@ function toggleCategory(cat) {
       <div class="col-span-4 lg:col-span-3">
         <div class="grid grid-cols-10 gap-y-4 lg:gap-y-6">
           <template v-for="article in visibleArticles" :key="article._id">
-            <div class="col-span-10 lg:col-span-2">{{ article.date }}</div>
+            <div class="col-span-10 lg:col-span-2">
+              {{ formatDate(article.date) }}
+            </div>
             <div class="col-span-10 lg:col-span-8">
               <div class="flex-col space-y-2">
-                <NuxtLink class="text-orange-500" :to="article._path">{{
+                <NuxtLink class="text-orange-500" :to="article.path">{{
                   article.title
                 }}</NuxtLink>
-                <ContentRenderer :value="article">
-                  <ContentRendererMarkdown
-                    class="line-clamp-5 text-xs text-gray-400"
-                    :value="{ body: article.excerpt }"
-                  />
-                </ContentRenderer>
+                <ContentRenderer
+                  :value="article.meta.excerpt"
+                  class="line-clamp-5 text-xs text-gray-400"
+                />
               </div>
             </div>
           </template>

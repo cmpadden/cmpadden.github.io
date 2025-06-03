@@ -1,8 +1,7 @@
-import { serverQueryContent } from '#content/server';
 import { SitemapStream, streamToPromise } from 'sitemap';
 
 export default defineEventHandler(async (event) => {
-    const articles = await serverQueryContent(event).find();
+    const articles = await queryCollection(event, 'content').all();
 
     const sitemap = new SitemapStream({ hostname: 'https://cmpadden.github.io' });
 
@@ -19,7 +18,7 @@ export default defineEventHandler(async (event) => {
     sitemap.write({ url: '/playground/matrix' });
 
     // Dynamically generate routes for Nuxt markdown content
-    articles.forEach((article) => sitemap.write({ url: article._path, changefreq: 'monthly' }));
+    articles.forEach((article) => sitemap.write({ url: article.path, changefreq: 'monthly' }));
     sitemap.end();
 
     return (await streamToPromise(sitemap));

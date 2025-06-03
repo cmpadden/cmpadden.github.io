@@ -13,7 +13,6 @@ I've been using p5 for a while now to tinker and explore generative art, some of
 
 ```js
 // plugins/p5.client.js
-
 import p5 from 'p5'
 
 export default defineNuxtPlugin(() => {
@@ -40,7 +39,7 @@ The component was registered globally by using the `ModelPreview.global.vue` fil
 
 The full source code for the `ModelPreview` component at the time of this writing can be found below. Not too bad!
 
-```javascript
+```js
 <template>
     <div id="canvas" class="h-64" />
 </template>

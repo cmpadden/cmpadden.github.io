@@ -1,37 +1,33 @@
 <script setup lang="ts">
 const route = useRoute();
 
-const { data } = await useAsyncData("page-data", () =>
-  queryContent(route.path).findOne(),
-);
-
-const REDIRECTS = {};
+const { data: page } = await useAsyncData(route.path, () => {
+  return queryCollection("content").path(route.path).first();
+});
 
 // Redirect missing articles to `/`, or defined redirects to their intended location
-if (data.value === null || route.path in REDIRECTS) {
-  const target = REDIRECTS[route.path] || "/";
-  console.log(target);
+if (page.value === null) {
   await navigateTo({
-    path: target,
+    path: "/",
   });
 }
 </script>
 
 <template>
-  <div class="container mx-auto text-white" v-if="data">
+  <div class="container mx-auto text-white" v-if="page">
     <article class="mb-10 space-y-6 shadow-lg">
       <!-- title -->
       <div class="flex">
         <!-- https://content.nuxt.com/components/content-slot -->
-        <template v-if="data.cover_image">
+        <template v-if="page.cover_image">
           <img
             class="mr-4 h-16 border-2 border-black"
-            :src="data.cover_image"
+            :src="page.cover_image"
           />
         </template>
 
         <h1 class="text-xl font-bold md:text-3xl">
-          {{ data.title }}
+          {{ page.title }}
         </h1>
       </div>
 
@@ -42,7 +38,7 @@ if (data.value === null || route.path in REDIRECTS) {
           <div class="flex flex-row space-x-2">
             <NuxtLink
               class="mr-2 w-min rounded-md bg-background text-sm font-bold hover:cursor-pointer hover:text-orange-500"
-              v-for="(category, ix) in data.categories"
+              v-for="(category, ix) in page.categories"
               :key="ix"
               :to="`/articles?category=${category}`"
             >
@@ -58,7 +54,7 @@ if (data.value === null || route.path in REDIRECTS) {
           <div class="flex flex-row md:space-x-2">
             <NuxtLink
               class="mr-2 w-min rounded-md bg-background text-sm font-bold hover:cursor-pointer hover:text-orange-500"
-              v-for="(tag, ix) in data.tags"
+              v-for="(tag, ix) in page.tags"
               :key="ix"
               :to="`/articles?tag=${tag}`"
             >
@@ -75,9 +71,7 @@ if (data.value === null || route.path in REDIRECTS) {
       <article
         class="prose max-w-none text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-500 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-black"
       >
-        <ContentRenderer>
-          <ContentRendererMarkdown :value="data" />
-        </ContentRenderer>
+        <ContentRenderer v-if="page" :value="page" />
       </article>
     </article>
   </div>
