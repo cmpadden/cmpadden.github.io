@@ -1,18 +1,8 @@
 <script setup>
 const data = await queryCollection("content")
-  .only([
-    "_id",
-    "_path",
-    "title",
-    "description",
-    "date",
-    "img",
-    "author",
-    "tags",
-  ])
-  .sort({ date: -1 })
+  .order('date', 'DESC')
   .limit(4)
-  .find();
+  .all();
 </script>
 
 <template>
