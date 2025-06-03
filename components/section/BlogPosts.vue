@@ -27,7 +27,7 @@ const props = defineProps({
           -->
           <NuxtLink :to="article._path" external>
             <div
-              class="h-full space-y-4 bg-white/20 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white rounded-lg"
+              class="h-full space-y-4 rounded-lg bg-white/20 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
             >
               <div>
                 <div class="flex-1 text-lg font-bold md:text-xl">

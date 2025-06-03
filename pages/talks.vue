@@ -5,7 +5,8 @@ const talks = [
     subtitle: "Abstractions: Enabling Data Teams Through Reduced Complexity",
     date: new Date("2025-5-5"),
     href_slides: "/slides/abstractions.pdf",
-    href_video: "https://www.secoda.co/mds-fest-3-0/abstractions-enabling-data-teams-through-reduced-complexity"
+    href_video:
+      "https://www.secoda.co/mds-fest-3-0/abstractions-enabling-data-teams-through-reduced-complexity",
   },
   {
     title: "Dagster Deep Dive",
@@ -13,15 +14,17 @@ const talks = [
     date: new Date("2025-2-11"),
     href_slides:
       "https://github.com/dagster-io/talks/blob/main/slides/deep-dive-not-diamond.pdf",
-    href_video: "https://www.youtube.com/watch?v=iwAhzS4EMkw"
+    href_video: "https://www.youtube.com/watch?v=iwAhzS4EMkw",
   },
   {
     title: "Dagster Deep Dive",
     subtitle: "Shifting Left and Moving Forward with MotherDuck",
     date: new Date("2025-1-15"),
-    href_slides: "https://github.com/dagster-io/talks/blob/88651b705102e0558908e333495b4c21451310ca/slides/deep-dive-motherduck-atproto-demo.pdf",
-    href_code: "https://github.com/dagster-io/dagster/tree/aadfade92c7faebb0a92bd7006c4eb1934cd1982/examples/docs_projects/project_atproto_dashboard",
-    href_video: "https://youtu.be/z3trqkKPbsI?feature=shared"
+    href_slides:
+      "https://github.com/dagster-io/talks/blob/88651b705102e0558908e333495b4c21451310ca/slides/deep-dive-motherduck-atproto-demo.pdf",
+    href_code:
+      "https://github.com/dagster-io/dagster/tree/aadfade92c7faebb0a92bd7006c4eb1934cd1982/examples/docs_projects/project_atproto_dashboard",
+    href_video: "https://youtu.be/z3trqkKPbsI?feature=shared",
   },
   {
     title: "Dagster Deep Dive",

@@ -3,8 +3,7 @@ import { Feed } from 'feed';
 const BASE_URL = "https://cmpadden.github.io"
 const AUTHOR_NAME = "Colton Padden"
 
-export default queryCollection(async (event, 'content') => {
-
+export default queryCollection('content', async (event) => {
     const feed = new Feed({
       title: "cmpadden.github.io",
       description: "Colton Padden's Personal Blog",
