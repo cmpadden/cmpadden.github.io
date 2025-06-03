@@ -21,7 +21,7 @@ if (route.query.tag) {
 const showTags = ref(true);
 
 const { data: articles } = await useAsyncData("articles", () =>
-  queryCollection('content').order('date', 'DESC').all()
+  queryCollection("content").order("date", "DESC").all(),
 );
 
 const categories = computed(() => {
@@ -50,9 +50,7 @@ const visibleArticles = computed(() => {
   return articles.value.filter((article) => {
     if (selectedCategories.value.length > 0) {
       if (
-        !selectedCategories.value.every((c) =>
-          article.categories.includes(c),
-        )
+        !selectedCategories.value.every((c) => article.categories.includes(c))
       ) {
         return false;
       }
@@ -96,7 +94,9 @@ function toggleCategory(cat) {
       <div class="col-span-4 lg:col-span-3">
         <div class="grid grid-cols-10 gap-y-4 lg:gap-y-6">
           <template v-for="article in visibleArticles" :key="article._id">
-            <div class="col-span-10 lg:col-span-2">{{ formatDate(article.date) }}</div>
+            <div class="col-span-10 lg:col-span-2">
+              {{ formatDate(article.date) }}
+            </div>
             <div class="col-span-10 lg:col-span-8">
               <div class="flex-col space-y-2">
                 <NuxtLink class="text-orange-500" :to="article.path">{{

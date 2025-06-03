@@ -1,6 +1,6 @@
 <script setup>
 const data = await queryCollection("content")
-  .order('date', 'DESC')
+  .order("date", "DESC")
   .limit(4)
   .all();
 </script>
