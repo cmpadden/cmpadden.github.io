@@ -5,12 +5,12 @@ const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection("content").path(route.path).first();
 });
 
-// Redirect missing articles to `/`, or defined redirects to their intended location
-if (page.value === null) {
-  await navigateTo({
-    path: "/",
-  });
-}
+//// Redirect missing articles to `/`, or defined redirects to their intended location
+//if (page.value === null) {
+//  await navigateTo({
+//    path: "/",
+//  });
+//}
 </script>
 
 <template>
