@@ -124,7 +124,7 @@ const filtered_links = computed(() => {
           <div
             class="absolute bottom-0 flex w-full items-center justify-center"
           >
-            <div class="rounded-b-lg bg-gray-800/80 px-6 py-2">
+            <div class="min-h-24 w-full rounded-b-lg bg-gray-800/80 px-6 py-2">
               <h3 class="text-xl font-bold text-white">
                 {{ link.title }}
               </h3>
