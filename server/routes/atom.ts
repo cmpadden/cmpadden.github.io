@@ -3,7 +3,7 @@ import { Feed } from 'feed';
 const BASE_URL = "https://cmpadden.github.io"
 const AUTHOR_NAME = "Colton Padden"
 
-export default queryCollection('content', async (event) => {
+export default defineEventHandler(async (event) => {
     const feed = new Feed({
       title: "cmpadden.github.io",
       description: "Colton Padden's Personal Blog",
@@ -23,14 +23,14 @@ export default queryCollection('content', async (event) => {
       }
     });
 
-    const articles = await serverQueryContent(event).find();
+    const articles = await queryCollection(event, 'content').all();
 
     articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
     articles.forEach((article) => {
       feed.addItem({
         title: article.title ? article.title : "Missing Title",
-        id: article._path,
+        id: article.path,
         link: `${BASE_URL}${article._path}`,
         description: article.description,
         author: [
