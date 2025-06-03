@@ -33,7 +33,6 @@ export default defineNuxtConfig({
     experimental: { nativeSqlite: true }
   },
 
-  // compatibilityDate: '2024-10-26'
   nitro: {
     // render server-side routes as static content
     prerender: {
