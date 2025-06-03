@@ -9,20 +9,25 @@ export default defineNuxtConfig({
   },
 
   content: {
-    // Disable highlighting until interoperability with by the Tailwind Typography plugin is sorted
-    // highlight: false
-    highlight: {
-      theme: 'github-dark',
-      preload: [
-          'bash',
-          'json',
-          'lisp',
-          'lua',
-          'python',
-          'shell',
-          'js',
-          'ts',
-      ]
+    build: {
+      markdown: {
+        // Disable highlighting until interoperability with by the Tailwind Typography plugin is sorted
+        // highlight: false
+        highlight: {
+          theme: 'github-dark',
+          preload: [
+              'bash',
+              'js',
+              'json',
+              'lisp',
+              'lua',
+              'python',
+              'shell',
+              'ts',
+              'vue',
+          ]
+        },
+      },
     },
     // https://github.com/nuxt/content/issues/3249#issuecomment-2778749735
     experimental: { nativeSqlite: true }
