@@ -64,14 +64,6 @@ const talks = [
   },
 ];
 
-const formatDate = function (date) {
-  return date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "2-digit",
-    year: "numeric",
-  });
-};
-
 // todo - self host slides
 // todo - modal slides preview
 </script>

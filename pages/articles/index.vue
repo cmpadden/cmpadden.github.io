@@ -85,15 +85,6 @@ function toggleCategory(cat) {
     selectedCategories.value.push(cat);
   }
 }
-
-// TODO - refactor
-const formatDate = function (date) {
-  return new Date(date).toLocaleDateString("en-US", {
-    month: "short",
-    day: "2-digit",
-    year: "numeric",
-  });
-};
 </script>
 
 <template>
