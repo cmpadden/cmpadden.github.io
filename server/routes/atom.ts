@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
       feed.addItem({
         title: article.title ? article.title : "Missing Title",
         id: article.path,
-        link: `${BASE_URL}${article._path}`,
+        link: `${BASE_URL}${article.path}`,
         description: article.description,
         author: [
           {

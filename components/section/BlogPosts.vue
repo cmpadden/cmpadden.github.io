@@ -25,7 +25,7 @@ const props = defineProps({
             post if the user clicked the back button -- this unexpected behavior is
             still not entirely understood, but at least this is a workaround.
           -->
-          <NuxtLink :to="article._path" external>
+          <NuxtLink :to="article.path" external>
             <div
               class="h-full space-y-4 rounded-lg bg-white/20 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
             >
