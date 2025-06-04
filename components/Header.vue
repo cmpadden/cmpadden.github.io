@@ -54,31 +54,31 @@ const route = useRoute();
                   </NuxtLink>
                 </HeadlessMenuItem>
 
-                <HeadlessMenuItem v-slot="{ active }">
-                  <NuxtLink to="/about">
-                    <button
-                      :class="[
-                        active ? 'bg-orange-500/50 text-white' : 'text-white',
-                        $route.path === '/about' ? 'bg-orange-500' : '',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                      ]"
-                    >
-                      <svg
-                        class="mr-2 inline h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                      <span class="translate-y-0.5">About</span>
-                    </button>
-                  </NuxtLink>
-                </HeadlessMenuItem>
+                <!-- <HeadlessMenuItem v-slot="{ active }"> -->
+                <!--   <NuxtLink to="/about"> -->
+                <!--     <button -->
+                <!--       :class="[ -->
+                <!--         active ? 'bg-orange-500/50 text-white' : 'text-white', -->
+                <!--         $route.path === '/about' ? 'bg-orange-500' : '', -->
+                <!--         'group flex w-full items-center rounded-md px-2 py-2 text-sm', -->
+                <!--       ]" -->
+                <!--     > -->
+                <!--       <svg -->
+                <!--         class="mr-2 inline h-5 w-5" -->
+                <!--         xmlns="http://www.w3.org/2000/svg" -->
+                <!--         viewBox="0 0 24 24" -->
+                <!--         fill="currentColor" -->
+                <!--       > -->
+                <!--         <path -->
+                <!--           fill-rule="evenodd" -->
+                <!--           d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" -->
+                <!--           clip-rule="evenodd" -->
+                <!--         /> -->
+                <!--       </svg> -->
+                <!--       <span class="translate-y-0.5">About</span> -->
+                <!--     </button> -->
+                <!--   </NuxtLink> -->
+                <!-- </HeadlessMenuItem> -->
 
                 <HeadlessMenuItem v-slot="{ active }">
                   <a href="/articles">
