@@ -8,14 +8,6 @@ const props = defineProps({
 <template>
   <section class="bg-gradient-to-b from-background to-transparent py-2">
     <div class="container mx-auto space-y-4">
-      <template v-if="false">
-        <NuxtLink
-          to="/articles"
-          class="font-milk text-xl text-white hover:underline hover:decoration-orange-500 hover:decoration-2"
-        >
-          Blog Posts
-        </NuxtLink>
-      </template>
 
       <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div v-for="(article, ix) of articles" :key="ix">

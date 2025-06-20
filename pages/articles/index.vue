@@ -87,9 +87,6 @@ function toggleCategory(cat) {
 
 <template>
   <section class="container mx-auto font-mono text-white">
-    <template v-if="false">
-      <h1 class="my-6 text-2xl font-extrabold">Blog</h1>
-    </template>
     <div class="grid grid-cols-4 gap-4">
       <div class="col-span-4 lg:col-span-3">
         <div class="grid grid-cols-10 gap-y-4 lg:gap-y-6">

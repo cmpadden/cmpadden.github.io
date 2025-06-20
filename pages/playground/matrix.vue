@@ -146,10 +146,6 @@
       </div>
     </div>
 
-    <!-- Debug -->
-    <div v-if="false" class="border border-gray-400 p-2">
-      {{ step }}
-    </div>
   </div>
 </template>
 
