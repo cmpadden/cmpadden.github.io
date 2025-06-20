@@ -91,9 +91,13 @@ function toggleCategory(cat) {
       <div class="col-span-4 lg:col-span-3">
         <div class="grid grid-cols-10 gap-y-4 lg:gap-y-6">
           <template v-for="article in visibleArticles" :key="article._id">
-            <div class="col-span-10 lg:col-span-2">
-              {{ formatDate(article.date) }}
-            </div>
+            <NuxtTime
+              :datetime="article.date" 
+              class="col-span-10 lg:col-span-2"
+              year="numeric"
+              month="short"
+              day="2-digit"
+            />
             <div class="col-span-10 lg:col-span-8">
               <div class="flex-col space-y-2">
                 <NuxtLink class="text-orange-500" :to="article.path">{{

@@ -19,17 +19,15 @@ const props = defineProps({
                 <div class="flex-1 text-lg font-bold md:text-xl">
                   {{ article.title }}
                 </div>
-                <div v-if="show_dates" class="text-sm font-light text-gray-400">
-                  {{
-                    new Date(article.date).toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
-                    })
-                  }}
-                </div>
+                <NuxtTime
+                  v-if="show_dates"
+                  :datetime="article.date" 
+                  class="text-sm font-light text-gray-400"
+                  year="numeric"
+                  month="short"
+                  day="2-digit"
+                />
               </div>
-
               <div class="line-clamp-3 text-sm text-gray-300">
                 {{ article.description }}
               </div>
