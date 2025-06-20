@@ -17,7 +17,14 @@ definePageMeta({ layout: "none" });
       renderer.
     </div>
     <div class="h-96 border-2 border-white">
-      <ModelPreview path="/models/mac_mini_macbook_stand.stl" />
+      <ClientOnly>
+        <ModelPreview path="/models/mac_mini_macbook_stand.stl" />
+        <template #fallback>
+          <div class="flex h-full items-center justify-center bg-gray-800">
+            <div class="text-white">Loading 3D model...</div>
+          </div>
+        </template>
+      </ClientOnly>
     </div>
   </div>
 </template>

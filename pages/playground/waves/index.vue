@@ -29,33 +29,54 @@
           </div>
         </div>
         <div class="mb-2 border-2 border-white">
-          <PlaygroundWave
-            id="canvas1"
-            type="sin"
-            :diameter="wave.diameter"
-            :amplitude="wave.amplitude"
-            :lambda="wave.lambda"
-          />
+          <ClientOnly>
+            <PlaygroundWave
+              id="canvas1"
+              type="sin"
+              :diameter="wave.diameter"
+              :amplitude="wave.amplitude"
+              :lambda="wave.lambda"
+            />
+            <template #fallback>
+              <div class="flex h-64 items-center justify-center bg-gray-800">
+                <div class="text-white">Loading wave visualization...</div>
+              </div>
+            </template>
+          </ClientOnly>
         </div>
         <div>y(x) = A cos((2π / λ) x)</div>
         <div class="mb-2 border-2 border-white">
-          <PlaygroundWave
-            id="canvas2"
-            type="cos"
-            :diameter="wave.diameter"
-            :amplitude="wave.amplitude"
-            :lambda="wave.lambda"
-          />
+          <ClientOnly>
+            <PlaygroundWave
+              id="canvas2"
+              type="cos"
+              :diameter="wave.diameter"
+              :amplitude="wave.amplitude"
+              :lambda="wave.lambda"
+            />
+            <template #fallback>
+              <div class="flex h-64 items-center justify-center bg-gray-800">
+                <div class="text-white">Loading wave visualization...</div>
+              </div>
+            </template>
+          </ClientOnly>
         </div>
         <div>y(x) = A tan((2π / λ) x)</div>
         <div class="border-2 border-white">
-          <PlaygroundWave
-            id="canvas3"
-            type="tan"
-            :diameter="wave.diameter"
-            :amplitude="wave.amplitude"
-            :lambda="wave.lambda"
-          />
+          <ClientOnly>
+            <PlaygroundWave
+              id="canvas3"
+              type="tan"
+              :diameter="wave.diameter"
+              :amplitude="wave.amplitude"
+              :lambda="wave.lambda"
+            />
+            <template #fallback>
+              <div class="flex h-64 items-center justify-center bg-gray-800">
+                <div class="text-white">Loading wave visualization...</div>
+              </div>
+            </template>
+          </ClientOnly>
         </div>
         <div class="my-2 w-48 md:w-full">
           Click or tap anywhere to clear the canvas!

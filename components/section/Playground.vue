@@ -101,14 +101,6 @@ const filtered_links = computed(() => {
 <template>
   <section class="bg-gradient-to-b from-transparent to-background text-white">
     <div class="container mx-auto space-y-4 py-8 text-white">
-      <template v-if="false">
-        <NuxtLink
-          to="/playground"
-          class="font-milk text-2xl text-white underline decoration-orange-500 decoration-2"
-        >
-          Experiments
-        </NuxtLink>
-      </template>
 
       <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <nuxt-link

@@ -3,7 +3,14 @@
     <div class="grid h-screen place-items-center">
       <div class="font-mono text-white">
         <div class="mb-2 border-2 border-white">
-          <div id="canvas" />
+          <ClientOnly>
+            <div id="canvas" />
+            <template #fallback>
+              <div class="flex h-96 items-center justify-center bg-gray-800">
+                <div class="text-white">Loading color palette...</div>
+              </div>
+            </template>
+          </ClientOnly>
         </div>
       </div>
     </div>

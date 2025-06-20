@@ -3,7 +3,14 @@
     <div class="m-8 grid place-items-center">
       <div class="font-mono text-white">
         <div id="canvas-container" class="mb-2 h-96 border-2 border-white">
-          <div id="canvas" />
+          <ClientOnly>
+            <div id="canvas" />
+            <template #fallback>
+              <div class="flex h-96 items-center justify-center bg-gray-800">
+                <div class="text-white">Loading sequence plotter...</div>
+              </div>
+            </template>
+          </ClientOnly>
         </div>
         <div class="my-2 md:w-full">
           <textarea

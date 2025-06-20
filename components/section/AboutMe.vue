@@ -1,30 +1,6 @@
 <template>
   <section class="">
     <div class="lg:text-normal space-y-4 text-justify text-white sm:text-base">
-      <template v-if="false">
-        <div>
-          I am a
-          <span class="inline-block w-48">
-            <HeadlessTransitionRoot
-              as="template"
-              appear
-              :show="show"
-              enter="transition transform duration-300 ease-out"
-              enter-from="translate-y-2 opacity-0"
-              enter-to="translate-x-0 opacity-100"
-              leave="transition transform duration-300 ease-in"
-              leave-from="opacity-100"
-              leave-to="-translate-y-2 opacity-0"
-            >
-              <div
-                class="w-48 bg-white px-2 text-center font-extrabold tracking-wide text-black shadow-xl"
-              >
-                {{ occupation }}
-              </div>
-            </HeadlessTransitionRoot>
-          </span>
-        </div>
-      </template>
       <div>
         I help educate data engineers while building the future of data
         orchestration at
