@@ -3,6 +3,14 @@ export default defineNuxtConfig({
   components: true,
   modules: ["@nuxt/content", "@nuxtjs/tailwindcss", "nuxt-headlessui"],
 
+  app: {
+    head: {
+      bodyAttrs: {
+        class: 'bg-background'
+      }
+    }
+  },
+
   // Optionally change the default prefix.
   headlessui: {
     prefix: "Headless",

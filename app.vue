@@ -17,9 +17,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <body class="bg-background">
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </body>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
