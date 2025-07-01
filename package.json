@@ -23,6 +23,7 @@
     "webpack": "^5.99.9"
   },
   "dependencies": {
+    "@nuxtjs/color-mode": "^3.5.2",
     "chords.ts": "^0.1.0",
     "p5": "^1.11.7",
     "tailwindcss": "^3.4.17"

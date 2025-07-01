@@ -69,7 +69,7 @@ const talks = [
 </script>
 
 <template>
-  <div class="container mx-auto font-mono text-white">
+  <div class="container mx-auto font-mono text-gray-900 dark:text-white">
     <h1 class="my-6 text-2xl font-extrabold">Talks</h1>
     <div class="grid grid-cols-10 gap-y-6">
       <template v-for="(talk, ix) in talks" :key="ix">
@@ -92,21 +92,21 @@ const talks = [
             <div class="flex">
               <a
                 v-if="talk.href_slides"
-                class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
+                class="text-xs uppercase text-gray-600 dark:text-gray-400 hover:cursor-pointer hover:text-orange-500"
                 :href="talk.href_slides"
               >
                 [slide_deck]
               </a>
               <a
                 v-if="talk.href_video"
-                class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
+                class="text-xs uppercase text-gray-600 dark:text-gray-400 hover:cursor-pointer hover:text-orange-500"
                 :href="talk.href_video"
               >
                 [video]
               </a>
               <a
                 v-if="talk.href_code"
-                class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
+                class="text-xs uppercase text-gray-600 dark:text-gray-400 hover:cursor-pointer hover:text-orange-500"
                 :href="talk.href_code"
               >
                 [source_code]

@@ -1,4 +1,5 @@
 export default {
+  darkMode: 'class',
   theme: {
     container: {
       padding: {
@@ -36,8 +37,14 @@ export default {
       },
       colors: {
         cyan: "#9cdbff",
-        background: "#0f1c1e", // terafox bg
-        foreground: "#cbd9d8", // terafox fg
+        background: {
+          DEFAULT: "#ffffff", // light mode background
+          dark: "#0f1c1e", // terafox bg (dark mode)
+        },
+        foreground: {
+          DEFAULT: "#1e293b", // light mode foreground
+          dark: "#cbd9d8", // terafox fg (dark mode)
+        },
       },
       keyframes: {
         wiggle: {
