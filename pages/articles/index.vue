@@ -86,7 +86,7 @@ function toggleCategory(cat) {
 </script>
 
 <template>
-  <section class="container mx-auto font-mono text-gray-900 dark:text-white">
+  <section class="container mx-auto font-mono text-gray-700 dark:text-white">
     <div class="grid grid-cols-4 gap-4">
       <div class="col-span-4 lg:col-span-3">
         <div class="grid grid-cols-10 gap-y-4 lg:gap-y-6">

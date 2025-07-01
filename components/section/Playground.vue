@@ -99,8 +99,8 @@ const filtered_links = computed(() => {
 </script>
 
 <template>
-  <section class="bg-gradient-to-b from-transparent to-background dark:to-background-dark text-gray-900 dark:text-white">
-    <div class="container mx-auto space-y-4 py-8 text-gray-900 dark:text-white">
+  <section class="bg-gradient-to-b from-transparent to-background dark:to-background-dark text-gray-700 dark:text-white">
+    <div class="container mx-auto space-y-4 py-8 text-gray-700 dark:text-white">
 
       <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <nuxt-link
@@ -117,7 +117,7 @@ const filtered_links = computed(() => {
             class="absolute bottom-0 flex w-full items-center justify-center"
           >
             <div class="min-h-24 w-full rounded-b-lg bg-white/90 dark:bg-gray-800/80 px-6 py-2">
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+              <h3 class="text-xl font-bold text-gray-700 dark:text-white">
                 {{ link.title }}
               </h3>
               <div

@@ -14,7 +14,7 @@ const { data: page } = await useAsyncData(route.path, () => {
 </script>
 
 <template>
-  <div class="container mx-auto text-gray-900 dark:text-white" v-if="page">
+  <div class="container mx-auto text-gray-700 dark:text-white" v-if="page">
     <article class="mb-10 space-y-6 shadow-sm dark:shadow-lg">
       <!-- title -->
       <div class="flex">

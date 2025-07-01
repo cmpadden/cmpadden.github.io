@@ -6,13 +6,13 @@ const route = useRoute();
 
 <template>
   <nav class="container mx-auto py-5">
-    <div class="flex items-center text-gray-200 dark:text-gray-200">
+    <div class="flex items-center text-gray-700 dark:text-gray-200">
       <div class="flex-1" />
       <div class="flex items-center space-x-2">
         <ThemeToggle />
         <HeadlessMenu as="div" class="relative z-50 inline-block text-left">
           <div>
-            <HeadlessMenuButton class="text-gray-900 dark:text-white hover:text-orange-500">
+            <HeadlessMenuButton class="text-gray-700 dark:text-white hover:text-orange-500">
               <div class="text-2xl">&bull;&bull;&bull;</div>
             </HeadlessMenuButton>
           </div>
@@ -33,7 +33,7 @@ const route = useRoute();
                   <NuxtLink to="/">
                     <button
                       :class="[
-                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-900 dark:text-white',
+                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
                         $route.path === '/' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
@@ -85,7 +85,7 @@ const route = useRoute();
                   <a href="/articles">
                     <button
                       :class="[
-                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-900 dark:text-white',
+                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
                         $route.path === '/articles' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
@@ -113,7 +113,7 @@ const route = useRoute();
                   <a href="/playground">
                     <button
                       :class="[
-                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-900 dark:text-white',
+                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
                         $route.path === '/playground' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
@@ -141,7 +141,7 @@ const route = useRoute();
                   <a href="/talks">
                     <button
                       :class="[
-                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-900 dark:text-white',
+                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
                         $route.path === '/talks' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
@@ -167,7 +167,7 @@ const route = useRoute();
                   <a href="https://github.com/cmpadden">
                     <button
                       :class="[
-                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-900 dark:text-white',
+                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
@@ -190,7 +190,7 @@ const route = useRoute();
                   <a href="https://bsky.app/profile/colton.boo">
                     <button
                       :class="[
-                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-900 dark:text-white',
+                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
