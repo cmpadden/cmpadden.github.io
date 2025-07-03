@@ -99,12 +99,12 @@ const filtered_links = computed(() => {
 </script>
 
 <template>
-  <section class="bg-gradient-to-b from-transparent to-background text-white">
-    <div class="container mx-auto space-y-4 py-8 text-white">
+  <section class="bg-gradient-to-b from-transparent to-background dark:to-background-dark text-gray-700 dark:text-white">
+    <div class="container mx-auto space-y-4 py-8 text-gray-700 dark:text-white">
 
       <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <nuxt-link
-          class="relative rounded-lg drop-shadow-lg hover:ring-1 hover:ring-white"
+          class="relative rounded-lg drop-shadow-lg hover:ring-1 hover:ring-gray-300 dark:hover:ring-white"
           v-for="link in filtered_links"
           :key="link.title"
           :to="link.link"
@@ -116,12 +116,12 @@ const filtered_links = computed(() => {
           <div
             class="absolute bottom-0 flex w-full items-center justify-center"
           >
-            <div class="min-h-24 w-full rounded-b-lg bg-gray-800/80 px-6 py-2">
-              <h3 class="text-xl font-bold text-white">
+            <div class="min-h-24 w-full rounded-b-lg bg-white/90 dark:bg-gray-800/80 px-6 py-2">
+              <h3 class="text-xl font-bold text-gray-700 dark:text-white">
                 {{ link.title }}
               </h3>
               <div
-                class="line-clamp-2 text-sm text-gray-300"
+                class="line-clamp-2 text-sm text-gray-700 dark:text-gray-300"
                 v-html="link.description"
               ></div>
             </div>

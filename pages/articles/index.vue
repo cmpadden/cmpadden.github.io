@@ -86,7 +86,7 @@ function toggleCategory(cat) {
 </script>
 
 <template>
-  <section class="container mx-auto font-mono text-white">
+  <section class="container mx-auto font-mono text-gray-700 dark:text-white">
     <div class="grid grid-cols-4 gap-4">
       <div class="col-span-4 lg:col-span-3">
         <div class="grid grid-cols-10 gap-y-4 lg:gap-y-6">
@@ -105,14 +105,14 @@ function toggleCategory(cat) {
                 }}</NuxtLink>
                 <ContentRenderer
                   :value="article.meta.excerpt"
-                  class="line-clamp-5 text-xs text-gray-400"
+                  class="line-clamp-5 text-xs text-gray-600 dark:text-gray-400"
                 />
               </div>
             </div>
           </template>
         </div>
       </div>
-      <div class="col-span-4 border-l border-gray-700 pl-4 lg:col-span-1">
+      <div class="col-span-4 border-l border-gray-300 dark:border-gray-700 pl-4 lg:col-span-1">
         <div class="my-2 space-y-2">
           <p class="text-xl font-bold">Categories</p>
           <div
@@ -121,7 +121,7 @@ function toggleCategory(cat) {
             :class="{
               'bg-orange-500 text-white': selectedCategories.includes(category),
             }"
-            class="cursor-pointer p-1 text-sm text-gray-400 hover:bg-orange-500 hover:text-white"
+            class="cursor-pointer p-1 text-sm text-gray-600 dark:text-gray-400 hover:bg-orange-500 hover:text-white"
             @click="toggleCategory(category)"
           >
             {{ category }}
@@ -136,7 +136,7 @@ function toggleCategory(cat) {
             :class="{
               'bg-orange-500 text-white': selectedTags.includes(tag),
             }"
-            class="cursor-pointer select-none p-1 text-sm text-gray-400 hover:bg-orange-500 hover:text-white"
+            class="cursor-pointer select-none p-1 text-sm text-gray-600 dark:text-gray-400 hover:bg-orange-500 hover:text-white"
             @click="toggleTag(tag)"
           >
             {{ tag }}
