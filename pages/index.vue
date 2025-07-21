@@ -7,7 +7,7 @@ const data = await queryCollection("content")
 
 <template>
   <div>
-    <div class="bg-emerald-950 bg-[url('/images/noise.svg')]">
+    <div class="bg-orange-400 dark:bg-emerald-950 bg-[url('/images/noise.svg')]">
       <SectionBlogPosts :articles="data" :show_dates="true" />
       <SectionPlayground :limit="9" showImages linkToPlayground />
     </div>

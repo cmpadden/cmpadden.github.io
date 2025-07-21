@@ -1,14 +1,26 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   components: true,
-  modules: ["@nuxt/content", "@nuxtjs/tailwindcss", "nuxt-headlessui"],
+  modules: ["@nuxt/content", "@nuxtjs/tailwindcss", "@nuxtjs/color-mode", "nuxt-headlessui"],
 
   app: {
     head: {
       bodyAttrs: {
-        class: 'bg-background'
+        class: 'bg-background dark:bg-background-dark'
       }
     }
+  },
+
+  // Color mode configuration
+  colorMode: {
+    preference: 'system', // default value of $colorMode.preference
+    fallback: 'dark', // fallback value if not system preference found
+    hid: 'nuxt-color-mode-script',
+    globalName: '__NUXT_COLOR_MODE__',
+    componentName: 'ColorScheme',
+    classPrefix: '',
+    classSuffix: '',
+    storageKey: 'nuxt-color-mode'
   },
 
   // Optionally change the default prefix.
@@ -22,7 +34,10 @@ export default defineNuxtConfig({
         // Disable highlighting until interoperability with by the Tailwind Typography plugin is sorted
         // highlight: false
         highlight: {
-          theme: 'github-dark',
+          theme: {
+            light: 'github-light',
+            default: 'github-dark'
+          },
           preload: [
               'bash',
               'js',
