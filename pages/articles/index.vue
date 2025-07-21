@@ -104,6 +104,7 @@ function toggleCategory(cat) {
                   article.title
                 }}</NuxtLink>
                 <ContentRenderer
+                  v-if="article.meta?.excerpt"
                   :value="article.meta.excerpt"
                   class="line-clamp-5 text-xs text-gray-600 dark:text-gray-400"
                 />
