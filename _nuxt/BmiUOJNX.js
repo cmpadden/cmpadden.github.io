@@ -1,1 +1,0 @@
-import{_ as a,c as t,o as c,f as n,e,ab as r,I as l}from"./BRBtTEmL.js";const _={},d={class:"container mx-auto h-screen bg-background font-display"},i={class:"flex flex-col border-2 bg-white"};function f(o,m){const s=r;return c(),t("main",null,[n(s),e("div",d,[e("div",i,[l(o.$slots,"default")])])])}const h=a(_,[["render",f]]);export{h as default};
