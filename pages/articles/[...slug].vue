@@ -4,18 +4,10 @@ const route = useRoute();
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection("content").path(route.path).first();
 });
-
-//// Redirect missing articles to `/`, or defined redirects to their intended location
-//if (page.value === null) {
-//  await navigateTo({
-//    path: "/",
-//  });
-//}
 </script>
 
 <template>
-  <div class="container mx-auto text-white" v-if="page">
-    <article class="mb-10 space-y-6 shadow-lg">
+    <div class="container mx-auto max-w-[1024px] text-white mb-10 space-y-6 shadow-lg" v-if="page">
       <!-- title -->
       <div class="flex">
         <!-- https://content.nuxt.com/components/content-slot -->
@@ -69,12 +61,11 @@ const { data: page } = await useAsyncData(route.path, () => {
         - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
       -->
       <article
-        class="prose max-w-none text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-500 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-black"
+        class="prose max-w-[1024px] text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-500 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-black prose-p:text-justify"
       >
         <ContentRenderer v-if="page" :value="page" />
       </article>
-    </article>
-  </div>
+    </div>
 </template>
 
 <style>
