@@ -15,7 +15,7 @@ const props = defineProps({
       :to="props.to"
       class="flex items-center text-sm font-bold text-gray-700 dark:text-white hover:text-orange-500"
     >
-      <span class="translate-y-0.5">See More</span>
+      <span class="translate-y-0.5">More</span>
       <CursorArrowRaysIcon class="ml-1 h-5 w-5" aria-hidden="true" />
     </NuxtLink>
   </div>
