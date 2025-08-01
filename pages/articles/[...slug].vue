@@ -7,65 +7,69 @@ const { data: page } = await useAsyncData(route.path, () => {
 </script>
 
 <template>
-    <div class="container mx-auto max-w-[1024px] text-gray-700 dark:text-white mb-10 space-y-6 shadow-lg" v-if="page">
-      <!-- title -->
-      <div class="flex">
-        <!-- https://content.nuxt.com/components/content-slot -->
-        <template v-if="page.cover_image">
-          <img
-            class="mr-4 h-16 border-2 border-black"
-            :src="page.cover_image"
-          />
-        </template>
+  <div
+    class="container mx-auto mb-10 max-w-[1024px] space-y-6 text-gray-700 shadow-lg dark:text-white"
+    v-if="page"
+  >
+    <!-- title -->
+    <div class="flex">
+      <!-- https://content.nuxt.com/components/content-slot -->
+      <template v-if="page.cover_image">
+        <img class="mr-4 h-16 border-2 border-black" :src="page.cover_image" />
+      </template>
 
-        <h1 class="text-xl font-bold md:text-3xl">
-          {{ page.title }}
-        </h1>
-      </div>
+      <h1 class="text-xl font-bold md:text-3xl">
+        {{ page.title }}
+      </h1>
+    </div>
 
-      <!-- Meta -->
-      <div class="flex space-x-2">
-        <div>
-          <div class="mb-2 text-xs uppercase text-gray-600 dark:text-gray-400">Category</div>
-          <div class="flex flex-row space-x-2">
-            <NuxtLink
-              class="mr-2 w-min rounded-md bg-background dark:bg-background-dark text-sm font-bold hover:cursor-pointer hover:text-orange-500"
-              v-for="(category, ix) in page.categories"
-              :key="ix"
-              :to="`/articles?category=${category}`"
-            >
-              {{ category }}
-            </NuxtLink>
-          </div>
+    <!-- Meta -->
+    <div class="flex space-x-2">
+      <div>
+        <div class="mb-2 text-xs uppercase text-gray-600 dark:text-gray-400">
+          Category
         </div>
-
-        <div class="border-r border-gray-400 dark:border-gray-400"></div>
-
-        <div>
-          <div class="mb-2 text-xs uppercase text-gray-600 dark:text-gray-400">Tags</div>
-          <div class="flex flex-row md:space-x-2">
-            <NuxtLink
-              class="mr-2 w-min rounded-md bg-background dark:bg-background-dark text-sm font-bold hover:cursor-pointer hover:text-orange-500"
-              v-for="(tag, ix) in page.tags"
-              :key="ix"
-              :to="`/articles?tag=${tag}`"
-            >
-              {{ tag }}
-            </NuxtLink>
-          </div>
+        <div class="flex flex-row space-x-2">
+          <NuxtLink
+            class="mr-2 w-min rounded-md bg-background text-sm font-bold hover:cursor-pointer hover:text-orange-500 dark:bg-background-dark"
+            v-for="(category, ix) in page.categories"
+            :key="ix"
+            :to="`/articles?category=${category}`"
+          >
+            {{ category }}
+          </NuxtLink>
         </div>
       </div>
 
-      <!--
+      <div class="border-r border-gray-400 dark:border-gray-400"></div>
+
+      <div>
+        <div class="mb-2 text-xs uppercase text-gray-600 dark:text-gray-400">
+          Tags
+        </div>
+        <div class="flex flex-row md:space-x-2">
+          <NuxtLink
+            class="mr-2 w-min rounded-md bg-background text-sm font-bold hover:cursor-pointer hover:text-orange-500 dark:bg-background-dark"
+            v-for="(tag, ix) in page.tags"
+            :key="ix"
+            :to="`/articles?tag=${tag}`"
+          >
+            {{ tag }}
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
+
+    <!--
         - Remove maximum width of prose content: https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width
         - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
       -->
-      <article
-        class="prose max-w-[1024px] text-gray-700 dark:text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-500 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-black prose-p:text-justify"
-      >
-        <ContentRenderer v-if="page" :value="page" />
-      </article>
-    </div>
+    <article
+      class="prose max-w-[1024px] text-gray-700 prose-h2:mt-8 prose-p:text-justify prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-500 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-black dark:text-gray-300"
+    >
+      <ContentRenderer v-if="page" :value="page" />
+    </article>
+  </div>
 </template>
 
 <style>

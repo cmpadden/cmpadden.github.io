@@ -7,10 +7,17 @@ const data = await queryCollection("content")
 
 <template>
   <div>
-    <div class="bg-orange-400 dark:bg-emerald-950 bg-[url('/images/noise.svg')]">
-      <section class="bg-gradient-to-b from-background dark:from-background-dark to-transparent py-2">
+    <div
+      class="bg-orange-400 bg-[url('/images/noise.svg')] dark:bg-emerald-950"
+    >
+      <section
+        class="bg-gradient-to-b from-background to-transparent py-2 dark:from-background-dark"
+      >
         <div class="container mx-auto my-12">
-          <img src="/images/blog_and_experiments.svg" class="max-h-24 mx-auto"/>
+          <img
+            src="/images/blog_and_experiments.svg"
+            class="mx-auto max-h-24"
+          />
         </div>
       </section>
       <SectionBlogPosts :articles="data" :show_dates="true" />

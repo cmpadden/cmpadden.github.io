@@ -99,23 +99,27 @@ const filtered_links = computed(() => {
 </script>
 
 <template>
-  <section class="bg-gradient-to-b from-transparent to-background dark:to-background-dark text-gray-700 dark:text-white">
+  <section
+    class="bg-gradient-to-b from-transparent to-background text-gray-700 dark:to-background-dark dark:text-white"
+  >
     <div class="container mx-auto space-y-4 py-8 text-gray-700 dark:text-white">
       <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <nuxt-link
-          class="relative drop-shadow-lg hover:ring-1 hover:ring-gray-300 dark:hover:ring-white"
+          class="relative hover:ring-1 hover:ring-gray-300 dark:hover:ring-white"
           v-for="link in filtered_links"
           :key="link.title"
           :to="link.link"
         >
           <img
-            class="grayscale-1 h-64 w-full bg-gray-800 object-cover"
+            class="grayscale-1 h-64 w-full rounded-lg bg-gray-800 object-cover"
             :src="link.img || 'images/placeholder.png'"
           />
           <div
-            class="absolute bottom-0 flex w-full items-center justify-center"
+            class="absolute bottom-2 flex w-full items-center justify-center"
           >
-            <div class="w-full bg-white/90 dark:bg-black/80 px-6 py-2">
+            <div
+              class="w-full bg-black bg-[url('/images/noise.svg')] px-6 py-2"
+            >
               <h3 class="text-xl font-bold text-gray-700 dark:text-white">
                 {{ link.title }}
               </h3>

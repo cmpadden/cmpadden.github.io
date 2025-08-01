@@ -74,7 +74,7 @@ const talks = [
     <div class="grid grid-cols-10 gap-y-6">
       <template v-for="(talk, ix) in talks" :key="ix">
         <NuxtTime
-          :datetime="talk.date" 
+          :datetime="talk.date"
           class="col-span-2"
           year="numeric"
           month="short"
@@ -92,21 +92,21 @@ const talks = [
             <div class="flex">
               <a
                 v-if="talk.href_slides"
-                class="text-xs uppercase text-gray-600 dark:text-gray-400 hover:cursor-pointer hover:text-orange-500"
+                class="text-xs uppercase text-gray-600 hover:cursor-pointer hover:text-orange-500 dark:text-gray-400"
                 :href="talk.href_slides"
               >
                 [slide_deck]
               </a>
               <a
                 v-if="talk.href_video"
-                class="text-xs uppercase text-gray-600 dark:text-gray-400 hover:cursor-pointer hover:text-orange-500"
+                class="text-xs uppercase text-gray-600 hover:cursor-pointer hover:text-orange-500 dark:text-gray-400"
                 :href="talk.href_video"
               >
                 [video]
               </a>
               <a
                 v-if="talk.href_code"
-                class="text-xs uppercase text-gray-600 dark:text-gray-400 hover:cursor-pointer hover:text-orange-500"
+                class="text-xs uppercase text-gray-600 hover:cursor-pointer hover:text-orange-500 dark:text-gray-400"
                 :href="talk.href_code"
               >
                 [source_code]

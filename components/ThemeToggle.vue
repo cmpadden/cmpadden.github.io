@@ -1,13 +1,17 @@
 <template>
   <button
     @click="toggleTheme"
-    class="flex items-center justify-center w-8 h-8 rounded-md transition-colors duration-200 hover:bg-orange-500/20 bg-gray-100/10 dark:bg-gray-800/20"
-    :title="$colorMode.value === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+    class="flex h-8 w-8 items-center justify-center rounded-md bg-gray-100/10 transition-colors duration-200 hover:bg-orange-500/20 dark:bg-gray-800/20"
+    :title="
+      $colorMode.value === 'dark'
+        ? 'Switch to light mode'
+        : 'Switch to dark mode'
+    "
   >
     <!-- Sun icon for light mode -->
     <svg
       v-if="$colorMode.value === 'dark'"
-      class="w-5 h-5 text-yellow-500 dark:text-yellow-400"
+      class="h-5 w-5 text-yellow-500 dark:text-yellow-400"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -20,11 +24,11 @@
         d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
       />
     </svg>
-    
+
     <!-- Moon icon for dark mode -->
     <svg
       v-else
-      class="w-5 h-5 text-gray-700 dark:text-gray-300"
+      class="h-5 w-5 text-gray-700 dark:text-gray-300"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -41,9 +45,9 @@
 </template>
 
 <script setup>
-const { $colorMode } = useNuxtApp()
+const { $colorMode } = useNuxtApp();
 
 const toggleTheme = () => {
-  $colorMode.preference = $colorMode.value === 'dark' ? 'light' : 'dark'
-}
+  $colorMode.preference = $colorMode.value === "dark" ? "light" : "dark";
+};
 </script>

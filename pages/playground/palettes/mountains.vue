@@ -5,7 +5,9 @@
         <ClientOnly>
           <div id="canvas" class="mb-2 h-96 border-2 border-white" />
           <template #fallback>
-            <div class="mb-2 flex h-96 items-center justify-center border-2 border-white bg-gray-800">
+            <div
+              class="mb-2 flex h-96 items-center justify-center border-2 border-white bg-gray-800"
+            >
               <div class="text-white">Loading mountain visualization...</div>
             </div>
           </template>

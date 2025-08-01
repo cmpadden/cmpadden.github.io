@@ -11,7 +11,9 @@ const route = useRoute();
       <div class="flex items-center space-x-2">
         <HeadlessMenu as="div" class="relative z-50 inline-block text-left">
           <div>
-            <HeadlessMenuButton class="text-gray-700 dark:text-white hover:text-orange-500">
+            <HeadlessMenuButton
+              class="text-gray-700 hover:text-orange-500 dark:text-white"
+            >
               <div class="text-2xl">&bull;&bull;&bull;</div>
             </HeadlessMenuButton>
           </div>
@@ -25,14 +27,16 @@ const route = useRoute();
             leave-to-class="transform scale-95 opacity-0"
           >
             <HeadlessMenuItems
-              class="absolute right-0 mt-2 w-36 origin-top-right divide-y divide-gray-100 dark:divide-gray-100 rounded-md bg-white/90 dark:bg-black/80 text-gray-900 dark:text-white shadow-lg ring-1 ring-black ring-opacity-5 backdrop-blur-sm focus:outline-none"
+              class="absolute right-0 mt-2 w-36 origin-top-right divide-y divide-gray-100 rounded-md bg-white/90 text-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 backdrop-blur-sm focus:outline-none dark:divide-gray-100 dark:bg-black/80 dark:text-white"
             >
               <div class="px-1 py-1">
                 <HeadlessMenuItem v-slot="{ active }">
                   <NuxtLink to="/">
                     <button
                       :class="[
-                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
+                        active
+                          ? 'bg-orange-500/50 text-white dark:text-white'
+                          : 'text-gray-700 dark:text-white',
                         $route.path === '/' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
@@ -84,7 +88,9 @@ const route = useRoute();
                   <a href="/articles">
                     <button
                       :class="[
-                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
+                        active
+                          ? 'bg-orange-500/50 text-white dark:text-white'
+                          : 'text-gray-700 dark:text-white',
                         $route.path === '/articles' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
@@ -112,7 +118,9 @@ const route = useRoute();
                   <a href="/playground">
                     <button
                       :class="[
-                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
+                        active
+                          ? 'bg-orange-500/50 text-white dark:text-white'
+                          : 'text-gray-700 dark:text-white',
                         $route.path === '/playground' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
@@ -140,7 +148,9 @@ const route = useRoute();
                   <a href="/talks">
                     <button
                       :class="[
-                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
+                        active
+                          ? 'bg-orange-500/50 text-white dark:text-white'
+                          : 'text-gray-700 dark:text-white',
                         $route.path === '/talks' ? 'bg-orange-500' : '',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
@@ -166,7 +176,9 @@ const route = useRoute();
                   <a href="https://github.com/cmpadden">
                     <button
                       :class="[
-                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
+                        active
+                          ? 'bg-orange-500/50 text-white dark:text-white'
+                          : 'text-gray-700 dark:text-white',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
@@ -189,7 +201,9 @@ const route = useRoute();
                   <a href="https://bsky.app/profile/colton.boo">
                     <button
                       :class="[
-                        active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
+                        active
+                          ? 'bg-orange-500/50 text-white dark:text-white'
+                          : 'text-gray-700 dark:text-white',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
@@ -208,17 +222,22 @@ const route = useRoute();
                   </a>
                 </HeadlessMenuItem>
               </div>
-              
+
               <!-- Divider -->
               <div class="border-t border-gray-300 dark:border-gray-600"></div>
-              
+
               <!-- Theme Toggle Section -->
               <div class="px-1 py-1">
                 <HeadlessMenuItem v-slot="{ active }">
                   <button
-                    @click="$colorMode.preference = $colorMode.value === 'dark' ? 'light' : 'dark'"
+                    @click="
+                      $colorMode.preference =
+                        $colorMode.value === 'dark' ? 'light' : 'dark'
+                    "
                     :class="[
-                      active ? 'bg-orange-500/50 text-white dark:text-white' : 'text-gray-700 dark:text-white',
+                      active
+                        ? 'bg-orange-500/50 text-white dark:text-white'
+                        : 'text-gray-700 dark:text-white',
                       'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                     ]"
                   >
@@ -238,7 +257,7 @@ const route = useRoute();
                         d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
                       />
                     </svg>
-                    
+
                     <!-- Moon icon for when we're in light mode (clicking switches to dark) -->
                     <svg
                       v-else
@@ -255,7 +274,9 @@ const route = useRoute();
                         d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
                       />
                     </svg>
-                    <span class="translate-y-0.5">{{ $colorMode.value === 'dark' ? 'Light Mode' : 'Dark Mode' }}</span>
+                    <span class="translate-y-0.5">{{
+                      $colorMode.value === "dark" ? "Light Mode" : "Dark Mode"
+                    }}</span>
                   </button>
                 </HeadlessMenuItem>
               </div>
