@@ -1,1 +1,0 @@
-import{_ as a,c,o as t,f as n,e,ac as r,J as l}from"./By8POjSh.js";const _={},d={class:"container mx-auto h-screen bg-background font-display"},i={class:"flex flex-col border-2 bg-white"};function f(o,m){const s=r;return t(),c("main",null,[n(s),e("div",d,[e("div",i,[l(o.$slots,"default")])])])}const h=a(_,[["render",f]]);export{h as default};
