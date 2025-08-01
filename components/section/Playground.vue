@@ -102,10 +102,10 @@ const filtered_links = computed(() => {
   <section
     class="bg-gradient-to-b from-transparent to-background text-gray-700 dark:to-background-dark dark:text-white"
   >
-    <div class="container mx-auto space-y-4 py-8 text-gray-700 dark:text-white">
-      <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="container mx-auto py-8 text-gray-700 dark:text-white">
+      <div class="mb-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <nuxt-link
-          class="relative hover:ring-1 hover:ring-gray-300 dark:hover:ring-white"
+          class="relative hover:ring-1 hover:ring-gray-300 dark:hover:ring-white rounded-lg"
           v-for="link in filtered_links"
           :key="link.title"
           :to="link.link"
@@ -118,7 +118,7 @@ const filtered_links = computed(() => {
             class="absolute bottom-2 flex w-full items-center justify-center"
           >
             <div
-              class="w-full bg-black bg-[url('/images/noise.svg')] px-6 py-2"
+              class="w-full bg-black bg-[url('/images/noise.svg')] px-6 py-2 border-t border-b border-white"
             >
               <h3 class="text-xl font-bold text-gray-700 dark:text-white">
                 {{ link.title }}
@@ -131,9 +131,7 @@ const filtered_links = computed(() => {
           </div>
         </nuxt-link>
       </div>
-      <div v-if="linkToPlayground">
-        <MoreLink to="/playground" />
-      </div>
+      <MoreLink to="/playground" />
     </div>
   </section>
 </template>
