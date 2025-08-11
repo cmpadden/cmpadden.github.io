@@ -222,64 +222,6 @@ const route = useRoute();
                   </a>
                 </HeadlessMenuItem>
               </div>
-
-              <!-- Divider -->
-              <div class="border-t border-gray-300 dark:border-gray-600"></div>
-
-              <!-- Theme Toggle Section -->
-              <div class="px-1 py-1">
-                <HeadlessMenuItem v-slot="{ active }">
-                  <button
-                    @click="
-                      $colorMode.preference =
-                        $colorMode.value === 'dark' ? 'light' : 'dark'
-                    "
-                    :class="[
-                      active
-                        ? 'bg-orange-500/50 text-white dark:text-white'
-                        : 'text-gray-700 dark:text-white',
-                      'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                    ]"
-                  >
-                    <!-- Sun icon for when we're in dark mode (clicking switches to light) -->
-                    <svg
-                      v-if="$colorMode.value === 'dark'"
-                      class="mr-2 inline h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                      />
-                    </svg>
-
-                    <!-- Moon icon for when we're in light mode (clicking switches to dark) -->
-                    <svg
-                      v-else
-                      class="mr-2 inline h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                      />
-                    </svg>
-                    <span class="translate-y-0.5">{{
-                      $colorMode.value === "dark" ? "Light Mode" : "Dark Mode"
-                    }}</span>
-                  </button>
-                </HeadlessMenuItem>
-              </div>
             </HeadlessMenuItems>
           </transition>
         </HeadlessMenu>

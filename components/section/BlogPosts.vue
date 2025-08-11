@@ -11,7 +11,7 @@ const props = defineProps({
       <div v-for="(article, ix) of articles" :key="ix">
         <NuxtLink :to="article.path">
           <div
-            class="h-full space-y-4 rounded-lg p-4 text-gray-700 drop-shadow-lg hover:ring-1 hover:ring-gray-300 dark:bg-orange-400/50 dark:text-white dark:hover:ring-white"
+            class="h-full space-y-4 rounded-lg p-4 drop-shadow-lg hover:ring-1 bg-orange-400/50 text-white hover:ring-white"
           >
             <div>
               <div
@@ -24,7 +24,7 @@ const props = defineProps({
                 <NuxtTime
                   v-if="show_dates"
                   :datetime="article.date"
-                  class="text-sm text-gray-600 dark:text-gray-200"
+                  class="text-sm text-gray-200"
                   year="numeric"
                   month="short"
                   day="2-digit"
@@ -34,7 +34,7 @@ const props = defineProps({
                 >
               </div>
             </div>
-            <div class="line-clamp-3 text-sm text-gray-700 dark:text-gray-100">
+            <div class="line-clamp-3 text-sm text-gray-100">
               {{ article.description }}
             </div>
           </div>

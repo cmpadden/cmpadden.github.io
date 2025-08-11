@@ -8,10 +8,10 @@ const data = await queryCollection("content")
 <template>
   <div>
     <div
-      class="bg-orange-400 bg-[url('/images/noise.svg')] dark:bg-emerald-950"
+      class="bg-[url('/images/noise.svg')] bg-emerald-950"
     >
       <section
-        class="bg-gradient-to-b from-background to-transparent py-2 dark:from-background-dark"
+        class="bg-gradient-to-b to-transparent py-2 from-background"
       >
         <div class="container mx-auto my-12">
           <img
