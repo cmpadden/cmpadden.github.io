@@ -6,10 +6,8 @@ const data = await queryCollection("content")
 </script>
 
 <template>
-  <div>
-    <div
-      class="bg-[url('/images/noise.svg')] bg-emerald-950"
-    >
+  <div class="bg-[url('/images/noise.svg')] bg-emerald-950 min-h-screen">
+    <div>
       <section
         class="bg-gradient-to-b to-transparent py-2 from-background"
       >
