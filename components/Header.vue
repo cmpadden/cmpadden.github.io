@@ -30,9 +30,10 @@ const route = useRoute();
               class="absolute right-0 mt-2 w-36 origin-top-right divide-y divide-gray-100 rounded-md bg-white/90 text-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 backdrop-blur-sm focus:outline-none dark:divide-gray-100 dark:bg-black/80 dark:text-white"
             >
               <div class="px-1 py-1">
-                <HeadlessMenuItem v-slot="{ active }">
+                <HeadlessMenuItem v-slot="{ active, close }">
                   <NuxtLink to="/">
                     <button
+                      @click="close"
                       :class="[
                         active
                           ? 'bg-orange-500/50 text-white dark:text-white'
@@ -58,35 +59,10 @@ const route = useRoute();
                   </NuxtLink>
                 </HeadlessMenuItem>
 
-                <!-- <HeadlessMenuItem v-slot="{ active }"> -->
-                <!--   <NuxtLink to="/about"> -->
-                <!--     <button -->
-                <!--       :class="[ -->
-                <!--         active ? 'bg-orange-500/50 text-white' : 'text-white', -->
-                <!--         $route.path === '/about' ? 'bg-orange-500' : '', -->
-                <!--         'group flex w-full items-center rounded-md px-2 py-2 text-sm', -->
-                <!--       ]" -->
-                <!--     > -->
-                <!--       <svg -->
-                <!--         class="mr-2 inline h-5 w-5" -->
-                <!--         xmlns="http://www.w3.org/2000/svg" -->
-                <!--         viewBox="0 0 24 24" -->
-                <!--         fill="currentColor" -->
-                <!--       > -->
-                <!--         <path -->
-                <!--           fill-rule="evenodd" -->
-                <!--           d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" -->
-                <!--           clip-rule="evenodd" -->
-                <!--         /> -->
-                <!--       </svg> -->
-                <!--       <span class="translate-y-0.5">About</span> -->
-                <!--     </button> -->
-                <!--   </NuxtLink> -->
-                <!-- </HeadlessMenuItem> -->
-
-                <HeadlessMenuItem v-slot="{ active }">
-                  <a href="/articles">
+                <HeadlessMenuItem v-slot="{ active, close }">
+                  <NuxtLink to="/articles">
                     <button
+                      @click="close"
                       :class="[
                         active
                           ? 'bg-orange-500/50 text-white dark:text-white'
@@ -111,12 +87,13 @@ const route = useRoute();
                       </svg>
                       <span class="translate-y-0.5">Blog</span>
                     </button>
-                  </a>
+                  </NuxtLink>
                 </HeadlessMenuItem>
 
-                <HeadlessMenuItem v-slot="{ active }">
-                  <a href="/playground">
+                <HeadlessMenuItem v-slot="{ active, close }">
+                  <NuxtLink to="/playground">
                     <button
+                      @click="close"
                       :class="[
                         active
                           ? 'bg-orange-500/50 text-white dark:text-white'
@@ -141,12 +118,13 @@ const route = useRoute();
                       </svg>
                       <span class="translate-y-0.5">Experiments</span>
                     </button>
-                  </a>
+                  </NuxtLink>
                 </HeadlessMenuItem>
 
-                <HeadlessMenuItem v-slot="{ active }">
-                  <a href="/talks">
+                <HeadlessMenuItem v-slot="{ active, close }">
+                  <NuxtLink to="/talks">
                     <button
+                      @click="close"
                       :class="[
                         active
                           ? 'bg-orange-500/50 text-white dark:text-white'
@@ -169,7 +147,7 @@ const route = useRoute();
                       </svg>
                       <span class="translate-y-0.5">Talks</span>
                     </button>
-                  </a>
+                  </NuxtLink>
                 </HeadlessMenuItem>
 
                 <HeadlessMenuItem v-slot="{ active }">
