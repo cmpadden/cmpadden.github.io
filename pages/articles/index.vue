@@ -113,9 +113,7 @@ function toggleCategory(cat) {
           </template>
         </div>
       </div>
-      <div
-        class="col-span-4 border-l pl-4 border-gray-700 lg:col-span-1"
-      >
+      <div class="col-span-4 border-l border-gray-700 pl-4 lg:col-span-1">
         <div class="my-2 space-y-2">
           <p class="text-xl font-bold">Categories</p>
           <div
@@ -124,7 +122,7 @@ function toggleCategory(cat) {
             :class="{
               'bg-orange-500 text-white': selectedCategories.includes(category),
             }"
-            class="cursor-pointer p-1 text-sm hover:bg-orange-500 hover:text-white text-gray-400"
+            class="cursor-pointer p-1 text-sm text-gray-400 hover:bg-orange-500 hover:text-white"
             @click="toggleCategory(category)"
           >
             {{ category }}
@@ -139,7 +137,7 @@ function toggleCategory(cat) {
             :class="{
               'bg-orange-500 text-white': selectedTags.includes(tag),
             }"
-            class="cursor-pointer select-none p-1 text-sm hover:bg-orange-500 hover:text-white text-gray-400"
+            class="cursor-pointer select-none p-1 text-sm text-gray-400 hover:bg-orange-500 hover:text-white"
             @click="toggleTag(tag)"
           >
             {{ tag }}

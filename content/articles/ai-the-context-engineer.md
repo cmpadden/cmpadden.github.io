@@ -1,5 +1,5 @@
 ---
-title: 'The evolution of data engineering'
+title: 'An evolution of data engineering'
 draft: true
 date: "2025-07-18"
 tags: ["ai", "data"]

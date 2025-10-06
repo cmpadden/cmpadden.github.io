@@ -8,7 +8,7 @@ const { data: page } = await useAsyncData(route.path, () => {
 
 <template>
   <div
-    class="container mx-auto mb-10 max-w-[1024px] space-y-6 shadow-lg text-white"
+    class="container mx-auto mb-10 max-w-[1024px] space-y-6 text-white shadow-lg"
     v-if="page"
   >
     <!-- title -->
@@ -18,44 +18,51 @@ const { data: page } = await useAsyncData(route.path, () => {
         <img class="mr-4 h-16 border-2 border-black" :src="page.cover_image" />
       </template>
 
-      <h1 class="text-xl font-bold md:text-3xl">
+      <h1 class="text-2xl font-bold md:text-3xl">
         {{ page.title }}
       </h1>
     </div>
 
+    <h1 class="font-bold text-gray-400">
+      <NuxtTime
+        :datetime="page.date"
+        year="numeric"
+        month="short"
+        day="2-digit"
+      />
+    </h1>
+
     <!-- Meta -->
-    <div class="flex space-x-2">
-      <div>
-        <div class="mb-2 text-xs uppercase text-gray-400">
-          Category
+    <div class="hidden md:block">
+      <div class="flex space-x-2">
+        <div>
+          <div class="mb-2 text-xs uppercase text-gray-400">Category</div>
+          <div class="flex flex-row space-x-2">
+            <NuxtLink
+              class="mr-2 w-min rounded-md bg-background text-sm font-bold hover:cursor-pointer hover:text-orange-500"
+              v-for="(category, ix) in page.categories"
+              :key="ix"
+              :to="`/articles?category=${category}`"
+            >
+              {{ category }}
+            </NuxtLink>
+          </div>
         </div>
-        <div class="flex flex-row space-x-2">
-          <NuxtLink
-            class="mr-2 w-min rounded-md text-sm font-bold hover:cursor-pointer hover:text-orange-500 bg-background"
-            v-for="(category, ix) in page.categories"
-            :key="ix"
-            :to="`/articles?category=${category}`"
-          >
-            {{ category }}
-          </NuxtLink>
-        </div>
-      </div>
 
-      <div class="border-r border-gray-400"></div>
+        <div class="border-r border-gray-400"></div>
 
-      <div>
-        <div class="mb-2 text-xs uppercase text-gray-400">
-          Tags
-        </div>
-        <div class="flex flex-row md:space-x-2">
-          <NuxtLink
-            class="mr-2 w-min rounded-md text-sm font-bold hover:cursor-pointer hover:text-orange-500 bg-background"
-            v-for="(tag, ix) in page.tags"
-            :key="ix"
-            :to="`/articles?tag=${tag}`"
-          >
-            {{ tag }}
-          </NuxtLink>
+        <div>
+          <div class="mb-2 text-xs uppercase text-gray-400">Tags</div>
+          <div class="flex flex-row md:space-x-2">
+            <NuxtLink
+              class="mr-2 w-min rounded-md bg-background text-sm font-bold hover:cursor-pointer hover:text-orange-500"
+              v-for="(tag, ix) in page.tags"
+              :key="ix"
+              :to="`/articles?tag=${tag}`"
+            >
+              {{ tag }}
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </div>
@@ -65,7 +72,7 @@ const { data: page } = await useAsyncData(route.path, () => {
         - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
       -->
     <article
-      class="prose max-w-[1024px] prose-h2:mt-8 prose-p:text-justify prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-500 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-black text-gray-300"
+      class="prose max-w-[1024px] text-gray-300 prose-h2:mt-8 prose-p:text-justify prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-500 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-black prose-li:my-0"
     >
       <ContentRenderer v-if="page" :value="page" />
     </article>

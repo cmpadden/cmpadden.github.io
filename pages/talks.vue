@@ -92,21 +92,21 @@ const talks = [
             <div class="flex">
               <a
                 v-if="talk.href_slides"
-                class="text-xs uppercase hover:cursor-pointer hover:text-orange-500 text-gray-400"
+                class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
                 :href="talk.href_slides"
               >
                 [slide_deck]
               </a>
               <a
                 v-if="talk.href_video"
-                class="text-xs uppercase hover:cursor-pointer hover:text-orange-500 text-gray-400"
+                class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
                 :href="talk.href_video"
               >
                 [video]
               </a>
               <a
                 v-if="talk.href_code"
-                class="text-xs uppercase hover:cursor-pointer hover:text-orange-500 text-gray-400"
+                class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
                 :href="talk.href_code"
               >
                 [source_code]
