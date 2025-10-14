@@ -1,6 +1,12 @@
 <script setup>
 const talks = [
   {
+    title: "All Things Open 2025",
+    subtitle: "Enabling community education with a little help from AI",
+    date: new Date("2025-10-14"),
+    href_slides: "/slides/ato-2025.pdf",
+  },
+  {
     title: "MDS Fest 3.0",
     subtitle: "Abstractions: Enabling Data Teams Through Reduced Complexity",
     date: new Date("2025-5-5"),
