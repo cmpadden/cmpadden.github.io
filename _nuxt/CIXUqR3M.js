@@ -1,1 +1,0 @@
-import{_ as o,c as r,o as t,E as s}from"./D9lm7_kE.js";const a={};function c(e,n){return t(),r("thead",null,[s(e.$slots,"default")])}const _=o(a,[["render",c]]);export{_ as default};
