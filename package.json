@@ -7,7 +7,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "format": "prettier --parser vue components/ pages/ --write"
+    "format": "prettier --parser vue components/ pages/ layouts/ --write"
   },
   "devDependencies": {
     "@heroicons/vue": "^2.2.0",

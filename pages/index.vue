@@ -7,16 +7,14 @@ const data = await queryCollection("content")
 
 <template>
   <div class="min-h-screen bg-emerald-950 bg-[url('/images/noise.svg')]">
-    <div>
-      <section class="bg-gradient-to-b from-background to-transparent py-2">
-        <div class="container mx-auto my-12">
-          <div class="text-orange-500">
-            <Logo />
-          </div>
+    <section class="bg-gradient-to-b from-background to-transparent py-2">
+      <div class="container mx-auto my-12">
+        <div class="text-orange-500">
+          <Logo />
         </div>
-      </section>
-      <SectionBlogPosts :articles="data" :show_dates="true" />
-      <SectionPlayground :limit="8" showImages linkToPlayground />
-    </div>
+      </div>
+    </section>
+    <SectionBlogPosts :articles="data" :show_dates="true" />
+    <SectionPlayground :limit="8" showImages linkToPlayground />
   </div>
 </template>
