@@ -7,11 +7,11 @@ const props = defineProps({
 
 <template>
   <section class="container mx-auto space-y-2">
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
       <div v-for="(article, ix) of articles" :key="ix">
         <NuxtLink :to="article.path">
           <div
-            class="h-full space-y-4 rounded-lg bg-orange-400/50 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
+            class="h-full space-y-2 rounded-lg bg-orange-500/50 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
           >
             <div>
               <div
@@ -29,8 +29,8 @@ const props = defineProps({
                   month="short"
                   day="2-digit"
                 />
-                <span v-if="ix === 0" class="text-xs font-bold uppercase"
-                  >[latest]</span
+                <span v-if="ix === 0" class="text-xs font-bold uppercase italic"
+                  >latest</span
                 >
               </div>
             </div>

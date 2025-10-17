@@ -10,10 +10,9 @@ const data = await queryCollection("content")
     <div>
       <section class="bg-gradient-to-b from-background to-transparent py-2">
         <div class="container mx-auto my-12">
-          <img
-            src="/images/blog_and_experiments.svg"
-            class="mx-auto max-h-24"
-          />
+          <div class="text-orange-500">
+            <Logo />
+          </div>
         </div>
       </section>
       <SectionBlogPosts :articles="data" :show_dates="true" />
