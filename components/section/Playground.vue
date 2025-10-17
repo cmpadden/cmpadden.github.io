@@ -16,6 +16,12 @@ const props = defineProps({
 
 const links = [
   {
+    title: "tabs.garden",
+    description: "A simple site for guitar tabs",
+    link: "/playground/tabs-garden",
+    img: "/images/previews/tabs-garden.png",
+  },
+  {
     title: "Conway",
     description: "Conway's game of life written in vanilla Javascript",
     link: "/playground/conway",
