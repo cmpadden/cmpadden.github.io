@@ -8,6 +8,8 @@ categories: ["programming"]
 
 With the advancements of LLM-based tooling, the responsibilities (and maybe even the title!) of data engineers are changing.
 
+<!--more-->
+
 ## Origin
 
 Before we talk about the changes, let's reflect on the inception of data engineering.
