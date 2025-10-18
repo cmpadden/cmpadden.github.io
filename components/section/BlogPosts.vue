@@ -11,7 +11,7 @@ const props = defineProps({
       <div v-for="(article, ix) of articles" :key="ix">
         <NuxtLink :to="article.path">
           <div
-            class="h-full space-y-2 rounded-lg bg-orange-500/50 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
+            class="h-full space-y-2 bg-orange-500/50 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
           >
             <div>
               <div

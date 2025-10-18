@@ -95,6 +95,8 @@ const links = [
   },
 ];
 
+const route = useRoute();
+
 const filtered_links = computed(() => {
   if (props.limit === null || props.limit <= 0) {
     return links;
@@ -111,20 +113,23 @@ const filtered_links = computed(() => {
     <div class="container mx-auto py-8 text-white">
       <div class="mb-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <nuxt-link
-          class="relative rounded-lg hover:ring-1 hover:ring-white"
+          class="relative text-orange-500 ring-2 hover:text-white hover:ring-white"
           v-for="link in filtered_links"
           :key="link.title"
           :to="link.link"
         >
+          <svg class="absolute right-0 top-0 size-8" viewBox="0 0 100 100">
+            <polygon points="0,0 0,100 100,100" fill="currentColor" />
+          </svg>
           <img
-            class="grayscale-1 h-64 w-full rounded-lg bg-gray-800 object-cover"
+            class="h-64 w-full bg-gray-800 object-cover grayscale hover:grayscale-0"
             :src="link.img || 'images/placeholder.png'"
           />
           <div
             class="absolute bottom-2 flex w-full items-center justify-center px-2"
           >
             <div
-              class="w-full rounded-lg bg-black bg-[url('/images/noise.svg')] px-6 py-2"
+              class="w-full bg-black bg-[url('/images/noise.svg')] px-6 py-2"
             >
               <h3 class="text-xl font-bold text-white">
                 {{ link.title }}
@@ -137,7 +142,7 @@ const filtered_links = computed(() => {
           </div>
         </nuxt-link>
       </div>
-      <MoreLink to="/playground" />
+      <MoreLink to="/playground" v-if="route.path !== '/playground'" />
     </div>
   </section>
 </template>
