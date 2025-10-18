@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="mx-auto h-20"
+    class="mx-auto max-h-20"
     viewBox="0 0 1920 209"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
