@@ -12,7 +12,7 @@ const route = useRoute();
         <HeadlessMenu as="div" class="relative z-50 inline-block text-left">
           <div>
             <HeadlessMenuButton
-              class="text-gray-700 hover:text-orange-500 dark:text-white"
+              class="transform text-gray-700 transition-all duration-300 ease-in-out hover:scale-110 hover:text-orange-500 active:scale-95 dark:text-white"
             >
               <div class="text-2xl">&bull;&bull;&bull;</div>
             </HeadlessMenuButton>
@@ -27,7 +27,7 @@ const route = useRoute();
             leave-to-class="transform scale-95 opacity-0"
           >
             <HeadlessMenuItems
-              class="absolute right-0 mt-2 w-36 origin-top-right divide-y divide-gray-100 rounded-md bg-white/90 text-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 backdrop-blur-sm focus:outline-none dark:divide-gray-100 dark:bg-black/80 dark:text-white"
+              class="absolute right-0 mt-2 w-36 origin-top-right divide-y divide-gray-100 bg-white/90 text-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 backdrop-blur-sm focus:outline-none dark:divide-gray-100 dark:bg-black/80 dark:text-white"
             >
               <div class="px-1 py-1">
                 <HeadlessMenuItem v-slot="{ active, close }">
@@ -39,7 +39,7 @@ const route = useRoute();
                           ? 'bg-orange-500/50 text-white dark:text-white'
                           : 'text-gray-700 dark:text-white',
                         $route.path === '/' ? 'bg-orange-500' : '',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                        'group flex w-full items-center px-2 py-2 text-sm',
                       ]"
                     >
                       <svg
@@ -68,7 +68,7 @@ const route = useRoute();
                           ? 'bg-orange-500/50 text-white dark:text-white'
                           : 'text-gray-700 dark:text-white',
                         $route.path === '/articles' ? 'bg-orange-500' : '',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                        'group flex w-full items-center px-2 py-2 text-sm',
                       ]"
                     >
                       <svg
@@ -99,7 +99,7 @@ const route = useRoute();
                           ? 'bg-orange-500/50 text-white dark:text-white'
                           : 'text-gray-700 dark:text-white',
                         $route.path === '/playground' ? 'bg-orange-500' : '',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                        'group flex w-full items-center px-2 py-2 text-sm',
                       ]"
                     >
                       <svg
@@ -130,7 +130,7 @@ const route = useRoute();
                           ? 'bg-orange-500/50 text-white dark:text-white'
                           : 'text-gray-700 dark:text-white',
                         $route.path === '/talks' ? 'bg-orange-500' : '',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                        'group flex w-full items-center px-2 py-2 text-sm',
                       ]"
                     >
                       <svg
@@ -157,7 +157,7 @@ const route = useRoute();
                         active
                           ? 'bg-orange-500/50 text-white dark:text-white'
                           : 'text-gray-700 dark:text-white',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                        'group flex w-full items-center px-2 py-2 text-sm',
                       ]"
                     >
                       <svg
@@ -182,7 +182,7 @@ const route = useRoute();
                         active
                           ? 'bg-orange-500/50 text-white dark:text-white'
                           : 'text-gray-700 dark:text-white',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                        'group flex w-full items-center px-2 py-2 text-sm',
                       ]"
                     >
                       <svg
