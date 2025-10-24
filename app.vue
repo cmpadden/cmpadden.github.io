@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const title = "Colton Padden's: Blog & Experiments";
 const description = "The blog, portfolio, and repository of experiments by Colton Padden.";
-const preview_image = "/images/og-index.png";
+const preview_image = "/images/og-index.webp";
 
 useSeoMeta({
   'title': title,
@@ -9,6 +9,7 @@ useSeoMeta({
   'og:title': title,
   'og:description': description,
   'og:image': preview_image,
+  'og:image:type': 'image/webp',
   'twitter:card': "summary_large_image",
   'twitter:image': preview_image,
   'twitter:title': title,
