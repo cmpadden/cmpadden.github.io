@@ -10,7 +10,6 @@
     "format": "prettier --parser vue components/ pages/ layouts/ --write"
   },
   "devDependencies": {
-    "@heroicons/vue": "^2.2.0",
     "@nuxt/content": "^3.5.1",
     "@nuxtjs/tailwindcss": "^6.14.0",
     "@tailwindcss/typography": "^0.5.16",

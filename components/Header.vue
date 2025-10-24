@@ -1,6 +1,4 @@
 <script setup>
-import { Bars3Icon } from "@heroicons/vue/20/solid";
-
 const route = useRoute();
 </script>
 
