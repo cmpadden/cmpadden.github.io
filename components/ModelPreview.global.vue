@@ -1,33 +1,56 @@
 <template>
-  <div id="canvas" class="h-64" />
+  <div ref="container" class="h-64" />
 </template>
 
 <script setup lang="ts">
-const { $p5 } = useNuxtApp();
+import { onBeforeUnmount, onMounted, ref } from "vue";
 
-const { path, backgroundColor = 100 } = defineProps<{
-  path: string;
-  backgroundColor?: Number;
-}>();
+const props = withDefaults(
+  defineProps<{
+    path: string;
+    backgroundColor?: number;
+  }>(),
+  {
+    backgroundColor: 100,
+  },
+);
 
-onMounted(() => {
-  console.log(backgroundColor);
-  const sketch = (s) => {
-    const c = document.getElementById("canvas");
+const container = ref<HTMLElement | null>(null);
+let p5Instance: any = null;
 
-    const WIDTH = c.clientWidth;
-    const HEIGHT = c.clientHeight;
+onMounted(async () => {
+  if (!container.value) {
+    return;
+  }
 
+  const { $p5 } = useNuxtApp();
+  const p5 = await $p5();
+  const host = container.value;
+
+  const sketch = (s: any) => {
     let model;
-    let angle;
+    let angle = 0;
     let rotate = true;
 
+    const getSize = () => {
+      return {
+        width: host.clientWidth || 0,
+        height: host.clientHeight || 0,
+      };
+    };
+
     s.preload = () => {
-      model = s.loadModel(path, true);
+      model = s.loadModel(props.path, true);
     };
 
     s.setup = () => {
-      s.createCanvas(WIDTH, HEIGHT, s.WEBGL);
+      const { width, height } = getSize();
+      s.createCanvas(width, height, s.WEBGL);
+    };
+
+    s.windowResized = () => {
+      const { width, height } = getSize();
+      s.resizeCanvas(width, height);
     };
 
     s.mouseClicked = () => {
@@ -35,21 +58,32 @@ onMounted(() => {
     };
 
     s.draw = () => {
-      s.background(backgroundColor);
+      const bg = Number(props.backgroundColor ?? 100);
+
+      s.background(bg);
       s.lights();
 
       if (rotate) {
         angle = s.frameCount * 0.005;
       }
+
       s.rotateX(angle);
       s.rotateY(angle);
       s.orbitControl();
 
-      s.model(model);
+      if (model) {
+        s.model(model);
+      }
     };
   };
 
-  // eslint-disable-next-line no-new
-  new $p5(sketch, "canvas");
+  p5Instance = new p5(sketch, host);
+});
+
+onBeforeUnmount(() => {
+  if (p5Instance) {
+    p5Instance.remove?.();
+    p5Instance = null;
+  }
 });
 </script>

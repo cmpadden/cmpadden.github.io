@@ -3,7 +3,11 @@
     <div class="m-6 grid h-2/3 place-items-center">
       <div class="font-mono text-white">
         <ClientOnly>
-          <div id="canvas" class="mb-2 h-96 border-2 border-white" />
+          <div
+            ref="canvas"
+            id="canvas"
+            class="mb-2 h-96 border-2 border-white"
+          ></div>
           <template #fallback>
             <div
               class="mb-2 flex h-96 items-center justify-center border-2 border-white bg-gray-800"
@@ -24,13 +28,27 @@
 definePageMeta({ layout: "light" });
 export default {
   data() {
-    return {};
+    return {
+      p5Instance: null,
+    };
   },
-  mounted() {
+  async mounted() {
+    await this.$nextTick();
+
+    let canvas = this.$refs.canvas;
+    if (!canvas) {
+      await this.$nextTick();
+      canvas = this.$refs.canvas;
+    }
+    if (!(canvas instanceof HTMLElement)) {
+      console.warn("Mountains palette: canvas container not found");
+      return;
+    }
+
     // There is a bug where multiple p5 canvases are created within canvas div if a
     // user closely and re-opens the palettes playground. This is a workaround to
     // remove the children canvas elements within this div.
-    document.getElementById("canvas").textContent = "";
+    canvas.textContent = "";
 
     const PALETTE = [
       "#FFBA08",
@@ -47,9 +65,8 @@ export default {
 
     const sketch = (s) => {
       // canvas dimensions
-      const c = document.getElementById("canvas");
-      const WIDTH = c.clientWidth;
-      const HEIGHT = c.clientHeight;
+      const WIDTH = canvas.clientWidth;
+      const HEIGHT = canvas.clientHeight;
 
       const waves = [
         { color: PALETTE[1], min: 0, max: 0.2, yoff: 2.0 },
@@ -104,8 +121,12 @@ export default {
       };
     };
 
-    // eslint-disable-next-line no-new
-    new this.$p5(sketch, "canvas");
+    const p5 = await this.$p5();
+    this.p5Instance = new p5(sketch, canvas);
+  },
+  beforeUnmount() {
+    this.p5Instance?.remove?.();
+    this.p5Instance = null;
   },
 };
 </script>

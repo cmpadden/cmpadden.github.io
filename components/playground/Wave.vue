@@ -31,7 +31,14 @@ export default {
       default: 266,
     },
   },
-  mounted() {
+  data() {
+    return {
+      p5Instance: null,
+    };
+  },
+  async mounted() {
+    const p5 = await this.$p5();
+
     const sketch = (s) => {
       const HEIGHT = s.windowWidth >= 450 ? this.canvasHeight : 200;
       const WIDTH = s.windowWidth >= 450 ? 800 : 300;
@@ -87,11 +94,11 @@ export default {
       };
     };
 
-    // eslint-disable-next-line no-new
-    new this.$p5(sketch, this.id);
+    this.p5Instance = new p5(sketch, this.id);
   },
-  data() {
-    return {};
+  beforeUnmount() {
+    this.p5Instance?.remove?.();
+    this.p5Instance = null;
   },
 };
 </script>

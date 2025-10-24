@@ -21,9 +21,11 @@
 definePageMeta({ layout: "light" });
 export default {
   data() {
-    return {};
+    return {
+      p5Instance: null,
+    };
   },
-  mounted() {
+  async mounted() {
     const PALETTE = [
       "#FFBA08",
       "#FAA307",
@@ -88,8 +90,12 @@ export default {
       };
     };
 
-    // eslint-disable-next-line no-new
-    new this.$p5(sketch, "canvas");
+    const p5 = await this.$p5();
+    this.p5Instance = new p5(sketch, "canvas");
+  },
+  beforeUnmount() {
+    this.p5Instance?.remove?.();
+    this.p5Instance = null;
   },
 };
 </script>

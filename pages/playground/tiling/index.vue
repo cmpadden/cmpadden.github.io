@@ -106,9 +106,13 @@ definePageMeta({ layout: "light" });
 
 export default {
   data() {
-    return {};
+    return {
+      p5Instance: null,
+    };
   },
-  mounted() {
+  async mounted() {
+    const p5 = await this.$p5();
+
     const sketch = (s) => {
       const HEIGHT = 500;
       const WIDTH = 500;
@@ -175,8 +179,11 @@ export default {
       };
     };
 
-    // eslint-disable-next-line no-new
-    new this.$p5(sketch, "canvas");
+    this.p5Instance = new p5(sketch, "canvas");
+  },
+  beforeUnmount() {
+    this.p5Instance?.remove?.();
+    this.p5Instance = null;
   },
 };
 </script>
