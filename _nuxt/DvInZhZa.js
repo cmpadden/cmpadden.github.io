@@ -1,0 +1,1 @@
+import{c as t,e as r,o as s}from"./gYh6ilP8.js";const a={class:"flex h-[1024px] justify-center border-2 border-gray-500"},d={__name:"tabs-garden",setup(o){return(n,e)=>(s(),t("main",a,e[0]||(e[0]=[r("iframe",{src:"https://tabs.garden",width:"100%",height:"100%"},null,-1)])))}};export{d as default};
