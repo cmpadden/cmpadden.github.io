@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     const sitemap = new SitemapStream({ hostname: 'https://cmpadden.github.io' });
 
     sitemap.write({ url: '/' });
-    sitemap.write({ url: '/articles' });
+    sitemap.write({ url: '/blog' });
     sitemap.write({ url: '/playground' });
     sitemap.write({ url: '/playground/plotter' });
     sitemap.write({ url: '/playground/palettes/mountains' });
