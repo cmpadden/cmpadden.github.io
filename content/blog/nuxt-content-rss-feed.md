@@ -110,7 +110,7 @@ export default defineEventHandler(async (event) => {
 
     // Add non nuxt content endpoints here
     sitemap.write({ url: '/' });
-    sitemap.write({ url: '/articles' });
+    sitemap.write({ url: '/blog' });
 
     // Dynamically generate routes for Nuxt markdown content
     articles.forEach((article) => sitemap.write({ url: article._path, changefreq: 'monthly' }));

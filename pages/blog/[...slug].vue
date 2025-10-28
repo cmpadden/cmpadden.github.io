@@ -42,7 +42,7 @@ const { data: page } = await useAsyncData(route.path, () => {
               class="mr-2 w-min rounded-md bg-background text-xs font-bold uppercase hover:cursor-pointer hover:text-orange-500"
               v-for="(category, ix) in page.categories"
               :key="ix"
-              :to="`/articles?category=${category}`"
+              :to="`/blog?category=${category}`"
             >
               {{ category }}
             </NuxtLink>
@@ -58,7 +58,7 @@ const { data: page } = await useAsyncData(route.path, () => {
               class="mr-2 w-min rounded-md bg-background font-bold hover:cursor-pointer hover:text-orange-500"
               v-for="(tag, ix) in page.tags"
               :key="ix"
-              :to="`/articles?tag=${tag}`"
+              :to="`/blog?tag=${tag}`"
             >
               {{ tag }}
             </NuxtLink>

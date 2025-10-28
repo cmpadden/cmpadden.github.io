@@ -5,8 +5,8 @@ const route = useRoute();
 //
 // examples
 //
-//     localhost:3000/articles?category=embedded
-//     localhost:3000/articles?tag=embedded
+//     localhost:3000/blog?category=embedded
+//     localhost:3000/blog?tag=embedded
 
 const selectedCategories = ref([]);
 if (route.query.category) {

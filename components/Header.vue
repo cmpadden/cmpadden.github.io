@@ -60,14 +60,14 @@ const route = useRoute();
                 </HeadlessMenuItem>
 
                 <HeadlessMenuItem v-slot="{ active, close }">
-                  <NuxtLink to="/articles">
+                  <NuxtLink to="/blog">
                     <button
                       @click="close"
                       :class="[
                         active
                           ? 'bg-orange-500/50 text-white dark:text-white'
                           : 'text-gray-700 dark:text-white',
-                        $route.path === '/articles' ? 'bg-orange-500' : '',
+                        $route.path === '/blog' ? 'bg-orange-500' : '',
                         'group flex w-full items-center px-2 py-2 text-sm',
                       ]"
                     >
