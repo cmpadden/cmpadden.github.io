@@ -23,23 +23,22 @@ const { data: page } = await useAsyncData(route.path, () => {
       </h1>
     </div>
 
-    <h1 class="font-bold text-gray-400">
-      <NuxtTime
-        :datetime="page.date"
-        year="numeric"
-        month="short"
-        day="2-digit"
-      />
-    </h1>
-
     <!-- Meta -->
-    <div class="hidden md:block">
-      <div class="flex space-x-2">
+    <div class="">
+      <div class="flex-row space-x-0 md:flex md:space-x-2">
+        <NuxtTime
+          class="text-xs uppercase text-gray-400"
+          :datetime="page.date"
+          year="numeric"
+          month="short"
+          day="2-digit"
+        />
+
         <div>
-          <div class="mb-2 text-xs uppercase text-gray-400">Category</div>
-          <div class="flex flex-row space-x-2">
+          <div class="flex flex-row space-x-2 uppercase">
+            <div class="text-xs uppercase text-gray-400">Categories</div>
             <NuxtLink
-              class="mr-2 w-min rounded-md bg-background text-xs font-bold uppercase hover:cursor-pointer hover:text-orange-500"
+              class="w-min rounded-md bg-background text-xs font-bold uppercase hover:cursor-pointer hover:text-orange-500"
               v-for="(category, ix) in page.categories"
               :key="ix"
               :to="`/blog?category=${category}`"
@@ -49,13 +48,11 @@ const { data: page } = await useAsyncData(route.path, () => {
           </div>
         </div>
 
-        <div class="border-r border-gray-400"></div>
-
         <div>
-          <div class="mb-2 text-xs uppercase text-gray-400">Tags</div>
-          <div class="flex flex-row text-xs uppercase">
+          <div class="flex flex-row space-x-2 text-xs uppercase">
+            <div class="text-xs uppercase text-gray-400">Tags</div>
             <NuxtLink
-              class="mr-2 w-min rounded-md bg-background font-bold hover:cursor-pointer hover:text-orange-500"
+              class="w-min rounded-md bg-background font-bold hover:cursor-pointer hover:text-orange-500"
               v-for="(tag, ix) in page.tags"
               :key="ix"
               :to="`/blog?tag=${tag}`"
@@ -72,7 +69,7 @@ const { data: page } = await useAsyncData(route.path, () => {
         - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
       -->
     <article
-      class="prose max-w-[1024px] text-gray-300 prose-h2:mt-8 prose-p:text-justify prose-a:font-bold prose-a:text-orange-500 prose-a:no-underline hover:prose-a:text-orange-500 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-black prose-li:my-0"
+      class="prose max-w-[1024px] text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-300 prose-a:no-underline hover:prose-a:text-orange-500 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-orange-950/50 prose-li:my-0"
     >
       <ContentRenderer v-if="page" :value="page" />
     </article>
