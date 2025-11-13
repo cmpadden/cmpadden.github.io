@@ -5,6 +5,7 @@ const talks = [
     subtitle: "Enabling community education with a little help from AI",
     date: new Date("2025-10-14"),
     href_slides: "/slides/ato-2025.pdf",
+    href_video: "https://youtu.be/7Yz6i5YIytA?si=VY7uPOtRPau8Luok",
   },
   {
     title: "MDS Fest 3.0",
