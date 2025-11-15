@@ -10,11 +10,11 @@
     "format": "prettier --parser vue components/ pages/ layouts/ --write"
   },
   "devDependencies": {
-    "@nuxt/content": "^3.5.1",
+    "@nuxt/content": "^3.8.2",
     "@nuxtjs/tailwindcss": "^6.14.0",
     "@tailwindcss/typography": "^0.5.16",
     "feed": "^4.2.2",
-    "nuxt": "3.17.4",
+    "nuxt": "3.20.1",
     "nuxt-headlessui": "^1.2.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
