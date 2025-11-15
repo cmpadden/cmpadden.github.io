@@ -124,7 +124,7 @@ const search = ref("");
 const suggestions = ref([]);
 
 const { data: conjugations } = await useFetch(
-  "/1000_french_conjugations.json",
+  "/api/french-conjugations",
   {
     transform: (value) => {
       return value as Conjugation[];

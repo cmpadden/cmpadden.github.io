@@ -1,4 +1,5 @@
 import { SitemapStream, streamToPromise } from 'sitemap';
+import { queryCollection } from '#imports';
 
 export default defineEventHandler(async (event) => {
     const articles = await queryCollection(event, 'content').all();

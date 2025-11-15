@@ -21,7 +21,6 @@ export default {
         body: ["Graphik", "sans-serif"],
         mono: ["Inconsolata", "monospace"],
         fantasy: ["fantasy"],
-        milk: ["Milk and Honey"],
         mafins: ["Mafins"],
       },
       borderWidth: {

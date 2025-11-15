@@ -1,4 +1,5 @@
 import { Feed } from 'feed';
+import { queryCollection } from '#imports';
 
 const BASE_URL = "https://cmpadden.github.io"
 const AUTHOR_NAME = "Colton Padden"
