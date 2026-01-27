@@ -11,9 +11,6 @@ importers:
       chords.ts:
         specifier: ^0.1.0
         version: 0.1.0
-      p5:
-        specifier: ^1.11.7
-        version: 1.11.7
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -3317,9 +3314,6 @@ packages:
   p-wait-for@5.0.2:
     resolution: {integrity: sha512-lwx6u1CotQYPVju77R+D0vFomni/AqRfqLmqQ8hekklqZ6gAY9rONh7lBQ0uxWMkC2AuX9b2DVAl8To0NyP1JA==}
     engines: {node: '>=12'}
-
-  p5@1.11.7:
-    resolution: {integrity: sha512-NX/+qkKPIvfUW/zHMLMT46FZITqoh9+N4739DwGpc61ZY4SsUo9C7qu4b/e1SWH4/bCGnmSQT+ZgOaueNnDGTA==}
 
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
@@ -8826,8 +8820,6 @@ snapshots:
     dependencies:
       p-timeout: 6.1.4
     optional: true
-
-  p5@1.11.7: {}
 
   package-json-from-dist@1.0.1: {}
 

@@ -7,6 +7,8 @@ categories: ["examples"]
 
 Three-dimensional models, whether they be of the format `.obj` or `.stl`, can be easily rendered in your Nuxt project by using the [p5js.org](https://p5js.org/) library.
 
+> Update 2025: the interactive demos on this site now load the standalone [p5 playground](https://cmpadden.github.io/p5/) within an iframe. The component API described below still works when embedding the GitHub Pages build of that project.
+
 <!--more-->
 
 I've been using p5 for a while now to tinker and explore generative art, some of which can be found in the [/playground](/playground) section of this website. To use it with Nuxt, a [client-side plugin](https://github.com/cmpadden/cmpadden.github.io/blob/70ba674acdbe80c4a41b510a9b54edcddb19f489/plugins/p5.client.js) was created like so:

@@ -1,9 +1,18 @@
 <template>
-  <div ref="container" class="h-64" />
+  <div class="relative h-64 w-full overflow-hidden border border-white/40">
+    <iframe
+      :src="iframeSrc"
+      class="h-full w-full"
+      loading="lazy"
+      referrerpolicy="no-referrer"
+      title="Embedded p5 model preview"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { computed } from "vue";
+const PLAYGROUND_ORIGIN = "https://cmpadden.github.io/p5";
 
 const props = withDefaults(
   defineProps<{
@@ -15,75 +24,29 @@ const props = withDefaults(
   },
 );
 
-const container = ref<HTMLElement | null>(null);
-let p5Instance: any = null;
-
-onMounted(async () => {
-  if (!container.value) {
-    return;
-  }
-
-  const { $p5 } = useNuxtApp();
-  const p5 = await $p5();
-  const host = container.value;
-
-  const sketch = (s: any) => {
-    let model;
-    let angle = 0;
-    let rotate = true;
-
-    const getSize = () => {
-      return {
-        width: host.clientWidth || 0,
-        height: host.clientHeight || 0,
-      };
-    };
-
-    s.preload = () => {
-      model = s.loadModel(props.path, true);
-    };
-
-    s.setup = () => {
-      const { width, height } = getSize();
-      s.createCanvas(width, height, s.WEBGL);
-    };
-
-    s.windowResized = () => {
-      const { width, height } = getSize();
-      s.resizeCanvas(width, height);
-    };
-
-    s.mouseClicked = () => {
-      rotate = false; // disable object rotation on click
-    };
-
-    s.draw = () => {
-      const bg = Number(props.backgroundColor ?? 100);
-
-      s.background(bg);
-      s.lights();
-
-      if (rotate) {
-        angle = s.frameCount * 0.005;
-      }
-
-      s.rotateX(angle);
-      s.rotateY(angle);
-      s.orbitControl();
-
-      if (model) {
-        s.model(model);
-      }
-    };
+const sanitizePath = (path: string) => {
+  const ensureAbsolute = (p: string) => {
+    const base = PLAYGROUND_ORIGIN.replace(/\/$/, "");
+    const suffix = p.startsWith("/") ? p : `/${p}`;
+    return `${base}${suffix}`;
   };
 
-  p5Instance = new p5(sketch, host);
-});
-
-onBeforeUnmount(() => {
-  if (p5Instance) {
-    p5Instance.remove?.();
-    p5Instance = null;
+  if (!path) {
+    return ensureAbsolute("/models/mac_mini_macbook_stand.stl");
   }
+  if (/^https?:/i.test(path)) {
+    return path;
+  }
+  return ensureAbsolute(path);
+};
+
+const iframeSrc = computed(() => {
+  const modelPath = sanitizePath(props.path);
+  const search = new URLSearchParams({
+    path: modelPath,
+    bg: String(props.backgroundColor ?? 100),
+  });
+  const viewerBase = `${PLAYGROUND_ORIGIN.replace(/\/$/, "")}/experiments/model-viewer.html`;
+  return `${viewerBase}?${search.toString()}`;
 });
 </script>
