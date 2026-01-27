@@ -26,10 +26,9 @@ export default defineNuxtPlugin(() => {
 })
 ```
 
-As I've been exploring 3d-printing lately, I wanted a way to showcase some of the models I've created directly on this website. So, the `ModelPreview` component was created, which you can see in use below.
+As I've been exploring 3d-printing lately, I wanted a way to showcase some of the models I've created directly on this website. So, the `ModelPreview` component was created, and the snippet below shows how it's embedded in markdown.
 
 <!-- Low poly eevee was used as an example found here: https://www.thingiverse.com/thing:2931434 -->
-:ModelPreview{path="/models/eevee.stl" :backgroundColor="50"}
 
 The Vue component was embedded in our markdown using the following syntax is used. The `path` prop with the location of the file we want to render; in this case, that file is served on the website as well in the `public/models` folder.
 
