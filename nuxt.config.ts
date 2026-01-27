@@ -58,13 +58,18 @@ export default defineNuxtConfig({
   hooks: {
     // Generate HTML redirect files for `/articles/**` to `/blog/**`
     async 'close'() {
-      const { readdirSync, statSync } = await import('fs')
+      const { readdirSync, statSync, existsSync } = await import('fs')
       const distBlogPath = join(process.cwd(), 'dist', 'blog')
       const distArticlesPath = join(process.cwd(), 'dist', 'articles')
 
       try {
-        if (!statSync(distBlogPath).isDirectory()) {
+        if (!existsSync(distBlogPath)) {
           console.log('Blog directory not found, skipping redirect generation')
+          return
+        }
+
+        if (!statSync(distBlogPath).isDirectory()) {
+          console.log('Blog directory path is not a directory, skipping redirect generation')
           return
         }
 
