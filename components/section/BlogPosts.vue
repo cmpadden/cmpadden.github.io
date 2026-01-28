@@ -36,6 +36,6 @@ const props = defineProps({
         </NuxtLink>
       </div>
     </div>
-    <MoreLink to="/blog">See all posts</MoreLink>
+    <MoreLink to="/blog">See more posts</MoreLink>
   </section>
 </template>

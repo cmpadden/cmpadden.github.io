@@ -146,7 +146,7 @@ const filtered_links = computed(() => {
         </nuxt-link>
       </div>
       <MoreLink to="/playground" v-if="route.path !== '/playground'"
-        >See all experiments</MoreLink
+        >See more experiments</MoreLink
       >
     </div>
   </section>

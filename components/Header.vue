@@ -10,9 +10,20 @@ const route = useRoute();
         <HeadlessMenu as="div" class="relative z-50 inline-block text-left">
           <div>
             <HeadlessMenuButton
-              class="transform text-gray-700 transition-all duration-300 ease-in-out hover:scale-110 hover:text-orange-500 active:scale-95 dark:text-white"
+              class="align-middle transform text-gray-700 transition-all duration-300 ease-in-out hover:scale-110 hover:text-orange-500 active:scale-95 dark:text-white"
             >
-              <div class="text-2xl">&bull;&bull;&bull;</div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="size-5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2 4.75A.75.75 0 0 1 2.75 4h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75Zm7 10.5a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5a.75.75 0 0 1-.75-.75ZM2 10a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 10Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </HeadlessMenuButton>
           </div>
 
@@ -27,7 +38,7 @@ const route = useRoute();
             <HeadlessMenuItems
               class="absolute right-0 mt-2 w-36 origin-top-right divide-y divide-gray-100 bg-white/90 text-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 backdrop-blur-sm focus:outline-none dark:divide-gray-100 dark:bg-black/80 dark:text-white"
             >
-              <div class="px-1 py-1">
+              <div class="p-1">
                 <HeadlessMenuItem v-slot="{ active, close }">
                   <NuxtLink to="/">
                     <button
@@ -97,7 +108,7 @@ const route = useRoute();
                           ? 'bg-orange-500/50 text-white dark:text-white'
                           : 'text-gray-700 dark:text-white',
                         $route.path === '/playground' ? 'bg-orange-500' : '',
-                        'group flex w-full items-center px-2 py-2 text-sm',
+                        'y-2 group flex w-full items-center px-2 text-sm',
                       ]"
                     >
                       <svg
