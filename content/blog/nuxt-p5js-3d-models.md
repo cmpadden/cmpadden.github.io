@@ -1,5 +1,5 @@
 ---
-title: "Render three-dimensional models in NuxtContent with p5js"
+title: "Render three-dimensional models in `NuxtContent` with p5.js"
 date: "2024-12-31"
 tags: ["nuxt", "p5js", "3d"]
 categories: ["examples"]

@@ -111,9 +111,9 @@ const filtered_links = computed(() => {
     class="to-background-dark bg-gradient-to-b from-transparent text-white"
   >
     <div class="container mx-auto py-8 text-white">
-      <div class="mb-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="mb-2 grid grid-cols-1 gap-3 sm:grid-cols-3">
         <nuxt-link
-          class="relative text-orange-500 ring-2 hover:text-white hover:ring-white"
+          class="relative text-orange-500 ring-2 ring-white hover:text-white hover:ring-orange-500"
           v-for="link in filtered_links"
           :key="link.title"
           :to="link.link"
@@ -145,7 +145,9 @@ const filtered_links = computed(() => {
           </div>
         </nuxt-link>
       </div>
-      <MoreLink to="/playground" v-if="route.path !== '/playground'" />
+      <MoreLink to="/playground" v-if="route.path !== '/playground'"
+        >See all experiments</MoreLink
+      >
     </div>
   </section>
 </template>

@@ -13,7 +13,7 @@ const props = defineProps({
       :to="props.to"
       class="flex items-center text-sm font-bold text-white hover:text-orange-500"
     >
-      <span class="translate-y-0.5">More</span>
+      <span class="translate-y-0.5"><slot></slot></span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

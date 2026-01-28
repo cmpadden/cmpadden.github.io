@@ -123,14 +123,11 @@ const wordIndex = ref<number>(0);
 const search = ref("");
 const suggestions = ref([]);
 
-const { data: conjugations } = await useFetch(
-  "/api/french-conjugations",
-  {
-    transform: (value) => {
-      return value as Conjugation[];
-    },
+const { data: conjugations } = await useFetch("/api/french-conjugations", {
+  transform: (value) => {
+    return value as Conjugation[];
   },
-);
+});
 
 const word = computed(() => {
   if (conjugations.value) {

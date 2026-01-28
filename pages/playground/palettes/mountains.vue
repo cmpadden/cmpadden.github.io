@@ -17,9 +17,9 @@ const src = `${fullUrl}?embed=1`;
           loading="lazy"
         />
       </div>
-      <div class="text-center text-lg font-mono">
-        Click inside the sketch to redraw the layered waves. Colors and logic now
-        live in the standalone p5 playground.
+      <div class="text-center font-mono text-lg">
+        Click inside the sketch to redraw the layered waves. Colors and logic
+        now live in the standalone p5 playground.
       </div>
       <a
         :href="fullUrl"

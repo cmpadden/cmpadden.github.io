@@ -18,11 +18,22 @@ const src = `${viewerBase}?${query.toString()}`;
     </div>
     <div>
       Powered by the vanilla
-      <a class="text-blue-500 underline" href="https://p5js.org" target="_blank" rel="noreferrer">p5js</a>
+      <a
+        class="text-blue-500 underline"
+        href="https://p5js.org"
+        target="_blank"
+        rel="noreferrer"
+        >p5js</a
+      >
       WEBGL renderer.
     </div>
     <div class="h-[28rem] border-2 border-white">
-      <iframe :src="src" title="STL demo" class="h-full w-full" loading="lazy" />
+      <iframe
+        :src="src"
+        title="STL demo"
+        class="h-full w-full"
+        loading="lazy"
+      />
     </div>
     <a
       :href="fullUrl"

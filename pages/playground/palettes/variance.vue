@@ -17,7 +17,7 @@ const src = `${fullUrl}?embed=1`;
           loading="lazy"
         />
       </div>
-      <div class="text-center text-lg font-mono">
+      <div class="text-center font-mono text-lg">
         Watch a fixed palette drift with light RGB variance. Reload or tap the
         standalone sketch to sample a new grid.
       </div>
