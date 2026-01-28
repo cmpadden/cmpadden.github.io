@@ -208,16 +208,20 @@ watch(
             class="h-full"
           >
             <div
-              class="flex h-full flex-col justify-between space-y-3 bg-black/50 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
+              class="flex flex-col justify-between space-y-3 bg-black/50 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
             >
               <div class="space-y-1">
-                <div class="flex items-center gap-3">
-                  <p class="flex-1 text-xl font-semibold text-orange-400">
+                <div
+                  class="flex flex-col gap-1 md:flex-row md:items-center md:gap-3"
+                >
+                  <p
+                    class="text-lg font-semibold text-orange-400 md:flex-1 md:text-xl"
+                  >
                     {{ article.title }}
                   </p>
                   <NuxtTime
                     :datetime="article.date"
-                    class="text-sm text-gray-300"
+                    class="text-sm text-gray-300 md:text-right"
                     year="numeric"
                     month="short"
                     day="2-digit"
@@ -226,7 +230,7 @@ watch(
               </div>
               <p
                 v-if="article.description"
-                class="line-clamp-4 text-sm text-gray-100"
+                class="line-clamp-3 text-sm text-gray-100"
               >
                 {{ article.description }}
               </p>
@@ -284,9 +288,7 @@ watch(
             </div>
           </div>
           <div v-if="showTags">
-            <p class="text-xs uppercase tracking-widest text-gray-300">
-              Tags
-            </p>
+            <p class="text-xs uppercase tracking-widest text-gray-300">Tags</p>
             <div class="mt-3 flex flex-wrap gap-2">
               <button
                 v-for="(tag, ix) in tags"
