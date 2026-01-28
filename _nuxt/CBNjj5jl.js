@@ -1,1 +1,0 @@
-import{_ as a,c,o as t,f as n,e,aa as r,E as l}from"./BxpFUmBl.js";const _={},d={class:"container mx-auto h-screen bg-background font-display"},f={class:"flex flex-col border-2"};function i(o,m){const s=r;return t(),c("main",null,[n(s),e("div",d,[e("div",f,[l(o.$slots,"default")])])])}const p=a(_,[["render",i]]);export{p as default};
