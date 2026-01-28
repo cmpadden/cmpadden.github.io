@@ -3,7 +3,7 @@ const route = useRoute();
 </script>
 
 <template>
-  <nav class="container mx-auto py-5">
+  <nav class="container mx-auto py-3">
     <div class="flex items-center text-gray-700 dark:text-gray-200">
       <div class="flex-1" />
       <div class="flex items-center space-x-2">

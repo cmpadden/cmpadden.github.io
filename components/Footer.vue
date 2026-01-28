@@ -1,5 +1,5 @@
 <template>
-  <footer class="pin-b w-full p-4 text-xs font-bold text-white">
+  <footer class="pin-b w-full p-3 text-xs font-bold text-white">
     <div class="flex justify-center space-x-2">
       <a
         class="hover:cursor-pointer hover:text-blue-200"

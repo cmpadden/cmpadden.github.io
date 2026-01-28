@@ -26,15 +26,17 @@ const { data: page } = await useAsyncData(route.path, () => {
     <!-- Meta -->
     <div class="">
       <div class="flex-row space-x-0 md:flex md:space-x-2">
-        <NuxtTime
-          class="text-xs uppercase text-gray-400"
-          :datetime="page.date"
-          year="numeric"
-          month="short"
-          day="2-digit"
-        />
+        <p class="text-sm text-gray-300 md:text-right">
+          Published
+          <NuxtTime
+            :datetime="page.date"
+            year="numeric"
+            month="short"
+            day="2-digit"
+          />
+        </p>
 
-        <div>
+        <div v-if="false">
           <div class="flex flex-row space-x-2 uppercase">
             <div class="text-xs uppercase text-gray-400">Categories</div>
             <NuxtLink
@@ -48,7 +50,7 @@ const { data: page } = await useAsyncData(route.path, () => {
           </div>
         </div>
 
-        <div>
+        <div v-if="false">
           <div class="flex flex-row space-x-2 text-xs uppercase">
             <div class="text-xs uppercase text-gray-400">Tags</div>
             <NuxtLink
@@ -69,7 +71,7 @@ const { data: page } = await useAsyncData(route.path, () => {
         - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
       -->
     <article
-      class="prose max-w-[1024px] text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-300 prose-a:no-underline hover:prose-a:text-orange-500 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-orange-950/50 prose-li:my-0"
+      class="prose max-w-[1024px] text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0"
     >
       <ContentRenderer v-if="page" :value="page" />
     </article>
