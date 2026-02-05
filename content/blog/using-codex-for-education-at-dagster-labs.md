@@ -3,13 +3,16 @@ title: 'Using Codex for education at Dagster Labs'
 date: "2025-10-27"
 tags: ["ai", "education"]
 categories: ["ai"]
+description: "How we structure docs so AI tools can reason with them effectively."
+external_url: "https://developers.openai.com/blog/codex-for-documentation-dagster"
+external_site: "OpenAI Developer Blog"
 ---
 
 I recently had the opportunity to showcase how we use Codex for educational content at Dagster Labs which was featured on the OpenAI developer blog; you can find a full copy of that post below.
 
 <!--more-->
 
-https://developers.openai.com/blog/codex-for-documentation-dagster
+
 
 ## Overview
 

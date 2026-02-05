@@ -29,18 +29,23 @@ export default defineEventHandler(async (event) => {
     articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
     articles.forEach((article) => {
+      const isExternal = Boolean((article as any).external_url)
+      const link = isExternal ? (article as any).external_url : `${BASE_URL}${article.path}`
+      const id = link
+      const imagePath = (article as any).cover_image || (article as any).img
+
       feed.addItem({
         title: article.title ? article.title : "Missing Title",
-        id: article.path,
-        link: `${BASE_URL}${article.path}`,
-        description: article.description,
+        id,
+        link,
+        description: (article as any).description,
         author: [
           {
             name: AUTHOR_NAME,
           },
         ],
         date: new Date(article.date),
-        image: article.cover_image ? `${BASE_URL}/${article.cover_image}` : undefined
+        image: imagePath ? (imagePath.startsWith('http') ? imagePath : `${BASE_URL}${imagePath.startsWith('/') ? '' : '/'}${imagePath}`) : undefined
       });
     });
 

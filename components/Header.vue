@@ -10,7 +10,7 @@ const route = useRoute();
         <HeadlessMenu as="div" class="relative z-50 inline-block text-left">
           <div>
             <HeadlessMenuButton
-              class="align-middle transform text-gray-700 transition-all duration-300 ease-in-out hover:scale-110 hover:text-orange-500 active:scale-95 dark:text-white"
+              class="transform align-middle text-gray-700 transition-all duration-300 ease-in-out hover:scale-110 hover:text-orange-500 active:scale-95 dark:text-white"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +108,7 @@ const route = useRoute();
                           ? 'bg-orange-500/50 text-white dark:text-white'
                           : 'text-gray-700 dark:text-white',
                         $route.path === '/playground' ? 'bg-orange-500' : '',
-                        'y-2 group flex w-full items-center px-2 text-sm',
+                        'group flex w-full items-center px-2 py-2 text-sm',
                       ]"
                     >
                       <svg
