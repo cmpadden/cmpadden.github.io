@@ -1,0 +1,101 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Colton Padden&#x27;s: Blog &amp; Experiments</title><style>pre code .line{min-height:.25rem!important}</style><style>pre code .line{display:block}</style><link rel="stylesheet" href="/_nuxt/entry.Bl_akigX.css" crossorigin><link rel="preload" as="fetch" crossorigin="anonymous" href="/blog/podcast-transcription-whispercpp/_payload.json?2b987d38-98a8-4342-994b-e46a2f180ac4"><link rel="modulepreload" as="script" crossorigin href="/_nuxt/CwLGEThI.js"><link rel="modulepreload" as="script" crossorigin href="/_nuxt/CUOwbAZA.js"><link rel="modulepreload" as="script" crossorigin href="/_nuxt/CKBe-lrn.js"><link rel="modulepreload" as="script" crossorigin href="/_nuxt/DvxHPEUN.js"><link rel="modulepreload" as="script" crossorigin href="/_nuxt/CCrSFRCY.js"><link rel="modulepreload" as="script" crossorigin href="/_nuxt/B6W9kYMp.js"><link rel="modulepreload" as="script" crossorigin href="/_nuxt/CW8LrqR9.js"><link rel="modulepreload" as="script" crossorigin href="/_nuxt/CIlVBX33.js"><link rel="modulepreload" as="script" crossorigin href="/_nuxt/Bq3piegZ.js"><link rel="modulepreload" as="script" crossorigin href="/_nuxt/DwIo08Hk.js"><link rel="modulepreload" as="script" crossorigin href="/_nuxt/IvuWidMp.js"><link rel="modulepreload" as="script" crossorigin href="/_nuxt/Bw1OFBda.js"><link rel="preload" as="fetch" fetchpriority="low" crossorigin="anonymous" href="/_nuxt/builds/meta/2b987d38-98a8-4342-994b-e46a2f180ac4.json"><meta name="description" content="The blog, portfolio, and repository of experiments by Colton Padden."><meta property="og:title" content="Colton Padden's: Blog & Experiments"><meta property="og:description" content="The blog, portfolio, and repository of experiments by Colton Padden."><meta property="og:image" content="/images/og-index.webp"><meta property="og:image:type" content="image/webp"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/images/og-index.webp"><meta name="twitter:title" content="Colton Padden's: Blog & Experiments"><meta name="twitter:description" content="The blog, portfolio, and repository of experiments by Colton Padden."><script type="module" src="/_nuxt/CwLGEThI.js" crossorigin></script></head><body  class="bg-background"><div id="__nuxt"><div class="bg-gradient-to-b from-orange-500 to-red-500"><div class="p-[8px]"><main class="flex h-[calc(100vh-16px)] flex-col bg-background font-display"><nav class="container mx-auto py-3"><div class="flex items-center text-gray-700 dark:text-gray-200"><div class="flex-1"></div><div class="flex items-center space-x-2"><div data-headlessui-state class="relative z-50 inline-block text-left"><div><button id="headlessui-menu-button-v-0-0" type="button" aria-haspopup="menu" aria-expanded="false" data-headlessui-state class="align-middle transform text-gray-700 transition-all duration-300 ease-in-out hover:scale-110 hover:text-orange-500 active:scale-95 dark:text-white"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"><path fill-rule="evenodd" d="M2 4.75A.75.75 0 0 1 2.75 4h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75Zm7 10.5a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5a.75.75 0 0 1-.75-.75ZM2 10a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 10Z" clip-rule="evenodd"></path></svg></button></div><!----></div></div></div></nav><main class="no-scrollbar flex-1 overflow-scroll"><!--[--><div class="container mx-auto mb-10 max-w-[1024px] space-y-6 text-white shadow-lg"><div class="flex"><!----><h1 class="text-2xl font-bold md:text-3xl">Easily Transcribe Podcasts with Whisper.cpp</h1></div><div class=""><div class="flex-row space-x-0 md:flex md:space-x-2"><p class="text-sm text-gray-300 md:text-right"> Published <time data-year="numeric" data-month="short" data-day="2-digit" datetime="2024-01-08T00:00:00.000Z" data-prehydrate-id=":WFaGyVfuXU:">Jan 08, 2024</time></p><!----><!----></div></div><article class="prose max-w-[1024px] text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0"><div><p><!--[-->If you&#39;ve ever had the need to transcribe a podcast, lecture, or some other audio recording, it turns out it&#39;s surprisingly easy with the extremely impressive <a href="https://github.com/ggerganov/whisper.cpp" rel="nofollow"><!--[-->whisper.cpp<!--]--></a> project. This high-performance fork of <a href="https://github.com/openai/whisper" rel="nofollow"><!--[-->OpenAI&#39;s Whisper<!--]--></a> can run on all sorts of hardware -- including my M1 Mac Mini. Let&#39;s walk through an example from start-to-finish of transcribing an episode of the <a href="https://podcasts.apple.com/us/podcast/alter-everything/id1356137854" rel="nofollow"><!--[-->Alter Everything<!--]--></a> podcast.<!--]--></p><h2 id="obtain-audio-files"><a href="#obtain-audio-files"><!--[-->Obtain Audio File(s)<!--]--></a></h2><p><!--[-->First, let&#39;s get the <code><!--[-->wav<!--]--></code> file from YouTube using the <code><!--[-->youtube-dl<!--]--></code> utility. It should be noted that <code><!--[-->whisper.cpp<!--]--></code> expects <code><!--[-->wav<!--]--></code> filetypes, and this utility defaults to <code><!--[-->mp3<!--]--></code>.<!--]--></p><pre class="language-sh shiki shiki-themes github-dark" style=""><!--[--><code><span class="line" line="1"><span class="svObZ"> $</span><span class="sU2Wk"> youtube-dl</span><span class="sDLfK"> \
+</span></span><span class="line" line="2"><span class="sDLfK">    --extract-audio</span><span class="sDLfK"> \
+</span></span><span class="line" line="3"><span class="sDLfK">    --audio-format</span><span class="sU2Wk"> wav</span><span class="sDLfK"> \
+</span></span><span class="line" line="4"><span class="sDLfK">    --output</span><span class="sU2Wk"> podcast.wav</span><span class="sDLfK"> \
+</span></span><span class="line" line="5"><span class="sU2Wk">    &quot;https://www.youtube.com/watch?v=CoUN690wSYQ&quot;
+</span></span></code><!--]--></pre><p><!--[-->This file has a 44.1 kHz sample rate, and <code><!--[-->whisper.cpp<!--]--></code> expects 16 kHz, so let&#39;s go ahead and convert that.<!--]--></p><pre class="language-sh shiki shiki-themes github-dark" style=""><!--[--><code><span class="line" line="1"><span class="svObZ"> $</span><span class="sU2Wk"> file</span><span class="sU2Wk"> podcast.wav
+</span></span><span class="line" line="2"><span class="svObZ">podcast.wav:</span><span class="sU2Wk"> RIFF</span><span class="s95oV"> (little-endian) data, WAVE audio, Microsoft PCM, 16 bit, stereo 44100 Hz
+</span></span><span class="line" line="3"><span emptylineplaceholder="true">
+</span></span><span class="line" line="4"><span class="svObZ"> $</span><span class="sU2Wk"> ffmpeg</span><span class="sDLfK"> -i</span><span class="sU2Wk"> podcast.wav</span><span class="sDLfK"> -ar</span><span class="sDLfK"> 16000</span><span class="sU2Wk"> podcast-16khz.wav
+</span></span><span class="line" line="5"><span emptylineplaceholder="true">
+</span></span><span class="line" line="6"><span class="svObZ"> $</span><span class="sU2Wk"> file</span><span class="sU2Wk"> podcast-16khz.wav
+</span></span><span class="line" line="7"><span class="svObZ">podcast-16khz.wav:</span><span class="sU2Wk"> RIFF</span><span class="s95oV"> (little-endian) data, WAVE audio, Microsoft PCM, 16 bit, stereo 16000 Hz
+</span></span><span class="line" line="8"><span emptylineplaceholder="true">
+</span></span><span class="line" line="9"><span class="sAwPA"># NOTE: it looks like it&#39;s possible to specify this conversion as a post-process as a
+</span></span><span class="line" line="10"><span class="sAwPA"># flag to the `youtube-dl` command -- I will explore this further next time...
+</span></span><span class="line" line="11"><span class="sAwPA"># youtube-dl --extract-audio --audio-quality 0 --audio-format mp3 --postprocessor-args &quot;-ar 44100&quot; %dl%
+</span></span></code><!--]--></pre><h2 id="build-whispercpp-transcribe-audio"><a href="#build-whispercpp-transcribe-audio"><!--[-->Build <code><!--[-->whisper.cpp<!--]--></code> &amp; Transcribe Audio<!--]--></a></h2><p><!--[-->Then, let&#39;s get the latest version of <code><!--[-->whisper.cpp<!--]--></code>, download the English Whisper model, and build the example.<!--]--></p><pre class="language-sh shiki shiki-themes github-dark" style=""><!--[--><code><span class="line" line="1"><span class="sAwPA"># Clone the `whisper.cpp` repository
+</span></span><span class="line" line="2"><span class="svObZ"> $</span><span class="sU2Wk"> git</span><span class="sU2Wk"> clone</span><span class="sDLfK"> --depth</span><span class="sDLfK"> 1</span><span class="sU2Wk"> git@github.com:ggerganov/whisper.cpp</span><span class="s95oV"> &amp;&amp; </span><span class="sDLfK">cd</span><span class="sU2Wk"> whisper.cpp
+</span></span><span class="line" line="3"><span emptylineplaceholder="true">
+</span></span><span class="line" line="4"><span class="sAwPA"># Download the English Whisper model in `ggml` format
+</span></span><span class="line" line="5"><span class="svObZ"> $</span><span class="sU2Wk"> bash</span><span class="sU2Wk"> ./models/download-ggml-model.sh</span><span class="sU2Wk"> base.en
+</span></span><span class="line" line="6"><span emptylineplaceholder="true">
+</span></span><span class="line" line="7"><span class="sAwPA"># Build the main example
+</span></span><span class="line" line="8"><span class="svObZ"> $</span><span class="sU2Wk"> make
+</span></span></code><!--]--></pre><p><!--[-->And finally, let&#39;s transcribe that podcast!<!--]--></p><pre class="language-sh shiki shiki-themes github-dark" style=""><!--[--><code><span class="line" line="1"><span class="svObZ"> $</span><span class="sU2Wk"> ./main</span><span class="sDLfK"> \
+</span></span><span class="line" line="2"><span class="sDLfK">    -m</span><span class="sU2Wk"> ~/workspace/whisper.cpp/models/ggml-base.en.bin</span><span class="sDLfK"> \
+</span></span><span class="line" line="3"><span class="sDLfK">    -f</span><span class="sU2Wk"> ~/Downloads/podcast-16khz.wav</span><span class="sDLfK"> \
+</span></span><span class="line" line="4"><span class="sDLfK">    --output-vtt</span><span class="sDLfK"> \
+</span></span><span class="line" line="5"><span class="sDLfK">    --output-file</span><span class="sU2Wk"> out
+</span></span><span class="line" line="6"><span emptylineplaceholder="true">
+</span></span><span class="line" line="7"><span class="sAwPA"># whisper_print_timings:     load time =   114.71 ms
+</span></span><span class="line" line="8"><span class="sAwPA"># whisper_print_timings:     fallbacks =   0 p /   0 h
+</span></span><span class="line" line="9"><span class="sAwPA"># whisper_print_timings:      mel time =   692.20 ms
+</span></span><span class="line" line="10"><span class="sAwPA"># whisper_print_timings:   sample time = 22278.10 ms / 27893 runs (    0.80 ms per run)
+</span></span><span class="line" line="11"><span class="sAwPA"># whisper_print_timings:   encode time = 10000.75 ms /    55 runs (  181.83 ms per run)
+</span></span><span class="line" line="12"><span class="sAwPA"># whisper_print_timings:   decode time =   331.77 ms /    54 runs (    6.14 ms per run)
+</span></span><span class="line" line="13"><span class="sAwPA"># whisper_print_timings:   batchd time = 45236.73 ms / 27566 runs (    1.64 ms per run)
+</span></span><span class="line" line="14"><span class="sAwPA"># whisper_print_timings:   prompt time =  1921.90 ms / 11832 runs (    0.16 ms per run)
+</span></span><span class="line" line="15"><span class="sAwPA"># whisper_print_timings:    total time = 80709.54 ms
+</span></span></code><!--]--></pre><p><!--[-->A full podcast transcribed in ~80 seconds on an M1 Mac Mini -- not too bad!<!--]--></p><pre class="language-text"><!--[--><code># out.vtt
+
+00:00:00.000 --&gt; 00:00:06.480
+ &gt;&gt; Hi everyone. We recently launched a short engagement feedback survey for the Alter Everything
+
+00:00:06.480 --&gt; 00:00:11.360
+ podcast. Click the link in the episode description wherever you&#39;re listening to let us know what
+
+00:00:11.360 --&gt; 00:00:16.320
+ you think and help us improve our show.
+
+00:00:16.320 --&gt; 00:00:21.200
+ Welcome to Alter Everything, a podcast about data science and analytics culture. I&#39;m Megan
+
+00:00:21.200 --&gt; 00:00:26.440
+ Dibble and today I&#39;m talking with Nick Schrock, CTO and founder of Dagster Labs. We discussed
+
+00:00:26.440 --&gt; 00:00:31.560
+ data engineering trends, challenges in the field, why he started his company, and what
+
+00:00:31.560 --&gt; 00:00:38.960
+ makes him excited about the future of data engineering. Let&#39;s get started.
+
+00:00:38.960 --&gt; 00:00:42.720
+ &gt;&gt; Hi, Nick. It&#39;s great to have you on our show today. Thanks for being here.
+
+00:00:42.720 --&gt; 00:00:43.920
+ &gt;&gt; Thanks for having me.
+
+00:00:43.920 --&gt; 00:00:48.280
+ &gt;&gt; Yeah. Could you start off by giving an introduction to yourself for our listeners?
+
+00:00:48.280 --&gt; 00:00:52.920
+ &gt;&gt; Sure. My name is Nick Schrock. I&#39;m the CTO and founder of Dagster Labs. There&#39;s the
+
+00:00:52.920 --&gt; 00:00:59.520
+ company behind Dagster, which is a data orchestration framework. Prior to doing this, I was an engineer
+
+00:00:59.520 --&gt; 00:01:05.960
+ at Facebook from 2009, 2017. While I was there, I found a team called product infrastructure
+
+00:01:05.960 --&gt; 00:01:09.800
+ whose goal was to make our application developers more efficient and productive, and a bunch
+
+00:01:09.800 --&gt; 00:01:13.840
+ of open source work came out of that actually, one of which was React, which I had nothing
+
+00:01:13.840 --&gt; 00:01:18.040
+ to do with, but actually the CEO of Dagster Labs co-created and I personally co-created
+
+00:01:18.040 --&gt; 00:01:22.640
+ GraphQL. So as I like to say, Pete and I were present at the creation of the full hipster
+
+00:01:22.640 --&gt; 00:01:28.680
+ stack. I moved on to Facebook in 2017, figuring out what to do next, and this data engineering
+
+00:01:28.680 --&gt; 00:01:32.960
+ and data orchestration problem really got me hooked actually quite soon after I left,
+
+00:01:32.960 --&gt; 00:01:36.280
+ and the rest is history. I&#39;m sure we&#39;ll get into that more.
+</code><!--]--></pre><style>html pre.shiki code .svObZ, html code.shiki .svObZ{--shiki-default:#B392F0}html pre.shiki code .sU2Wk, html code.shiki .sU2Wk{--shiki-default:#9ECBFF}html pre.shiki code .sDLfK, html code.shiki .sDLfK{--shiki-default:#79B8FF}html .default .shiki span {color: var(--shiki-default);background: var(--shiki-default-bg);font-style: var(--shiki-default-font-style);font-weight: var(--shiki-default-font-weight);text-decoration: var(--shiki-default-text-decoration);}html .shiki span {color: var(--shiki-default);background: var(--shiki-default-bg);font-style: var(--shiki-default-font-style);font-weight: var(--shiki-default-font-weight);text-decoration: var(--shiki-default-text-decoration);}html pre.shiki code .s95oV, html code.shiki .s95oV{--shiki-default:#E1E4E8}html pre.shiki code .sAwPA, html code.shiki .sAwPA{--shiki-default:#6A737D}</style></div></article></div><!--]--></main><footer class="pin-b w-full p-3 text-xs font-bold text-white"><div class="flex justify-center space-x-2"><a class="hover:cursor-pointer hover:text-blue-200" href="https://github.com/cmpadden/cmpadden.github.io"> © Colton Padden</a><span>•</span><a class="hover:cursor-pointer hover:text-blue-200" href="/sitemap.xml">Sitemap</a><span>•</span><a class="hover:cursor-pointer hover:text-blue-200" href="/atom">RSS</a></div></footer></main></div></div></div><div id="teleports"></div><script data-hid=":WFaGyVfuXU:">document.querySelectorAll('[data-prehydrate-id*=":WFaGyVfuXU:"]').forEach(e=>{let t=window._nuxtTimeNow||=Date.now(),n=(e,t)=>t>0?e[0].toUpperCase()+e.slice(1):e,r=new Date(e.getAttribute(`datetime`)),i={};for(let t of e.getAttributeNames())if(t.startsWith(`data-`)){let r=t.slice(5).split(`-`).map(n).join(``);r===`relativeStyle`&&(r=`style`),i[r]=e.getAttribute(t)}if(i.relative){let n=(r.getTime()-t)/1e3,a=[{unit:`second`,seconds:1,threshold:60},{unit:`minute`,seconds:60,threshold:60},{unit:`hour`,seconds:3600,threshold:24},{unit:`day`,seconds:86400,threshold:30},{unit:`month`,seconds:2592e3,threshold:12},{unit:`year`,seconds:31536e3,threshold:1/0}],{unit:o,seconds:s}=a.find(({seconds:e,threshold:t})=>Math.abs(n/e)<t)||a[a.length-1],c=n/s;e.textContent=new Intl.RelativeTimeFormat(i.locale,i).format(Math.round(c),o)}else e.textContent=new Intl.DateTimeFormat(i.locale,i).format(r)})</script><script type="application/json" data-nuxt-data="nuxt-app" data-ssr="true" id="__NUXT_DATA__" data-src="/blog/podcast-transcription-whispercpp/_payload.json?2b987d38-98a8-4342-994b-e46a2f180ac4">[{"state":1,"once":3,"_errors":4,"serverRendered":6,"path":7,"prerenderedAt":8},["Reactive",2],{},["Set"],["ShallowReactive",5],{"/blog/podcast-transcription-whispercpp":-1},true,"/blog/podcast-transcription-whispercpp",1770318819397]</script><script>window.__NUXT__={};window.__NUXT__.config={public:{mdc:{components:{prose:true,map:{}},headings:{anchorLinks:{h1:false,h2:true,h3:true,h4:true,h5:false,h6:false}}},content:{wsUrl:""}},app:{baseURL:"/",buildId:"2b987d38-98a8-4342-994b-e46a2f180ac4",buildAssetsDir:"/_nuxt/",cdnURL:""}}</script></body></html>
