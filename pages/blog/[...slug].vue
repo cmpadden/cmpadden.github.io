@@ -112,7 +112,7 @@ function externalSite(p: any) {
           class="font-semibold text-orange-300"
         >
           {{ externalSite(page) }} </a
-        >.
+        > blog.
       </div>
     </div>
 
