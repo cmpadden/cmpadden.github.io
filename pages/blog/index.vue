@@ -5,7 +5,7 @@ const router = useRouter();
 const selectedCategories = ref([]);
 const selectedTags = ref([]);
 const currentPage = ref(1);
-const pageSize = 5;
+const pageSize = 8;
 
 const showTags = ref(true);
 
