@@ -3,6 +3,17 @@ const props = defineProps({
   articles: Object,
   show_dates: false,
 });
+
+function externalSite(article) {
+  if (!article?.external_url) return ''
+  if (article?.external_site) return article.external_site
+  try {
+    const u = new URL(article.external_url)
+    return u.hostname.replace(/^www\./, '')
+  } catch {
+    return article.external_url
+  }
+}
 </script>
 
 <template>
@@ -20,22 +31,19 @@ const props = defineProps({
               >
                 {{ article.title }}
               </div>
-              <template v-if="article.external_url">
-                <span
-                  class="rounded border border-orange-500/30 bg-orange-500/20 px-2 py-0.5 text-[10px] uppercase tracking-wide text-orange-300"
-                  >External</span
-                >
-              </template>
-              <template v-if="show_dates">
-                <NuxtTime
-                  :datetime="article.date"
-                  class="text-sm text-gray-200"
-                  year="numeric"
-                  month="short"
-                  day="2-digit"
-                />
-              </template>
+              <div class="flex items-center gap-2 md:ml-auto">
+                <ExternalIndicator v-if="article.external_url" :site="externalSite(article)" />
+              </div>
             </div>
+            <template v-if="show_dates">
+              <NuxtTime
+                :datetime="article.date"
+                class="text-xs text-gray-300"
+                year="numeric"
+                month="short"
+                day="2-digit"
+              />
+            </template>
             <div class="line-clamp-3 text-sm text-gray-100">
               {{
                 article.description ||

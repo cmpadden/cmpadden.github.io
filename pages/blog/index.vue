@@ -215,7 +215,7 @@ watch(
           <template v-for="article in paginatedArticles" :key="article._id">
             <NuxtLink :to="article.path" class="h-full">
               <div
-                class="flex flex-col justify-between space-y-3 bg-black/50 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
+                class="flex flex-col justify-between space-y-2 bg-black/50 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
               >
                 <div class="space-y-1">
                   <div
@@ -227,21 +227,19 @@ watch(
                       {{ article.title }}
                     </p>
                     <div class="flex items-center gap-2 md:ml-auto">
-                      <template v-if="article.external_url">
-                        <span
-                          class="rounded border border-orange-500/30 bg-orange-500/20 px-2 py-0.5 text-[10px] uppercase tracking-wide text-orange-300"
-                          >{{ externalSite(article) }}</span
-                        >
-                      </template>
-                      <NuxtTime
-                        :datetime="article.date"
-                        class="text-sm text-gray-300 md:text-right"
-                        year="numeric"
-                        month="short"
-                        day="2-digit"
+                      <ExternalIndicator
+                        v-if="article.external_url"
+                        :site="externalSite(article)"
                       />
                     </div>
                   </div>
+                  <NuxtTime
+                    :datetime="article.date"
+                    class="text-xs text-gray-300"
+                    year="numeric"
+                    month="short"
+                    day="2-digit"
+                  />
                 </div>
                 <p
                   v-if="article.description"
