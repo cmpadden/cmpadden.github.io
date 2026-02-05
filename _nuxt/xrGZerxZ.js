@@ -1,0 +1,1 @@
+import{_ as a,c as t,o as c,f as n,e,ae as r,K as l}from"./BzE8NJvd.js";const _={},d={class:"container mx-auto h-screen font-display"},f={class:"flex flex-col border-2"};function i(s,m){const o=r;return c(),t("main",null,[n(o),e("div",d,[e("div",f,[l(s.$slots,"default")])])])}const u=a(_,[["render",i]]);export{u as default};
