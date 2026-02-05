@@ -18,8 +18,10 @@ export default defineEventHandler(async (event) => {
     sitemap.write({ url: '/playground/french' });
     sitemap.write({ url: '/playground/matrix' });
 
-    // Dynamically generate routes for Nuxt markdown content
-    articles.forEach((article) => sitemap.write({ url: article.path, changefreq: 'monthly' }));
+    // Dynamically generate routes for Nuxt markdown content (exclude external summaries)
+    articles
+      .filter((a: any) => !a.external_url)
+      .forEach((article) => sitemap.write({ url: article.path, changefreq: 'monthly' }));
     sitemap.end();
 
     return (await streamToPromise(sitemap));

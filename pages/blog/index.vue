@@ -64,6 +64,17 @@ const paginatedArticles = computed(() => {
   return visibleArticles.value.slice(start, start + pageSize);
 });
 
+function externalSite(article) {
+  if (!article?.external_url) return "";
+  if (article?.external_site) return article.external_site;
+  try {
+    const u = new URL(article.external_url);
+    return u.hostname.replace(/^www\./, "");
+  } catch {
+    return article.external_url;
+  }
+}
+
 function toggleTag(tag) {
   if (selectedTags.value.includes(tag)) {
     selectedTags.value = selectedTags.value.filter((el) => el !== tag);
@@ -201,46 +212,51 @@ watch(
     <div class="container mx-auto space-y-8">
       <div class="space-y-4">
         <div class="grid gap-4">
-          <NuxtLink
-            v-for="article in paginatedArticles"
-            :key="article._id"
-            :to="article.path"
-            class="h-full"
-          >
-            <div
-              class="flex flex-col justify-between space-y-3 bg-black/50 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
-            >
-              <div class="space-y-1">
-                <div
-                  class="flex flex-col gap-1 md:flex-row md:items-center md:gap-3"
-                >
-                  <p
-                    class="text-lg font-semibold text-orange-400 md:flex-1 md:text-xl"
-                  >
-                    {{ article.title }}
-                  </p>
-                  <NuxtTime
-                    :datetime="article.date"
-                    class="text-sm text-gray-300 md:text-right"
-                    year="numeric"
-                    month="short"
-                    day="2-digit"
-                  />
-                </div>
-              </div>
-              <p
-                v-if="article.description"
-                class="line-clamp-3 text-sm text-gray-100"
+          <template v-for="article in paginatedArticles" :key="article._id">
+            <NuxtLink :to="article.path" class="h-full">
+              <div
+                class="flex flex-col justify-between space-y-3 bg-black/50 p-4 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
               >
-                {{ article.description }}
-              </p>
-              <ContentRenderer
-                v-else-if="article.meta?.excerpt"
-                :value="article.meta.excerpt"
-                class="line-clamp-4 text-sm text-gray-100"
-              />
-            </div>
-          </NuxtLink>
+                <div class="space-y-1">
+                  <div
+                    class="flex flex-col gap-1 md:flex-row md:items-center md:gap-3"
+                  >
+                    <p
+                      class="text-lg font-semibold text-orange-400 md:flex-1 md:text-xl"
+                    >
+                      {{ article.title }}
+                    </p>
+                    <div class="flex items-center gap-2 md:ml-auto">
+                      <template v-if="article.external_url">
+                        <span
+                          class="rounded border border-orange-500/30 bg-orange-500/20 px-2 py-0.5 text-[10px] uppercase tracking-wide text-orange-300"
+                          >{{ externalSite(article) }}</span
+                        >
+                      </template>
+                      <NuxtTime
+                        :datetime="article.date"
+                        class="text-sm text-gray-300 md:text-right"
+                        year="numeric"
+                        month="short"
+                        day="2-digit"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <p
+                  v-if="article.description"
+                  class="line-clamp-3 text-sm text-gray-100"
+                >
+                  {{ article.description }}
+                </p>
+                <ContentRenderer
+                  v-else-if="article.meta?.excerpt"
+                  :value="article.meta.excerpt"
+                  class="line-clamp-4 text-sm text-gray-100"
+                />
+              </div>
+            </NuxtLink>
+          </template>
         </div>
 
         <div class="flex items-center justify-between text-sm text-gray-300">

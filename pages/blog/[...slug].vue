@@ -4,6 +4,34 @@ const route = useRoute();
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection("content").path(route.path).first();
 });
+
+watchEffect(() => {
+  if (!page.value) return;
+  const isExternal = Boolean((page.value as any).external_url);
+  const canonical =
+    (page.value as any).canonical_url || (page.value as any).external_url;
+
+  useHead({
+    meta: [
+      // avoid duplicate indexing for external summaries
+      isExternal ? { name: "robots", content: "noindex,follow" } : undefined,
+    ].filter(Boolean) as any,
+    link: [
+      canonical ? { rel: "canonical", href: canonical } : undefined,
+    ].filter(Boolean) as any,
+  });
+});
+
+function externalSite(p: any) {
+  if (!p?.external_url) return "";
+  if (p?.external_site) return p.external_site;
+  try {
+    const u = new URL(p.external_url);
+    return u.hostname.replace(/^www\./, "");
+  } catch {
+    return p.external_url;
+  }
+}
 </script>
 
 <template>
@@ -14,8 +42,11 @@ const { data: page } = await useAsyncData(route.path, () => {
     <!-- title -->
     <div class="flex">
       <!-- https://content.nuxt.com/components/content-slot -->
-      <template v-if="page.cover_image">
-        <img class="mr-4 h-16 border-2 border-black" :src="page.cover_image" />
+      <template v-if="page.cover_image || page.img">
+        <img
+          class="mr-4 h-16 border-2 border-black"
+          :src="page.cover_image || page.img"
+        />
       </template>
 
       <h1 class="text-2xl font-bold md:text-3xl">
@@ -63,6 +94,25 @@ const { data: page } = await useAsyncData(route.path, () => {
             </NuxtLink>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- external banner and CTA (below title/date, above content) -->
+    <div
+      v-if="page.external_url"
+      class="flex items-center justify-between gap-4 rounded border border-orange-500/30 bg-orange-500/10 p-3"
+    >
+      <div class="text-sm text-gray-200">
+        The original version of this article can be found on the
+
+        <a
+          :href="page.external_url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-semibold text-orange-300"
+        >
+          {{ externalSite(page) }} </a
+        >.
       </div>
     </div>
 
