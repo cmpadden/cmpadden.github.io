@@ -8,7 +8,7 @@ const articles = await queryCollection("content")
 <template>
   <div class="min-h-screen bg-emerald-950 bg-[url('/images/noise.svg')]">
     <section class="bg-gradient-to-b from-background to-transparent py-2">
-      <div class="container mx-auto my-7">
+      <div class="container my-7">
         <div class="text-orange-500">
           <Logo />
         </div>

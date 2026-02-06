@@ -76,7 +76,7 @@ const talks = [
 </script>
 
 <template>
-  <div class="container mx-auto font-mono text-white">
+  <div class="container font-mono text-white">
     <h1 class="my-6 text-2xl font-extrabold">Talks</h1>
     <div class="grid grid-cols-10 gap-y-6">
       <template v-for="(talk, ix) in talks" :key="ix">

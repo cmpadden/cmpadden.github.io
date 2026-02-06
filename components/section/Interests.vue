@@ -2,7 +2,7 @@
   <section class="text-white">
     <div class="bg-gradient-to-b from-background to-transparent">
       <div
-        class="container mx-auto grid grid-cols-1 space-y-6 py-8 md:grid-cols-3 md:space-x-6 md:space-y-0"
+        class="container grid grid-cols-1 space-y-6 py-8 md:grid-cols-3 md:space-x-6 md:space-y-0"
       >
         <div>
           <div

@@ -5,19 +5,19 @@ const props = defineProps({
 });
 
 function externalSite(article) {
-  if (!article?.external_url) return ''
-  if (article?.external_site) return article.external_site
+  if (!article?.external_url) return "";
+  if (article?.external_site) return article.external_site;
   try {
-    const u = new URL(article.external_url)
-    return u.hostname.replace(/^www\./, '')
+    const u = new URL(article.external_url);
+    return u.hostname.replace(/^www\./, "");
   } catch {
-    return article.external_url
+    return article.external_url;
   }
 }
 </script>
 
 <template>
-  <section class="container mx-auto space-y-2">
+  <section class="container space-y-2">
     <div class="grid grid-cols-1 gap-3">
       <div v-for="(article, ix) of articles" :key="ix">
         <NuxtLink :to="article.path">
@@ -32,7 +32,10 @@ function externalSite(article) {
                 {{ article.title }}
               </div>
               <div class="flex items-center gap-2 md:ml-auto">
-                <ExternalIndicator v-if="article.external_url" :site="externalSite(article)" />
+                <ExternalIndicator
+                  v-if="article.external_url"
+                  :site="externalSite(article)"
+                />
               </div>
             </div>
             <template v-if="show_dates">

@@ -12,7 +12,7 @@ const props = defineProps({
     class="inline-flex items-center gap-1 rounded border border-orange-500/30 bg-orange-500/20 px-2 py-0.5"
   >
     <span
-      class="text-[10px] leading-none uppercase tracking-wide text-orange-300"
+      class="text-[10px] uppercase leading-none tracking-wide text-orange-300"
       >External - {{ site }}</span
     >
     <svg

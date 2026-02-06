@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto font-mono">
+  <div class="container font-mono">
     <div class="bg-background text-white">
       <div class="grid grid-cols-3 gap-4">
         <!-- Controls -->

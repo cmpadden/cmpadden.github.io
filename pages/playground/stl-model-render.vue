@@ -10,7 +10,7 @@ const src = `${viewerBase}?${query.toString()}`;
 </script>
 
 <template>
-  <div class="container m-8 mx-auto space-y-4 text-white">
+  <div class="container m-8 space-y-4 text-white">
     <div class="text-2xl font-bold"><code>.stl</code> Model Render Demo</div>
     <div class="font-body">
       Models auto-rotate until you click the canvas. Use the iframe menu to open

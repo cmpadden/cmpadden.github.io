@@ -36,7 +36,7 @@ function externalSite(p: any) {
 
 <template>
   <div
-    class="container mx-auto mb-10 max-w-[1024px] space-y-6 text-white shadow-lg"
+    class="container mb-10 max-w-[1024px] space-y-6 text-white shadow-lg"
     v-if="page"
   >
     <!-- title -->
@@ -111,8 +111,9 @@ function externalSite(p: any) {
           rel="noopener noreferrer"
           class="font-semibold text-orange-300"
         >
-          {{ externalSite(page) }} </a
-        > blog.
+          {{ externalSite(page) }}
+        </a>
+        blog.
       </div>
     </div>
 

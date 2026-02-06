@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto space-y-5 rounded-lg bg-white/20 py-5">
+  <div class="container space-y-5 rounded-lg bg-white/20 py-5">
     <SectionAboutMe />
     <div class="flex flex-row items-center justify-center">
       <div class="text-orange-500">

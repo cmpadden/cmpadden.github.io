@@ -110,7 +110,7 @@ const filtered_links = computed(() => {
   <section
     class="to-background-dark bg-gradient-to-b from-transparent text-white"
   >
-    <div class="container mx-auto py-8 text-white">
+    <div class="container py-8 text-white">
       <div class="mb-2 grid grid-cols-1 gap-3 sm:grid-cols-3">
         <nuxt-link
           class="relative text-orange-500 ring-2 ring-white hover:text-white hover:ring-orange-500"

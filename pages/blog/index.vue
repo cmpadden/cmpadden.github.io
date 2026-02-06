@@ -209,7 +209,7 @@ watch(
   <section
     class="min-h-screen bg-emerald-950 bg-[url('/images/noise.svg')] py-10 text-white"
   >
-    <div class="container mx-auto space-y-8">
+    <div class="container space-y-8">
       <div class="space-y-4">
         <div class="grid gap-4">
           <template v-for="article in paginatedArticles" :key="article._id">

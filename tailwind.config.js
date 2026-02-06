@@ -1,12 +1,17 @@
 export default {
   theme: {
     container: {
+      center: true,
       padding: {
         DEFAULT: "2rem",
-        sm: "4rem",
-        lg: "8rem",
-        xl: "10rem",
-        "2xl": "12rem",
+      },
+      // Set content max-widths narrower than breakpoints for a tighter layout
+      screens: {
+        sm: "640px",
+        md: "704px",
+        lg: "768px",
+        xl: "896px",
+        "2xl": "1024px",
       },
     },
     extend: {

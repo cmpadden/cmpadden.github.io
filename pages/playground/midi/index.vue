@@ -98,7 +98,7 @@
         </div>
       </div>
 
-      <div class="container mx-auto p-8">
+      <div class="container p-8">
         <div class="font-display text-4xl font-light tracking-wide">
           MIDI Events
         </div>
