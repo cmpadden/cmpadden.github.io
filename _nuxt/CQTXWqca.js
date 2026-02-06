@@ -1,1 +1,0 @@
-import{a as o}from"./DK41SIPY.js";import{_ as s,c,f as n,o as t}from"./flXBs0hw.js";const a={},r={class:"min-h-screen bg-emerald-950 bg-[url('/images/noise.svg')] py-10 text-white"};function _(i,m){const e=o;return t(),c("div",r,[n(e,{showImages:""})])}const l=s(a,[["render",_]]);export{l as default};
