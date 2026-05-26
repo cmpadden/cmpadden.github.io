@@ -1,7 +1,7 @@
 <template>
-  <div class="m-4 space-y-4">
+  <div class="space-y-4 p-4 text-slate-100">
     <!-- Instructions -->
-    <div class="m-2 w-4/5">
+    <div class="max-w-3xl text-lg leading-relaxed text-slate-100">
       Walk through the steps of matrix multiplication with randomly generated
       matrices. Press the <em>Spacebar</em> or click the
       <em class="bg-blue-200 text-blue-800">buttons</em> to iterate through the
@@ -70,9 +70,9 @@
 
     <!-- Matrices -->
     <div class="flex flex-wrap">
-      <div class="w-34 m-2 border border-gray-400 sm:w-min">
+      <div class="w-34 m-2 border border-gray-400 text-slate-950 sm:w-min">
         <div class="bg-gray-200 p-4 text-center font-bold">Matrix A</div>
-        <div class="flex items-center justify-center p-4">
+        <div class="flex items-center justify-center bg-white p-4">
           <table class="text-center">
             <tr v-for="(row, i) in a" :key="i">
               <td
@@ -91,9 +91,9 @@
           </table>
         </div>
       </div>
-      <div class="w-34 m-2 border border-gray-400 sm:w-min">
+      <div class="w-34 m-2 border border-gray-400 text-slate-950 sm:w-min">
         <div class="bg-gray-200 p-4 text-center font-bold">Matrix B</div>
-        <div class="flex items-center justify-center p-4">
+        <div class="flex items-center justify-center bg-white p-4">
           <table class="text-center">
             <tr v-for="(row, i) in b" :key="i">
               <td
@@ -116,11 +116,11 @@
       <!-- Result -->
       <div
         v-if="started"
-        class="m-2 w-72 border border-gray-400 sm:w-min"
+        class="m-2 w-72 border border-gray-400 text-slate-950 sm:w-min"
         :class="{ 'bg-green-200': done }"
       >
         <div class="bg-gray-200 p-4 text-center font-bold">Result</div>
-        <div class="flex items-center justify-center p-4">
+        <div class="flex items-center justify-center bg-white p-4">
           <table class="text-center">
             <tr v-for="(row, i) in step['c']" :key="i">
               <td v-for="(col, j) in step['c'][i]" :key="j" class="p-2">
@@ -134,7 +134,7 @@
       <!-- Log of all steps -->
       <div
         v-if="started"
-        class="m-2 w-72 border border-gray-400 bg-gray-100 p-2"
+        class="m-2 w-72 border border-gray-400 bg-gray-100 p-2 text-slate-950"
       >
         <div class="text-center font-bold">Steps</div>
         <div class="font-mono">

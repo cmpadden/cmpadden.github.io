@@ -2,33 +2,22 @@
 definePageMeta({ layout: "light" });
 const PLAYGROUND_ORIGIN = "https://cmpadden.github.io/p5";
 const pagePath = "/experiments/mountains.html";
-const fullUrl = `${PLAYGROUND_ORIGIN}${pagePath}`;
-const src = `${fullUrl}?embed=1`;
+const src = `${PLAYGROUND_ORIGIN}${pagePath}?embed=1&v=embed-shell-2`;
 </script>
 
 <template>
-  <div class="">
-    <div class="flex flex-col items-center justify-center gap-6 p-6 text-white">
-      <div class="w-full max-w-4xl overflow-hidden">
-        <iframe
-          :src="src"
-          title="Perlin Mountains sketch"
-          class="h-[48rem] w-full"
-          loading="lazy"
-        />
-      </div>
-      <div class="text-center font-mono text-lg">
-        Click inside the sketch to redraw the layered waves. Colors and logic
-        now live in the standalone p5 playground.
-      </div>
-      <a
-        :href="fullUrl"
-        target="_blank"
-        rel="noreferrer"
-        class="border-2 border-white px-6 py-2 text-sm uppercase tracking-widest"
-      >
-        Open full screen
-      </a>
-    </div>
+  <div class="space-y-4 py-4 text-white">
+    <header class="mx-auto max-w-5xl">
+      <h1 class="font-mono text-2xl font-bold">Perlin Mountain Palette</h1>
+      <p class="mt-1 font-mono text-sm text-white/70">
+        Visualize a gradient of layered waves generated with Perlin noise.
+      </p>
+    </header>
+    <iframe
+      :src="src"
+      title="Perlin Mountains sketch"
+      class="mx-auto block h-[360px] w-full max-w-5xl border-2"
+      loading="lazy"
+    />
   </div>
 </template>

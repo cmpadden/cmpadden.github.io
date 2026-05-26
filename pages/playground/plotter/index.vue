@@ -2,33 +2,22 @@
 definePageMeta({ layout: "light" });
 const PLAYGROUND_ORIGIN = "https://cmpadden.github.io/p5";
 const pagePath = "/experiments/plotter.html";
-const fullUrl = `${PLAYGROUND_ORIGIN}${pagePath}`;
-const src = `${fullUrl}?embed=1`;
+const src = `${PLAYGROUND_ORIGIN}${pagePath}?embed=1&v=embed-shell-2`;
 </script>
 
 <template>
-  <div>
-    <div class="flex flex-col items-center justify-center gap-6 p-6 text-white">
-      <div class="w-full max-w-4xl overflow-hidden">
-        <iframe
-          :src="src"
-          title="Sequence plotter"
-          class="h-[48rem] w-full"
-          loading="lazy"
-        />
-      </div>
-      <div class="text-center font-mono">
-        Adjust turtle-like motion parameters in the dedicated p5 playground. The
-        iframe keeps the original Nuxt routes intact.
-      </div>
-      <a
-        :href="fullUrl"
-        target="_blank"
-        rel="noreferrer"
-        class="border-2 border-white px-6 py-2 text-sm uppercase tracking-widest"
-      >
-        Open full screen
-      </a>
-    </div>
+  <div class="space-y-4 py-4 text-white">
+    <header class="mx-auto max-w-5xl">
+      <h1 class="font-mono text-2xl font-bold">Sequence Plotter</h1>
+      <p class="mt-1 font-mono text-sm text-white/70">
+        Adjust turtle-like motion parameters to draw paths from digit sequences.
+      </p>
+    </header>
+    <iframe
+      :src="src"
+      title="Sequence plotter"
+      class="mx-auto block h-[48rem] w-full max-w-5xl border-2"
+      loading="lazy"
+    />
   </div>
 </template>

@@ -6,6 +6,7 @@ const modelPath = `${PLAYGROUND_ORIGIN}/models/mac_mini_macbook_stand.stl`;
 const query = new URLSearchParams({ path: modelPath, bg: "30" });
 const fullUrl = `${viewerBase}?${query.toString()}`;
 query.set("embed", "1");
+query.set("v", "embed-shell-2");
 const src = `${viewerBase}?${query.toString()}`;
 </script>
 

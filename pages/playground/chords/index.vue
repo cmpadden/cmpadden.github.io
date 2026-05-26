@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-2/3 bg-gradient-to-b from-green-900 via-purple-900 to-indigo-900 text-white"
+    class="relative min-h-[32rem] overflow-hidden bg-gradient-to-b from-green-900 via-purple-900 to-indigo-900 text-white"
   >
     <!-- Message for unsupported browsers -->
     <div
@@ -17,7 +17,7 @@
     </div>
 
     <!-- Main application -->
-    <div v-else>
+    <div v-else class="relative min-h-[32rem]">
       <div class="flex flex-wrap">
         <div class="absolute bottom-16 right-2">
           <div
@@ -106,7 +106,7 @@
           </div>
         </div>
       </div>
-      <div class="grid h-screen place-items-center">
+      <div class="grid min-h-[32rem] place-items-center">
         <div>
           <div class="text-center text-4xl font-semibold tracking-wide">
             <!-- <div v-if="activeKeys.size === 0">-</div> -->

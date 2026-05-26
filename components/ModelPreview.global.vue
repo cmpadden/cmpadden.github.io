@@ -45,6 +45,8 @@ const iframeSrc = computed(() => {
   const search = new URLSearchParams({
     path: modelPath,
     bg: String(props.backgroundColor ?? 100),
+    embed: "1",
+    v: "embed-shell-2",
   });
   const viewerBase = `${PLAYGROUND_ORIGIN.replace(/\/$/, "")}/experiments/model-viewer.html`;
   return `${viewerBase}?${search.toString()}`;
