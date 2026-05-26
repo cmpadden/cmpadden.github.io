@@ -44,7 +44,7 @@ The image is still 1200x630, and the hidden payload is 20,557 bytes after compre
 Here's the encoder:
 
 ```shell
-python3 encode.py script.txt noise.png
+uv run encode.py script.txt noise.png
 ```
 
 ```python
@@ -148,7 +148,7 @@ The script writes a minimal RGB PNG directly with the PNG signature, `IHDR`, `ID
 And here's the decoder:
 
 ```shell
-python3 decode.py noise.png decoded.txt
+uv run decode.py noise.png decoded.txt
 ```
 
 ```python
@@ -304,7 +304,7 @@ curl -fsSL https://cmpadden.github.io/images/noise.png -o noise.png
 Save the `decode.py` snippet, and then run the following:
 
 ```shell
-$ python decode.py noise.png out.txt && head -n10 out.txt
+$ uv run decode.py noise.png out.txt && head -n10 out.txt
 Decoded 49,474 bytes to out.txt
 According to all known laws of aviation, there is no way a bee should be able to fly.
 Its wings are too small to get its fat little body off the ground.
@@ -321,5 +321,5 @@ Hello?
 To hide your own text file inside of a noisy image, save `encode.py` and then run:
 
 ```shell
-python encode.py my-super-secret-text.txt noise.png
+uv run encode.py my-super-secret-text.txt noise.png
 ```
