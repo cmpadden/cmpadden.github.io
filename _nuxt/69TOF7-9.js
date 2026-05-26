@@ -1,0 +1,1 @@
+import{a as o}from"./BV_yeNi6.js";import{_ as c,c as n,f as s,o as t}from"./8mZJct9y.js";const a={},r={class:"noise-bg min-h-screen bg-emerald-950 py-10 text-white"};function _(i,m){const e=o;return t(),n("div",r,[s(e,{showImages:""})])}const l=c(a,[["render",_]]);export{l as default};
