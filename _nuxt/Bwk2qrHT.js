@@ -1,0 +1,1 @@
+import{_ as o,c,o as t,f as n,e,ae as l,L as r}from"./CbIrod53.js";const _={},d={class:"mx-auto min-h-screen w-full max-w-7xl bg-background px-4 font-display sm:px-6 lg:px-8"},f={class:"flex flex-col"};function i(s,m){const a=l;return t(),c("main",null,[n(a),e("div",d,[e("div",f,[r(s.$slots,"default")])])])}const p=o(_,[["render",i]]);export{p as default};
