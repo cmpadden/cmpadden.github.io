@@ -122,7 +122,7 @@ function externalSite(p: any) {
         - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
       -->
     <article
-      class="prose max-w-[1024px] text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0"
+      class="prose max-w-[1024px] text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-code:text-white prose-li:my-0 prose-pre:bg-black/70 prose-strong:text-gray-100"
     >
       <ContentRenderer v-if="page" :value="page" />
     </article>
@@ -137,4 +137,5 @@ function externalSite(p: any) {
 pre code .line {
   min-height: 0.25rem !important;
 }
+
 </style>

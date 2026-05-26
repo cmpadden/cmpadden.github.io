@@ -6,7 +6,9 @@ const articles = await queryCollection("content")
 </script>
 
 <template>
-  <div class="min-h-screen bg-emerald-950 bg-[url('/images/noise.svg')]">
+  <div
+    class="noise-bg min-h-screen bg-emerald-950"
+  >
     <section class="bg-gradient-to-b from-background to-transparent py-2">
       <div class="container my-7">
         <div class="text-orange-500">
