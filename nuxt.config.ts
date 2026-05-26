@@ -1,5 +1,5 @@
-import { writeFileSync, mkdirSync } from 'fs'
-import { join, dirname } from 'path'
+import { writeFileSync, mkdirSync } from "fs";
+import { join, dirname } from "path";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -8,10 +8,29 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        lang: "en",
+      },
+      titleTemplate: "%s",
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { property: "og:site_name", content: "Colton Padden" },
+        { property: "og:type", content: "website" },
+        { property: "og:locale", content: "en_US" },
+      ],
+      link: [
+        {
+          rel: "alternate",
+          type: "application/atom+xml",
+          title: "Colton Padden's Blog",
+          href: "/atom",
+        },
+      ],
       bodyAttrs: {
-        class: 'bg-background'
-      }
-    }
+        class: "bg-background",
+      },
+    },
   },
 
   // Optionally change the default prefix.
@@ -25,63 +44,67 @@ export default defineNuxtConfig({
         // Disable highlighting until interoperability with by the Tailwind Typography plugin is sorted
         // highlight: false
         highlight: {
-          theme: 'github-dark',
+          theme: "github-dark",
           preload: [
-              'bash',
-              'js',
-              'json',
-              'lisp',
-              'lua',
-              'python',
-              'shell',
-              'ts',
-              'vue',
-          ]
+            "bash",
+            "js",
+            "json",
+            "lisp",
+            "lua",
+            "python",
+            "shell",
+            "ts",
+            "vue",
+          ],
         },
       },
     },
     // https://github.com/nuxt/content/issues/3249#issuecomment-2778749735
-    experimental: { nativeSqlite: true }
+    experimental: { nativeSqlite: true },
   },
 
   nitro: {
     // render server-side routes as static content
     prerender: {
-      routes: ['/sitemap.xml', '/atom']
-    }
+      routes: ["/sitemap.xml", "/robots.txt", "/atom"],
+    },
   },
 
   routeRules: {
-    '/articles': { redirect: { to: '/blog', statusCode: 301 } },
+    "/articles": { redirect: { to: "/blog", statusCode: 301 } },
   },
 
   hooks: {
     // Generate HTML redirect files for `/articles/**` to `/blog/**`
-    async 'close'() {
-      const { readdirSync, statSync, existsSync } = await import('fs')
-      const distBlogPath = join(process.cwd(), 'dist', 'blog')
-      const distArticlesPath = join(process.cwd(), 'dist', 'articles')
+    async close() {
+      const { readdirSync, statSync, existsSync } = await import("fs");
+      const distBlogPath = join(process.cwd(), "dist", "blog");
+      const distArticlesPath = join(process.cwd(), "dist", "articles");
 
       try {
         if (!existsSync(distBlogPath)) {
-          console.log('Blog directory not found, skipping redirect generation')
-          return
+          console.log("Blog directory not found, skipping redirect generation");
+          return;
         }
 
         if (!statSync(distBlogPath).isDirectory()) {
-          console.log('Blog directory path is not a directory, skipping redirect generation')
-          return
+          console.log(
+            "Blog directory path is not a directory, skipping redirect generation",
+          );
+          return;
         }
 
         const blogDirs = readdirSync(distBlogPath, { withFileTypes: true })
-          .filter(dirent => dirent.isDirectory())
-          .map(dirent => dirent.name)
+          .filter((dirent) => dirent.isDirectory())
+          .map((dirent) => dirent.name);
 
-        console.log(`Generating ${blogDirs.length} redirect files for old /articles paths...`)
+        console.log(
+          `Generating ${blogDirs.length} redirect files for old /articles paths...`,
+        );
 
         for (const slug of blogDirs) {
-          const oldPath = `/articles/${slug}`
-          const newPath = `/blog/${slug}`
+          const oldPath = `/articles/${slug}`;
+          const newPath = `/blog/${slug}`;
 
           const redirectHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -95,19 +118,19 @@ export default defineNuxtConfig({
 <body>
   <p>This page has moved to <a href="${newPath}">${newPath}</a>.</p>
 </body>
-</html>`
+</html>`;
 
-          const outputPath = join(distArticlesPath, slug, 'index.html')
-          mkdirSync(dirname(outputPath), { recursive: true })
-          writeFileSync(outputPath, redirectHtml)
+          const outputPath = join(distArticlesPath, slug, "index.html");
+          mkdirSync(dirname(outputPath), { recursive: true });
+          writeFileSync(outputPath, redirectHtml);
         }
 
-        console.log('Redirect files generated successfully!')
+        console.log("Redirect files generated successfully!");
       } catch (error) {
-        console.warn('Could not generate redirect files:', error)
+        console.warn("Could not generate redirect files:", error);
       }
-    }
+    },
   },
 
-  compatibilityDate: '2025-06-03'
+  compatibilityDate: "2025-06-03",
 });

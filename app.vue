@@ -1,19 +1,15 @@
 <script setup lang="ts">
-const title = "Colton Padden's: Blog & Experiments";
-const description = "The blog, portfolio, and repository of experiments by Colton Padden.";
-const preview_image = "/images/og-index.webp";
-
 useSeoMeta({
-  'title': title,
-  'description': description,
-  'og:title': title,
-  'og:description': description,
-  'og:image': preview_image,
-  'og:image:type': 'image/webp',
-  'twitter:card': "summary_large_image",
-  'twitter:image': preview_image,
-  'twitter:title': title,
-  'twitter:description': description,
+  title: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
+  ogTitle: DEFAULT_TITLE,
+  ogDescription: DEFAULT_DESCRIPTION,
+  ogImage: imageUrl(),
+  ogImageType: "image/webp",
+  twitterCard: "summary_large_image",
+  twitterImage: imageUrl(),
+  twitterTitle: DEFAULT_TITLE,
+  twitterDescription: DEFAULT_DESCRIPTION,
 });
 </script>
 

@@ -5,22 +5,87 @@ const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection("content").path(route.path).first();
 });
 
-watchEffect(() => {
-  if (!page.value) return;
-  const isExternal = Boolean((page.value as any).external_url);
-  const canonical =
-    (page.value as any).canonical_url || (page.value as any).external_url;
+const isExternal = computed(() => Boolean((page.value as any)?.external_url));
+const isDraft = computed(() => Boolean((page.value as any)?.draft));
+const title = computed(() => pageTitle(page.value?.title));
+const description = computed(() => articleDescription(page.value));
+const canonical = computed(() => {
+  const article = page.value as any;
 
-  useHead({
-    meta: [
-      // avoid duplicate indexing for external summaries
-      isExternal ? { name: "robots", content: "noindex,follow" } : undefined,
-    ].filter(Boolean) as any,
-    link: [
-      canonical ? { rel: "canonical", href: canonical } : undefined,
-    ].filter(Boolean) as any,
-  });
+  return (
+    article?.canonical_url || article?.external_url || absoluteUrl(route.path)
+  );
 });
+const socialImage = computed(() =>
+  imageUrl((page.value as any)?.cover_image || (page.value as any)?.img),
+);
+const publishedDate = computed(() =>
+  page.value?.date ? new Date(page.value.date).toISOString() : undefined,
+);
+const tags = computed(() => (page.value as any)?.tags || []);
+const categories = computed(() => (page.value as any)?.categories || []);
+const jsonLd = computed(() => {
+  if (!page.value || isExternal.value) {
+    return undefined;
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: page.value.title,
+    description: description.value,
+    datePublished: publishedDate.value,
+    dateModified: publishedDate.value,
+    mainEntityOfPage: absoluteUrl(route.path),
+    url: absoluteUrl(route.path),
+    image: socialImage.value,
+    author: {
+      "@type": "Person",
+      name: SITE_NAME,
+      url: SITE_ORIGIN,
+    },
+    publisher: {
+      "@type": "Person",
+      name: SITE_NAME,
+      url: SITE_ORIGIN,
+    },
+    keywords: [...tags.value, ...categories.value].join(", "),
+  };
+});
+
+useSeoMeta({
+  title,
+  description,
+  ogTitle: title,
+  ogDescription: description,
+  ogImage: socialImage,
+  ogUrl: canonical,
+  ogType: "article",
+  articlePublishedTime: publishedDate,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  twitterDescription: description,
+  twitterImage: socialImage,
+});
+
+useHead(() => ({
+  link: [{ rel: "canonical", href: canonical.value }],
+  meta: [
+    isDraft.value
+      ? { name: "robots", content: "noindex,nofollow" }
+      : isExternal.value
+        ? { name: "robots", content: "noindex,follow" }
+        : undefined,
+  ].filter(Boolean) as any,
+  script: jsonLd.value
+    ? [
+        {
+          type: "application/ld+json",
+          innerHTML: JSON.stringify(jsonLd.value),
+        },
+      ]
+    : [],
+}));
 
 function externalSite(p: any) {
   if (!p?.external_url) return "";
@@ -122,7 +187,7 @@ function externalSite(p: any) {
         - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
       -->
     <article
-      class="prose max-w-[1024px] text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-code:text-white prose-li:my-0 prose-pre:bg-black/70 prose-strong:text-gray-100"
+      class="prose max-w-[1024px] text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-strong:text-gray-100 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0"
     >
       <ContentRenderer v-if="page" :value="page" />
     </article>
@@ -137,5 +202,4 @@ function externalSite(p: any) {
 pre code .line {
   min-height: 0.25rem !important;
 }
-
 </style>

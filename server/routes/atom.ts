@@ -1,38 +1,45 @@
-import { Feed } from 'feed';
-import { queryCollection } from '#imports';
+import { Feed } from "feed";
+import { queryCollection } from "#imports";
+import { SITE_NAME, SITE_ORIGIN } from "~/utils/seo";
 
-const BASE_URL = "https://cmpadden.github.io"
-const AUTHOR_NAME = "Colton Padden"
+const BASE_URL = SITE_ORIGIN;
+const AUTHOR_NAME = SITE_NAME;
 
 export default defineEventHandler(async (event) => {
-    const feed = new Feed({
-      title: "cmpadden.github.io",
-      description: "Colton Padden's Personal Blog",
-      id: BASE_URL,
-      link: BASE_URL,
-      language: "en",
-      image: `${BASE_URL}/images/placeholder.png`,
-      favicon: `${BASE_URL}/favicon.ico`,
-      copyright: `All rights reserved ${new Date().getFullYear()}, ${AUTHOR_NAME}`,
-      updated: new Date(),
-      generator: "Nuxt static site generation + Feed for Node.js",
-      feedLinks: {
-        atom: `${BASE_URL}/atom`
-      },
-      author: {
-        name: AUTHOR_NAME,
-      }
-    });
+  const feed = new Feed({
+    title: "cmpadden.github.io",
+    description: "Colton Padden's Personal Blog",
+    id: BASE_URL,
+    link: BASE_URL,
+    language: "en",
+    image: `${BASE_URL}/images/placeholder.png`,
+    favicon: `${BASE_URL}/favicon.ico`,
+    copyright: `All rights reserved ${new Date().getFullYear()}, ${AUTHOR_NAME}`,
+    updated: new Date(),
+    generator: "Nuxt static site generation + Feed for Node.js",
+    feedLinks: {
+      atom: `${BASE_URL}/atom`,
+    },
+    author: {
+      name: AUTHOR_NAME,
+    },
+  });
 
-    const articles = await queryCollection(event, 'content').all();
+  const articles = await queryCollection(event, "content").all();
 
-    articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  articles.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
 
-    articles.forEach((article) => {
-      const isExternal = Boolean((article as any).external_url)
-      const link = isExternal ? (article as any).external_url : `${BASE_URL}${article.path}`
-      const id = link
-      const imagePath = (article as any).cover_image || (article as any).img
+  articles
+    .filter((article: any) => !article.draft)
+    .forEach((article) => {
+      const isExternal = Boolean((article as any).external_url);
+      const link = isExternal
+        ? (article as any).external_url
+        : `${BASE_URL}${article.path}`;
+      const id = link;
+      const imagePath = (article as any).cover_image || (article as any).img;
 
       feed.addItem({
         title: article.title ? article.title : "Missing Title",
@@ -45,9 +52,13 @@ export default defineEventHandler(async (event) => {
           },
         ],
         date: new Date(article.date),
-        image: imagePath ? (imagePath.startsWith('http') ? imagePath : `${BASE_URL}${imagePath.startsWith('/') ? '' : '/'}${imagePath}`) : undefined
+        image: imagePath
+          ? imagePath.startsWith("http")
+            ? imagePath
+            : `${BASE_URL}${imagePath.startsWith("/") ? "" : "/"}${imagePath}`
+          : undefined,
       });
     });
 
-    return feed.atom1();
+  return feed.atom1();
 });

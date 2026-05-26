@@ -10,8 +10,32 @@ const pageSize = 8;
 const showTags = ref(true);
 
 const { data: articles } = await useAsyncData("articles", () =>
-  queryCollection("content").order("date", "DESC").all(),
+  queryCollection("content")
+    .order("date", "DESC")
+    .all()
+    .then((articles) => articles.filter((article) => !article.draft)),
 );
+
+const title = "Blog";
+const description =
+  "Technical articles about programming, data engineering, homelab infrastructure, and creative browser experiments.";
+
+useSeoMeta({
+  title: pageTitle(title),
+  description,
+  ogTitle: pageTitle(title),
+  ogDescription: description,
+  ogImage: imageUrl(),
+  ogUrl: absoluteUrl("/blog"),
+  twitterCard: "summary_large_image",
+  twitterTitle: pageTitle(title),
+  twitterDescription: description,
+  twitterImage: imageUrl(),
+});
+
+useHead({
+  link: [{ rel: "canonical", href: absoluteUrl("/blog") }],
+});
 
 const categories = computed(() => {
   return [
@@ -206,9 +230,7 @@ watch(
 </script>
 
 <template>
-  <section
-    class="noise-bg min-h-screen bg-emerald-950 py-10 text-white"
-  >
+  <section class="noise-bg min-h-screen bg-emerald-950 py-10 text-white">
     <div class="container space-y-8">
       <div class="space-y-4">
         <div class="grid gap-4">
