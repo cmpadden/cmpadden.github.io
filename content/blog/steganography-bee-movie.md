@@ -31,6 +31,14 @@ Classic examples include hiding text in the least significant bits of an image, 
 
 This version is especially uninteresting as the entire image is generated from the payload, but you could imagine the Bee Movie being hidden in other images with very little detection. Now _that's_ interesting.
 
+## Hiding the Bee Movie in the Bee Movie
+
+So let's do that too. Here's a regular bee image, converted to a lossless PNG, with the same Bee Movie script embedded into the least significant bits of its RGB channels:
+
+![Bee image containing the encoded Bee Movie script](/images/bee-movie-bee.png)
+
+The image is still 1200x630, and the hidden payload is 20,557 bytes after compressing the 49,474-byte script and adding a small header. Since the payload only changes the lowest bit of each color channel, the image looks essentially unchanged, but the script can be recovered as long as the file remains lossless.
+
 ## Encoder
 
 Here's the encoder:
