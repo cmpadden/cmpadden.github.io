@@ -156,6 +156,8 @@ The `similarTabIds` field is what the UI uses. Since the song index is already l
 
 ## Rendering it
 
+![Similar tabs sidebar in tabs.garden](/images/tabs-garden-similar-tabs.jpg)
+
 Once the IDs are embedded in `songs-index.json`, the UI work is straightforward. The app looks up those IDs in the existing song index and passes the resulting songs to a small presentational component.
 
 The sidebar shows the three similar tabs above the capo, voicing, and chord controls. I also strip tab suffixes like `Chords`, `Chord`, and `Chords Ver 3` from the display title so the list reads more like song names than imported tab names.
