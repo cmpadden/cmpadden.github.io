@@ -9,12 +9,9 @@ const pageSize = 8;
 
 const showTags = ref(true);
 
-const { data: articles } = await useAsyncData("articles", () =>
-  queryCollection("content")
-    .order("date", "DESC")
-    .all()
-    .then((articles) => articles.filter((article) => !article.draft)),
-);
+const { data: articles } = await useFetch("/api/articles", {
+  default: () => [],
+});
 
 const title = "Blog";
 const description =
@@ -269,11 +266,12 @@ watch(
                 >
                   {{ article.description }}
                 </p>
-                <ContentRenderer
-                  v-else-if="article.meta?.excerpt"
-                  :value="article.meta.excerpt"
+                <p
+                  v-else-if="article.excerpt"
                   class="line-clamp-4 text-sm text-gray-100"
-                />
+                >
+                  {{ article.excerpt }}
+                </p>
               </div>
             </NuxtLink>
           </template>

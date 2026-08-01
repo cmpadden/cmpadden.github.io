@@ -1,9 +1,12 @@
 <script setup lang="ts">
 const route = useRoute();
 
-const { data: page } = await useAsyncData(route.path, () => {
-  return queryCollection("content").path(route.path).first();
+const slug = computed(() => {
+  const value = route.params.slug;
+  return Array.isArray(value) ? value.join("/") : value;
 });
+
+const { data: page } = await useFetch(() => `/api/articles/${slug.value}`);
 
 const isExternal = computed(() => Boolean((page.value as any)?.external_url));
 const isDraft = computed(() => Boolean((page.value as any)?.draft));
@@ -106,7 +109,6 @@ function externalSite(p: any) {
   >
     <!-- title -->
     <div class="flex">
-      <!-- https://content.nuxt.com/components/content-slot -->
       <template v-if="page.cover_image || page.img">
         <img
           class="mr-4 h-16 border-2 border-black"
@@ -184,20 +186,18 @@ function externalSite(p: any) {
 
     <!--
         - Remove maximum width of prose content: https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width
-        - Use prose-pre:bg-white to work with @nuxt/content syntax highlighting, otherwise background-color defaults to `.prose:where(pre)`
       -->
     <article
-      class="prose max-w-[1024px] text-gray-300 prose-h2:mt-8 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-strong:text-gray-100 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0"
+      class="prose max-w-[1024px] text-gray-300 prose-headings:text-white prose-h2:mt-8 prose-h2:border-b prose-h2:border-white/10 prose-h2:pb-2 prose-h3:text-orange-100 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-strong:text-gray-100 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0"
     >
-      <ContentRenderer v-if="page" :value="page" />
+      <ComarkRenderer v-if="page?.tree" :tree="page.tree" />
     </article>
   </div>
 </template>
 
 <style>
 /*
- * For some reason min-height is set to 1rem in ProsePre.vue of @nuxt/content, override this for more suitable code block line height
- * https://github.com/nuxt/content/blob/056da889a28c2f8cfe622a2848a652324b4c32c8/src/runtime/components/Prose/ProsePre.vue#L43
+ * Keep code block line boxes compact when syntax highlighting wraps lines.
  */
 pre code .line {
   min-height: 0.25rem !important;

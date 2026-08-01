@@ -1,7 +1,8 @@
 <script setup>
-const articles = (await queryCollection("content").order("date", "DESC").all())
-  .filter((article) => !article.draft)
-  .slice(0, 3);
+const { data: articles } = await useFetch("/api/articles", {
+  default: () => [],
+  transform: (articles) => articles.slice(0, 3),
+});
 
 useSeoMeta({
   title: DEFAULT_TITLE,

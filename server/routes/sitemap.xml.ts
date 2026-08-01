@@ -1,5 +1,5 @@
 import { SitemapStream, streamToPromise } from "sitemap";
-import { queryCollection } from "#imports";
+import { getAllBlogArticles } from "#content/articles";
 import { SITE_ORIGIN } from "~/utils/seo";
 
 const STATIC_ROUTES = [
@@ -24,8 +24,8 @@ const STATIC_ROUTES = [
   "/playground/waves",
 ];
 
-export default defineEventHandler(async (event) => {
-  const articles = await queryCollection(event, "content").all();
+export default defineEventHandler(async () => {
+  const articles = getAllBlogArticles();
 
   const sitemap = new SitemapStream({ hostname: SITE_ORIGIN });
 
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
   // Dynamically generate routes for Nuxt markdown content. Drafts and
   // external summaries should not be advertised as canonical crawl targets.
   articles
-    .filter((a: any) => !a.draft && !a.external_url)
+    .filter((a) => !a.external_url)
     .forEach((article) =>
       sitemap.write({
         url: article.path,

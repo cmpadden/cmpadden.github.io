@@ -48,10 +48,7 @@ function externalSite(article) {
               />
             </template>
             <div class="line-clamp-3 text-sm text-gray-100">
-              {{
-                article.description ||
-                article.meta?.excerpt?.children?.[0]?.value
-              }}
+              {{ article.description || article.excerpt }}
             </div>
           </div>
         </NuxtLink>
