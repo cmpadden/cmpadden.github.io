@@ -1,5 +1,5 @@
 import { Feed } from "feed";
-import { queryCollection } from "#imports";
+import { getAllBlogArticles } from "#content/articles";
 import { SITE_NAME, SITE_ORIGIN } from "~/utils/seo";
 
 const BASE_URL = SITE_ORIGIN;
@@ -25,40 +25,34 @@ export default defineEventHandler(async (event) => {
     },
   });
 
-  const articles = await queryCollection(event, "content").all();
+  const articles = getAllBlogArticles();
 
-  articles.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
+  articles.forEach((article) => {
+    const isExternal = Boolean(article.external_url);
+    const link = isExternal
+      ? article.external_url
+      : `${BASE_URL}${article.path}`;
+    const id = link;
+    const imagePath = article.cover_image || article.img;
 
-  articles
-    .filter((article: any) => !article.draft)
-    .forEach((article) => {
-      const isExternal = Boolean((article as any).external_url);
-      const link = isExternal
-        ? (article as any).external_url
-        : `${BASE_URL}${article.path}`;
-      const id = link;
-      const imagePath = (article as any).cover_image || (article as any).img;
-
-      feed.addItem({
-        title: article.title ? article.title : "Missing Title",
-        id,
-        link,
-        description: (article as any).description,
-        author: [
-          {
-            name: AUTHOR_NAME,
-          },
-        ],
-        date: new Date(article.date),
-        image: imagePath
-          ? imagePath.startsWith("http")
-            ? imagePath
-            : `${BASE_URL}${imagePath.startsWith("/") ? "" : "/"}${imagePath}`
-          : undefined,
-      });
+    feed.addItem({
+      title: article.title ? article.title : "Missing Title",
+      id,
+      link,
+      description: article.description || article.excerpt,
+      author: [
+        {
+          name: AUTHOR_NAME,
+        },
+      ],
+      date: new Date(article.date),
+      image: imagePath
+        ? imagePath.startsWith("http")
+          ? imagePath
+          : `${BASE_URL}${imagePath.startsWith("/") ? "" : "/"}${imagePath}`
+        : undefined,
     });
+  });
 
   return feed.atom1();
 });

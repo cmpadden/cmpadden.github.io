@@ -4,7 +4,12 @@ import { join, dirname } from "path";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   components: true,
-  modules: ["@nuxt/content", "@nuxtjs/tailwindcss", "nuxt-headlessui"],
+  modules: [
+    "./modules/content",
+    "@comark/nuxt",
+    "@nuxtjs/tailwindcss",
+    "nuxt-headlessui",
+  ],
 
   app: {
     head: {
@@ -36,31 +41,6 @@ export default defineNuxtConfig({
   // Optionally change the default prefix.
   headlessui: {
     prefix: "Headless",
-  },
-
-  content: {
-    build: {
-      markdown: {
-        // Disable highlighting until interoperability with by the Tailwind Typography plugin is sorted
-        // highlight: false
-        highlight: {
-          theme: "github-dark",
-          preload: [
-            "bash",
-            "js",
-            "json",
-            "lisp",
-            "lua",
-            "python",
-            "shell",
-            "ts",
-            "vue",
-          ],
-        },
-      },
-    },
-    // https://github.com/nuxt/content/issues/3249#issuecomment-2778749735
-    experimental: { nativeSqlite: true },
   },
 
   nitro: {
