@@ -2,7 +2,7 @@ export type BlogArticle = {
   _id: string;
   slug: string;
   path: string;
-  tree: unknown;
+  document: unknown;
   excerpt: string;
   title?: string;
   description?: string;
@@ -17,4 +17,4 @@ export type BlogArticle = {
   draft?: boolean;
 };
 
-export type BlogArticleSummary = Omit<BlogArticle, "tree">;
+export type BlogArticleSummary = Omit<BlogArticle, "document">;
