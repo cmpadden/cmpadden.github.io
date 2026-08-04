@@ -6,7 +6,7 @@ import {
   createResolver,
   defineNuxtModule,
 } from "@nuxt/kit";
-import { parse } from "comark";
+import { parseMarkdown } from "comark";
 import highlight from "comark/plugins/highlight";
 import matter from "gray-matter";
 import { z } from "zod";
@@ -51,7 +51,7 @@ async function parseArticle(
   const slug = slugFromFilePath(filePath);
   const { data, content } = matter(rawMarkdown);
   const frontmatter = frontmatterSchema.parse(data);
-  const tree = await parse(content.trim(), {
+  const document = await parseMarkdown(content.trim(), {
     plugins: [highlight()],
   });
 
@@ -60,7 +60,7 @@ async function parseArticle(
     _id: `content:blog:${slug}`,
     slug,
     path: `/blog/${slug}`,
-    tree,
+    document,
     excerpt: excerptFromBody(content),
     date: frontmatter.date.toISOString(),
   };
@@ -96,7 +96,7 @@ export default defineNuxtModule({
 
         return `const articles = ${JSON.stringify(articles, null, 2)}
 
-const articleSummaries = articles.map(({ tree, ...article }) => article)
+const articleSummaries = articles.map(({ document, ...article }) => article)
 
 export function getAllBlogArticles(options = {}) {
   if (options.includeDrafts) {

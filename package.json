@@ -10,7 +10,7 @@
     "format": "prettier --parser vue components/ pages/ layouts/ --write"
   },
   "devDependencies": {
-    "@comark/nuxt": "^0.5.1",
+    "@comark/nuxt": "^0.6.0",
     "@nuxtjs/tailwindcss": "^6.14.0",
     "@tailwindcss/typography": "^0.5.16",
     "feed": "^4.2.2",

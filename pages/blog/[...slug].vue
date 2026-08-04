@@ -190,7 +190,7 @@ function externalSite(p: any) {
     <article
       class="prose max-w-[1024px] text-gray-300 prose-headings:text-white prose-h2:mt-8 prose-h2:border-b prose-h2:border-white/10 prose-h2:pb-2 prose-h3:text-orange-100 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-strong:text-gray-100 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0"
     >
-      <ComarkRenderer v-if="page?.tree" :tree="page.tree" />
+      <MarkdownDocument v-if="page?.document" :value="page.document" />
     </article>
   </div>
 </template>
