@@ -1,7 +1,7 @@
 <script setup>
 const { data: articles } = await useFetch("/api/articles", {
   default: () => [],
-  transform: (articles) => articles.slice(0, 3),
+  transform: (articles) => articles.slice(0, 5),
 });
 
 useSeoMeta({
@@ -24,6 +24,7 @@ useHead({
 
 <template>
   <div class="noise-bg min-h-screen bg-emerald-950">
+    <!-- Temporarily hide the interactive logo hero while retaining the component.
     <section class="bg-gradient-to-b from-background to-transparent py-2">
       <div class="container my-7">
         <div class="text-orange-500">
@@ -31,7 +32,16 @@ useHead({
         </div>
       </div>
     </section>
+    -->
+    <div class="container pb-2 pt-6">
+      <h2 class="font-pixelify text-3xl font-bold text-orange-400">Blog</h2>
+    </div>
     <SectionBlogPosts :articles="articles" :show_dates="true" />
-    <SectionPlayground :limit="6" showImages linkToPlayground />
+    <div class="container pb-2 pt-8">
+      <h2 class="font-pixelify text-3xl font-bold text-orange-400">
+        Experiments
+      </h2>
+    </div>
+    <SectionPlayground :limit="6" showImages linkToPlayground tightTop />
   </div>
 </template>

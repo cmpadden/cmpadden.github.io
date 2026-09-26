@@ -27,6 +27,7 @@ export default {
         mono: ["Inconsolata", "monospace"],
         fantasy: ["fantasy"],
         mafins: ["Mafins"],
+        pixelify: ["Pixelify Sans", "system-ui", "sans-serif"],
       },
       borderWidth: {
         default: "1px",

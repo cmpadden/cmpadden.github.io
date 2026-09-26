@@ -1,5 +1,5 @@
 ---
-title: "Scaling documentation without scaling your team: Dagster’s AI-powered strategy"
+title: "Dagster's AI-powered strategy to scaling documentation"
 date: "2025-12-16"
 tags: ["ai", "docs", "education"]
 categories: ["ai"]

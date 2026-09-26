@@ -1,19 +1,16 @@
-<script setup>
-const props = defineProps({
-  to: {
-    type: String,
-    required: true,
-  },
-});
+<script setup lang="ts">
+defineProps<{ label: string }>();
+const emit = defineEmits<{ click: [] }>();
 </script>
 
 <template>
-  <div class="flex justify-center">
-    <NuxtLink
-      :to="props.to"
+  <div class="flex justify-end">
+    <button
+      type="button"
       class="flex items-center text-sm font-bold text-white hover:text-orange-500"
+      @click="emit('click')"
     >
-      <span class="translate-y-0.5"><slot></slot></span>
+      <span class="translate-y-0.5">{{ label }}</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -27,6 +24,6 @@ const props = defineProps({
           clip-rule="evenodd"
         />
       </svg>
-    </NuxtLink>
+    </button>
   </div>
 </template>

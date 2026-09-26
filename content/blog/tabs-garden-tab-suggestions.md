@@ -1,5 +1,5 @@
 ---
-title: "Adding tab suggestions using cosine-similarity on tabs.garden"
+title: "Using cosine-similarity for song suggestion on tabs.garden"
 date: "2026-06-04"
 tags: ["ml", "tabs", "music"]
 categories: ["ml", "web"]
