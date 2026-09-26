@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { BlogArticle } from "../../modules/content/runtime/types/blog-article";
+
 const route = useRoute();
 
 const slug = computed(() => {
@@ -6,27 +8,29 @@ const slug = computed(() => {
   return Array.isArray(value) ? value.join("/") : value;
 });
 
-const { data: page } = await useFetch(() => `/api/articles/${slug.value}`);
+const { data: page } = await useFetch<BlogArticle>(
+  () => `/api/articles/${slug.value}`,
+);
 
-const isExternal = computed(() => Boolean((page.value as any)?.external_url));
-const isDraft = computed(() => Boolean((page.value as any)?.draft));
+const isExternal = computed(() => Boolean(page.value?.external_url));
+const isDraft = computed(() => Boolean(page.value?.draft));
 const title = computed(() => pageTitle(page.value?.title));
 const description = computed(() => articleDescription(page.value));
 const canonical = computed(() => {
-  const article = page.value as any;
+  const article = page.value;
 
   return (
     article?.canonical_url || article?.external_url || absoluteUrl(route.path)
   );
 });
 const socialImage = computed(() =>
-  imageUrl((page.value as any)?.cover_image || (page.value as any)?.img),
+  imageUrl(page.value?.cover_image || page.value?.img),
 );
 const publishedDate = computed(() =>
   page.value?.date ? new Date(page.value.date).toISOString() : undefined,
 );
-const tags = computed(() => (page.value as any)?.tags || []);
-const categories = computed(() => (page.value as any)?.categories || []);
+const tags = computed(() => page.value?.tags ?? []);
+const categories = computed(() => page.value?.categories ?? []);
 const jsonLd = computed(() => {
   if (!page.value || isExternal.value) {
     return undefined;
@@ -92,67 +96,64 @@ useHead(() => ({
 </script>
 
 <template>
-  <div
-    class="container mb-10 max-w-[1024px] space-y-6 text-white shadow-lg"
-    v-if="page"
-  >
-    <!-- title -->
-    <div class="flex">
-      <template v-if="page.cover_image || page.img">
-        <img
-          class="mr-4 h-16 border-2 border-black"
-          :src="page.cover_image || page.img"
-        />
-      </template>
-
-      <h1 class="text-2xl font-bold md:text-3xl">
-        {{ page.title }}
-      </h1>
-    </div>
-
-    <!-- Meta -->
-    <div class="">
-      <div class="flex-row space-x-0 md:flex md:space-x-2">
-        <p class="text-sm text-gray-300 md:text-right">
-          Published
-          <NuxtTime
-            :datetime="page.date"
-            year="numeric"
-            month="short"
-            day="2-digit"
+  <div v-if="page" class="noise-bg min-h-screen bg-emerald-950 pt-8">
+    <div class="container mb-10 space-y-6 text-white shadow-lg">
+      <!-- title -->
+      <div class="flex">
+        <template v-if="page.cover_image || page.img">
+          <img
+            class="mr-4 h-16 border-2 border-black"
+            :src="page.cover_image || page.img"
           />
-        </p>
+        </template>
+
+        <h1 class="text-2xl font-bold md:text-3xl">
+          {{ page.title }}
+        </h1>
       </div>
-    </div>
 
-    <!-- external banner and CTA (below title/date, above content) -->
-    <div
-      v-if="page.external_url"
-      class="flex items-center justify-between gap-4 rounded border border-orange-500/30 bg-orange-500/10 p-3"
-    >
-      <div class="text-sm text-gray-200">
-        The original version of this article can be found on the
-
-        <a
-          :href="page.external_url"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="font-semibold text-orange-300"
-        >
-          {{ externalSite(page) }}
-        </a>
-        blog.
+      <!-- Post metadata -->
+      <div class="flex items-center gap-2 text-sm text-gray-300">
+        <NuxtTime
+          :datetime="page.date"
+          class="whitespace-nowrap tabular-nums"
+          year="numeric"
+          month="short"
+          day="2-digit"
+        />
+        <span aria-hidden="true">·</span>
+        <span>{{ page.readingTimeMinutes }} min read</span>
       </div>
-    </div>
 
-    <!--
+      <!-- external banner and CTA (below title/date, above content) -->
+      <div
+        v-if="page.external_url"
+        class="flex items-center justify-between gap-4 rounded border border-orange-500/30 bg-orange-500/10 p-3"
+      >
+        <div class="text-sm text-gray-200">
+          The original version of this article can be found on the
+
+          <a
+            :href="page.external_url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-semibold text-orange-300"
+          >
+            {{ externalSite(page) }}
+          </a>
+          blog.
+        </div>
+      </div>
+
+      <!--
         - Remove maximum width of prose content: https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width
       -->
-    <article
-      class="prose max-w-[1024px] text-gray-300 prose-headings:text-white prose-h2:mt-8 prose-h2:border-b prose-h2:border-white/10 prose-h2:pb-2 prose-h3:text-orange-100 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-strong:text-gray-100 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0"
-    >
-      <MarkdownDocument v-if="page?.document" :value="page.document" />
-    </article>
+      <article
+        class="prose max-w-[1024px] text-gray-300 prose-headings:text-white prose-h2:mt-8 prose-h3:text-orange-100 prose-p:my-3 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-strong:text-gray-100 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0"
+      >
+        <MarkdownDocument v-if="page?.document" :value="page.document" />
+      </article>
+    </div>
   </div>
 </template>
 

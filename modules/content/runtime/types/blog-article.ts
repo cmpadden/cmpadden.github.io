@@ -4,6 +4,7 @@ export type BlogArticle = {
   path: string;
   document: unknown;
   excerpt: string;
+  readingTimeMinutes: number;
   title?: string;
   description?: string;
   date: string;

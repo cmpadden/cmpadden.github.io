@@ -1,48 +1,22 @@
-<script setup>
-const props = defineProps({
-  articles: Object,
-  show_dates: false,
-});
+<script setup lang="ts">
+import type { BlogArticleSummary } from "../../modules/content/runtime/types/blog-article";
+
+defineProps<{
+  articles: BlogArticleSummary[];
+  show_dates?: boolean;
+}>();
 </script>
 
 <template>
-  <section class="container space-y-2">
-    <div class="grid grid-cols-1 gap-3">
-      <div v-for="(article, ix) of articles" :key="ix">
-        <NuxtLink :to="article.path">
-          <div
-            class="h-full space-y-2 bg-black/50 p-3 text-white drop-shadow-lg hover:ring-1 hover:ring-white"
-          >
-            <div class="flex items-center gap-2">
-              <div
-                class="line-clamp-1 flex-1 text-lg font-bold md:text-xl"
-                :title="article.title"
-              >
-                {{ article.title }}
-              </div>
-              <div class="flex items-center gap-2 md:ml-auto">
-                <ExternalIndicator
-                  v-if="article.external_url"
-                  :site="externalSite(article)"
-                />
-              </div>
-            </div>
-            <template v-if="show_dates">
-              <NuxtTime
-                :datetime="article.date"
-                class="text-xs text-gray-300"
-                year="numeric"
-                month="short"
-                day="2-digit"
-              />
-            </template>
-            <div class="line-clamp-3 text-sm text-gray-100">
-              {{ article.description || article.excerpt }}
-            </div>
-          </div>
-        </NuxtLink>
-      </div>
+  <section class="container space-y-1">
+    <div class="grid grid-cols-1 gap-2">
+      <BlogArticleCard
+        v-for="article in articles"
+        :key="article._id"
+        :article="article"
+        :show-date="show_dates"
+      />
     </div>
-    <MoreLink to="/blog">See more posts</MoreLink>
+    <!-- <MoreLink to="/blog">More</MoreLink> -->
   </section>
 </template>

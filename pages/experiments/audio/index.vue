@@ -19,7 +19,7 @@
         </div>
         <div class="col-span-3 rounded-xl bg-black/75 p-4 lg:col-span-1">
           <div class="mb-2 text-xl font-bold">Time Domain Waveform</div>
-          <PlaygroundAudioWaveform
+          <ExperimentsAudioWaveform
             :timeDomainBufferHistory="timeDomainBufferHistory"
             strokeStyle="rgb(255, 0, 255)"
             class="h-72 border-2 border-gray-400"
@@ -27,14 +27,14 @@
         </div>
         <div class="col-span-3 rounded-xl bg-black/75 p-4 lg:col-span-1">
           <div class="mb-2 text-xl font-bold">Frequency Spectrogram</div>
-          <PlaygroundAudioSpectrogram
+          <ExperimentsAudioSpectrogram
             :frequencyDomainBufferHistory="frequencyDomainBufferHistory"
             class="h-72 border-2 border-gray-400"
           />
         </div>
         <div class="col-span-3 rounded-xl bg-black/75 p-4 lg:col-span-1">
           <div class="mb-2 text-xl font-bold">Frequency Bar Chart</div>
-          <PlaygroundAudioFrequencyBarGraph
+          <ExperimentsAudioFrequencyBarGraph
             :audioBufferHistory="frequencyDomainBufferHistory"
             class="h-72 border-2 border-gray-400"
           />

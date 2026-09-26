@@ -1,5 +1,5 @@
 ---
-title: "The entire Bee Movie script is hidden somewhere on this website"
+title: "Hiding the Bee Movie transcript with steganography"
 date: "2026-05-26"
 draft: false
 tags: ["python", "steganography", "web"]

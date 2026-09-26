@@ -1,5 +1,5 @@
 <script setup>
-import { playgroundLinks } from "../../data/playground";
+import { experimentLinks } from "../../data/experiments";
 
 const props = defineProps({
   showImages: {
@@ -10,21 +10,21 @@ const props = defineProps({
     type: Number,
     default: null,
   },
-  linkToPlayground: {
+  tightTop: {
     type: Boolean,
     default: false,
   },
 });
 
-const links = playgroundLinks;
+const links = experimentLinks;
 
-const route = useRoute();
+const visibleLinks = computed(() => links.filter((link) => !link.hidden));
 
 const filtered_links = computed(() => {
   if (props.limit === null || props.limit <= 0) {
-    return links;
+    return visibleLinks.value;
   } else {
-    return links.slice(0, props.limit);
+    return visibleLinks.value.slice(0, props.limit);
   }
 });
 </script>
@@ -33,7 +33,10 @@ const filtered_links = computed(() => {
   <section
     class="to-background-dark bg-gradient-to-b from-transparent text-white"
   >
-    <div class="container py-8 text-white">
+    <div
+      class="container text-white"
+      :class="props.tightTop ? 'pb-8 pt-4' : 'py-8'"
+    >
       <div class="mb-2 grid grid-cols-1 gap-3 sm:grid-cols-3">
         <nuxt-link
           class="relative text-orange-500 ring-2 ring-white hover:text-white hover:ring-orange-500"
@@ -41,9 +44,6 @@ const filtered_links = computed(() => {
           :key="link.title"
           :to="link.link"
         >
-          <svg class="absolute right-0 top-0 size-8" viewBox="0 0 100 100">
-            <polygon points="0,0 0,100 100,100" fill="currentColor" />
-          </svg>
           <img
             class="h-64 w-full bg-gray-800 object-cover grayscale hover:grayscale-0"
             :src="link.img || 'images/placeholder.png'"
@@ -52,7 +52,10 @@ const filtered_links = computed(() => {
             decoding="async"
           />
           <div
-            class="absolute bottom-2 flex w-full items-center justify-center px-2"
+            class="pointer-events-none absolute inset-0 bg-orange-500/10 mix-blend-color"
+          />
+          <div
+            class="absolute bottom-2 z-10 flex w-full items-center justify-center px-2"
           >
             <div
               class="noise-bg w-full bg-black/90 px-6 py-2 [--noise-opacity:0.16]"
@@ -68,9 +71,7 @@ const filtered_links = computed(() => {
           </div>
         </nuxt-link>
       </div>
-      <MoreLink to="/playground" v-if="route.path !== '/playground'"
-        >See more experiments</MoreLink
-      >
+      <!-- <MoreLink to="/experiments">More</MoreLink> -->
     </div>
   </section>
 </template>

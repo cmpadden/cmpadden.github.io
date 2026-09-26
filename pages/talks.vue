@@ -31,7 +31,7 @@ const talks = [
   {
     title: "MDS Fest 3.0",
     subtitle: "Abstractions: Enabling Data Teams Through Reduced Complexity",
-    date: new Date("2025-5-5"),
+    date: new Date("2025-05-05"),
     href_slides: "/slides/abstractions.pdf",
     href_video:
       "https://www.secoda.co/mds-fest-3-0/abstractions-enabling-data-teams-through-reduced-complexity",
@@ -39,7 +39,7 @@ const talks = [
   {
     title: "Dagster Deep Dive",
     subtitle: "Building Breakthrough AI Applications with Not Diamond",
-    date: new Date("2025-2-11"),
+    date: new Date("2025-02-11"),
     href_slides:
       "https://github.com/dagster-io/talks/blob/main/slides/deep-dive-not-diamond.pdf",
     href_video: "https://www.youtube.com/watch?v=iwAhzS4EMkw",
@@ -47,7 +47,7 @@ const talks = [
   {
     title: "Dagster Deep Dive",
     subtitle: "Shifting Left and Moving Forward with MotherDuck",
-    date: new Date("2025-1-15"),
+    date: new Date("2025-01-15"),
     href_slides:
       "https://github.com/dagster-io/talks/blob/88651b705102e0558908e333495b4c21451310ca/slides/deep-dive-motherduck-atproto-demo.pdf",
     href_code:
@@ -57,7 +57,7 @@ const talks = [
   {
     title: "Dagster Deep Dive",
     subtitle: "Orchestrating ML Workloads with Dagster & Modal",
-    date: new Date("2024-9-24"),
+    date: new Date("2024-09-24"),
     href_slides:
       "https://github.com/dagster-io/talks/blob/main/slides/deep-dive-dagster-modal-demo.pdf",
     href_code: "https://github.com/dagster-io/dagster-modal-demo",
@@ -92,6 +92,22 @@ const talks = [
   },
 ];
 
+const formatDate = (date) => {
+  const parts = new Intl.DateTimeFormat("en", {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+  const values = Object.fromEntries(
+    parts
+      .filter((part) => part.type !== "literal")
+      .map((part) => [part.type, part.value]),
+  );
+
+  return `${values.year}-${values.month}-${values.day}`;
+};
+
 // todo - self host slides
 // todo - modal slides preview
 </script>
@@ -99,50 +115,50 @@ const talks = [
 <template>
   <div class="container font-mono text-white">
     <h1 class="my-6 text-2xl font-extrabold">Talks</h1>
-    <div class="grid grid-cols-10 gap-y-6">
-      <template v-for="(talk, ix) in talks" :key="ix">
-        <NuxtTime
-          :datetime="talk.date"
-          class="col-span-2"
-          year="numeric"
-          month="short"
-          day="2-digit"
-        />
-        <div class="col-span-8">
-          <div class="flex-col space-y-2">
-            <!-- <div class=""> -->
-            <div class="text-orange-500">
-              {{ talk.title }}
-            </div>
-            <div>
-              {{ talk.subtitle }}
-            </div>
-            <div class="flex">
-              <a
-                v-if="talk.href_slides"
-                class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
-                :href="talk.href_slides"
-              >
-                [slide_deck]
-              </a>
-              <a
-                v-if="talk.href_video"
-                class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
-                :href="talk.href_video"
-              >
-                [video]
-              </a>
-              <a
-                v-if="talk.href_code"
-                class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
-                :href="talk.href_code"
-              >
-                [source_code]
-              </a>
-            </div>
+    <div class="grid gap-y-6">
+      <div
+        v-for="(talk, ix) in talks"
+        :key="ix"
+        class="grid grid-cols-[6rem_minmax(0,1fr)] gap-1"
+      >
+        <time
+          :datetime="talk.date.toISOString()"
+          class="whitespace-nowrap pt-1 font-mono text-sm tabular-nums text-gray-300"
+        >
+          {{ formatDate(talk.date) }}
+        </time>
+        <div class="flex-col space-y-2">
+          <div class="text-white">
+            {{ talk.title }}
+          </div>
+          <div>
+            {{ talk.subtitle }}
+          </div>
+          <div class="flex">
+            <a
+              v-if="talk.href_slides"
+              class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
+              :href="talk.href_slides"
+            >
+              [slide_deck]
+            </a>
+            <a
+              v-if="talk.href_video"
+              class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
+              :href="talk.href_video"
+            >
+              [video]
+            </a>
+            <a
+              v-if="talk.href_code"
+              class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
+              :href="talk.href_code"
+            >
+              [source_code]
+            </a>
           </div>
         </div>
-      </template>
+      </div>
     </div>
   </div>
 </template>

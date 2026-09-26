@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-const PLAYGROUND_ORIGIN = "https://cmpadden.github.io/p5";
+const P5_ORIGIN = "https://cmpadden.github.io/p5";
 
 const props = withDefaults(
   defineProps<{
@@ -26,7 +26,7 @@ const props = withDefaults(
 
 const sanitizePath = (path: string) => {
   const ensureAbsolute = (p: string) => {
-    const base = PLAYGROUND_ORIGIN.replace(/\/$/, "");
+    const base = P5_ORIGIN.replace(/\/$/, "");
     const suffix = p.startsWith("/") ? p : `/${p}`;
     return `${base}${suffix}`;
   };
@@ -48,7 +48,7 @@ const iframeSrc = computed(() => {
     embed: "1",
     v: "embed-shell-2",
   });
-  const viewerBase = `${PLAYGROUND_ORIGIN.replace(/\/$/, "")}/experiments/model-viewer.html`;
+  const viewerBase = `${P5_ORIGIN.replace(/\/$/, "")}/experiments/model-viewer.html`;
   return `${viewerBase}?${search.toString()}`;
 });
 </script>
