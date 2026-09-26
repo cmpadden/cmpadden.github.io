@@ -7,7 +7,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "format": "prettier --parser vue components/ pages/ layouts/ --write"
+    "typecheck": "nuxt typecheck",
+    "format": "prettier --write \"**/*.{vue,ts,js,json,md}\" --ignore-path .gitignore"
   },
   "devDependencies": {
     "@comark/nuxt": "^0.6.0",

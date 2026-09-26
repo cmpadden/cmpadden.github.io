@@ -1,5 +1,5 @@
 <script setup>
-definePageMeta({ layout: "none" });
+definePageMeta({ layout: "empty" });
 const PLAYGROUND_ORIGIN = "https://cmpadden.github.io/p5";
 const viewerBase = `${PLAYGROUND_ORIGIN}/experiments/model-viewer.html`;
 const modelPath = `${PLAYGROUND_ORIGIN}/models/mac_mini_macbook_stand.stl`;

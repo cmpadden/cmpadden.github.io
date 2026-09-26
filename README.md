@@ -1,31 +1,35 @@
 # cmpadden.github.io
 
+A personal website built with Nuxt 4, Vue, and Tailwind CSS. Routes are file-based in `pages/`; reusable layouts and UI live in `layouts/` and `components/`. Blog posts are Markdown files in `content/blog/`, parsed by `modules/content.ts` and served through the generated article API. Server endpoints and feed/sitemap routes are under `server/`.
+
 ## Setup
 
-Make sure to install the dependencies:
+Install dependencies with pnpm:
 
 ```bash
-pnpm install --shamefully-hoist
+pnpm install
 ```
 
-## Development Server
-
-Start the development server on http://localhost:3000
+## Development
 
 ```bash
-pnpm run dev
+pnpm dev
 ```
 
-## Production
+The development site is available at http://localhost:3000.
 
-Generate the static website
+## Build and static generation
 
 ```bash
+pnpm build
 pnpm generate
+pnpm preview
 ```
 
-## References
+## Layout conventions
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- `default`: site frame with Header/Footer and a scrollable content region.
+- `light`: Header and centered page content, without the default frame/Footer.
+- `empty`: no shared chrome, for standalone experiences.
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Page-specific layout selection uses `definePageMeta({ layout: "light" })` or `layout: "empty"`.

@@ -3,22 +3,7 @@ const title = "About";
 const description =
   "About Colton Padden, a software engineer focused on data, developer education, infrastructure, and creative web experiments.";
 
-useSeoMeta({
-  title: pageTitle(title),
-  description,
-  ogTitle: pageTitle(title),
-  ogDescription: description,
-  ogImage: imageUrl(),
-  ogUrl: absoluteUrl("/about"),
-  twitterCard: "summary_large_image",
-  twitterTitle: pageTitle(title),
-  twitterDescription: description,
-  twitterImage: imageUrl(),
-});
-
-useHead({
-  link: [{ rel: "canonical", href: absoluteUrl("/about") }],
-});
+usePageSeo({ title, description, path: "/about" });
 </script>
 
 <template>

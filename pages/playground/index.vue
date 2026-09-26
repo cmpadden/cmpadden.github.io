@@ -3,21 +3,11 @@ const title = "Playground";
 const description =
   "Interactive browser experiments by Colton Padden, including audio visualizers, MIDI tools, generative art, and small utilities.";
 
-useSeoMeta({
-  title: pageTitle(title),
+usePageSeo({
+  title,
   description,
-  ogTitle: pageTitle(title),
-  ogDescription: description,
-  ogImage: imageUrl("/images/previews/conway.webp"),
-  ogUrl: absoluteUrl("/playground"),
-  twitterCard: "summary_large_image",
-  twitterTitle: pageTitle(title),
-  twitterDescription: description,
-  twitterImage: imageUrl("/images/previews/conway.webp"),
-});
-
-useHead({
-  link: [{ rel: "canonical", href: absoluteUrl("/playground") }],
+  path: "/playground",
+  image: "/images/previews/conway.webp",
 });
 </script>
 

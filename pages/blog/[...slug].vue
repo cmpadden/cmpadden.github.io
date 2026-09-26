@@ -89,17 +89,6 @@ useHead(() => ({
       ]
     : [],
 }));
-
-function externalSite(p: any) {
-  if (!p?.external_url) return "";
-  if (p?.external_site) return p.external_site;
-  try {
-    const u = new URL(p.external_url);
-    return u.hostname.replace(/^www\./, "");
-  } catch {
-    return p.external_url;
-  }
-}
 </script>
 
 <template>
@@ -133,34 +122,6 @@ function externalSite(p: any) {
             day="2-digit"
           />
         </p>
-
-        <div v-if="false">
-          <div class="flex flex-row space-x-2 uppercase">
-            <div class="text-xs uppercase text-gray-400">Categories</div>
-            <NuxtLink
-              class="w-min rounded-md bg-background text-xs font-bold uppercase hover:cursor-pointer hover:text-orange-500"
-              v-for="(category, ix) in page.categories"
-              :key="ix"
-              :to="`/blog?category=${category}`"
-            >
-              {{ category }}
-            </NuxtLink>
-          </div>
-        </div>
-
-        <div v-if="false">
-          <div class="flex flex-row space-x-2 text-xs uppercase">
-            <div class="text-xs uppercase text-gray-400">Tags</div>
-            <NuxtLink
-              class="w-min rounded-md bg-background font-bold hover:cursor-pointer hover:text-orange-500"
-              v-for="(tag, ix) in page.tags"
-              :key="ix"
-              :to="`/blog?tag=${tag}`"
-            >
-              {{ tag }}
-            </NuxtLink>
-          </div>
-        </div>
       </div>
     </div>
 

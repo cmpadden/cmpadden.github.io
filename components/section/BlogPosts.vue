@@ -3,17 +3,6 @@ const props = defineProps({
   articles: Object,
   show_dates: false,
 });
-
-function externalSite(article) {
-  if (!article?.external_url) return "";
-  if (article?.external_site) return article.external_site;
-  try {
-    const u = new URL(article.external_url);
-    return u.hostname.replace(/^www\./, "");
-  } catch {
-    return article.external_url;
-  }
-}
 </script>
 
 <template>

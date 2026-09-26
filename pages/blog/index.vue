@@ -7,8 +7,6 @@ const selectedTags = ref([]);
 const currentPage = ref(1);
 const pageSize = 8;
 
-const showTags = ref(true);
-
 const { data: articles } = await useFetch("/api/articles", {
   default: () => [],
 });
@@ -17,22 +15,7 @@ const title = "Blog";
 const description =
   "Technical articles about programming, data engineering, homelab infrastructure, and creative browser experiments.";
 
-useSeoMeta({
-  title: pageTitle(title),
-  description,
-  ogTitle: pageTitle(title),
-  ogDescription: description,
-  ogImage: imageUrl(),
-  ogUrl: absoluteUrl("/blog"),
-  twitterCard: "summary_large_image",
-  twitterTitle: pageTitle(title),
-  twitterDescription: description,
-  twitterImage: imageUrl(),
-});
-
-useHead({
-  link: [{ rel: "canonical", href: absoluteUrl("/blog") }],
-});
+usePageSeo({ title, description, path: "/blog" });
 
 const categories = computed(() => {
   return [
@@ -84,17 +67,6 @@ const paginatedArticles = computed(() => {
   const start = (currentPage.value - 1) * pageSize;
   return visibleArticles.value.slice(start, start + pageSize);
 });
-
-function externalSite(article) {
-  if (!article?.external_url) return "";
-  if (article?.external_site) return article.external_site;
-  try {
-    const u = new URL(article.external_url);
-    return u.hostname.replace(/^www\./, "");
-  } catch {
-    return article.external_url;
-  }
-}
 
 function toggleTag(tag) {
   if (selectedTags.value.includes(tag)) {
@@ -321,7 +293,7 @@ watch(
               </button>
             </div>
           </div>
-          <div v-if="showTags">
+          <div>
             <p class="text-xs uppercase tracking-widest text-gray-300">Tags</p>
             <div class="mt-3 flex flex-wrap gap-2">
               <button
