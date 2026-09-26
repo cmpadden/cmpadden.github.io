@@ -44,9 +44,6 @@ const filtered_links = computed(() => {
           :key="link.title"
           :to="link.link"
         >
-          <svg class="absolute right-0 top-0 size-8" viewBox="0 0 100 100">
-            <polygon points="0,0 0,100 100,100" fill="currentColor" />
-          </svg>
           <img
             class="h-64 w-full bg-gray-800 object-cover grayscale hover:grayscale-0"
             :src="link.img || 'images/placeholder.png'"
@@ -55,7 +52,10 @@ const filtered_links = computed(() => {
             decoding="async"
           />
           <div
-            class="absolute bottom-2 flex w-full items-center justify-center px-2"
+            class="pointer-events-none absolute inset-0 bg-orange-500/10 mix-blend-color"
+          />
+          <div
+            class="absolute bottom-2 z-10 flex w-full items-center justify-center px-2"
           >
             <div
               class="noise-bg w-full bg-black/90 px-6 py-2 [--noise-opacity:0.16]"
