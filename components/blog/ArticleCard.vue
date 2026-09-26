@@ -19,7 +19,7 @@ withDefaults(
       <NuxtTime
         v-if="showDate"
         :datetime="article.date"
-        class="whitespace-nowrap pt-1 tabular-nums text-sm text-gray-300"
+        class="whitespace-nowrap pt-1 text-sm tabular-nums text-gray-300"
         year="numeric"
         month="short"
         day="2-digit"

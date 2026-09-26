@@ -5,7 +5,7 @@ tags: ["ml", "tabs", "music"]
 categories: ["ml", "web"]
 ---
 
-A new feature just landed on https://tabs.garden where a user is suggested similar tabs in the sidebar. This was implemented in a very simple way (spoiler: using JSON files and a rudimentary cosine-similarity score), but I was very pleased by the result.
+A new feature just landed on [tabs.garden](https://tabs.garden) where a user is suggested similar tabs in the sidebar. This was implemented in a very simple way (spoiler: using JSON files and a rudimentary cosine-similarity score), but I was very pleased by the result.
 
 <!--more-->
 

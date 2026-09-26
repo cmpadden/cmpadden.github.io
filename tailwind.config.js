@@ -67,8 +67,6 @@ export default {
             "pre code": false,
             "code::before": false,
             "code::after": false,
-            "code::before": false,
-            "code::after": false,
           },
         },
       },

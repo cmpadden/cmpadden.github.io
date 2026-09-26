@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <section class="container space-y-2">
+  <section class="container space-y-1">
     <div class="grid grid-cols-1 gap-2">
       <BlogArticleCard
         v-for="article in articles"

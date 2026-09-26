@@ -52,7 +52,11 @@ async function parseArticle(
   const { data, content } = matter(rawMarkdown);
   const frontmatter = frontmatterSchema.parse(data);
   const document = await parseMarkdown(content.trim(), {
-    plugins: [highlight()],
+    plugins: [
+      highlight({
+        themes: { light: "tokyo-night", dark: "tokyo-night" },
+      }),
+    ],
   });
 
   return {
