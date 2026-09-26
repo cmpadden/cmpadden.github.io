@@ -1,8 +1,8 @@
 <script setup>
 definePageMeta({ layout: "empty" });
-const PLAYGROUND_ORIGIN = "https://cmpadden.github.io/p5";
-const viewerBase = `${PLAYGROUND_ORIGIN}/experiments/model-viewer.html`;
-const modelPath = `${PLAYGROUND_ORIGIN}/models/mac_mini_macbook_stand.stl`;
+const P5_ORIGIN = "https://cmpadden.github.io/p5";
+const viewerBase = `${P5_ORIGIN}/experiments/model-viewer.html`;
+const modelPath = `${P5_ORIGIN}/models/mac_mini_macbook_stand.stl`;
 const query = new URLSearchParams({ path: modelPath, bg: "30" });
 const fullUrl = `${viewerBase}?${query.toString()}`;
 query.set("embed", "1");
@@ -15,7 +15,7 @@ const src = `${viewerBase}?${query.toString()}`;
     <div class="text-2xl font-bold"><code>.stl</code> Model Render Demo</div>
     <div class="font-body">
       Models auto-rotate until you click the canvas. Use the iframe menu to open
-      the standalone playground in a new tab when embedding elsewhere.
+      the standalone p5 site in a new tab when embedding elsewhere.
     </div>
     <div>
       Powered by the vanilla
@@ -42,7 +42,7 @@ const src = `${viewerBase}?${query.toString()}`;
       rel="noreferrer"
       class="inline-flex items-center gap-2 text-orange-400 underline"
     >
-      Launch in the playground repo
+      Launch in the p5 repo
     </a>
   </div>
 </template>

@@ -81,6 +81,12 @@ code {
     z-index: 1;
   }
 
+  /* Preserve the sticky header when it is a child of a noise background. */
+  .noise-bg > .site-header {
+    position: sticky;
+    z-index: 40;
+  }
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;

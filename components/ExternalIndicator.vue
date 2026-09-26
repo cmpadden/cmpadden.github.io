@@ -9,10 +9,12 @@ const props = defineProps({
 });
 
 const label = computed(() =>
-  props.site.toLowerCase().includes("openai") ? "OPENAI" : props.site.toUpperCase(),
+  props.site.toLowerCase().includes("openai")
+    ? "OPENAI"
+    : props.site.toUpperCase(),
 );
 </script>
 
 <template>
-  <span class="shrink-0 font-mono text-xs font-semibold text-orange-400">[{{ label }}]</span>
+  <span class="shrink-0 font-mono text-xs font-semibold text-gray-300">[{{ label }}]</span>
 </template>

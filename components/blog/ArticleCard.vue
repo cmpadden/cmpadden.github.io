@@ -8,28 +8,43 @@ withDefaults(
   }>(),
   { showDate: false },
 );
+
+const formatDate = (date: string) => {
+  const parts = new Intl.DateTimeFormat("en", {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date(date));
+  const values = Object.fromEntries(
+    parts
+      .filter((part) => part.type !== "literal")
+      .map((part) => [part.type, part.value]),
+  );
+
+  return `${values.year}-${values.month}-${values.day}`;
+};
 </script>
 
 <template>
-  <NuxtLink :to="article.path" class="block h-full">
+  <NuxtLink :to="article.path" class="group block h-full">
     <article
       class="grid h-full items-start gap-1 text-white"
-      :class="showDate ? 'grid-cols-[7.5rem_minmax(0,1fr)]' : 'grid-cols-1'"
+      :class="showDate ? 'grid-cols-[6rem_minmax(0,1fr)]' : 'grid-cols-1'"
     >
-      <NuxtTime
+      <time
         v-if="showDate"
         :datetime="article.date"
-        class="whitespace-nowrap pt-1 text-sm tabular-nums text-gray-300"
-        year="numeric"
-        month="short"
-        day="2-digit"
-      />
+        class="whitespace-nowrap pt-1 font-mono text-sm tabular-nums text-gray-300"
+      >
+        {{ formatDate(article.date) }}
+      </time>
       <div class="flex min-w-0 flex-wrap items-center gap-2">
         <h2
-          class="w-fit max-w-[60ch] text-lg font-semibold text-white md:text-xl"
+          class="w-fit max-w-[60ch] text-lg font-semibold text-white transition-colors group-hover:text-gray-300 md:text-xl"
           :title="article.title"
         >
-          {{ article.title }}
+          <BlogArticleTitle :title="article.title" />
         </h2>
         <ExternalIndicator
           v-if="article.external_url"

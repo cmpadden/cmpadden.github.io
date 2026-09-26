@@ -34,14 +34,19 @@ useHead({
     </section>
     -->
     <div class="container pb-2 pt-6">
-      <h2 class="font-pixelify text-3xl font-bold text-orange-400">Blog</h2>
+      <h2 id="blog" class="font-pixelify text-3xl font-bold text-white">
+        <a href="#blog">Blog</a>
+      </h2>
     </div>
     <SectionBlogPosts :articles="articles" :show_dates="true" />
     <div class="container pb-2 pt-8">
-      <h2 class="font-pixelify text-3xl font-bold text-orange-400">
-        Experiments
+      <h2
+        id="experiments"
+        class="font-pixelify text-3xl font-bold text-white"
+      >
+        <a href="#experiments">Experiments</a>
       </h2>
     </div>
-    <SectionPlayground :limit="6" showImages linkToPlayground tightTop />
+    <SectionExperiments :limit="6" showImages tightTop />
   </div>
 </template>

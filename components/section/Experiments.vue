@@ -1,5 +1,5 @@
 <script setup>
-import { playgroundLinks } from "../../data/playground";
+import { experimentLinks } from "../../data/experiments";
 
 const props = defineProps({
   showImages: {
@@ -10,25 +10,21 @@ const props = defineProps({
     type: Number,
     default: null,
   },
-  linkToPlayground: {
-    type: Boolean,
-    default: false,
-  },
   tightTop: {
     type: Boolean,
     default: false,
   },
 });
 
-const links = playgroundLinks;
+const links = experimentLinks;
 
-const route = useRoute();
+const visibleLinks = computed(() => links.filter((link) => !link.hidden));
 
 const filtered_links = computed(() => {
   if (props.limit === null || props.limit <= 0) {
-    return links;
+    return visibleLinks.value;
   } else {
-    return links.slice(0, props.limit);
+    return visibleLinks.value.slice(0, props.limit);
   }
 });
 </script>
@@ -75,9 +71,7 @@ const filtered_links = computed(() => {
           </div>
         </nuxt-link>
       </div>
-      <MoreLink to="/playground" v-if="route.path !== '/playground'"
-        >More</MoreLink
-      >
+      <!-- <MoreLink to="/experiments">More</MoreLink> -->
     </div>
   </section>
 </template>

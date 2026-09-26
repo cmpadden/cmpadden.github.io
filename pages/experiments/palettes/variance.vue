@@ -1,8 +1,8 @@
 <script setup>
 definePageMeta({ layout: "light" });
-const PLAYGROUND_ORIGIN = "https://cmpadden.github.io/p5";
+const P5_ORIGIN = "https://cmpadden.github.io/p5";
 const pagePath = "/experiments/variance.html";
-const src = `${PLAYGROUND_ORIGIN}${pagePath}?embed=1&v=embed-shell-2`;
+const src = `${P5_ORIGIN}${pagePath}?embed=1&v=embed-shell-2`;
 </script>
 
 <template>

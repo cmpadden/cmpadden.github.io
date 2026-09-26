@@ -17,6 +17,6 @@ defineProps<{
         :show-date="show_dates"
       />
     </div>
-    <MoreLink to="/blog">More</MoreLink>
+    <!-- <MoreLink to="/blog">More</MoreLink> -->
   </section>
 </template>

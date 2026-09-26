@@ -111,19 +111,17 @@ useHead(() => ({
       </h1>
     </div>
 
-    <!-- Meta -->
-    <div class="">
-      <div class="flex-row space-x-0 md:flex md:space-x-2">
-        <p class="text-sm text-gray-300 md:text-right">
-          Published
-          <NuxtTime
-            :datetime="page.date"
-            year="numeric"
-            month="short"
-            day="2-digit"
-          />
-        </p>
-      </div>
+    <!-- Post metadata -->
+    <div class="flex items-center gap-2 text-sm text-gray-300">
+      <NuxtTime
+        :datetime="page.date"
+        class="whitespace-nowrap tabular-nums"
+        year="numeric"
+        month="short"
+        day="2-digit"
+      />
+      <span aria-hidden="true">·</span>
+      <span>{{ page.readingTimeMinutes }} min read</span>
     </div>
 
     <!-- external banner and CTA (below title/date, above content) -->

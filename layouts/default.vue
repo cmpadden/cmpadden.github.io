@@ -4,8 +4,8 @@
       <div
         class="flex h-[calc(100vh-16px)] flex-col bg-background font-display"
       >
-        <Header />
-        <main class="no-scrollbar min-h-0 flex-1 overflow-y-auto">
+        <main class="noise-bg no-scrollbar min-h-0 flex-1 overflow-y-auto bg-emerald-950">
+          <Header />
           <slot />
         </main>
         <Footer />

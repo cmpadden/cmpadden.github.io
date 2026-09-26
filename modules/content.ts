@@ -30,6 +30,19 @@ function slugFromFilePath(filePath: string) {
   return filePath.split("/").pop()?.replace(/\.md$/, "") || "";
 }
 
+function readingTimeMinutes(body: string) {
+  const text = body
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/<!--[\s\S]*?-->/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/!?\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/[`*_>#~]/g, " ");
+  const wordCount =
+    text.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu)?.length ?? 0;
+
+  return Math.max(1, Math.ceil(wordCount / 225));
+}
+
 function excerptFromBody(body: string) {
   const summary = body.split(/<!--\s*more\s*-->/i)[0] || body;
 
@@ -66,6 +79,7 @@ async function parseArticle(
     path: `/blog/${slug}`,
     document,
     excerpt: excerptFromBody(content),
+    readingTimeMinutes: readingTimeMinutes(content),
     date: frontmatter.date.toISOString(),
   };
 }
