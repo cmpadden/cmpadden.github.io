@@ -8,13 +8,13 @@ export const experimentLinks = [
   {
     title: "tabs.garden",
     description: "A simple site for guitar tabs",
-    link: "/experiments/tabs-garden",
+    link: "https://tabs.garden",
     img: "/images/previews/tabs-garden.webp",
   },
   {
     title: "Conway",
     description: "Conway's game of life written in vanilla Javascript",
-    link: "/experiments/conway",
+    link: "https://cmpadden.github.io/conway/",
     img: "/images/previews/conway.webp",
   },
   {
@@ -27,7 +27,7 @@ export const experimentLinks = [
     title: "Metronome",
     description: "A simple metronome for tracking tempo in the browser",
     hidden: true,
-    link: "/experiments/metronome",
+    link: "https://simple-tempo.com",
     img: "/images/previews/metronome.webp",
   },
   {
@@ -41,7 +41,7 @@ export const experimentLinks = [
     title: "Mountains",
     description:
       "Visualize a gradient of colored waves generated with Perlin noise",
-    link: "/experiments/palettes/mountains",
+    link: "https://cmpadden.github.io/p5/experiments/mountains.html",
     img: "/images/previews/noise.webp",
   },
   {
@@ -55,7 +55,7 @@ export const experimentLinks = [
     title: "Waves",
     description:
       "Demonstration of using p5.js within Vue.js to visualize trigonometric functions",
-    link: "/experiments/waves",
+    link: "https://cmpadden.github.io/p5/experiments/waves.html",
     img: "/images/previews/waves.webp",
   },
   {
@@ -82,7 +82,7 @@ export const experimentLinks = [
     title: "Sequence Plotter",
     description:
       "Plot the first 10,000 digits of Pi, or any sequence of digits, in 2-dimensional space",
-    link: "/experiments/plotter",
+    link: "https://cmpadden.github.io/p5/experiments/plotter.html",
     img: "/images/previews/plotter.webp",
   },
 ] as const;

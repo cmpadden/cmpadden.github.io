@@ -10,18 +10,9 @@ const STATIC_ROUTES = [
   "/experiments",
   "/experiments/audio",
   "/experiments/chords",
-  "/experiments/conway",
   "/experiments/french",
   "/experiments/matrix",
-  "/experiments/metronome",
   "/experiments/midi",
-  "/experiments/palettes/mountains",
-  "/experiments/palettes/variance",
-  "/experiments/plotter",
-  "/experiments/stl-model-render",
-  "/experiments/tabs-garden",
-  "/experiments/tiling",
-  "/experiments/waves",
 ];
 
 export default defineEventHandler(async () => {
