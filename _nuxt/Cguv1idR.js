@@ -1,1 +1,0 @@
-import{P as e,f as t,l as n}from"./Co6sCOnk.js";import{t as r}from"./CNs_Ozdc.js";var i={class:`flex h-[1024px] justify-center border-2 border-gray-500 bg-white`},a={__name:`conway`,setup(a){return r({layout:`light`}),(r,a)=>(e(),t(`main`,i,[...a[0]||=[n(`iframe`,{src:`https://cmpadden.github.io/conway/`,width:`100%`,height:`100%`},null,-1)]]))}};export{a as default};
