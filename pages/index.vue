@@ -24,15 +24,6 @@ useHead({
 
 <template>
   <div class="noise-bg min-h-screen bg-emerald-950">
-    <!-- Temporarily hide the interactive logo hero while retaining the component.
-    <section class="bg-gradient-to-b from-background to-transparent py-2">
-      <div class="container my-7">
-        <div class="text-orange-500">
-          <Logo />
-        </div>
-      </div>
-    </section>
-    -->
     <div class="container pb-2 pt-6">
       <h2 id="blog" class="font-pixelify text-3xl font-bold text-white">
         <a href="#blog">Blog</a>
