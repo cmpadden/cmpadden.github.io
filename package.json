@@ -25,7 +25,6 @@
     "sitemap": "^9.0.1",
     "typescript": "6.0.0-beta",
     "vue-tsc": "^3.3.11",
-    "webpack": "^5.111.1",
     "zod": "^4.6.5"
   },
   "dependencies": {
