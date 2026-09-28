@@ -31,13 +31,6 @@ export const experimentLinks = [
     img: "/images/previews/metronome.webp",
   },
   {
-    title: "Conjugations",
-    description: "Search and explore the conjugations of 1000 French verbs",
-    hidden: true,
-    link: "/experiments/french",
-    img: "/images/previews/french-conjugations.webp",
-  },
-  {
     title: "Mountains",
     description:
       "Visualize a gradient of colored waves generated with Perlin noise",

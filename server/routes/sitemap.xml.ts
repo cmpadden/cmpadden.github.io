@@ -10,7 +10,6 @@ const STATIC_ROUTES = [
   "/experiments",
   "/experiments/audio",
   "/experiments/chords",
-  "/experiments/french",
   "/experiments/matrix",
   "/experiments/midi",
 ];
