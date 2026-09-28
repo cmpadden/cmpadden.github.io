@@ -1,1 +1,0 @@
-function e(e){if(!e?.external_url)return``;if(e.external_site)return e.external_site;try{return new URL(e.external_url).hostname.replace(/^www\./,``)}catch{return e.external_url}}export{e as t};
