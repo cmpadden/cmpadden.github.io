@@ -19,14 +19,14 @@
     <!-- Main application -->
     <div v-else class="relative min-h-[32rem]">
       <div class="flex flex-wrap">
-        <div class="absolute bottom-16 right-2">
+        <div class="absolute right-2 bottom-16">
           <div
             v-bind:class="{ hidden: !tooltip, block: tooltip }"
-            class="z-50 max-w-md break-words rounded-lg border-2 border-green-800 bg-yellow-200 text-sm font-normal leading-normal"
+            class="z-50 max-w-md rounded-lg border-2 border-green-800 bg-yellow-200 text-sm leading-normal font-normal break-words"
           >
             <div>
               <div
-                class="mb-0 rounded-t-lg border-b border-solid bg-green-600 p-3 font-semibold uppercase text-white opacity-75"
+                class="mb-0 rounded-t-lg border-b border-solid bg-green-600 p-3 font-semibold text-white uppercase opacity-75"
               >
                 MIDI Status
               </div>
@@ -47,7 +47,11 @@
                     No input devices detected :(
                   </div>
                   <div v-else>
-                    <div v-for="input in inputs" :key="input.id" class="flex">
+                    <div
+                      v-for="input in inputs || []"
+                      :key="input.id"
+                      class="flex"
+                    >
                       <div class="flex-1">{{ input.manufacturer }}</div>
                       <div class="flex-1">{{ input.name }}</div>
                     </div>
@@ -63,7 +67,7 @@
                   </div>
                   <div v-else>
                     <div
-                      v-for="output in outputs"
+                      v-for="output in outputs || []"
                       :key="output.id"
                       class="flex"
                     >
@@ -76,10 +80,10 @@
             </div>
           </div>
         </div>
-        <div class="absolute bottom-2 right-2">
+        <div class="absolute right-2 bottom-2">
           <button
             @click="tooltip = !tooltip"
-            class="border-3 rounded-lg border-green-600 bg-green-50 px-1 text-green-600 shadow hover:text-green-500 hover:shadow-lg"
+            class="rounded-lg border-3 border-green-600 bg-green-50 px-1 text-green-600 shadow hover:text-green-500 hover:shadow-lg"
             type="button"
           >
             <svg
@@ -139,7 +143,7 @@ export default {
     // not all browsers support `requestMIDIAccess`
     if (typeof navigator.requestMIDIAccess !== "undefined") {
       navigator.requestMIDIAccess().then(
-        (access: WebMidi.MIDIAccess) => {
+        (access: MIDIAccess) => {
           this.midi = access;
           this.midi.inputs.forEach((entry: any) => {
             entry.onmidimessage = (event: any) => {
@@ -165,22 +169,16 @@ export default {
   data() {
     return {
       tooltip: false,
-      midi: undefined as undefined | WebMidi.MIDIAccess,
+      midi: undefined as undefined | MIDIAccess,
       activeKeys: new Map<number, object>(),
     };
   },
   computed: {
-    inputs(): WebMidi.MIDIInput[] | undefined {
-      if (typeof this.midi !== "undefined") {
-        return Array.from(this.midi.inputs.values());
-      }
-      return undefined;
+    inputs(): MIDIInput[] {
+      return this.midi ? Array.from(this.midi.inputs.values()) : [];
     },
-    outputs(): WebMidi.MIDIOutput[] | undefined {
-      if (typeof this.midi !== "undefined") {
-        return Array.from(this.midi.outputs.values());
-      }
-      return undefined;
+    outputs(): MIDIOutput[] {
+      return this.midi ? Array.from(this.midi.outputs.values()) : [];
     },
   },
   methods: {

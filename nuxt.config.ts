@@ -1,15 +1,12 @@
 import { writeFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   components: true,
-  modules: [
-    "./modules/content",
-    "@comark/nuxt",
-    "@nuxtjs/tailwindcss",
-    "nuxt-headlessui",
-  ],
+  css: ["~/assets/css/tailwind.css"],
+  modules: ["./modules/content", "@comark/nuxt", "nuxt-headlessui"],
 
   app: {
     head: {
@@ -36,6 +33,10 @@ export default defineNuxtConfig({
         class: "bg-background",
       },
     },
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
   },
 
   // Optionally change the default prefix.

@@ -17,14 +17,14 @@
     <!-- Main application -->
     <div v-else>
       <div class="flex flex-wrap">
-        <div class="absolute bottom-16 right-2">
+        <div class="absolute right-2 bottom-16">
           <div
             v-bind:class="{ hidden: !tooltip, block: tooltip }"
-            class="z-50 max-w-md break-words rounded-lg border-2 border-green-800 bg-yellow-200 text-sm font-normal leading-normal"
+            class="z-50 max-w-md rounded-lg border-2 border-green-800 bg-yellow-200 text-sm leading-normal font-normal break-words"
           >
             <div>
               <div
-                class="mb-0 rounded-t-lg border-b border-solid bg-green-600 p-3 font-semibold uppercase text-white opacity-75"
+                class="mb-0 rounded-t-lg border-b border-solid bg-green-600 p-3 font-semibold text-white uppercase opacity-75"
               >
                 MIDI Status
               </div>
@@ -45,7 +45,11 @@
                     No input devices detected :(
                   </div>
                   <div v-else>
-                    <div v-for="input in inputs" :key="input.id" class="flex">
+                    <div
+                      v-for="input in inputs || []"
+                      :key="input.id"
+                      class="flex"
+                    >
                       <div class="flex-1">{{ input.manufacturer }}</div>
                       <div class="flex-1">{{ input.name }}</div>
                     </div>
@@ -61,7 +65,7 @@
                   </div>
                   <div v-else>
                     <div
-                      v-for="output in outputs"
+                      v-for="output in outputs || []"
                       :key="output.id"
                       class="flex"
                     >
@@ -74,7 +78,7 @@
             </div>
           </div>
         </div>
-        <div class="absolute bottom-2 right-2">
+        <div class="absolute right-2 bottom-2">
           <button
             ref="btnRef"
             @click="tooltip = !tooltip"
@@ -105,7 +109,7 @@
         <table
           class="w-full table-auto border-2 border-green-800 bg-green-50 text-sm"
         >
-          <thead class="bg-green-800 font-semibold uppercase text-white">
+          <thead class="bg-green-800 font-semibold text-white uppercase">
             <tr>
               <th class="p-2 text-left">Timestamp</th>
               <th class="p-2 text-left">Command #</th>
@@ -125,14 +129,14 @@
             <tr v-for="(event, ix) in events" :key="ix">
               <td class="p-2 text-left">{{ event.timeStamp.toFixed(2) }}</td>
               <td class="p-2 text-left">{{ event.data[0] }}</td>
-              <td class="p-2 text-left">{{ event.data[0] | midiCommand }}</td>
+              <td class="p-2 text-left">{{ midiCommand(event.data[0]) }}</td>
               <td class="p-2 text-left">{{ event.data[1] }}</td>
               <td
                 v-if="event.data[0] === 144 || event.data[0] == 128"
                 class="p-2 text-left"
               >
                 <!-- only perform note mapping for note on/off commands -->
-                {{ event.data[1] | midiNote }}
+                {{ midiNote(event.data[1]) }}
               </td>
               <td v-else class="p-2 text-left">-</td>
               <td class="p-2 text-left">{{ event.data[2] }}</td>
@@ -152,7 +156,7 @@ export default {
     // not all browsers support `requestMIDIAccess`
     if (typeof navigator.requestMIDIAccess !== "undefined") {
       navigator.requestMIDIAccess().then(
-        (access: WebMidi.MIDIAccess) => {
+        (access: MIDIAccess) => {
           this.midi = access;
           this.midi.inputs.forEach((entry: any) => {
             entry.onmidimessage = (event: any) => {
@@ -174,25 +178,19 @@ export default {
   data() {
     return {
       tooltip: false,
-      midi: undefined as undefined | WebMidi.MIDIAccess,
+      midi: undefined as undefined | MIDIAccess,
       events: [] as any[],
     };
   },
   computed: {
-    inputs(): WebMidi.MIDIInput[] | undefined {
-      if (typeof this.midi !== "undefined") {
-        return Array.from(this.midi.inputs.values());
-      }
-      return undefined;
+    inputs(): MIDIInput[] {
+      return this.midi ? Array.from(this.midi.inputs.values()) : [];
     },
-    outputs(): WebMidi.MIDIOutput[] | undefined {
-      if (typeof this.midi !== "undefined") {
-        return Array.from(this.midi.outputs.values());
-      }
-      return undefined;
+    outputs(): MIDIOutput[] {
+      return this.midi ? Array.from(this.midi.outputs.values()) : [];
     },
   },
-  filters: {
+  methods: {
     midiCommand: (value: number) => {
       // https://www.midi.org/specifications-old/item/table-1-summary-of-midi-message
       switch (value) {

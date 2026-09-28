@@ -2,7 +2,7 @@
 //
 // Date formatting can cause hydration issues due to the difference locale on server and client.
 // See: https://www.leopold.is/blog/nuxt-hydration-issues-and-dates/
-export const formatDate = function (date) {
+export const formatDate = function (date: string | number | Date) {
   return new Date(date).toLocaleDateString("en-US", {
     month: "short",
     day: "2-digit",

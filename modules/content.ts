@@ -8,6 +8,7 @@ import {
 } from "@nuxt/kit";
 import { parseMarkdown } from "comark";
 import highlight from "comark/plugins/highlight";
+import tokyoNight from "shiki/themes/tokyo-night.mjs";
 import matter from "gray-matter";
 import { z } from "zod";
 import type { BlogArticle } from "./content/runtime/types/blog-article";
@@ -67,7 +68,10 @@ async function parseArticle(
   const document = await parseMarkdown(content.trim(), {
     plugins: [
       highlight({
-        themes: { light: "tokyo-night", dark: "tokyo-night" },
+        themes: {
+          light: tokyoNight,
+          dark: tokyoNight,
+        },
       }),
     ],
   });

@@ -5,13 +5,13 @@
         <!-- Controls -->
         <div class="col-span-3 space-x-2">
           <div
-            class="inline-block rounded-lg bg-black px-6 py-2 text-sm font-bold uppercase text-white shadow-lg shadow-green-400/25 transition duration-150 ease-in-out hover:cursor-pointer hover:shadow-white/25"
+            class="inline-block rounded-lg bg-black px-6 py-2 text-sm font-bold text-white uppercase shadow-lg shadow-green-400/25 transition duration-150 ease-in-out hover:cursor-pointer hover:shadow-white/25"
             @click="enable_audio_monitoring"
           >
             Enable
           </div>
           <div
-            class="inline-block rounded-lg bg-black px-6 py-2 text-sm font-bold uppercase text-white shadow-lg shadow-red-400/25 transition duration-150 ease-in-out hover:cursor-pointer hover:shadow-white/25"
+            class="inline-block rounded-lg bg-black px-6 py-2 text-sm font-bold text-white uppercase shadow-lg shadow-red-400/25 transition duration-150 ease-in-out hover:cursor-pointer hover:shadow-white/25"
             @click="disable_audio_monitoring"
           >
             Disable
@@ -144,36 +144,31 @@ let audioCtx: AudioContext | null = null;
 let analyser: AnalyserNode | null = null;
 let source: MediaStreamAudioSourceNode | null = null;
 
-let timeDomainBuffer: Uint8Array | null = null;
-let timeDomainBufferHistory = ref<Array<Uint8Array>>([]);
+let timeDomainBuffer: Uint8Array<ArrayBuffer> | null = null;
+let timeDomainBufferHistory = ref<Array<Uint8Array<ArrayBuffer>>>([]);
 
-let frequencyDomainBuffer: Uint8Array | null = null;
-let frequencyDomainBufferHistory = ref<Array<Uint8Array>>([]);
+let frequencyDomainBuffer: Uint8Array<ArrayBuffer> | null = null;
+let frequencyDomainBufferHistory = ref<Array<Uint8Array<ArrayBuffer>>>([]);
 
 const HISTORY_SCROLLBACK = 256;
 
-const audioAnalysisEnabled = ref<Boolean>(false);
+const audioAnalysisEnabled = ref(false);
 
 const poll_byte_frequency_data = () => {
   requestAnimationFrame(poll_byte_frequency_data);
 
-  analyser.getByteTimeDomainData(timeDomainBuffer);
+  if (!analyser || !timeDomainBuffer || !frequencyDomainBuffer) return;
 
-  // slice is required to make a copy of the buffer
-  if (timeDomainBuffer !== null) {
-    timeDomainBufferHistory.value.push(timeDomainBuffer.slice());
-    if (timeDomainBufferHistory.value.length > HISTORY_SCROLLBACK) {
-      timeDomainBufferHistory.value.shift();
-    }
+  analyser.getByteTimeDomainData(timeDomainBuffer);
+  timeDomainBufferHistory.value.push(timeDomainBuffer.slice());
+  if (timeDomainBufferHistory.value.length > HISTORY_SCROLLBACK) {
+    timeDomainBufferHistory.value.shift();
   }
 
   analyser.getByteFrequencyData(frequencyDomainBuffer);
-
-  if (frequencyDomainBuffer !== null) {
-    frequencyDomainBufferHistory.value.push(frequencyDomainBuffer.slice());
-    if (frequencyDomainBufferHistory.value.length > HISTORY_SCROLLBACK) {
-      frequencyDomainBufferHistory.value.shift();
-    }
+  frequencyDomainBufferHistory.value.push(frequencyDomainBuffer.slice());
+  if (frequencyDomainBufferHistory.value.length > HISTORY_SCROLLBACK) {
+    frequencyDomainBufferHistory.value.shift();
   }
 };
 
@@ -182,7 +177,13 @@ const enable_audio_monitoring = () => {
     .getUserMedia({ audio: true })
     .then((s) => {
       stream = s;
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const AudioContextClass =
+        window.AudioContext ||
+        (window as Window & { webkitAudioContext?: typeof AudioContext })
+          .webkitAudioContext;
+      if (!AudioContextClass) return;
+
+      audioCtx = new AudioContextClass();
       analyser = audioCtx.createAnalyser();
 
       source = audioCtx.createMediaStreamSource(stream);

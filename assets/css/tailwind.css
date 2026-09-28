@@ -1,6 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@config "../../tailwind.config.js";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@source "../../app.vue";
+@source "../../components";
+@source "../../layouts";
+@source "../../pages";
 
 /******************************************************************************
 *                               Customizations                               *

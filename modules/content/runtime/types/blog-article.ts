@@ -1,8 +1,10 @@
+import type { MarkdownDocument } from "comark";
+
 export type BlogArticle = {
   _id: string;
   slug: string;
   path: string;
-  document: unknown;
+  document: MarkdownDocument;
   excerpt: string;
   readingTimeMinutes: number;
   title?: string;

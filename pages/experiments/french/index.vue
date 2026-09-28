@@ -18,7 +18,7 @@
         <template v-if="conjugations && conjugations.length > 0 && word">
           <!-- dismissible instructions -->
           <div class="flex rounded-xl bg-amber-500 p-4">
-            <div class="text-center text-xl italic text-white">
+            <div class="text-center text-xl text-white italic">
               Click a word to the left or right to cycle through the 1000 most
               popular French verb conjugations!
             </div>
@@ -41,11 +41,11 @@
               <li
                 v-for="s in suggestions"
                 :key="s.word"
-                class="relative cursor-pointer py-1 pl-8 pr-2 hover:bg-yellow-50 hover:text-gray-900"
+                class="relative cursor-pointer py-1 pr-2 pl-8 hover:bg-yellow-50 hover:text-gray-900"
                 @click="searchNavigate(s)"
               >
                 <svg
-                  class="absolute left-2 top-2 h-4 w-4"
+                  class="absolute top-2 left-2 h-4 w-4"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
@@ -62,17 +62,17 @@
           <!-- window over words -->
           <div class="flex p-4">
             <div
-              class="flex-1 cursor-pointer select-none text-center text-2xl text-gray-400"
+              class="flex-1 cursor-pointer text-center text-2xl text-gray-400 select-none"
               @click="decWordIndex"
             >
               {{ wordPrev ? wordPrev.word : "-" }}
             </div>
-            <div class="text-cyan-600 flex-1 text-center text-3xl font-bold">
+            <div class="flex-1 text-center text-3xl font-bold text-cyan-600">
               <span class="text-amber-500"> #{{ word.word_popularity }}</span>
               {{ word.word }}
             </div>
             <div
-              class="flex-1 cursor-pointer select-none text-center text-2xl text-gray-400"
+              class="flex-1 cursor-pointer text-center text-2xl text-gray-400 select-none"
               @click="incWordIndex"
             >
               {{ wordNext ? wordNext.word : "-" }}
@@ -85,9 +85,9 @@
           >
             <div v-for="(conjs, tense) in word.conjugations" :key="tense">
               <div
-                class="border-cyan-600 h-full space-y-3 rounded-md border-2 bg-white p-4 shadow shadow-amber-500"
+                class="h-full space-y-3 rounded-md border-2 border-cyan-600 bg-white p-4 shadow shadow-amber-500"
               >
-                <h1 class="text-2xl font-semibold capitalize text-gray-700">
+                <h1 class="text-2xl font-semibold text-gray-700 capitalize">
                   {{ tense }}
                 </h1>
 
@@ -114,20 +114,18 @@
 type Conjugation = {
   word: string;
   word_popularity: number;
-  conjugations: Object;
+  conjugations: Record<string, Array<Array<{ text: string }>>>;
 };
 
 definePageMeta({ layout: "light" });
 
 const wordIndex = ref<number>(0);
 const search = ref("");
-const suggestions = ref([]);
+const suggestions = ref<Conjugation[]>([]);
 
-const { data: conjugations } = await useFetch("/api/french-conjugations", {
-  transform: (value) => {
-    return value as Conjugation[];
-  },
-});
+const { data: conjugations } = await useFetch<Conjugation[]>(
+  "/api/french-conjugations",
+);
 
 const word = computed(() => {
   if (conjugations.value) {
@@ -136,7 +134,7 @@ const word = computed(() => {
 });
 
 const wordPrev = computed(() => {
-  if (conjugations.value === null) {
+  if (!conjugations.value || wordIndex.value === 0) {
     return undefined;
   }
   return wordIndex.value === 0
@@ -145,7 +143,10 @@ const wordPrev = computed(() => {
 });
 
 const wordNext = computed(() => {
-  if (conjugations.value === null) {
+  if (
+    !conjugations.value ||
+    wordIndex.value + 1 === conjugations.value.length
+  ) {
     return undefined;
   }
   return wordIndex.value + 1 === conjugations.value.length
@@ -160,7 +161,7 @@ watch(search, (value: string) => {
   }
 
   let count = 0;
-  suggestions.value = conjugations.value.filter((v: Conjugation) => {
+  suggestions.value = (conjugations.value ?? []).filter((v) => {
     const match = v.word
       .normalize("NFD")
       .replace(/\p{Diacritic}/gu, "")

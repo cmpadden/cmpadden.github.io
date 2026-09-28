@@ -1,5 +1,6 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "nuxt build",
@@ -11,23 +12,25 @@
     "format": "prettier --write \"**/*.{vue,ts,js,json,md}\" --ignore-path .gitignore"
   },
   "devDependencies": {
-    "@comark/nuxt": "^0.6.0",
-    "@nuxtjs/tailwindcss": "^6.14.0",
-    "@tailwindcss/typography": "^0.5.16",
-    "feed": "^4.2.2",
+    "@comark/nuxt": "^0.7.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.3",
+    "feed": "^6.0.0",
     "gray-matter": "^4.0.3",
-    "nuxt": "^4.5.1",
-    "nuxt-headlessui": "^1.2.1",
-    "prettier": "^3.5.3",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "shiki": "^4.3.1",
-    "sitemap": "^8.0.0",
-    "webpack": "^5.99.9",
-    "zod": "^4.4.3"
+    "nuxt": "^4.5.2",
+    "nuxt-headlessui": "^1.2.2",
+    "prettier": "^3.9.9",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "shiki": "^4.4.3",
+    "sitemap": "^9.0.1",
+    "typescript": "6.0.0-beta",
+    "vue-tsc": "^3.3.11",
+    "webpack": "^5.111.1",
+    "zod": "^4.6.5"
   },
   "dependencies": {
     "chords.ts": "^0.1.0",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^4.3.3"
   },
   "packageManager": "pnpm@10.8.0+sha512.0e82714d1b5b43c74610193cb20734897c1d00de89d0e18420aebc5977fa13d780a9cb05734624e81ebd81cc876cd464794850641c48b9544326b5622ca29971"
 }

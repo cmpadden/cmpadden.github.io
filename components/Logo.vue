@@ -7,6 +7,10 @@ const MAX_TILT = 7;
 const logoRef = ref<HTMLElement | null>(null);
 let deviceOrientationEnabled = false;
 
+type DeviceOrientationEventConstructor = typeof DeviceOrientationEvent & {
+  requestPermission?: () => Promise<PermissionState>;
+};
+
 const transformStyle = computed(() => ({
   transform: `perspective(900px) rotateX(${tiltX.value}deg) rotateY(${tiltY.value}deg)`,
 }));
@@ -47,7 +51,8 @@ const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
 
 const enableDeviceTilt = async (fromInteraction = false) => {
   if (deviceOrientationEnabled || typeof window === "undefined") return;
-  const DeviceOrientation = window.DeviceOrientationEvent;
+  const DeviceOrientation =
+    window.DeviceOrientationEvent as DeviceOrientationEventConstructor;
   if (!DeviceOrientation) return;
 
   if (typeof DeviceOrientation.requestPermission === "function") {
