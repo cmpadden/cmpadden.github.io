@@ -5,12 +5,14 @@
         class="bg-background font-display flex h-[calc(100vh-16px)] flex-col"
       >
         <main
-          class="noise-bg no-scrollbar min-h-0 flex-1 overflow-y-auto bg-emerald-950"
+          class="site-noise-surface noise-bg no-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto bg-emerald-950"
         >
           <Header />
-          <slot />
+          <div class="flex-1">
+            <slot />
+          </div>
+          <Footer />
         </main>
-        <Footer />
       </div>
     </div>
   </div>

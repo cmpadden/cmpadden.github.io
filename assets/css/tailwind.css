@@ -85,6 +85,12 @@ code {
     z-index: 1;
   }
 
+  /* Keep one texture behind the full scroll range, including the header and
+   * footer, rather than letting an absolute layer scroll out of view. */
+  .site-noise-surface::before {
+    position: fixed;
+  }
+
   /* Preserve the sticky header when it is a child of a noise background. */
   .noise-bg > .site-header {
     position: sticky;

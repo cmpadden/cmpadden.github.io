@@ -13,7 +13,7 @@ const visibleArticles = computed(() => articles.value);
 </script>
 
 <template>
-  <section class="noise-bg min-h-screen bg-emerald-950 py-10 text-white">
+  <section class="min-h-screen py-10 text-white">
     <div class="container space-y-8">
       <h1 class="font-pixelify text-3xl font-bold text-white">Blog</h1>
       <div class="space-y-4">

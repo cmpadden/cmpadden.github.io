@@ -7,7 +7,7 @@ const closeMenu = (event: MouseEvent) => {
 </script>
 
 <template>
-  <nav class="site-header bg-background/75 sticky top-0 z-40 backdrop-blur-sm">
+  <nav class="site-header sticky top-0 z-40 bg-emerald-950/75 backdrop-blur-sm">
     <div class="container py-3">
       <div class="flex items-center text-gray-700 dark:text-gray-200">
         <div class="flex-1" />

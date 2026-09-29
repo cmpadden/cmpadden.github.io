@@ -96,8 +96,10 @@ useHead(() => ({
 </script>
 
 <template>
-  <div v-if="page" class="noise-bg min-h-screen bg-emerald-950 pt-8">
-    <div class="container mb-10 space-y-6 text-white shadow-lg">
+  <div v-if="page" class="min-h-screen pt-8">
+    <div
+      class="container mb-10 space-y-6 bg-emerald-950/75 py-6 text-white backdrop-blur-sm"
+    >
       <!-- title -->
       <div class="flex">
         <template v-if="page.cover_image || page.img">

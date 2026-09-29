@@ -23,7 +23,7 @@ useHead({
 </script>
 
 <template>
-  <div class="noise-bg min-h-screen bg-emerald-950">
+  <div class="min-h-screen">
     <div class="container pb-2 pt-6">
       <h2 id="blog" class="font-pixelify text-3xl font-bold text-white">
         <a href="#blog">Blog</a>
