@@ -149,7 +149,7 @@ useHead(() => ({
         - Remove maximum width of prose content: https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width
       -->
       <article
-        class="prose max-w-[1024px] text-gray-300 prose-headings:text-white prose-h2:mt-8 prose-h3:text-orange-100 prose-p:my-3 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-strong:text-gray-100 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0"
+        class="prose prose-headings:text-white prose-h2:mt-8 prose-h3:text-orange-100 prose-p:my-3 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-strong:text-gray-100 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0 max-w-[75ch] text-gray-300"
       >
         <MarkdownDocument v-if="page?.document" :value="page.document" />
       </article>

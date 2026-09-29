@@ -119,11 +119,11 @@ const formatDate = (date) => {
       <div
         v-for="(talk, ix) in talks"
         :key="ix"
-        class="grid grid-cols-[6rem_minmax(0,1fr)] gap-1"
+        class="grid grid-cols-1 gap-2 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-1"
       >
         <time
           :datetime="talk.date.toISOString()"
-          class="whitespace-nowrap pt-1 font-mono text-sm tabular-nums text-gray-300"
+          class="font-mono text-sm whitespace-nowrap text-gray-300 tabular-nums sm:pt-1"
         >
           {{ formatDate(talk.date) }}
         </time>
@@ -134,24 +134,24 @@ const formatDate = (date) => {
           <div>
             {{ talk.subtitle }}
           </div>
-          <div class="flex">
+          <div class="flex flex-wrap gap-x-3 gap-y-1">
             <a
               v-if="talk.href_slides"
-              class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
+              class="text-xs text-gray-400 uppercase hover:cursor-pointer hover:text-orange-500"
               :href="talk.href_slides"
             >
               [slide_deck]
             </a>
             <a
               v-if="talk.href_video"
-              class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
+              class="text-xs text-gray-400 uppercase hover:cursor-pointer hover:text-orange-500"
               :href="talk.href_video"
             >
               [video]
             </a>
             <a
               v-if="talk.href_code"
-              class="text-xs uppercase text-gray-400 hover:cursor-pointer hover:text-orange-500"
+              class="text-xs text-gray-400 uppercase hover:cursor-pointer hover:text-orange-500"
               :href="talk.href_code"
             >
               [source_code]
