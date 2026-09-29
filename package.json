@@ -18,7 +18,6 @@
     "feed": "^6.0.0",
     "gray-matter": "^4.0.3",
     "nuxt": "^4.5.2",
-    "nuxt-headlessui": "^1.2.2",
     "prettier": "^3.9.9",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "shiki": "^4.4.3",
