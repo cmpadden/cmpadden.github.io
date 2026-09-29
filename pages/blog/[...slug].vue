@@ -5,7 +5,7 @@ const route = useRoute();
 
 const slug = computed(() => {
   const value = route.params.slug;
-  return Array.isArray(value) ? value.join("/") : value;
+  return Array.isArray(value) ? value.filter(Boolean).join("/") : value;
 });
 
 const { data: page } = await useFetch<BlogArticle>(
