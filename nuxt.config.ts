@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   components: true,
   css: ["~/assets/css/tailwind.css"],
-  modules: ["./modules/content", "@comark/nuxt"],
+  modules: ["./modules/content", "@comark/nuxt", "nuxt-headlessui"],
 
   app: {
     head: {
@@ -37,6 +37,11 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  // Optionally change the default prefix.
+  headlessui: {
+    prefix: "Headless",
   },
 
   nitro: {
