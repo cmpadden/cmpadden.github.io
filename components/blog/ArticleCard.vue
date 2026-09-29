@@ -30,12 +30,16 @@ const formatDate = (date: string) => {
   <NuxtLink :to="article.path" class="group block h-full">
     <article
       class="grid h-full items-start gap-1 text-white"
-      :class="showDate ? 'grid-cols-[6rem_minmax(0,1fr)]' : 'grid-cols-1'"
+      :class="
+        showDate
+          ? 'grid-cols-1 gap-2 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-1'
+          : 'grid-cols-1'
+      "
     >
       <time
         v-if="showDate"
         :datetime="article.date"
-        class="whitespace-nowrap pt-1 font-mono text-sm tabular-nums text-gray-300"
+        class="font-mono text-sm whitespace-nowrap text-gray-300 tabular-nums sm:pt-1"
       >
         {{ formatDate(article.date) }}
       </time>
