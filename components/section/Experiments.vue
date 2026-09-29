@@ -43,6 +43,7 @@ const filtered_links = computed(() => {
           v-for="link in filtered_links"
           :key="link.title"
           :to="link.link"
+          :prefetch-on="{ interaction: true }"
         >
           <img
             class="h-64 w-full bg-gray-800 object-cover grayscale hover:grayscale-0"

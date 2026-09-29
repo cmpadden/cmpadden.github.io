@@ -1,37 +1,9 @@
-<script setup>
-import { onBeforeUnmount, onMounted, ref } from "vue";
-
-const route = useRoute();
-const menu = ref(null);
-const menuButton = ref(null);
-const menuOpen = ref(false);
-
-const closeMenu = () => {
-  menuOpen.value = false;
-};
-
-const handlePointerDown = (event) => {
-  if (event.target instanceof Node && !menu.value?.contains(event.target)) {
-    closeMenu();
+<script setup lang="ts">
+const closeMenu = (event: MouseEvent) => {
+  if (event.currentTarget instanceof HTMLElement) {
+    event.currentTarget.closest("details")?.removeAttribute("open");
   }
 };
-
-const handleKeydown = (event) => {
-  if (event.key === "Escape" && menuOpen.value) {
-    closeMenu();
-    menuButton.value?.focus();
-  }
-};
-
-onMounted(() => {
-  document.addEventListener("pointerdown", handlePointerDown);
-  document.addEventListener("keydown", handleKeydown);
-});
-
-onBeforeUnmount(() => {
-  document.removeEventListener("pointerdown", handlePointerDown);
-  document.removeEventListener("keydown", handleKeydown);
-});
 </script>
 
 <template>
@@ -40,17 +12,10 @@ onBeforeUnmount(() => {
       <div class="flex items-center text-gray-700 dark:text-gray-200">
         <div class="flex-1" />
         <div class="flex items-center space-x-2">
-          <div ref="menu" class="relative z-50 inline-block text-left">
-            <div>
-              <button
-                ref="menuButton"
-                type="button"
-                aria-haspopup="true"
-                :aria-expanded="menuOpen"
-                aria-controls="site-navigation"
-                class="transform align-middle text-gray-700 transition-all duration-300 ease-in-out hover:scale-110 hover:text-orange-500 active:scale-95 dark:text-white"
-                @click="menuOpen = !menuOpen"
-              >
+          <details class="relative z-50 inline-block text-left">
+            <summary
+              class="transform list-none align-middle text-gray-700 transition-all duration-300 ease-in-out hover:scale-110 hover:text-orange-500 active:scale-95 [&::-webkit-details-marker]:hidden dark:text-white"
+            >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -63,19 +28,9 @@ onBeforeUnmount(() => {
                     clip-rule="evenodd"
                   />
                 </svg>
-              </button>
-            </div>
+            </summary>
 
-            <Transition
-              enter-active-class="transition duration-100 ease-out"
-              enter-from-class="transform scale-95 opacity-0"
-              enter-to-class="transform scale-100 opacity-100"
-              leave-active-class="transition duration-75 ease-in"
-              leave-from-class="transform scale-100 opacity-100"
-              leave-to-class="transform scale-95 opacity-0"
-            >
-              <nav
-                v-if="menuOpen"
+            <nav
                 id="site-navigation"
                 aria-label="Primary navigation"
                 class="ring-opacity-5 absolute right-0 mt-2 w-36 origin-top-right divide-y divide-gray-100 bg-white/90 text-gray-900 shadow-lg ring-1 ring-black backdrop-blur-sm focus:outline-none dark:divide-gray-100 dark:bg-black/80 dark:text-white"
@@ -222,8 +177,7 @@ onBeforeUnmount(() => {
                   </a>
                 </div>
               </nav>
-            </Transition>
-          </div>
+          </details>
         </div>
       </div>
     </div>

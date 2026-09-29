@@ -1,9 +1,29 @@
-import { writeFileSync, mkdirSync } from "fs";
+import { readdirSync, writeFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import tailwindcss from "@tailwindcss/vite";
 
+const STATIC_ROUTES = [
+  "/",
+  "/about",
+  "/blog",
+  "/experiments",
+  "/experiments/audio",
+  "/experiments/chords",
+  "/experiments/matrix",
+  "/experiments/midi",
+  "/talks",
+  "/sitemap.xml",
+  "/robots.txt",
+  "/atom",
+];
+
+const blogRoutes = readdirSync(join(process.cwd(), "content", "blog"))
+  .filter((fileName) => fileName.endsWith(".md"))
+  .map((fileName) => `/blog/${fileName.replace(/\.md$/, "")}`);
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: true,
   components: true,
   css: ["~/assets/css/tailwind.css"],
   modules: ["./modules/content", "@comark/nuxt"],
@@ -40,9 +60,11 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    // render server-side routes as static content
+    // GitHub Pages serves this as static output. Explicit routes make the
+    // generated site independent of the prerenderer's link crawler.
     prerender: {
-      routes: ["/sitemap.xml", "/robots.txt", "/atom"],
+      crawlLinks: false,
+      routes: [...STATIC_ROUTES, ...blogRoutes],
     },
   },
 
@@ -53,7 +75,7 @@ export default defineNuxtConfig({
   hooks: {
     // Generate HTML redirect files for `/articles/**` to `/blog/**`
     async close() {
-      const { readdirSync, statSync, existsSync } = await import("fs");
+      const { statSync, existsSync } = await import("fs");
       const distBlogPath = join(process.cwd(), "dist", "blog");
       const distArticlesPath = join(process.cwd(), "dist", "articles");
 
