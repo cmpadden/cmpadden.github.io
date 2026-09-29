@@ -1,0 +1,1 @@
+import{P as e,R as t,_ as n,f as r,l as i}from"./BtOuXYNK.js";import{t as a}from"./Cf75ATip.js";import{t as o}from"./BDNMzG2s.js";var s={},c={class:`bg-background font-display container min-h-screen`},l={class:`flex flex-col`};function u(o,s){let u=a;return e(),r(`main`,null,[n(u),i(`div`,c,[i(`main`,l,[t(o.$slots,`default`)])])])}var d=o(s,[[`render`,u]]);export{d as default};
