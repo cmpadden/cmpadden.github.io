@@ -1,12 +1,10 @@
 <template>
-  <body class="flex min-h-screen flex-col bg-background font-display">
+  <body class="bg-background font-display flex min-h-screen flex-col">
     <Header />
     <main class="mt-4 flex-1">
       <div class="flex justify-center">
-        <HeadlessTransitionRoot
-          show
+        <Transition
           appear
-          as="template"
           enter="transition transform duration-300 ease-out"
           enter-from="translate-x-8 opacity-0"
           enter-to="translate-x-0 opacity-100"
@@ -23,7 +21,7 @@
               gone terribly wrong.
             </div>
           </div>
-        </HeadlessTransitionRoot>
+        </Transition>
       </div>
     </main>
   </body>
