@@ -1,6 +1,6 @@
 export const SITE_ORIGIN = "https://cmpadden.github.io";
 export const SITE_NAME = "Colton Padden";
-export const DEFAULT_TITLE = "Colton Padden's Blog & Experiments";
+export const DEFAULT_TITLE = "colton :: blog ∧ experiments";
 export const DEFAULT_DESCRIPTION =
   "Technical writing, projects, and browser experiments by Colton Padden.";
 export const DEFAULT_SOCIAL_IMAGE = "/images/og-index.webp";
