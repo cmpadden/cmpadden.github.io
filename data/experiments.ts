@@ -24,6 +24,12 @@ export const experimentLinks = [
     img: "/images/previews/wm.spoon.webp",
   },
   {
+    title: "dotfiles",
+    description: "Personal development environment configuration files",
+    link: "https://github.com/cmpadden/dotfiles",
+    img: "/images/previews/dotfiles.webp",
+  },
+  {
     title: "Metronome",
     description: "A simple metronome for tracking tempo in the browser",
     hidden: true,
