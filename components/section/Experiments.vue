@@ -35,22 +35,20 @@ const filtered_links = computed(() => {
   >
     <div
       class="container text-white"
-      :class="props.tightTop ? 'pb-8 pt-4' : 'py-8'"
+      :class="props.tightTop ? 'pt-4 pb-8' : 'py-8'"
     >
       <div class="mb-2 grid grid-cols-1 gap-3 sm:grid-cols-3">
         <nuxt-link
           class="relative text-orange-500 ring-2 ring-white hover:text-white hover:ring-orange-500"
-          v-for="link in filtered_links"
+          v-for="(link, index) in filtered_links"
           :key="link.title"
           :to="link.link"
           :prefetch-on="{ interaction: true }"
         >
-          <img
-            class="h-64 w-full bg-gray-800 object-cover grayscale hover:grayscale-0"
-            :src="link.img || 'images/placeholder.png'"
+          <ExperimentCoverImage
+            :src="link.img || '/images/placeholder.png'"
             :alt="link.title"
-            loading="lazy"
-            decoding="async"
+            :loading="index < 3 ? 'eager' : 'lazy'"
           />
           <div
             class="pointer-events-none absolute inset-0 bg-orange-500/10 mix-blend-color"
