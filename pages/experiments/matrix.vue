@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-4 p-4 text-slate-100">
+  <div class="space-y-5 p-5 text-slate-100">
     <!-- Instructions -->
     <div class="max-w-3xl text-lg leading-relaxed text-slate-100">
       Walk through the steps of matrix multiplication with randomly generated
@@ -9,9 +9,9 @@
     </div>
 
     <!-- Buttons -->
-    <div class="m-2 inline-flex space-x-2">
+    <div class="m-3 inline-flex space-x-3">
       <button
-        class="bg-blue-200 px-4 py-2 font-bold text-blue-800 hover:bg-blue-800 hover:text-blue-200"
+        class="bg-blue-200 px-5 py-3 font-bold text-blue-800 hover:bg-blue-800 hover:text-blue-200"
         :disabled="!started"
         :class="{ 'cursor-not-allowed opacity-25': !started }"
         @click="decStep"
@@ -33,20 +33,20 @@
       </button>
       <button
         v-if="!done"
-        class="bg-blue-200 px-4 py-2 font-bold text-blue-800 hover:bg-blue-800 hover:text-blue-200"
+        class="bg-blue-200 px-5 py-3 font-bold text-blue-800 hover:bg-blue-800 hover:text-blue-200"
         @click="matmul(a, b)"
       >
         Start
       </button>
       <button
         v-if="done"
-        class="bg-orange-200 px-4 py-2 font-bold text-orange-800 hover:bg-blue-800 hover:text-blue-200"
+        class="bg-orange-200 px-5 py-3 font-bold text-orange-800 hover:bg-blue-800 hover:text-blue-200"
         @click="generateRandomMatrices"
       >
         Again!
       </button>
       <button
-        class="bg-blue-200 px-4 py-2 font-bold text-blue-800 hover:bg-blue-800 hover:text-blue-200"
+        class="bg-blue-200 px-5 py-3 font-bold text-blue-800 hover:bg-blue-800 hover:text-blue-200"
         :disabled="!started"
         :class="{ 'cursor-not-allowed opacity-25': !started }"
         @click="incStep"
@@ -70,9 +70,9 @@
 
     <!-- Matrices -->
     <div class="flex flex-wrap">
-      <div class="w-34 m-2 border border-gray-400 text-slate-950 sm:w-min">
-        <div class="bg-gray-200 p-4 text-center font-bold">Matrix A</div>
-        <div class="flex items-center justify-center bg-white p-4">
+      <div class="m-3 w-34 border border-gray-400 text-slate-950 sm:w-min">
+        <div class="bg-gray-200 p-5 text-center font-bold">Matrix A</div>
+        <div class="flex items-center justify-center bg-white p-5">
           <table class="text-center">
             <tr v-for="(row, i) in a" :key="i">
               <td
@@ -83,7 +83,7 @@
                     step && i == step['row_a'] && j == step['col_a'],
                   'bg-orange-100': step && i == step['row_a'],
                 }"
-                class="p-2"
+                class="p-3"
               >
                 {{ a[i][j] }}
               </td>
@@ -91,9 +91,9 @@
           </table>
         </div>
       </div>
-      <div class="w-34 m-2 border border-gray-400 text-slate-950 sm:w-min">
-        <div class="bg-gray-200 p-4 text-center font-bold">Matrix B</div>
-        <div class="flex items-center justify-center bg-white p-4">
+      <div class="m-3 w-34 border border-gray-400 text-slate-950 sm:w-min">
+        <div class="bg-gray-200 p-5 text-center font-bold">Matrix B</div>
+        <div class="flex items-center justify-center bg-white p-5">
           <table class="text-center">
             <tr v-for="(row, i) in b" :key="i">
               <td
@@ -104,7 +104,7 @@
                     step && i == step['row_b'] && j == step['col_b'],
                   'bg-orange-100': step && j == step['col_b'],
                 }"
-                class="p-2"
+                class="p-3"
               >
                 {{ b[i][j] }}
               </td>
@@ -116,14 +116,14 @@
       <!-- Result -->
       <div
         v-if="started"
-        class="m-2 w-72 border border-gray-400 text-slate-950 sm:w-min"
+        class="m-3 w-72 border border-gray-400 text-slate-950 sm:w-min"
         :class="{ 'bg-green-200': done }"
       >
-        <div class="bg-gray-200 p-4 text-center font-bold">Result</div>
-        <div class="flex items-center justify-center bg-white p-4">
+        <div class="bg-gray-200 p-5 text-center font-bold">Result</div>
+        <div class="flex items-center justify-center bg-white p-5">
           <table class="text-center">
             <tr v-for="(row, i) in step['c']" :key="i">
-              <td v-for="(col, j) in step['c'][i]" :key="j" class="p-2">
+              <td v-for="(col, j) in step['c'][i]" :key="j" class="p-3">
                 {{ step["c"][i][j] }}
               </td>
             </tr>
@@ -134,14 +134,14 @@
       <!-- Log of all steps -->
       <div
         v-if="started"
-        class="m-2 w-72 border border-gray-400 bg-gray-100 p-2 text-slate-950"
+        class="m-3 w-72 border border-gray-400 bg-gray-100 p-3 text-slate-950"
       >
         <div class="text-center font-bold">Steps</div>
         <div class="font-mono">
           <div v-for="(s, i) in step['all_steps']" :key="i">
             {{ s }}
           </div>
-          <div v-if="done" class="italic text-green-600">Done!</div>
+          <div v-if="done" class="text-green-600 italic">Done!</div>
         </div>
       </div>
     </div>

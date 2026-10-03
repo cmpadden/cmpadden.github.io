@@ -114,12 +114,12 @@ const formatDate = (date) => {
 
 <template>
   <div class="container font-mono text-white">
-    <h1 class="my-6 text-2xl font-extrabold">Talks</h1>
-    <div class="grid gap-y-6">
+    <h1 class="my-7 text-2xl font-extrabold">Talks</h1>
+    <div class="grid gap-y-7">
       <div
         v-for="(talk, ix) in talks"
         :key="ix"
-        class="grid grid-cols-1 gap-2 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-1"
+        class="grid grid-cols-1 gap-3 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-1"
       >
         <time
           :datetime="talk.date.toISOString()"
@@ -127,7 +127,7 @@ const formatDate = (date) => {
         >
           {{ formatDate(talk.date) }}
         </time>
-        <div class="flex-col space-y-2">
+        <div class="flex-col space-y-3">
           <div class="text-white">
             {{ talk.title }}
           </div>

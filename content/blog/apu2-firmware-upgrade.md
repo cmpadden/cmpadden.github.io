@@ -1,9 +1,9 @@
 ---
-title: 'Upgrading the Firmware on the PCEngines APU2'
-date: '2019-12-21'
+title: "Upgrading the Firmware on the PCEngines APU2"
+date: "2019-12-21"
 draft: false
-tags: ['pcengine', 'apu']
-categories: ['linux']
+tags: ["pcengine", "apu"]
+categories: ["linux"]
 ---
 
 I've had a [PCEngines APU2](https://pcengines.ch/apu2.htm) gathering dust for a

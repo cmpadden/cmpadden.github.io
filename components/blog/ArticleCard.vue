@@ -10,19 +10,12 @@ withDefaults(
 );
 
 const formatDate = (date: string) => {
-  const parts = new Intl.DateTimeFormat("en", {
+  return new Intl.DateTimeFormat("en-US", {
     timeZone: "UTC",
     year: "numeric",
-    month: "2-digit",
+    month: "short",
     day: "2-digit",
-  }).formatToParts(new Date(date));
-  const values = Object.fromEntries(
-    parts
-      .filter((part) => part.type !== "literal")
-      .map((part) => [part.type, part.value]),
-  );
-
-  return `${values.year}-${values.month}-${values.day}`;
+  }).format(new Date(date));
 };
 </script>
 
@@ -30,11 +23,7 @@ const formatDate = (date: string) => {
   <NuxtLink :to="article.path" class="group block h-full">
     <article
       class="grid h-full items-start gap-1 text-white"
-      :class="
-        showDate
-          ? 'grid-cols-1 gap-2 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-1'
-          : 'grid-cols-1'
-      "
+      :class="showDate ? 'grid-cols-1 sm:flex sm:gap-5' : 'grid-cols-1'"
     >
       <time
         v-if="showDate"
@@ -43,7 +32,7 @@ const formatDate = (date: string) => {
       >
         {{ formatDate(article.date) }}
       </time>
-      <div class="flex min-w-0 flex-wrap items-center gap-2">
+      <div class="flex min-w-0 flex-wrap items-center gap-3">
         <h2
           class="w-fit max-w-[60ch] text-lg font-semibold text-white transition-colors group-hover:text-gray-300 md:text-xl"
           :title="article.title"

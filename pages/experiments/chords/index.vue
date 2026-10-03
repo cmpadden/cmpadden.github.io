@@ -5,7 +5,7 @@
     <!-- Message for unsupported browsers -->
     <div
       v-if="typeof midi === 'undefined'"
-      class="p-4 text-center font-light tracking-wide"
+      class="p-5 text-center font-light tracking-wide"
     >
       Unfortunately, the Web MIDI API is
       <a
@@ -32,17 +32,17 @@
               </div>
 
               <div class="p-3 font-mono text-orange-900">
-                <div class="mb-2 font-bold">
+                <div class="mb-3 font-bold">
                   Enabled:
                   <span>
                     {{ typeof midi !== "undefined" ? "Yep!" : "Nope" }}
                   </span>
                 </div>
-                <div class="mb-2">
+                <div class="mb-3">
                   <div class="font-bold">Inputs:</div>
                   <div
                     v-if="inputs.length === 0"
-                    class="p-4 text-center italic"
+                    class="p-5 text-center italic"
                   >
                     No input devices detected :(
                   </div>
@@ -57,11 +57,11 @@
                     </div>
                   </div>
                 </div>
-                <div class="mb-2">
+                <div class="mb-3">
                   <div class="font-bold">Outputs:</div>
                   <div
                     v-if="outputs.length === 0"
-                    class="p-4 text-center italic"
+                    class="p-5 text-center italic"
                   >
                     No output devices detected :(
                   </div>
@@ -105,7 +105,7 @@
       <!-- display active key pressed in the bottom left of the screen -->
       <div class="absolute bottom-4 left-4">
         <div class="flex">
-          <div v-for="note in orderedNotes()" :key="note" class="p-4">
+          <div v-for="note in orderedNotes()" :key="note" class="p-5">
             {{ note }}
           </div>
         </div>

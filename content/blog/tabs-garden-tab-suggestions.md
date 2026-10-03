@@ -170,7 +170,6 @@ There is still a lot of improvement to be had.
 
 Right now the weights are hand-tuned, but I could imagine running some experiments to measure the impact of each weight, and better determine what is ideal here.
 
-
 Additionally, we would definitely benefit from more metadata enrichment; what we currently have is pretty limited. Many songs are missing genre data, and when genre is missing the model has to fall back to release date, chords, and tab metadata.
 
 Better results would likely come from adding things like: instrumentation tags, tempo or energy information, richer artist information, etc.

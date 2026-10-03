@@ -1,6 +1,6 @@
 ---
 title: "Docker Volume Permissions with SELinux"
-date: '2019-12-26'
+date: "2019-12-26"
 draft: false
 tags: ["docker", "selinux"]
 categories: ["linux"]

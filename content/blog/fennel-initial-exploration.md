@@ -1,10 +1,10 @@
 ---
-title: 'Impressions of Fennel with Hammerspoon'
+title: "Impressions of Fennel with Hammerspoon"
 draft: false
 date: "2023-10-22"
 tags: ["lisp", "hammerspoon", "fennel"]
 categories: ["lisp"]
-cover_image: '/images/dall-e-fennel-hammer.jpeg'
+cover_image: "/images/dall-e-fennel-hammer.jpeg"
 ---
 
 A while back I read an introductory book on Lisp programming titled, "The Little
@@ -35,9 +35,9 @@ it with Hammerspoon. I found a few resources online demonstrating how to extend 
 `package.path` and `package.cpath` properties in Lua, but I was unable to get this to
 work.
 
-* https://blog.exupero.org/hammerspoon-with-fennel/
-* https://github.com/Hammerspoon/hammerspoon/issues/2377#issuecomment-636331435
-* https://github.com/agzam/spacehammer/blob/master/init.lua
+- https://blog.exupero.org/hammerspoon-with-fennel/
+- https://github.com/Hammerspoon/hammerspoon/issues/2377#issuecomment-636331435
+- https://github.com/agzam/spacehammer/blob/master/init.lua
 
 Ultimately, I opted to include the `fennel.lua` file to my Hammerspoon configuration,
 and while not ideal, it does make the configuration nicely self-contained. I'll leave it
@@ -96,7 +96,7 @@ end)
   (fn [] (hs.caffeinate.toggle :displayIdle)
     (if (hs.caffeinate.get :displayIdle)
       (helpers:show "Caffeine Enabled" nil helpers.styles.success helpers.assets.check)
-      (helpers:show "Caffeine Disabled" nil helpers.styles.error helpers.assets.ban))))	
+      (helpers:show "Caffeine Disabled" nil helpers.styles.error helpers.assets.ban))))
 ```
 
 This was especially helpful for more gnarly modules like the `window` module used for
@@ -117,7 +117,6 @@ configuration of my own.
 
 The full pull-request for translating my Lua Hammerspoon configuration to Fennel can be
 found here: https://github.com/cmpadden/dotfiles/pull/19/files
-
 
 [1]: https://fennel-lang.org/
 [2]: https://www.hammerspoon.org/

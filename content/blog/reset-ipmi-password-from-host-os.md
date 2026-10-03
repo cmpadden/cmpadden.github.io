@@ -1,8 +1,8 @@
 ---
-title: 'Reset IPMI Credentials from the Host OS'
-date: '2021-12-27'
-tags: ['homelab', 'supermicro', 'truenas']
-categories: ['homelab']
+title: "Reset IPMI Credentials from the Host OS"
+date: "2021-12-27"
+tags: ["homelab", "supermicro", "truenas"]
+categories: ["homelab"]
 ---
 
 If you ever find yourself locked out of the Intelligent Platform Management Interface (IPMI) of a server, these

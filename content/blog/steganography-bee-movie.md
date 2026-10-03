@@ -10,7 +10,6 @@ You probably didn't realize it, but the static noise visible on the home page of
 
 <!--more-->
 
-
 The image is a lossless PNG with the RGB pixels encoding the bytes of a small payload:
 
 ![Noise image containing the encoded Bee Movie script](/images/noise.png)

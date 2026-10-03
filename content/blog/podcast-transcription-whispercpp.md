@@ -1,5 +1,5 @@
 ---
-title: 'Easily Transcribe Podcasts with Whisper.cpp'
+title: "Easily Transcribe Podcasts with Whisper.cpp"
 draft: false
 date: "2024-01-08"
 tags: ["whisper.cpp", "ml"]

@@ -22,7 +22,8 @@ export default {
         xl: "1280px",
       },
       fontFamily: {
-        display: ["Helvetica", "sans-serif"],
+        sans: ["Helvetica", "Arial", "sans-serif"],
+        display: ["Helvetica", "Arial", "sans-serif"],
         body: ["Graphik", "sans-serif"],
         mono: ["Inconsolata", "monospace"],
         fantasy: ["fantasy"],

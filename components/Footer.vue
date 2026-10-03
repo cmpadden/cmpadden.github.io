@@ -1,6 +1,8 @@
 <template>
-  <footer class="pin-b w-full bg-emerald-950/75 p-3 text-xs font-bold text-white backdrop-blur-sm">
-    <div class="flex justify-center space-x-2">
+  <footer
+    class="pin-b w-full bg-black/75 p-3 text-xs font-bold text-white backdrop-blur-sm"
+  >
+    <div class="flex justify-center space-x-3">
       <a
         class="hover:cursor-pointer hover:text-blue-200"
         href="https://github.com/cmpadden/cmpadden.github.io"

@@ -1,6 +1,6 @@
 ---
 title: "Create a Persistent Arch Linux Bootable USB with Vagrant"
-date: '2020-01-09'
+date: "2020-01-09"
 draft: false
 tags: ["vagrant", "archlinux"]
 categories: ["linux"]
@@ -113,7 +113,6 @@ Filesystem/RAID signature on partition 1 will be wiped.
 
 The UEFI specification mandates support for FAT file-systems, and FAT32 is
 recommended for removable media. <sup>[7][7]</sup>
-
 
 ```bash
 [root@archlinux ~]# pacman -Sy dosfstools

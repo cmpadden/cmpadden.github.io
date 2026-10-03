@@ -1,5 +1,5 @@
 ---
-title: 'Configuring a YubiKey for use with OpenSSH'
+title: "Configuring a YubiKey for use with OpenSSH"
 draft: false
 date: "2024-06-09"
 tags: ["unix", "configurations"]
@@ -12,7 +12,7 @@ categories: ["tooling", "tips"]
 
 In [release 8.2 of OpenSSH](https://www.openssh.com/txt/release-8.2) support for FIDO devices was added with public key types "ecdsa-sk" and "ed25519-sk" (-sk standing for "security key"). This key type is supported by YubiKey's with firmware version 5.2.3 or higher.
 
-> This release adds support for FIDO/U2F hardware authenticators to OpenSSH. U2F/FIDO are open standards for inexpensive two-factor authentication hardware that are widely used for website authentication.  In OpenSSH FIDO devices are supported by new public key types "ecdsa-sk" and "ed25519-sk", along with corresponding certificate types.
+> This release adds support for FIDO/U2F hardware authenticators to OpenSSH. U2F/FIDO are open standards for inexpensive two-factor authentication hardware that are widely used for website authentication. In OpenSSH FIDO devices are supported by new public key types "ecdsa-sk" and "ed25519-sk", along with corresponding certificate types.
 
 Let's get started by installing the latest version of OpenSSH via [Homebrew](https://brew.sh/), along with the YubiKey Manager (ykman) CLI. The version of OpenSSH included with macOS is not compatible.
 

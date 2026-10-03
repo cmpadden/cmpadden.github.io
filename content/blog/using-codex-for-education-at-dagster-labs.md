@@ -1,5 +1,5 @@
 ---
-title: 'Using Codex for education at Dagster Labs'
+title: "Using Codex for education at Dagster Labs"
 date: "2025-10-27"
 tags: ["ai", "education"]
 categories: ["ai"]
@@ -11,8 +11,6 @@ external_site: "OpenAI Developer Blog"
 I recently had the opportunity to showcase how we use Codex for educational content at Dagster Labs which was featured on the OpenAI developer blog; you can find a full copy of that post below.
 
 <!--more-->
-
-
 
 ## Overview
 

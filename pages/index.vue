@@ -24,17 +24,14 @@ useHead({
 
 <template>
   <div class="min-h-screen">
-    <div class="container pb-2 pt-6">
+    <div class="container py-3">
       <h2 id="blog" class="font-pixelify text-3xl font-bold text-white">
         <a href="#blog">Blog</a>
       </h2>
     </div>
-    <SectionBlogPosts :articles="articles" :show_dates="true" />
-    <div class="container pb-2 pt-8">
-      <h2
-        id="experiments"
-        class="font-pixelify text-3xl font-bold text-white"
-      >
+    <SectionBlogPosts class="pt-3" :articles="articles" :show_dates="true" />
+    <div class="container pt-9 pb-3">
+      <h2 id="experiments" class="font-pixelify text-3xl font-bold text-white">
         <a href="#experiments">Experiments</a>
       </h2>
     </div>

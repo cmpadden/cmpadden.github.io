@@ -50,13 +50,13 @@ If LCP or another browser API is unavailable, state that explicitly. Do not subs
 
 Baseline commit: `e08013dd`.
 
-| Route | FCP | JS/CSS transfer | Main-thread task duration |
-| --- | ---: | ---: | ---: |
-| `/` | 1.53s | 63.5 KB | 251ms |
-| `/blog` | 1.52s | 63.5 KB | 244ms |
-| `/experiments` | 1.55s | 51.0 KB | 189ms |
-| `/talks` | 1.60s | 52.1 KB | 177ms |
-| representative article | 1.56s | 52.5 KB | 199ms |
+| Route                  |   FCP | JS/CSS transfer | Main-thread task duration |
+| ---------------------- | ----: | --------------: | ------------------------: |
+| `/`                    | 1.53s |         63.5 KB |                     251ms |
+| `/blog`                | 1.52s |         63.5 KB |                     244ms |
+| `/experiments`         | 1.55s |         51.0 KB |                     189ms |
+| `/talks`               | 1.60s |         52.1 KB |                     177ms |
+| representative article | 1.56s |         52.5 KB |                     199ms |
 
 Compiled asset totals: 297.7 KB JS raw / 116.3 KB gzip / 104.4 KB Brotli; 51.3 KB CSS raw / 9.8 KB gzip / 8.4 KB Brotli.
 

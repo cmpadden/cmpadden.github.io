@@ -3,7 +3,7 @@
     <!-- Message for unsupported browsers -->
     <div
       v-if="typeof midi === 'undefined'"
-      class="p-4 text-center font-light tracking-wide"
+      class="p-5 text-center font-light tracking-wide"
     >
       Unfortunately, the Web MIDI API is
       <a
@@ -30,17 +30,17 @@
               </div>
 
               <div class="p-3 font-mono text-orange-900">
-                <div class="mb-2 font-bold">
+                <div class="mb-3 font-bold">
                   Enabled:
                   <span>
                     {{ typeof midi !== "undefined" ? "Yep!" : "Nope" }}
                   </span>
                 </div>
-                <div class="mb-2">
+                <div class="mb-3">
                   <div class="font-bold">Inputs:</div>
                   <div
                     v-if="inputs.length === 0"
-                    class="p-4 text-center italic"
+                    class="p-5 text-center italic"
                   >
                     No input devices detected :(
                   </div>
@@ -55,11 +55,11 @@
                     </div>
                   </div>
                 </div>
-                <div class="mb-2">
+                <div class="mb-3">
                   <div class="font-bold">Outputs:</div>
                   <div
                     v-if="outputs.length === 0"
-                    class="p-4 text-center italic"
+                    class="p-5 text-center italic"
                   >
                     No output devices detected :(
                   </div>
@@ -82,7 +82,7 @@
           <button
             ref="btnRef"
             @click="tooltip = !tooltip"
-            class="rounded-lg bg-green-800 px-2 py-1 text-white shadow hover:text-yellow-200 hover:shadow-lg"
+            class="rounded-lg bg-green-800 px-3 py-1 text-white shadow hover:text-yellow-200 hover:shadow-lg"
             type="button"
           >
             <svg
@@ -102,7 +102,7 @@
         </div>
       </div>
 
-      <div class="container p-8">
+      <div class="container p-9">
         <div class="font-display text-4xl font-light tracking-wide">
           MIDI Events
         </div>
@@ -111,36 +111,36 @@
         >
           <thead class="bg-green-800 font-semibold text-white uppercase">
             <tr>
-              <th class="p-2 text-left">Timestamp</th>
-              <th class="p-2 text-left">Command #</th>
-              <th class="p-2 text-left">Command</th>
-              <th class="p-2 text-left">Note #</th>
-              <th class="p-2 text-left">Note</th>
-              <th class="p-2 text-left">Velocity</th>
-              <th class="p-2 text-right">MIDI Source</th>
+              <th class="p-3 text-left">Timestamp</th>
+              <th class="p-3 text-left">Command #</th>
+              <th class="p-3 text-left">Command</th>
+              <th class="p-3 text-left">Note #</th>
+              <th class="p-3 text-left">Note</th>
+              <th class="p-3 text-left">Velocity</th>
+              <th class="p-3 text-right">MIDI Source</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100">
             <tr v-if="events.length === 0">
-              <td class="p-4 text-center italic" colspan="7">
+              <td class="p-5 text-center italic" colspan="7">
                 Press a key, or turn a knob!
               </td>
             </tr>
             <tr v-for="(event, ix) in events" :key="ix">
-              <td class="p-2 text-left">{{ event.timeStamp.toFixed(2) }}</td>
-              <td class="p-2 text-left">{{ event.data[0] }}</td>
-              <td class="p-2 text-left">{{ midiCommand(event.data[0]) }}</td>
-              <td class="p-2 text-left">{{ event.data[1] }}</td>
+              <td class="p-3 text-left">{{ event.timeStamp.toFixed(2) }}</td>
+              <td class="p-3 text-left">{{ event.data[0] }}</td>
+              <td class="p-3 text-left">{{ midiCommand(event.data[0]) }}</td>
+              <td class="p-3 text-left">{{ event.data[1] }}</td>
               <td
                 v-if="event.data[0] === 144 || event.data[0] == 128"
-                class="p-2 text-left"
+                class="p-3 text-left"
               >
                 <!-- only perform note mapping for note on/off commands -->
                 {{ midiNote(event.data[1]) }}
               </td>
-              <td v-else class="p-2 text-left">-</td>
-              <td class="p-2 text-left">{{ event.data[2] }}</td>
-              <td class="p-2 text-right">{{ event.srcElement.name }}</td>
+              <td v-else class="p-3 text-left">-</td>
+              <td class="p-3 text-left">{{ event.data[2] }}</td>
+              <td class="p-3 text-right">{{ event.srcElement.name }}</td>
             </tr>
           </tbody>
         </table>

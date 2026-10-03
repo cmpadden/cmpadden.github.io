@@ -35,9 +35,9 @@ const filtered_links = computed(() => {
   >
     <div
       class="container text-white"
-      :class="props.tightTop ? 'pt-4 pb-8' : 'py-8'"
+      :class="props.tightTop ? 'pt-5 pb-9' : 'py-9'"
     >
-      <div class="mb-2 grid grid-cols-1 gap-3 sm:grid-cols-3">
+      <div class="mb-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
         <nuxt-link
           class="relative text-orange-500 ring-2 ring-white hover:text-white hover:ring-orange-500"
           v-for="(link, index) in filtered_links"
@@ -54,10 +54,10 @@ const filtered_links = computed(() => {
             class="pointer-events-none absolute inset-0 bg-orange-500/10 mix-blend-color"
           />
           <div
-            class="absolute bottom-2 z-10 flex w-full items-center justify-center px-2"
+            class="absolute bottom-2 z-10 flex w-full items-center justify-center px-3"
           >
             <div
-              class="noise-bg w-full bg-black/90 px-6 py-2 [--noise-opacity:0.16]"
+              class="noise-bg w-full bg-black/90 px-7 py-3 [--noise-opacity:0.16]"
             >
               <h3 class="text-xl font-bold text-white">
                 {{ link.title }}

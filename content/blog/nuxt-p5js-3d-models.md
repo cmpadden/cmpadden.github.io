@@ -15,15 +15,16 @@ I've been using p5 for a while now to tinker and explore generative art, some of
 
 ```js
 // plugins/p5.client.js
-import p5 from 'p5'
+import p5 from "p5";
 
 export default defineNuxtPlugin(() => {
   return {
     provide: {
-      p5, p5
-    }
-  }
-})
+      p5,
+      p5,
+    },
+  };
+});
 ```
 
 As I've been exploring 3d-printing lately, I wanted a way to showcase some of the models I've created directly on this website. So, the `ModelPreview` component was created, and the snippet below shows how it's embedded in markdown.
@@ -93,4 +94,5 @@ console.log(backgroundColor);
 });
 </script>
 ```
+
 Looking forward to sharing more models soon!

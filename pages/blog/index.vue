@@ -13,11 +13,11 @@ const visibleArticles = computed(() => articles.value);
 </script>
 
 <template>
-  <section class="min-h-screen py-10 text-white">
-    <div class="container space-y-8">
+  <section class="min-h-screen py-3 text-white">
+    <div class="container space-y-9">
       <h1 class="font-pixelify text-3xl font-bold text-white">Blog</h1>
-      <div class="space-y-4">
-        <div class="grid gap-4">
+      <div class="space-y-5">
+        <div class="grid gap-5">
           <BlogArticleCard
             v-for="article in visibleArticles"
             :key="article._id"

@@ -96,41 +96,43 @@ useHead(() => ({
 </script>
 
 <template>
-  <div v-if="page" class="min-h-screen pt-8">
+  <div v-if="page" class="min-h-screen pt-9">
     <div
-      class="container mb-10 space-y-6 bg-emerald-950/75 py-6 text-white backdrop-blur-sm"
+      class="container mb-11 space-y-7 bg-black/75 py-7 text-white backdrop-blur-sm"
     >
-      <!-- title -->
-      <div class="flex">
-        <template v-if="page.cover_image || page.img">
-          <img
-            class="mr-4 h-16 border-2 border-black"
-            :src="page.cover_image || page.img"
+      <div class="space-y-3">
+        <!-- title -->
+        <div class="flex">
+          <template v-if="page.cover_image || page.img">
+            <img
+              class="mr-5 h-16 border-2 border-black"
+              :src="page.cover_image || page.img"
+            />
+          </template>
+
+          <h1 class="text-2xl font-bold md:text-3xl">
+            {{ page.title }}
+          </h1>
+        </div>
+
+        <!-- Post metadata -->
+        <div class="flex items-center gap-3 text-sm text-gray-300">
+          <NuxtTime
+            :datetime="page.date"
+            class="whitespace-nowrap tabular-nums"
+            year="numeric"
+            month="short"
+            day="2-digit"
           />
-        </template>
-
-        <h1 class="text-2xl font-bold md:text-3xl">
-          {{ page.title }}
-        </h1>
-      </div>
-
-      <!-- Post metadata -->
-      <div class="flex items-center gap-2 text-sm text-gray-300">
-        <NuxtTime
-          :datetime="page.date"
-          class="whitespace-nowrap tabular-nums"
-          year="numeric"
-          month="short"
-          day="2-digit"
-        />
-        <span aria-hidden="true">·</span>
-        <span>{{ page.readingTimeMinutes }} min read</span>
+          <span aria-hidden="true">·</span>
+          <span>{{ page.readingTimeMinutes }} min read</span>
+        </div>
       </div>
 
       <!-- external banner and CTA (below title/date, above content) -->
       <div
         v-if="page.external_url"
-        class="flex items-center justify-between gap-4 rounded border border-orange-500/30 bg-orange-500/10 p-3"
+        class="flex items-center justify-between gap-5 rounded border border-orange-500/30 bg-orange-500/10 p-3"
       >
         <div class="text-sm text-gray-200">
           The original version of this article can be found on the
@@ -151,7 +153,7 @@ useHead(() => ({
         - Remove maximum width of prose content: https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width
       -->
       <article
-        class="prose max-w-[1024px] text-gray-300 prose-headings:text-white prose-h2:mt-8 prose-h3:text-orange-100 prose-p:my-3 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-strong:text-gray-100 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0"
+        class="prose prose-headings:text-white prose-h2:mt-5 prose-h2:mb-3 prose-h3:mt-5 prose-h3:mb-3 prose-h3:text-orange-100 prose-p:my-3 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-strong:text-gray-100 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0 max-w-[1024px] text-gray-300"
       >
         <MarkdownDocument v-if="page?.document" :value="page.document" />
       </article>

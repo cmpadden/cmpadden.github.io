@@ -1,7 +1,7 @@
 <template>
   <body class="bg-background font-display flex min-h-screen flex-col">
     <Header />
-    <main class="mt-4 flex-1">
+    <main class="mt-5 flex-1">
       <div class="flex justify-center">
         <Transition
           appear
@@ -12,7 +12,7 @@
           leave-from="opacity-100"
           leave-to="-translate-x-8 opacity-0"
         >
-          <div class="rounded-xl bg-black/50 p-6 text-center shadow-lg">
+          <div class="rounded-xl bg-black/50 p-7 text-center shadow-lg">
             <div class="text-6xl font-extrabold tracking-widest text-white">
               Yikes!
             </div>

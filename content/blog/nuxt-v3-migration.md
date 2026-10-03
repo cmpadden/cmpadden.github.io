@@ -29,7 +29,6 @@ Part of the delay for doing this upgrade was in waiting for module developers to
 I'm super thankful for all of the hard work they've don, and I'm excited to explore all of the new features available!
 I just hope that the breaking changes in this release don't cause too much fracturing of the community, as it does feel like déjà vu of Python 2 and 3.
 
-
 [1]: https://github.com/cmpadden/cmpadden.github.io/pull/3
 [2]: https://nuxt.com/docs/migration/overview
 [3]: https://nuxt.com/docs/getting-started/introduction

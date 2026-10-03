@@ -1,12 +1,12 @@
 ---
-title: 'Using pinentry-mac to sign commits from vim-fugitive'
+title: "Using pinentry-mac to sign commits from vim-fugitive"
 draft: false
 date: "2024-05-11"
 tags: ["vim", "tip"]
 categories: ["tooling", "tips"]
 ---
 
-In order to sign git commits from within Vim using a plugin like [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive), it is necessary to configure the `gpg-agent` to use a GUI based `pinentry-program`. 
+In order to sign git commits from within Vim using a plugin like [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive), it is necessary to configure the `gpg-agent` to use a GUI based `pinentry-program`.
 
 <!--more-->
 
@@ -45,4 +45,3 @@ $ echo $(brew --prefix)/bin/pinentry-mac
 ```
 
 But that's all it takes. Now, you should be prompted to enter your gpg pin in an external window when signing commits from vim.
-

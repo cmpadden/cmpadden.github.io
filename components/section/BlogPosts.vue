@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <section class="container space-y-1">
-    <div class="grid grid-cols-1 gap-2">
+    <div class="grid grid-cols-1 gap-3">
       <BlogArticleCard
         v-for="article in articles"
         :key="article._id"

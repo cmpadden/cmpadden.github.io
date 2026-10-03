@@ -1,39 +1,39 @@
 <template>
   <div class="container font-mono">
     <div class="bg-background text-white">
-      <div class="grid grid-cols-3 gap-4">
+      <div class="grid grid-cols-3 gap-5">
         <!-- Controls -->
-        <div class="col-span-3 space-x-2">
+        <div class="col-span-3 space-x-3">
           <div
-            class="inline-block rounded-lg bg-black px-6 py-2 text-sm font-bold text-white uppercase shadow-lg shadow-green-400/25 transition duration-150 ease-in-out hover:cursor-pointer hover:shadow-white/25"
+            class="inline-block rounded-lg bg-black px-7 py-3 text-sm font-bold text-white uppercase shadow-lg shadow-green-400/25 transition duration-150 ease-in-out hover:cursor-pointer hover:shadow-white/25"
             @click="enable_audio_monitoring"
           >
             Enable
           </div>
           <div
-            class="inline-block rounded-lg bg-black px-6 py-2 text-sm font-bold text-white uppercase shadow-lg shadow-red-400/25 transition duration-150 ease-in-out hover:cursor-pointer hover:shadow-white/25"
+            class="inline-block rounded-lg bg-black px-7 py-3 text-sm font-bold text-white uppercase shadow-lg shadow-red-400/25 transition duration-150 ease-in-out hover:cursor-pointer hover:shadow-white/25"
             @click="disable_audio_monitoring"
           >
             Disable
           </div>
         </div>
-        <div class="col-span-3 rounded-xl bg-black/75 p-4 lg:col-span-1">
-          <div class="mb-2 text-xl font-bold">Time Domain Waveform</div>
+        <div class="col-span-3 rounded-xl bg-black/75 p-5 lg:col-span-1">
+          <div class="mb-3 text-xl font-bold">Time Domain Waveform</div>
           <ExperimentsAudioWaveform
             :timeDomainBufferHistory="timeDomainBufferHistory"
             strokeStyle="rgb(255, 0, 255)"
             class="h-72 border-2 border-gray-400"
           />
         </div>
-        <div class="col-span-3 rounded-xl bg-black/75 p-4 lg:col-span-1">
-          <div class="mb-2 text-xl font-bold">Frequency Spectrogram</div>
+        <div class="col-span-3 rounded-xl bg-black/75 p-5 lg:col-span-1">
+          <div class="mb-3 text-xl font-bold">Frequency Spectrogram</div>
           <ExperimentsAudioSpectrogram
             :frequencyDomainBufferHistory="frequencyDomainBufferHistory"
             class="h-72 border-2 border-gray-400"
           />
         </div>
-        <div class="col-span-3 rounded-xl bg-black/75 p-4 lg:col-span-1">
-          <div class="mb-2 text-xl font-bold">Frequency Bar Chart</div>
+        <div class="col-span-3 rounded-xl bg-black/75 p-5 lg:col-span-1">
+          <div class="mb-3 text-xl font-bold">Frequency Bar Chart</div>
           <ExperimentsAudioFrequencyBarGraph
             :audioBufferHistory="frequencyDomainBufferHistory"
             class="h-72 border-2 border-gray-400"
@@ -41,8 +41,8 @@
         </div>
 
         <!-- Frequency Domain Table -->
-        <div class="col-span-3 rounded-xl bg-black/75 p-4">
-          <div class="mb-2 text-xl font-bold">Frequency Buffer History</div>
+        <div class="col-span-3 rounded-xl bg-black/75 p-5">
+          <div class="mb-3 text-xl font-bold">Frequency Buffer History</div>
           <div>
             <table class="w-full table-fixed">
               <thead class="collapse border-b-2 md:visible">
@@ -87,8 +87,8 @@
         </div>
 
         <!-- Time Domain Table -->
-        <div class="col-span-3 rounded-xl bg-black/75 p-4">
-          <div class="mb-2 text-xl font-bold">Time Domain Buffer History</div>
+        <div class="col-span-3 rounded-xl bg-black/75 p-5">
+          <div class="mb-3 text-xl font-bold">Time Domain Buffer History</div>
           <div>
             <table class="w-full table-fixed">
               <thead class="collapse border-b-2 md:visible">

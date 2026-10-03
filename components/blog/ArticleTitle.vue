@@ -16,10 +16,9 @@ const parts = computed(() =>
 
 <template>
   <template v-for="(part, index) in parts" :key="index">
-    <code
-      v-if="part.isCode"
-      class="font-mono font-semibold"
-    >{{ part.text }}</code>
+    <code v-if="part.isCode" class="font-mono font-semibold">{{
+      part.text
+    }}</code>
     <span v-else>{{ part.text }}</span>
   </template>
 </template>

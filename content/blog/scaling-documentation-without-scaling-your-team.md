@@ -10,7 +10,6 @@ external_site: "All Things Open"
 
 How smart information architecture and AI assistants help a small team answer 16,000 community questions a month.
 
-
 <!--more-->
 
 In Enabling Community Education with a Little Help from AI, Dagster Labs developer advocate Colton Padden shared how a small team supports a fast-growing open source community around Dagster, a declarative data orchestration framework.
@@ -21,14 +20,12 @@ After receiving feedback from the community about missing and unclear documentat
 
 Colton demonstrated how AI eased the team’s processes. With clear contributing guidelines in the repo and docs that live side by side with code, tools like Claude Code and other LLMs can generate first drafts of tutorials from implementations, review outlines, and translate material across mediums. Additionally, a custom “Ask AI” assistant, backed by Dagster docs, GitHub issues, and discussions, now answers more than 16,000 community questions a month and provides a fast feedback loop on missing content.
 
-
 ## Key takeaways
 
-- *Treat documentation and information architecture as core infrastructure* – Clear, lifecycle-oriented docs, examples, and courses serve both humans and LLMs, making every other education effort more effective.
+- _Treat documentation and information architecture as core infrastructure_ – Clear, lifecycle-oriented docs, examples, and courses serve both humans and LLMs, making every other education effort more effective.
 
-- *Build tight feedback loops with your community* – Use GitHub, Slack, analytics, and AI assistants to listen for where people are getting stuck, then continually refine content based on real questions and blockers.
+- _Build tight feedback loops with your community_ – Use GitHub, Slack, analytics, and AI assistants to listen for where people are getting stuck, then continually refine content based on real questions and blockers.
 
-- *Use AI and collaboration to scale a small team* – Well-designed CONTRIBUTING guidelines, monorepos, and AI tooling can turn engineers and community members into effective documentation contributors, with humans still providing the final review and voice.
+- _Use AI and collaboration to scale a small team_ – Well-designed CONTRIBUTING guidelines, monorepos, and AI tooling can turn engineers and community members into effective documentation contributors, with humans still providing the final review and voice.
 
 Ultimately, Colton argues that in an AI-driven world, high-quality educational material and empathetic listening to users are more important than ever. AI can scale a small team and empower contributors, but it’s only as good as the documentation and community practices behind it.
-
