@@ -28,8 +28,8 @@ pnpm preview
 
 ## Layout conventions
 
-- `default`: site frame with Header/Footer and a scrollable content region.
-- `light`: Header and centered page content, without the default frame/Footer.
+- `default`: site frame with Header and a scrollable content region.
+- `light`: Header and centered page content, without the default frame.
 - `empty`: no shared chrome, for standalone experiences.
 
 Page-specific layout selection uses `definePageMeta({ layout: "light" })` or `layout: "empty"`.

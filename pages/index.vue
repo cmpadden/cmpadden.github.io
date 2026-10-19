@@ -23,7 +23,7 @@ useHead({
 </script>
 
 <template>
-  <div class="min-h-screen">
+  <div>
     <div class="container py-3">
       <h2 id="blog" class="font-pixelify text-3xl font-bold text-white">
         <a href="#blog">Blog</a>
