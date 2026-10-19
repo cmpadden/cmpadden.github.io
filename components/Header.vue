@@ -1,9 +1,23 @@
 <script setup lang="ts">
-const closeMenu = (event: MouseEvent) => {
-  if (event.currentTarget instanceof HTMLElement) {
-    event.currentTarget.closest("details")?.removeAttribute("open");
+const menu = ref<HTMLDetailsElement | null>(null);
+
+const closeMenu = () => {
+  menu.value?.removeAttribute("open");
+};
+
+const closeMenuOnOutsideClick = (event: MouseEvent) => {
+  if (event.target instanceof Node && !menu.value?.contains(event.target)) {
+    closeMenu();
   }
 };
+
+onMounted(() => {
+  document.addEventListener("click", closeMenuOnOutsideClick, true);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("click", closeMenuOnOutsideClick, true);
+});
 </script>
 
 <template>
@@ -12,7 +26,7 @@ const closeMenu = (event: MouseEvent) => {
       <div class="flex items-center text-gray-700 dark:text-gray-200">
         <div class="flex-1" />
         <div class="flex items-center space-x-3">
-          <details class="relative z-50 inline-block text-left">
+          <details ref="menu" class="relative z-50 inline-block text-left">
             <summary
               class="transform list-none align-middle text-gray-700 transition-all duration-300 ease-in-out hover:scale-110 hover:cursor-pointer hover:text-orange-500 active:scale-95 dark:text-white [&::-webkit-details-marker]:hidden"
             >
