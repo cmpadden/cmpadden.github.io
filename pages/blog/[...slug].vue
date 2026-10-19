@@ -96,9 +96,9 @@ useHead(() => ({
 </script>
 
 <template>
-  <div v-if="page" class="min-h-screen pt-9">
+  <div v-if="page" class="container min-h-screen pt-9">
     <div
-      class="container mb-11 space-y-7 bg-black/75 py-7 text-white backdrop-blur-sm"
+      class="mb-11 space-y-7 bg-black/40 px-8 py-7 text-white"
     >
       <div class="space-y-3">
         <!-- title -->
