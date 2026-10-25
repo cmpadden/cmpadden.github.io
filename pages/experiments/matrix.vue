@@ -1,5 +1,6 @@
 <template>
   <div class="space-y-5 p-5 text-slate-900 dark:text-slate-100">
+    <h1 class="sr-only">Matrix multiplication</h1>
     <!-- Instructions -->
     <div
       class="max-w-3xl text-lg leading-relaxed text-slate-900 dark:text-slate-100"
@@ -16,6 +17,7 @@
         class="bg-blue-200 px-5 py-3 font-bold text-blue-800 hover:bg-blue-800 hover:text-blue-200"
         :disabled="!started"
         :class="{ 'cursor-not-allowed opacity-25': !started }"
+        aria-label="Previous multiplication step"
         @click="decStep"
       >
         <svg
@@ -51,6 +53,7 @@
         class="bg-blue-200 px-5 py-3 font-bold text-blue-800 hover:bg-blue-800 hover:text-blue-200"
         :disabled="!started"
         :class="{ 'cursor-not-allowed opacity-25': !started }"
+        aria-label="Next multiplication step"
         @click="incStep"
       >
         <svg
@@ -152,6 +155,11 @@
 
 <script setup>
 definePageMeta({ layout: "light" });
+usePageSeo({
+  title: "Matrix multiplication",
+  description: "Step through matrix multiplication interactively.",
+  path: "/experiments/matrix/",
+});
 </script>
 
 <script>
@@ -181,23 +189,28 @@ export default {
   },
   mounted() {
     this.generateRandomMatrices();
+    window.addEventListener("keydown", this.onKeydown);
   },
-  created() {
-    // eslint-disable-next-line nuxt/no-globals-in-created
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    // eslint-disable-next-line nuxt/no-globals-in-created
-    window.addEventListener("keydown", (e) => {
-      if (e.key === " ") {
-        this.incStep();
-      } else if (e.key === "Escape") {
-        this.ix = 0;
-      }
-    });
+  beforeUnmount() {
+    window.removeEventListener("keydown", this.onKeydown);
   },
   methods: {
+    onKeydown(event) {
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.isContentEditable ||
+          target.closest("input, textarea, select, button, a, summary"))
+      )
+        return;
+      if (event.key === " ") {
+        event.preventDefault();
+        if (!this.started) this.matmul(this.a, this.b);
+        else this.incStep();
+      } else if (event.key === "Escape") {
+        this.ix = 0;
+      }
+    },
     randomMatrix(n, m) {
       const matrix = [];
       for (let i = 0; i < n; i++) {
@@ -266,7 +279,7 @@ export default {
       });
     },
     incStep() {
-      if (this.ix !== this.timeline.length - 1) {
+      if (this.started && this.ix < this.timeline.length - 1) {
         this.ix += 1;
       }
     },

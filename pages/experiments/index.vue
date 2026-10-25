@@ -18,6 +18,6 @@ usePageSeo({
         Experiments
       </h1>
     </div>
-    <SectionExperiments showImages tightTop />
+    <SectionExperiments tightTop />
   </div>
 </template>

@@ -1,233 +1,86 @@
+<script setup lang="ts">
+const { enabled, starting, error, samples, summaries, start, stop } =
+  useAudioMonitor();
+usePageSeo({
+  title: "Audio visualizer",
+  description:
+    "Explore microphone waveforms, frequencies, and a live spectrogram.",
+  path: "/experiments/audio/",
+});
+const visualizations = [
+  { mode: "waveform", title: "Time Domain Waveform" },
+  { mode: "spectrogram", title: "Frequency Spectrogram" },
+  { mode: "frequency", title: "Frequency Bar Chart" },
+] as const;
+const tables = computed(() => [
+  { title: "Frequency Buffer History", rows: summaries.value.frequency },
+  { title: "Time Domain Buffer History", rows: summaries.value.waveform },
+]);
+</script>
+
 <template>
-  <div class="container font-mono">
-    <div class="bg-black text-white">
-      <div class="grid grid-cols-3 gap-5">
-        <!-- Controls -->
-        <div class="col-span-3 space-x-3">
-          <div
-            class="inline-block rounded-lg bg-black px-7 py-3 text-sm font-bold text-white uppercase shadow-lg shadow-green-400/25 transition duration-150 ease-in-out hover:cursor-pointer hover:shadow-white/25"
-            @click="enable_audio_monitoring"
-          >
-            Enable
-          </div>
-          <div
-            class="inline-block rounded-lg bg-black px-7 py-3 text-sm font-bold text-white uppercase shadow-lg shadow-red-400/25 transition duration-150 ease-in-out hover:cursor-pointer hover:shadow-white/25"
-            @click="disable_audio_monitoring"
-          >
-            Disable
-          </div>
-        </div>
-        <div class="col-span-3 rounded-xl bg-black/75 p-5 lg:col-span-1">
-          <div class="mb-3 text-xl font-bold">Time Domain Waveform</div>
-          <ExperimentsAudioWaveform
-            :timeDomainBufferHistory="timeDomainBufferHistory"
-            strokeStyle="rgb(255, 0, 255)"
-            class="h-72 border-2 border-gray-400"
-          />
-        </div>
-        <div class="col-span-3 rounded-xl bg-black/75 p-5 lg:col-span-1">
-          <div class="mb-3 text-xl font-bold">Frequency Spectrogram</div>
-          <ExperimentsAudioSpectrogram
-            :frequencyDomainBufferHistory="frequencyDomainBufferHistory"
-            class="h-72 border-2 border-gray-400"
-          />
-        </div>
-        <div class="col-span-3 rounded-xl bg-black/75 p-5 lg:col-span-1">
-          <div class="mb-3 text-xl font-bold">Frequency Bar Chart</div>
-          <ExperimentsAudioFrequencyBarGraph
-            :audioBufferHistory="frequencyDomainBufferHistory"
-            class="h-72 border-2 border-gray-400"
-          />
-        </div>
-
-        <!-- Frequency Domain Table -->
-        <div class="col-span-3 rounded-xl bg-black/75 p-5">
-          <div class="mb-3 text-xl font-bold">Frequency Buffer History</div>
-          <div>
-            <table class="w-full table-fixed">
-              <thead class="collapse border-b-2 md:visible">
-                <tr>
-                  <th class="text-left">Index</th>
-                  <th class="text-left">Mean</th>
-                  <th class="text-left">Min</th>
-                  <th class="text-left">Max</th>
-                  <th class="text-left">FFT</th>
-                  <th class="text-right">Buffer</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="(data, ix) in frequencyDomainBufferHistory.slice(-10)"
-                  :key="ix"
-                >
-                  <td class="text-left font-bold">{{ ix }}</td>
-                  <td class="text-left">
-                    {{
-                      (
-                        data.reduce((prev, curr) => prev + curr) / data.length
-                      ).toFixed(2)
-                    }}
-                  </td>
-                  <td class="text-left">
-                    {{ Math.min(...data) }}
-                  </td>
-                  <td class="text-left">
-                    {{ Math.max(...data) }}
-                  </td>
-                  <td class="text-left">
-                    {{ data.length }}
-                  </td>
-                  <td class="truncate text-right">
-                    {{ data.slice(0, 4) }} ... {{ data.slice(-4) }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Time Domain Table -->
-        <div class="col-span-3 rounded-xl bg-black/75 p-5">
-          <div class="mb-3 text-xl font-bold">Time Domain Buffer History</div>
-          <div>
-            <table class="w-full table-fixed">
-              <thead class="collapse border-b-2 md:visible">
-                <tr>
-                  <th class="text-left">Index</th>
-                  <th class="text-left">Mean</th>
-                  <th class="text-left">Min</th>
-                  <th class="text-left">Max</th>
-                  <th class="text-left">FFT</th>
-                  <th class="text-right">Buffer</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="(data, ix) in timeDomainBufferHistory.slice(-10)"
-                  :key="ix"
-                >
-                  <td class="text-left font-bold">{{ ix }}</td>
-                  <td class="text-left">
-                    {{
-                      (
-                        data.reduce((prev, curr) => prev + curr) / data.length
-                      ).toFixed(2)
-                    }}
-                  </td>
-                  <td class="text-left">
-                    {{ Math.min(...data) }}
-                  </td>
-                  <td class="text-left">
-                    {{ Math.max(...data) }}
-                  </td>
-                  <td class="text-left">
-                    {{ data.length }}
-                  </td>
-                  <td class="truncate text-right">
-                    {{ data.slice(0, 4) }} ... {{ data.slice(-4) }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+  <section class="container py-5 font-mono">
+    <h1 class="sr-only">Audio visualizer</h1>
+    <div class="grid grid-cols-3 gap-5 bg-black text-white">
+      <div class="col-span-3 space-x-3">
+        <button
+          type="button"
+          class="rounded-lg px-7 py-3 text-sm font-bold uppercase shadow-lg shadow-green-400/25 disabled:opacity-50"
+          :disabled="enabled || starting"
+          @click="start"
+        >
+          {{ starting ? "Enabling…" : "Enable" }}
+        </button>
+        <button
+          type="button"
+          class="rounded-lg px-7 py-3 text-sm font-bold uppercase shadow-lg shadow-red-400/25 disabled:opacity-50"
+          :disabled="!enabled && !starting"
+          @click="stop"
+        >
+          Disable
+        </button>
+        <p v-if="error" role="alert" class="p-3 text-red-300">{{ error }}</p>
+      </div>
+      <div
+        v-for="visualization in visualizations"
+        :key="visualization.mode"
+        class="col-span-3 min-w-0 rounded-xl bg-black/75 p-5 lg:col-span-1"
+      >
+        <h2 class="mb-3 text-xl font-bold">{{ visualization.title }}</h2>
+        <ExperimentsAudioVisualizer
+          :mode="visualization.mode"
+          :samples="samples"
+        />
+      </div>
+      <div
+        v-for="table in tables"
+        :key="table.title"
+        class="col-span-3 overflow-x-auto rounded-xl p-5"
+      >
+        <h2 class="mb-3 text-xl font-bold">{{ table.title }}</h2>
+        <table class="w-full table-fixed text-sm">
+          <thead class="border-b-2">
+            <tr>
+              <th scope="col">Index</th>
+              <th scope="col">Mean</th>
+              <th scope="col">Min</th>
+              <th scope="col">Max</th>
+              <th scope="col">FFT</th>
+              <th scope="col">Buffer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(row, index) in table.rows" :key="index">
+              <td>{{ index }}</td>
+              <td>{{ row.mean }}</td>
+              <td>{{ row.min }}</td>
+              <td>{{ row.max }}</td>
+              <td>{{ row.length }}</td>
+              <td class="truncate">{{ row.preview }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
+  </section>
 </template>
-
-<script setup lang="ts">
-// definePageMeta({ layout: "light" });
-
-let stream: MediaStream | null = null;
-let audioCtx: AudioContext | null = null;
-let analyser: AnalyserNode | null = null;
-let source: MediaStreamAudioSourceNode | null = null;
-
-let timeDomainBuffer: Uint8Array<ArrayBuffer> | null = null;
-let timeDomainBufferHistory = ref<Array<Uint8Array<ArrayBuffer>>>([]);
-
-let frequencyDomainBuffer: Uint8Array<ArrayBuffer> | null = null;
-let frequencyDomainBufferHistory = ref<Array<Uint8Array<ArrayBuffer>>>([]);
-
-const HISTORY_SCROLLBACK = 256;
-
-const audioAnalysisEnabled = ref(false);
-
-const poll_byte_frequency_data = () => {
-  requestAnimationFrame(poll_byte_frequency_data);
-
-  if (!analyser || !timeDomainBuffer || !frequencyDomainBuffer) return;
-
-  analyser.getByteTimeDomainData(timeDomainBuffer);
-  timeDomainBufferHistory.value.push(timeDomainBuffer.slice());
-  if (timeDomainBufferHistory.value.length > HISTORY_SCROLLBACK) {
-    timeDomainBufferHistory.value.shift();
-  }
-
-  analyser.getByteFrequencyData(frequencyDomainBuffer);
-  frequencyDomainBufferHistory.value.push(frequencyDomainBuffer.slice());
-  if (frequencyDomainBufferHistory.value.length > HISTORY_SCROLLBACK) {
-    frequencyDomainBufferHistory.value.shift();
-  }
-};
-
-const enable_audio_monitoring = () => {
-  navigator.mediaDevices
-    .getUserMedia({ audio: true })
-    .then((s) => {
-      stream = s;
-      const AudioContextClass =
-        window.AudioContext ||
-        (window as Window & { webkitAudioContext?: typeof AudioContext })
-          .webkitAudioContext;
-      if (!AudioContextClass) return;
-
-      audioCtx = new AudioContextClass();
-      analyser = audioCtx.createAnalyser();
-
-      source = audioCtx.createMediaStreamSource(stream);
-      source.connect(analyser);
-
-      // analyser.fftSize = 256;
-      analyser.fftSize = 2048;
-
-      timeDomainBuffer = new Uint8Array(analyser.frequencyBinCount);
-
-      frequencyDomainBuffer = new Uint8Array(analyser.frequencyBinCount);
-
-      // initialize time domain history
-      for (let i = 0; i < HISTORY_SCROLLBACK; i++) {
-        timeDomainBufferHistory.value.push(
-          new Uint8Array(analyser.frequencyBinCount),
-        );
-      }
-
-      // initialize frequency domain history
-      for (let i = 0; i < HISTORY_SCROLLBACK; i++) {
-        frequencyDomainBufferHistory.value.push(
-          new Uint8Array(analyser.frequencyBinCount),
-        );
-      }
-
-      poll_byte_frequency_data();
-    })
-    .catch(function (err) {
-      console.error(err);
-    });
-};
-
-const disable_audio_monitoring = () => {
-  if (stream !== null && stream.active) {
-    stream.getAudioTracks().forEach((track) => {
-      track.stop();
-    });
-  }
-};
-
-onUnmounted(() => {
-  // disconnect from audio source when leaving the page
-  console.log("disabling");
-  disable_audio_monitoring();
-});
-</script>

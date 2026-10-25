@@ -1,202 +1,74 @@
-<template>
-  <div
-    class="relative min-h-[32rem] overflow-hidden bg-gradient-to-b from-green-900 via-purple-900 to-indigo-900 text-white"
-  >
-    <!-- Message for unsupported browsers -->
-    <div
-      v-if="typeof midi === 'undefined'"
-      class="p-5 text-center font-light tracking-wide"
-    >
-      Unfortunately, the Web MIDI API is
-      <a
-        class="text-blue-500 underline"
-        href="https://developer.mozilla.org/en-US/docs/Web/API/MIDIMessageEvent#browser_compatibility"
-        >not supported</a
-      >
-      in all browsers...
-    </div>
-
-    <!-- Main application -->
-    <div v-else class="relative min-h-[32rem]">
-      <div class="flex flex-wrap">
-        <div class="absolute right-2 bottom-16">
-          <div
-            v-bind:class="{ hidden: !tooltip, block: tooltip }"
-            class="z-50 max-w-md rounded-lg border-2 border-green-800 bg-yellow-200 text-sm leading-normal font-normal break-words"
-          >
-            <div>
-              <div
-                class="mb-0 rounded-t-lg border-b border-solid bg-green-600 p-3 font-semibold text-white uppercase opacity-75"
-              >
-                MIDI Status
-              </div>
-
-              <div class="p-3 font-mono text-orange-900">
-                <div class="mb-3 font-bold">
-                  Enabled:
-                  <span>
-                    {{ typeof midi !== "undefined" ? "Yep!" : "Nope" }}
-                  </span>
-                </div>
-                <div class="mb-3">
-                  <div class="font-bold">Inputs:</div>
-                  <div
-                    v-if="inputs.length === 0"
-                    class="p-5 text-center italic"
-                  >
-                    No input devices detected :(
-                  </div>
-                  <div v-else>
-                    <div
-                      v-for="input in inputs || []"
-                      :key="input.id"
-                      class="flex"
-                    >
-                      <div class="flex-1">{{ input.manufacturer }}</div>
-                      <div class="flex-1">{{ input.name }}</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <div class="font-bold">Outputs:</div>
-                  <div
-                    v-if="outputs.length === 0"
-                    class="p-5 text-center italic"
-                  >
-                    No output devices detected :(
-                  </div>
-                  <div v-else>
-                    <div
-                      v-for="output in outputs || []"
-                      :key="output.id"
-                      class="flex"
-                    >
-                      <div class="flex-1">{{ output.manufacturer }}</div>
-                      <div class="flex-1">{{ output.name }}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="absolute right-2 bottom-2">
-          <button
-            @click="tooltip = !tooltip"
-            class="rounded-lg border-3 border-green-600 bg-green-50 px-1 text-green-600 shadow hover:text-green-500 hover:shadow-lg"
-            type="button"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              viewBox="0 0 20 20"
-              class="h-10 w-10"
-            >
-              <g fill="none">
-                <path
-                  d="M2.5 4a.5.5 0 0 0-.5.5v11a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-11a.5.5 0 0 0-.5-.5h-15zm.5 6h2v3.5a.5.5 0 0 0 1 0V10h2v3.5a.5.5 0 0 0 1 0V10h2v3.5a.5.5 0 0 0 1 0V10h2v3.5a.5.5 0 0 0 1 0V10h2v5H3v-5zm2.75-2.5a.75.75 0 1 1 0-1.5a.75.75 0 0 1 0 1.5zm6.25-1a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-3 .251a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0z"
-                  fill="currentColor"
-                />
-              </g>
-            </svg>
-          </button>
-        </div>
-      </div>
-      <!-- display active key pressed in the bottom left of the screen -->
-      <div class="absolute bottom-4 left-4">
-        <div class="flex">
-          <div v-for="note in orderedNotes()" :key="note" class="p-5">
-            {{ note }}
-          </div>
-        </div>
-      </div>
-      <div class="grid min-h-[32rem] place-items-center">
-        <div>
-          <div class="text-center text-4xl font-semibold tracking-wide">
-            <!-- <div v-if="activeKeys.size === 0">-</div> -->
-            <transition
-              enter-active-class="duration-500 ease-out"
-              enter-class="opacity-0 transform"
-              enter-to-class="opacity-100"
-              leave-active-class="duration-500"
-              leave-class="opacity-100"
-              leave-to-class="opacity-0 transform"
-            >
-              <div v-if="activeKeys.size >= 1">
-                {{ chord() || "?" }}
-              </div>
-            </transition>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-definePageMeta({ layout: "light" });
-</script>
-
-<script lang="ts">
 import { identify } from "chords.ts";
-
-export default {
-  mounted() {
-    // not all browsers support `requestMIDIAccess`
-    if (typeof navigator.requestMIDIAccess !== "undefined") {
-      navigator.requestMIDIAccess().then(
-        (access: MIDIAccess) => {
-          this.midi = access;
-          this.midi.inputs.forEach((entry: any) => {
-            entry.onmidimessage = (event: any) => {
-              // key pressed -- add key to active keys
-              if (event.data[0] === 144) {
-                this.activeKeys.set(event.data[1], event.data);
-                this.$forceUpdate();
-              }
-              // key released -- remove key from active keys
-              if (event.data[0] === 128) {
-                this.activeKeys.delete(event.data[1]);
-                this.$forceUpdate();
-              }
-            };
-          });
-        },
-        (error) => {
-          console.error(error);
-        },
-      );
-    }
+definePageMeta({ layout: "light" });
+usePageSeo({
+  title: "MIDI chords",
+  description: "Identify chords played on a connected MIDI keyboard.",
+  path: "/experiments/chords/",
+});
+// Key by input + channel + pitch, so one device's Note Off cannot release another.
+const activeKeys = reactive(new Map<string, number>());
+const {
+  supported,
+  starting,
+  midi,
+  inputs,
+  outputs,
+  error,
+  connect,
+  disconnect,
+} = useMidi(
+  (event) => {
+    const data = event.data;
+    if (!data || data.length < 3) return;
+    const command = data[0]! & 0xf0;
+    const key = `${(event.target as MIDIInput | null)?.id}:${data[0]! & 0x0f}:${data[1]}`;
+    if (command === 0x90 && data[2]! > 0) activeKeys.set(key, data[1]!);
+    else if (command === 0x80 || command === 0x90) activeKeys.delete(key);
   },
-  data() {
-    return {
-      tooltip: false,
-      midi: undefined as undefined | MIDIAccess,
-      activeKeys: new Map<number, object>(),
-    };
-  },
-  computed: {
-    inputs(): MIDIInput[] {
-      return this.midi ? Array.from(this.midi.inputs.values()) : [];
-    },
-    outputs(): MIDIOutput[] {
-      return this.midi ? Array.from(this.midi.outputs.values()) : [];
-    },
-  },
-  methods: {
-    orderedNotes(): number[] {
-      return Array.from(this.activeKeys.keys()).sort();
-    },
-    chord(): string | undefined {
-      // NOTE: this was made a `method` opposed to a `computed` property as it
-      // was note reacting to changes to the underlying data. There was an attempt to
-      // resolve this by using `Vue.delete` on the `activeKeys` and to run a
-      // `this.$forceUpdate()` but neither of these solutions worked.
-      const notes = Array.from(this.activeKeys.keys());
-
-      // chord identification has been refactored into the `chords.ts` library
-      return identify(notes).name;
-    },
-  },
-};
+  () => activeKeys.clear(),
+);
+const orderedNotes = computed(() =>
+  [...new Set(activeKeys.values())].sort((a, b) => a - b),
+);
+const chord = computed(() =>
+  orderedNotes.value.length ? identify(orderedNotes.value).name || "?" : "—",
+);
 </script>
+
+<template>
+  <section
+    class="relative min-h-[32rem] overflow-hidden bg-gradient-to-b from-green-900 via-purple-900 to-indigo-900 p-5 text-white"
+  >
+    <h1 class="mb-5 text-3xl font-bold">MIDI Chords</h1>
+    <p v-if="supported === false">Web MIDI is not supported in this browser.</p>
+    <div v-else class="space-x-3">
+      <button
+        type="button"
+        class="rounded border px-4 py-2 disabled:opacity-50"
+        :disabled="starting || !!midi"
+        @click="connect"
+      >
+        {{ starting ? "Connecting…" : "Enable MIDI" }}
+      </button>
+      <button
+        type="button"
+        class="rounded border px-4 py-2 disabled:opacity-50"
+        :disabled="!midi && !starting"
+        @click="disconnect"
+      >
+        Disconnect
+      </button>
+    </div>
+    <p v-if="error" role="alert" class="my-3">{{ error }}</p>
+    <template v-if="midi">
+      <ExperimentsMidiStatus :inputs="inputs" :outputs="outputs" />
+      <div class="grid min-h-72 place-items-center">
+        <output aria-live="polite" class="text-4xl font-semibold">{{
+          chord
+        }}</output>
+      </div>
+      <p>Active notes: {{ orderedNotes.join(", ") || "None" }}</p>
+    </template>
+  </section>
+</template>

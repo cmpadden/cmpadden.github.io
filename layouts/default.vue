@@ -1,18 +1,24 @@
 <template>
-  <div class="bg-gradient-to-b from-orange-600 to-red-600">
-    <div class="p-3">
-      <div
-        class="bg-background font-display flex h-[calc(100dvh-24px)] flex-col"
-      >
-        <main
-          class="site-noise-surface noise-bg no-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto bg-white dark:bg-black pointer-fine:overscroll-none"
-        >
-          <Header />
-          <div class="flex-1">
-            <slot />
-          </div>
-        </main>
-      </div>
-    </div>
+  <div class="site-frame bg-gradient-to-b from-orange-600 to-red-600 p-3">
+    <main
+      class="site-noise-surface noise-bg min-h-[calc(100dvh-24px)] bg-white dark:bg-black"
+    >
+      <Header />
+      <slot />
+    </main>
   </div>
 </template>
+
+<style>
+/* Preserve the fixed decorative frame while letting the document own scrolling.
+ * Nuxt can then reset routes, restore history positions, and follow anchors. */
+.site-frame::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  border: 12px solid;
+  border-image: linear-gradient(to bottom, #ea580c, #dc2626) 1;
+  pointer-events: none;
+  z-index: 60;
+}
+</style>

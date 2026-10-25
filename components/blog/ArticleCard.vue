@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BlogArticleSummary } from "../../modules/content/runtime/types/blog-article";
+import type { BlogArticleSummary } from "../../shared/types/article";
 
 withDefaults(
   defineProps<{
@@ -20,7 +20,11 @@ const formatDate = (date: string) => {
 </script>
 
 <template>
-  <NuxtLink :to="article.path" class="group block h-full">
+  <NuxtLink
+    :to="article.path"
+    :prefetch-on="{ visibility: false, interaction: true }"
+    class="group block h-full"
+  >
     <article
       class="text-foreground grid h-full items-start gap-1"
       :class="showDate ? 'grid-cols-1 sm:flex sm:gap-5' : 'grid-cols-1'"
