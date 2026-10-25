@@ -38,6 +38,6 @@ useHead({
         <a href="#experiments">Experiments</a>
       </h2>
     </div>
-    <SectionExperiments :limit="6" showImages tightTop />
+    <SectionExperiments :limit="9" showImages tightTop />
   </div>
 </template>
