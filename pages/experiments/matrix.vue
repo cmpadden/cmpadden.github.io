@@ -1,7 +1,9 @@
 <template>
-  <div class="space-y-5 p-5 text-slate-100">
+  <div class="space-y-5 p-5 text-slate-900 dark:text-slate-100">
     <!-- Instructions -->
-    <div class="max-w-3xl text-lg leading-relaxed text-slate-100">
+    <div
+      class="max-w-3xl text-lg leading-relaxed text-slate-900 dark:text-slate-100"
+    >
       Walk through the steps of matrix multiplication with randomly generated
       matrices. Press the <em>Spacebar</em> or click the
       <em class="bg-blue-200 text-blue-800">buttons</em> to iterate through the

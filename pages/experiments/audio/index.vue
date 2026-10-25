@@ -1,6 +1,6 @@
 <template>
   <div class="container font-mono">
-    <div class="bg-background text-white">
+    <div class="bg-black text-white">
       <div class="grid grid-cols-3 gap-5">
         <!-- Controls -->
         <div class="col-span-3 space-x-3">

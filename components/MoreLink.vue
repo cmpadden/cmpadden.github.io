@@ -11,7 +11,7 @@ const props = defineProps({
   <div class="flex justify-end">
     <NuxtLink
       :to="props.to"
-      class="flex items-center text-sm font-bold text-white hover:text-orange-500"
+      class="text-foreground flex items-center text-sm font-bold hover:text-orange-500"
     >
       <span><slot></slot></span>
       <svg

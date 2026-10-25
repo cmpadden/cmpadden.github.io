@@ -113,7 +113,7 @@ const formatDate = (date) => {
 </script>
 
 <template>
-  <div class="container font-mono text-white">
+  <div class="text-foreground container font-mono">
     <h1 class="my-7 text-2xl font-extrabold">Talks</h1>
     <div class="grid gap-y-7">
       <div
@@ -123,12 +123,12 @@ const formatDate = (date) => {
       >
         <time
           :datetime="talk.date.toISOString()"
-          class="font-mono text-sm whitespace-nowrap text-gray-300 tabular-nums sm:pt-1"
+          class="font-mono text-sm whitespace-nowrap text-gray-600 tabular-nums sm:pt-1 dark:text-gray-300"
         >
           {{ formatDate(talk.date) }}
         </time>
         <div class="flex-col space-y-3">
-          <div class="text-white">
+          <div class="text-foreground">
             {{ talk.title }}
           </div>
           <div>

@@ -5,7 +5,7 @@
         class="bg-background font-display flex h-[calc(100dvh-24px)] flex-col"
       >
         <main
-          class="site-noise-surface noise-bg no-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto bg-black pointer-fine:overscroll-none"
+          class="site-noise-surface noise-bg no-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto bg-white dark:bg-black pointer-fine:overscroll-none"
         >
           <Header />
           <div class="flex-1">

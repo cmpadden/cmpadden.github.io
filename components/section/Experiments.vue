@@ -31,15 +31,15 @@ const filtered_links = computed(() => {
 
 <template>
   <section
-    class="to-background-dark bg-gradient-to-b from-transparent text-white"
+    class="to-background-dark text-foreground bg-gradient-to-b from-transparent"
   >
     <div
-      class="container text-white"
-      :class="props.tightTop ? 'pt-5 pb-9' : 'py-9'"
+      class="text-foreground container"
+      :class="props.tightTop ? 'pt-3 pb-9' : 'py-9'"
     >
       <div class="mb-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
         <nuxt-link
-          class="relative text-orange-500 ring-2 ring-white hover:text-white hover:ring-orange-500"
+          class="hover:text-foreground relative text-orange-500 ring-2 ring-gray-300 hover:ring-orange-500 dark:ring-white"
           v-for="(link, index) in filtered_links"
           :key="link.title"
           :to="link.link"
@@ -57,13 +57,13 @@ const filtered_links = computed(() => {
             class="absolute bottom-2 z-10 flex w-full items-center justify-center px-3"
           >
             <div
-              class="noise-bg w-full bg-black/90 px-7 py-3 [--noise-opacity:0.16]"
+              class="noise-bg w-full bg-white/90 px-7 py-3 [--noise-opacity:0.16] dark:bg-black/90"
             >
-              <h3 class="text-xl font-bold text-white">
+              <h3 class="text-foreground text-xl font-bold">
                 {{ link.title }}
               </h3>
               <div
-                class="line-clamp-1 text-sm text-gray-300"
+                class="line-clamp-1 text-sm text-gray-600 dark:text-gray-300"
                 v-html="link.description"
               ></div>
             </div>

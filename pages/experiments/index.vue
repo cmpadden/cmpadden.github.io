@@ -12,10 +12,12 @@ usePageSeo({
 </script>
 
 <template>
-  <div class="min-h-screen py-3 text-white">
-    <div class="container pb-3">
-      <h1 class="font-pixelify text-3xl font-bold text-white">Experiments</h1>
+  <div class="text-foreground min-h-screen py-3">
+    <div class="container">
+      <h1 class="font-pixelify text-foreground text-3xl font-bold">
+        Experiments
+      </h1>
     </div>
-    <SectionExperiments showImages />
+    <SectionExperiments showImages tightTop />
   </div>
 </template>

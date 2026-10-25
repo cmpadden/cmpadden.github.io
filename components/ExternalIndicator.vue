@@ -17,7 +17,7 @@ const label = computed(() =>
 
 <template>
   <span
-    class="hidden shrink-0 font-mono text-xs font-semibold text-gray-300 sm:inline"
+    class="hidden shrink-0 font-mono text-xs font-semibold text-gray-600 sm:inline dark:text-gray-300"
     >[{{ label }}]</span
   >
 </template>

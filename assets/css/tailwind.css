@@ -22,7 +22,22 @@ code {
 }
 
 @layer base {
+  :root {
+    color-scheme: light;
+    --site-background: #f3f6f6;
+    --site-foreground: #465457;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --site-background: #0f1c1e;
+      --site-foreground: #cbd9d8;
+    }
+  }
+
   body {
+    color: var(--site-foreground);
     font-family: Helvetica, Arial, sans-serif;
   }
 

@@ -12,11 +12,15 @@
           leave-from="opacity-100"
           leave-to="-translate-x-8 opacity-0"
         >
-          <div class="rounded-xl bg-black/50 p-7 text-center shadow-lg">
-            <div class="text-6xl font-extrabold tracking-widest text-white">
+          <div
+            class="rounded-xl bg-white/75 p-7 text-center shadow-lg dark:bg-black/50"
+          >
+            <div
+              class="text-foreground text-6xl font-extrabold tracking-widest"
+            >
               Yikes!
             </div>
-            <div class="text-base text-gray-200">
+            <div class="text-base text-gray-700 dark:text-gray-200">
               Either the page you're looking for doesn't exist, or something has
               gone terribly wrong.
             </div>

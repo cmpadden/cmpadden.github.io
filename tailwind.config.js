@@ -42,8 +42,8 @@ export default {
       },
       colors: {
         cyan: "#9cdbff",
-        background: "#0f1c1e", // terafox bg
-        foreground: "#cbd9d8", // terafox fg
+        background: "var(--site-background)",
+        foreground: "var(--site-foreground)",
       },
       keyframes: {
         wiggle: {
