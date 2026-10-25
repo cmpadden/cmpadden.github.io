@@ -61,7 +61,7 @@ OPENAI_API_KEY=... pnpm generate:experiment-thumbnail -- \
 
 Use `--dry-run` to review the resolved prompt without calling the OpenAI Images API. After changing a source thumbnail while the dev server is already running, run `pnpm images:generate` to refresh its derivatives.
 
-The responsive pipeline generates square 320/640/960 WebP variants, with a 100 kB per-variant ceiling. Components declare `srcset`/`sizes`, reserve layout space, and remain visible without JavaScript. Only the first thumbnail is eager; article/experiment links prefetch on interaction rather than visibility. See [audit remediation](docs/audit-remediation.md) for validation and performance notes.
+The responsive pipeline generates square 320/640/960 WebP variants, with a 100 kB per-variant ceiling. Components declare `srcset`/`sizes`, reserve layout space, and remain visible without JavaScript. Only the first thumbnail is eager; article/experiment links prefetch on interaction rather than visibility.
 
 ## Layout conventions
 
