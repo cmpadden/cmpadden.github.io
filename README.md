@@ -26,6 +26,18 @@ pnpm generate
 pnpm preview
 ```
 
+## Experiment thumbnails
+
+Experiment thumbnail context and output paths live in `data/experiments.mjs`. Generate an image from that metadata with an optional art-direction adjustment:
+
+```bash
+OPENAI_API_KEY=... pnpm generate:experiment-thumbnail -- \
+  --experiment "photos.colton.boo" \
+  --direction "make the exposure bands diagonal and sparse"
+```
+
+Use `--dry-run` to review the resolved prompt without calling the OpenAI Images API.
+
 ## Layout conventions
 
 - `default`: site frame with Header and a scrollable content region.

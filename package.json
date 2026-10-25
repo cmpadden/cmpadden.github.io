@@ -9,7 +9,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "typecheck": "nuxt typecheck",
-    "format": "prettier --write \"**/*.{vue,ts,js,json,md}\" --ignore-path .gitignore"
+    "format": "prettier --write \"**/*.{vue,ts,js,mjs,json,md}\" --ignore-path .gitignore",
+    "generate:experiment-thumbnail": "node scripts/generate-experiment-thumbnail.mjs"
   },
   "devDependencies": {
     "@comark/nuxt": "^0.7.0",

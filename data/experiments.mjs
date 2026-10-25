@@ -2,6 +2,8 @@ export const experimentLinks = [
   {
     title: "photos.colton.boo",
     description: "Exploration of film photography.",
+    thumbnailPrompt:
+      "Abstract black-and-white darkroom composition: softly edged off-white form, a smaller near-black interruption, irregular exposure bands, and structural coarse monochrome dithering. It should feel like an experimental photocopy or risograph print.",
     link: "https://photos.colton.boo",
     img: "/images/previews/photos.colton.boo.webp",
   },
@@ -84,4 +86,4 @@ export const experimentLinks = [
     link: "https://cmpadden.github.io/p5/experiments/plotter.html",
     img: "/images/previews/plotter.webp",
   },
-] as const;
+];

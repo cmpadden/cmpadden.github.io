@@ -1,5 +1,5 @@
 <script setup>
-import { experimentLinks } from "../../data/experiments";
+import { experimentLinks } from "../../data/experiments.mjs";
 
 const props = defineProps({
   showImages: {
