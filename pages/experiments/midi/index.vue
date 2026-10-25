@@ -1,230 +1,122 @@
+<script setup lang="ts">
+definePageMeta({ layout: "light" });
+usePageSeo({
+  title: "MIDI events",
+  description: "View messages from a connected MIDI controller.",
+  path: "/experiments/midi/",
+});
+type MidiEvent = {
+  time: number;
+  command: number;
+  note: number;
+  velocity: number;
+  source: string;
+};
+const events = shallowRef<MidiEvent[]>([]);
+const {
+  supported,
+  starting,
+  midi,
+  inputs,
+  outputs,
+  error,
+  connect,
+  disconnect,
+} = useMidi((event) => {
+  const data = event.data;
+  if (!data) return;
+  events.value = [
+    ...events.value.slice(-14),
+    {
+      time: event.timeStamp,
+      command: data[0] || 0,
+      note: data[1] || 0,
+      velocity: data[2] || 0,
+      source: (event.target as MIDIInput | null)?.name || "Unknown device",
+    },
+  ];
+});
+const noteNames = [
+  "C",
+  "C♯",
+  "D",
+  "D♯",
+  "E",
+  "F",
+  "F♯",
+  "G",
+  "G♯",
+  "A",
+  "A♯",
+  "B",
+];
+const noteName = (value: number) =>
+  `${noteNames[value % 12]} (${Math.floor(value / 12) - 1})`;
+const commandName = (command: number, velocity: number) => {
+  const type = command & 0xf0;
+  if (type === 0x80 || (type === 0x90 && velocity === 0)) return "Note Off";
+  return type === 0x90 ? "Note On" : String(command);
+};
+</script>
+
 <template>
-  <div class="h-2/3 bg-gradient-to-b from-green-100 to-green-50">
-    <!-- Message for unsupported browsers -->
-    <div
-      v-if="typeof midi === 'undefined'"
-      class="p-5 text-center font-light tracking-wide"
-    >
-      Unfortunately, the Web MIDI API is
-      <a
-        class="text-blue-500 underline"
-        href="https://developer.mozilla.org/en-US/docs/Web/API/MIDIMessageEvent#browser_compatibility"
-        >not supported</a
+  <section
+    class="min-h-96 bg-gradient-to-b from-green-100 to-green-50 p-5 text-slate-900"
+  >
+    <h1 class="mb-5 text-3xl font-bold">MIDI Events</h1>
+    <p v-if="supported === false">Web MIDI is not supported in this browser.</p>
+    <div v-else class="space-x-3">
+      <button
+        type="button"
+        class="rounded bg-green-800 px-4 py-2 text-white disabled:opacity-50"
+        :disabled="starting || !!midi"
+        @click="connect"
       >
-      in all browsers...
+        {{ starting ? "Connecting…" : "Enable MIDI" }}
+      </button>
+      <button
+        type="button"
+        class="rounded border px-4 py-2 disabled:opacity-50"
+        :disabled="!midi && !starting"
+        @click="disconnect"
+      >
+        Disconnect
+      </button>
     </div>
-
-    <!-- Main application -->
-    <div v-else>
-      <div class="flex flex-wrap">
-        <div class="absolute right-2 bottom-16">
-          <div
-            v-bind:class="{ hidden: !tooltip, block: tooltip }"
-            class="z-50 max-w-md rounded-lg border-2 border-green-800 bg-yellow-200 text-sm leading-normal font-normal break-words"
-          >
-            <div>
-              <div
-                class="mb-0 rounded-t-lg border-b border-solid bg-green-600 p-3 font-semibold text-white uppercase opacity-75"
-              >
-                MIDI Status
-              </div>
-
-              <div class="p-3 font-mono text-orange-900">
-                <div class="mb-3 font-bold">
-                  Enabled:
-                  <span>
-                    {{ typeof midi !== "undefined" ? "Yep!" : "Nope" }}
-                  </span>
-                </div>
-                <div class="mb-3">
-                  <div class="font-bold">Inputs:</div>
-                  <div
-                    v-if="inputs.length === 0"
-                    class="p-5 text-center italic"
-                  >
-                    No input devices detected :(
-                  </div>
-                  <div v-else>
-                    <div
-                      v-for="input in inputs || []"
-                      :key="input.id"
-                      class="flex"
-                    >
-                      <div class="flex-1">{{ input.manufacturer }}</div>
-                      <div class="flex-1">{{ input.name }}</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <div class="font-bold">Outputs:</div>
-                  <div
-                    v-if="outputs.length === 0"
-                    class="p-5 text-center italic"
-                  >
-                    No output devices detected :(
-                  </div>
-                  <div v-else>
-                    <div
-                      v-for="output in outputs || []"
-                      :key="output.id"
-                      class="flex"
-                    >
-                      <div class="flex-1">{{ output.manufacturer }}</div>
-                      <div class="flex-1">{{ output.name }}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="absolute right-2 bottom-2">
-          <button
-            ref="btnRef"
-            @click="tooltip = !tooltip"
-            class="rounded-lg bg-green-800 px-3 py-1 text-white shadow hover:text-yellow-200 hover:shadow-lg"
-            type="button"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              viewBox="0 0 20 20"
-              class="h-10 w-10"
-            >
-              <g fill="none">
-                <path
-                  d="M2.5 4a.5.5 0 0 0-.5.5v11a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-11a.5.5 0 0 0-.5-.5h-15zm.5 6h2v3.5a.5.5 0 0 0 1 0V10h2v3.5a.5.5 0 0 0 1 0V10h2v3.5a.5.5 0 0 0 1 0V10h2v3.5a.5.5 0 0 0 1 0V10h2v5H3v-5zm2.75-2.5a.75.75 0 1 1 0-1.5a.75.75 0 0 1 0 1.5zm6.25-1a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-3 .251a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0z"
-                  fill="currentColor"
-                />
-              </g>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <div class="container p-9">
-        <div class="font-display text-4xl font-light tracking-wide">
-          MIDI Events
-        </div>
-        <table
-          class="w-full table-auto border-2 border-green-800 bg-green-50 text-sm"
-        >
-          <thead class="bg-green-800 font-semibold text-white uppercase">
+    <p v-if="error" role="alert" class="my-3">{{ error }}</p>
+    <template v-if="midi">
+      <ExperimentsMidiStatus :inputs="inputs" :outputs="outputs" />
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-green-800 text-white">
             <tr>
-              <th class="p-3 text-left">Timestamp</th>
-              <th class="p-3 text-left">Command #</th>
-              <th class="p-3 text-left">Command</th>
-              <th class="p-3 text-left">Note #</th>
-              <th class="p-3 text-left">Note</th>
-              <th class="p-3 text-left">Velocity</th>
-              <th class="p-3 text-right">MIDI Source</th>
+              <th scope="col">Timestamp</th>
+              <th scope="col">Command</th>
+              <th scope="col">Note</th>
+              <th scope="col">Velocity</th>
+              <th scope="col">Source</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-100">
-            <tr v-if="events.length === 0">
-              <td class="p-5 text-center italic" colspan="7">
-                Press a key, or turn a knob!
-              </td>
+          <tbody>
+            <tr v-if="!events.length">
+              <td colspan="5" class="p-5">Press a key, or turn a knob!</td>
             </tr>
-            <tr v-for="(event, ix) in events" :key="ix">
-              <td class="p-3 text-left">{{ event.timeStamp.toFixed(2) }}</td>
-              <td class="p-3 text-left">{{ event.data[0] }}</td>
-              <td class="p-3 text-left">{{ midiCommand(event.data[0]) }}</td>
-              <td class="p-3 text-left">{{ event.data[1] }}</td>
-              <td
-                v-if="event.data[0] === 144 || event.data[0] == 128"
-                class="p-3 text-left"
-              >
-                <!-- only perform note mapping for note on/off commands -->
-                {{ midiNote(event.data[1]) }}
+            <tr v-for="(event, index) in events" :key="index">
+              <td>{{ event.time.toFixed(2) }}</td>
+              <td>{{ commandName(event.command, event.velocity) }}</td>
+              <td>
+                {{
+                  [0x80, 0x90].includes(event.command & 0xf0)
+                    ? noteName(event.note)
+                    : "—"
+                }}
               </td>
-              <td v-else class="p-3 text-left">-</td>
-              <td class="p-3 text-left">{{ event.data[2] }}</td>
-              <td class="p-3 text-right">{{ event.srcElement.name }}</td>
+              <td>{{ event.velocity }}</td>
+              <td>{{ event.source }}</td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
-  </div>
+    </template>
+  </section>
 </template>
-
-<script setup lang="ts">
-definePageMeta({ layout: "light" });
-</script>
-
-<script lang="ts">
-export default {
-  mounted() {
-    // not all browsers support `requestMIDIAccess`
-    if (typeof navigator.requestMIDIAccess !== "undefined") {
-      navigator.requestMIDIAccess().then(
-        (access: MIDIAccess) => {
-          this.midi = access;
-          this.midi.inputs.forEach((entry: any) => {
-            entry.onmidimessage = (event: any) => {
-              this.events.push(event);
-
-              // limit the number of events in the array to 10
-              if (this.events.length > 15) {
-                this.events.shift();
-              }
-            };
-          });
-        },
-        (error) => {
-          console.error(error);
-        },
-      );
-    }
-  },
-  data() {
-    return {
-      tooltip: false,
-      midi: undefined as undefined | MIDIAccess,
-      events: [] as any[],
-    };
-  },
-  computed: {
-    inputs(): MIDIInput[] {
-      return this.midi ? Array.from(this.midi.inputs.values()) : [];
-    },
-    outputs(): MIDIOutput[] {
-      return this.midi ? Array.from(this.midi.outputs.values()) : [];
-    },
-  },
-  methods: {
-    midiCommand: (value: number) => {
-      // https://www.midi.org/specifications-old/item/table-1-summary-of-midi-message
-      switch (value) {
-        case 144:
-          return "Note On";
-        case 128:
-          return "Note Off";
-        default:
-          return value;
-      }
-    },
-    midiNote: (value: number) => {
-      // http://www.somascape.org/midi/basic/notes.html
-      const noteMappings = [
-        "C",
-        "C# / Db",
-        "D",
-        "D# / Eb",
-        "E",
-        "F",
-        "F# / Bb",
-        "G",
-        "G# / Ab",
-        "A",
-        "A# / Bb",
-        "B",
-      ];
-      // construct note octave string representation where the index of MIDI
-      // note modulus 12 corresponds with note letter
-      return `${noteMappings[value % 12]} (${Math.floor(value / 12) - 2})`;
-    },
-  },
-};
-</script>

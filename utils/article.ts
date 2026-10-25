@@ -1,4 +1,4 @@
-import type { BlogArticle } from "../modules/content/runtime/types/blog-article";
+import type { BlogArticle } from "../shared/types/article";
 
 export function externalSite(
   article?: Pick<BlogArticle, "external_url" | "external_site">,

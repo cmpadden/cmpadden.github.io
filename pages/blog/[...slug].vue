@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BlogArticle } from "../../modules/content/runtime/types/blog-article";
+import type { BlogArticle } from "../../shared/types/article";
 
 const route = useRoute();
 
@@ -8,9 +8,21 @@ const slug = computed(() => {
   return Array.isArray(value) ? value.filter(Boolean).join("/") : value;
 });
 
-const { data: page } = await useFetch<BlogArticle>(
+const { data: page, error } = await useFetch<BlogArticle>(
   () => `/api/articles/${slug.value}`,
 );
+
+// Propagate API failures to the shared error page, including SPA navigation.
+if (error.value || !page.value) {
+  throw createError({
+    statusCode: error.value?.statusCode || 404,
+    statusMessage:
+      error.value?.statusCode === 404 || !error.value
+        ? "Article not found"
+        : "Unable to load article",
+    fatal: true,
+  });
+}
 
 const isExternal = computed(() => Boolean(page.value?.external_url));
 const isDraft = computed(() => Boolean(page.value?.draft));
@@ -83,7 +95,7 @@ useHead(() => ({
       : isExternal.value
         ? { name: "robots", content: "noindex,follow" }
         : undefined,
-  ].filter(Boolean) as any,
+  ].filter((meta): meta is { name: string; content: string } => Boolean(meta)),
   script: jsonLd.value
     ? [
         {
@@ -105,8 +117,12 @@ useHead(() => ({
         <div class="flex">
           <template v-if="page.cover_image || page.img">
             <img
-              class="mr-5 h-16 border-2 border-black"
+              class="mr-5 h-16 w-16 shrink-0 border-2 border-black object-cover"
               :src="page.cover_image || page.img"
+              alt=""
+              width="64"
+              height="64"
+              decoding="async"
             />
           </template>
 

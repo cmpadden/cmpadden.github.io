@@ -2,10 +2,6 @@
 import { experimentLinks } from "../../data/experiments.mjs";
 
 const props = defineProps({
-  showImages: {
-    type: Boolean,
-    default: false,
-  },
   limit: {
     type: Number,
     default: null,
@@ -43,12 +39,12 @@ const filtered_links = computed(() => {
           v-for="(link, index) in filtered_links"
           :key="link.title"
           :to="link.link"
-          :prefetch-on="{ interaction: true }"
+          :prefetch-on="{ visibility: false, interaction: true }"
         >
           <ExperimentCoverImage
             :src="link.img || '/images/placeholder.png'"
             :alt="link.title"
-            :loading="index < 3 ? 'eager' : 'lazy'"
+            :loading="index === 0 ? 'eager' : 'lazy'"
           />
           <div
             class="pointer-events-none absolute inset-0 bg-orange-500/10 mix-blend-color"
@@ -64,8 +60,9 @@ const filtered_links = computed(() => {
               </h3>
               <div
                 class="line-clamp-1 text-sm text-gray-600 dark:text-gray-300"
-                v-html="link.description"
-              ></div>
+              >
+                {{ link.description }}
+              </div>
             </div>
           </div>
         </nuxt-link>

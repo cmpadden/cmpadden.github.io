@@ -7,7 +7,7 @@ export type BlogArticle = {
   document: MarkdownDocument;
   excerpt: string;
   readingTimeMinutes: number;
-  title?: string;
+  title: string;
   description?: string;
   date: string;
   tags: string[];
@@ -20,4 +20,8 @@ export type BlogArticle = {
   draft?: boolean;
 };
 
-export type BlogArticleSummary = Omit<BlogArticle, "document">;
+// List cards need neither a document AST nor full article excerpts/metadata.
+export type BlogArticleSummary = Pick<
+  BlogArticle,
+  "_id" | "path" | "title" | "date" | "external_url" | "external_site"
+>;

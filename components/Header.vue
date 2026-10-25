@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const menu = ref<HTMLDetailsElement | null>(null);
+const route = useRoute();
+const isActive = (path: string) =>
+  route.path.replace(/\/$/, "") === path.replace(/\/$/, "");
 
 const closeMenu = () => {
   menu.value?.removeAttribute("open");
@@ -58,7 +61,7 @@ onBeforeUnmount(() => {
                   @click="closeMenu"
                   :class="[
                     'text-gray-700 hover:bg-orange-500/50 hover:text-white dark:text-white',
-                    $route.path === '/' ? 'bg-orange-500' : '',
+                    isActive('/') ? 'bg-orange-500' : '',
                     'group flex w-full items-center px-3 py-3 text-sm',
                   ]"
                 >
@@ -78,11 +81,11 @@ onBeforeUnmount(() => {
                 </NuxtLink>
 
                 <NuxtLink
-                  to="/blog"
+                  to="/blog/"
                   @click="closeMenu"
                   :class="[
                     'text-gray-700 hover:bg-orange-500/50 hover:text-white dark:text-white',
-                    $route.path === '/blog' ? 'bg-orange-500' : '',
+                    isActive('/blog/') ? 'bg-orange-500' : '',
                     'group flex w-full items-center px-3 py-3 text-sm',
                   ]"
                 >
@@ -104,11 +107,11 @@ onBeforeUnmount(() => {
                 </NuxtLink>
 
                 <NuxtLink
-                  to="/experiments"
+                  to="/experiments/"
                   @click="closeMenu"
                   :class="[
                     'text-gray-700 hover:bg-orange-500/50 hover:text-white dark:text-white',
-                    $route.path === '/experiments' ? 'bg-orange-500' : '',
+                    isActive('/experiments/') ? 'bg-orange-500' : '',
                     'group flex w-full items-center px-3 py-3 text-sm',
                   ]"
                 >
@@ -130,11 +133,11 @@ onBeforeUnmount(() => {
                 </NuxtLink>
 
                 <NuxtLink
-                  to="/talks"
+                  to="/talks/"
                   @click="closeMenu"
                   :class="[
                     'text-gray-700 hover:bg-orange-500/50 hover:text-white dark:text-white',
-                    $route.path === '/talks' ? 'bg-orange-500' : '',
+                    isActive('/talks/') ? 'bg-orange-500' : '',
                     'group flex w-full items-center px-3 py-3 text-sm',
                   ]"
                 >

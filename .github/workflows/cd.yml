@@ -1,42 +1,53 @@
-name: cd
+name: validate-and-deploy
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
 
 jobs:
-  cd:
+  validate:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
         with:
           run_install: false
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'pnpm'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e --project=server
+      - run: pnpm generate
+      - run: pnpm test:output
+      - run: pnpm test:e2e --project=static
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: .output/public
+          include-hidden-files: true
 
-      - name: Install dependencies
-        run: pnpm install
-
-      # https://github.com/nuxt/content/issues/3249
-      - name: Rebuild native modules
-        run: pnpm rebuild better-sqlite3
-
-      - name: Generate static files
-        run: pnpm generate
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: public
+      - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./public
           cname: colton.foo

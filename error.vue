@@ -1,32 +1,34 @@
+<script setup lang="ts">
+import type { NuxtError } from "#app";
+const props = defineProps<{ error: NuxtError }>();
+const notFound = computed(() => props.error.statusCode === 404);
+useSeoMeta({
+  title: () =>
+    pageTitle(notFound.value ? "Page not found" : "Something went wrong"),
+  robots: "noindex,nofollow",
+});
+</script>
+
 <template>
-  <body class="bg-background font-display flex min-h-screen flex-col">
+  <div class="bg-background font-display flex min-h-screen flex-col">
     <Header />
-    <main class="mt-5 flex-1">
-      <div class="flex justify-center">
-        <Transition
-          appear
-          enter="transition transform duration-300 ease-out"
-          enter-from="translate-x-8 opacity-0"
-          enter-to="translate-x-0 opacity-100"
-          leave="transition transform duration-300 ease-in"
-          leave-from="opacity-100"
-          leave-to="-translate-x-8 opacity-0"
+    <main class="container mt-5 flex-1">
+      <div class="p-7 text-center">
+        <h1 class="text-foreground text-6xl font-bold">
+          {{ notFound ? "404" : "Something went wrong" }}
+        </h1>
+        <p class="mt-3 text-gray-700 dark:text-gray-200">
+          {{ notFound ? "Page not found" : "Please try again in a moment." }}
+        </p>
+        <button
+          v-if="!notFound"
+          type="button"
+          class="mt-5 underline"
+          @click="clearError({ redirect: '/' })"
         >
-          <div
-            class="rounded-xl bg-white/75 p-7 text-center shadow-lg dark:bg-black/50"
-          >
-            <div
-              class="text-foreground text-6xl font-extrabold tracking-widest"
-            >
-              Yikes!
-            </div>
-            <div class="text-base text-gray-700 dark:text-gray-200">
-              Either the page you're looking for doesn't exist, or something has
-              gone terribly wrong.
-            </div>
-          </div>
-        </Transition>
+          Return home
+        </button>
       </div>
     </main>
-  </body>
+  </div>
 </template>
