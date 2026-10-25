@@ -150,9 +150,12 @@
   </div>
 </template>
 
+<script setup>
+definePageMeta({ layout: "light" });
+</script>
+
 <script>
 // detect accelerometer shake as alternative to space bar?
-definePageMeta({ layout: "light" });
 export default {
   data() {
     return {

@@ -133,10 +133,12 @@
   </div>
 </template>
 
+<script setup lang="ts">
+definePageMeta({ layout: "light" });
+</script>
+
 <script lang="ts">
 import { identify } from "chords.ts";
-
-definePageMeta({ layout: "light" });
 
 export default {
   mounted() {

@@ -149,8 +149,11 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 definePageMeta({ layout: "light" });
+</script>
+
+<script lang="ts">
 export default {
   mounted() {
     // not all browsers support `requestMIDIAccess`
