@@ -1,0 +1,1 @@
+.site-frame:after{content:"";pointer-events:none;z-index:60;border:12px solid;border-image:linear-gradient(#ea580c,#dc2626) 1;position:fixed;inset:0}

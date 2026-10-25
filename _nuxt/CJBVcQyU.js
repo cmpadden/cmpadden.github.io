@@ -1,0 +1,1 @@
+import{a as e,c as t,d as n,i as r,u as i}from"./CZDkmoem.js";function a({title:a,description:o,path:s,image:c}){let l=e(a),u=r(c),d=t(s);n({title:l,description:o,ogTitle:l,ogDescription:o,ogImage:u,ogUrl:d,twitterCard:`summary_large_image`,twitterTitle:l,twitterDescription:o,twitterImage:u}),i({link:[{rel:`canonical`,href:d}]})}export{a as t};
