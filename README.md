@@ -48,25 +48,3 @@ pnpm test:e2e --project=static              # real static hosting, without SPA f
 ```
 
 CI runs this sequence on pull requests and main; only a successful main build is deployed. Browser tests mock audio/MIDI devices to check cleanup, pending permissions, and hot-plugging without requiring hardware. Real-device behavior should still be smoke-tested when changing the experiments.
-
-## Experiment thumbnails
-
-Experiment thumbnail context and output paths live in `data/experiments.mjs`. Generate an image from that metadata with an optional art-direction adjustment:
-
-```bash
-OPENAI_API_KEY=... pnpm generate:experiment-thumbnail -- \
-  --experiment "photos.colton.boo" \
-  --direction "make the exposure bands diagonal and sparse"
-```
-
-Use `--dry-run` to review the resolved prompt without calling the OpenAI Images API. After changing a source thumbnail while the dev server is already running, run `pnpm images:generate` to refresh its derivatives.
-
-The responsive pipeline generates square 320/640/960 WebP variants, with a 100 kB per-variant ceiling. Components declare `srcset`/`sizes`, reserve layout space, and remain visible without JavaScript. Only the first thumbnail is eager; article/experiment links prefetch on interaction rather than visibility.
-
-## Layout conventions
-
-- `default`: fixed decorative frame with Header and **document scrolling**, allowing Nuxt to reset routes, restore back/forward positions, and navigate anchors.
-- `light`: Header and centered page content, without the default frame.
-- `empty`: no shared chrome, for standalone experiences.
-
-Page-specific layout selection uses `definePageMeta({ layout: "light" })` or `layout: "empty"`.
