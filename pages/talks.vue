@@ -22,6 +22,19 @@ useHead({
 
 const talks = [
   {
+    title: "Data Outpost 2026",
+    subtitle: "Building an analytics agent with eve",
+    date: new Date("2026-11-04"),
+    href_slides: "/slides/data-outpost-2026.pdf",
+  },
+  {
+    title: "NY Stripe Developer Meetup",
+    subtitle:
+      "The eve Framework: Agentic payments and building a shopping assistant",
+    date: new Date("2026-10-22"),
+    href_slides: "/slides/stripe-developer-meetup-ny-2026.pdf",
+  },
+  {
     title: "All Things Open 2025",
     subtitle: "Enabling community education with a little help from AI",
     date: new Date("2025-10-14"),
@@ -139,6 +152,8 @@ const formatDate = (date) => {
               v-if="talk.href_slides"
               class="text-xs text-gray-400 uppercase hover:cursor-pointer hover:text-orange-500"
               :href="talk.href_slides"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               [slide_deck]
             </a>
