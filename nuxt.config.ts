@@ -1,27 +1,14 @@
-import { readdirSync, writeFileSync, mkdirSync } from "fs";
-import { join, dirname } from "path";
 import tailwindcss from "@tailwindcss/vite";
+import { loadArticleSources } from "./modules/content/manifest";
+import {
+  legacyRedirects,
+  writeStaticRedirects,
+} from "./modules/content/redirects";
+import { PAGE_ROUTES } from "./shared/site";
 
-const STATIC_ROUTES = [
-  "/",
-  "/about",
-  "/blog",
-  "/experiments",
-  "/experiments/audio",
-  "/experiments/chords",
-  "/experiments/matrix",
-  "/experiments/midi",
-  "/talks",
-  "/sitemap.xml",
-  "/robots.txt",
-  "/atom",
-];
+const articles = loadArticleSources(process.cwd());
+const redirects = legacyRedirects(articles);
 
-const blogRoutes = readdirSync(join(process.cwd(), "content", "blog"))
-  .filter((fileName) => fileName.endsWith(".md"))
-  .map((fileName) => `/blog/${fileName.replace(/\.md$/, "")}`);
-
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: true,
   components: true,
@@ -30,9 +17,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      htmlAttrs: {
-        lang: "en",
-      },
+      htmlAttrs: { lang: "en" },
       titleTemplate: "%s",
       meta: [
         { charset: "utf-8" },
@@ -46,87 +31,42 @@ export default defineNuxtConfig({
           rel: "alternate",
           type: "application/atom+xml",
           title: "Colton Padden's Blog",
-          href: "/atom",
+          href: "/atom.xml",
         },
       ],
-      bodyAttrs: {
-        class: "bg-background",
-      },
+      bodyAttrs: { class: "bg-background" },
     },
   },
 
-  vite: {
-    plugins: [tailwindcss()],
-  },
+  vite: { plugins: [tailwindcss()] },
 
   nitro: {
-    // GitHub Pages serves this as static output. Explicit routes make the
-    // generated site independent of the prerenderer's link crawler.
+    // Explicit publication manifest: drafts cannot enter output via crawling.
     prerender: {
       crawlLinks: false,
-      routes: [...STATIC_ROUTES, ...blogRoutes],
+      routes: [
+        ...PAGE_ROUTES,
+        ...articles.map(({ path }) => path),
+        "/sitemap.xml",
+        "/robots.txt",
+        "/atom.xml",
+      ],
     },
   },
 
-  routeRules: {
-    "/articles": { redirect: { to: "/blog", statusCode: 301 } },
-  },
+  // Actual HTTP redirects when running Nitro; HTML counterparts for Pages below.
+  routeRules: Object.fromEntries(
+    redirects.flatMap(({ from, to }) => [
+      [from, { redirect: { to, statusCode: 301 as const } }],
+      [`${from}/`, { redirect: { to, statusCode: 301 as const } }],
+    ]),
+  ),
 
   hooks: {
-    // Generate HTML redirect files for `/articles/**` to `/blog/**`
-    async close() {
-      const { statSync, existsSync } = await import("fs");
-      const distBlogPath = join(process.cwd(), "dist", "blog");
-      const distArticlesPath = join(process.cwd(), "dist", "articles");
-
-      try {
-        if (!existsSync(distBlogPath)) {
-          console.log("Blog directory not found, skipping redirect generation");
-          return;
-        }
-
-        if (!statSync(distBlogPath).isDirectory()) {
-          console.log(
-            "Blog directory path is not a directory, skipping redirect generation",
-          );
-          return;
-        }
-
-        const blogDirs = readdirSync(distBlogPath, { withFileTypes: true })
-          .filter((dirent) => dirent.isDirectory())
-          .map((dirent) => dirent.name);
-
-        console.log(
-          `Generating ${blogDirs.length} redirect files for old /articles paths...`,
-        );
-
-        for (const slug of blogDirs) {
-          const oldPath = `/articles/${slug}`;
-          const newPath = `/blog/${slug}`;
-
-          const redirectHtml = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Redirecting...</title>
-  <link rel="canonical" href="${newPath}">
-  <meta http-equiv="refresh" content="0; url=${newPath}">
-  <script>window.location.href = "${newPath}";</script>
-</head>
-<body>
-  <p>This page has moved to <a href="${newPath}">${newPath}</a>.</p>
-</body>
-</html>`;
-
-          const outputPath = join(distArticlesPath, slug, "index.html");
-          mkdirSync(dirname(outputPath), { recursive: true });
-          writeFileSync(outputPath, redirectHtml);
-        }
-
-        console.log("Redirect files generated successfully!");
-      } catch (error) {
-        console.warn("Could not generate redirect files:", error);
-      }
+    "nitro:init"(nitro) {
+      nitro.hooks.hook("prerender:done", () => {
+        writeStaticRedirects(nitro.options.output.publicDir, redirects);
+      });
     },
   },
 

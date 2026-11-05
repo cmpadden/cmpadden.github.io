@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BlogArticleSummary } from "../../modules/content/runtime/types/blog-article";
+import type { BlogArticleSummary } from "../../shared/types/article";
 
 defineProps<{
   articles: BlogArticleSummary[];

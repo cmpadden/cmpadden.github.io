@@ -2,7 +2,7 @@ declare module "#content/articles" {
   import type {
     BlogArticle,
     BlogArticleSummary,
-  } from "../modules/content/runtime/types/blog-article";
+  } from "../shared/types/article";
 
   type ArticleOptions = { includeDrafts?: boolean };
 

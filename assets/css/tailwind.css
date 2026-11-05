@@ -22,13 +22,39 @@ code {
 }
 
 @layer base {
+  [id] { scroll-margin-top: 5rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0s !important;
+      animation-duration: 0s !important;
+    }
+  }
+
+  :root {
+    color-scheme: light;
+    --site-background: #f3f6f6;
+    --site-foreground: #465457;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --site-background: #0f1c1e;
+      --site-foreground: #cbd9d8;
+    }
+  }
+
   body {
+    color: var(--site-foreground);
     font-family: Helvetica, Arial, sans-serif;
   }
 
   @font-face {
     font-family: Mafins;
     src: url("/fonts/Mafins.otf");
+    font-display: swap;
   }
 
   @font-face {
@@ -72,7 +98,7 @@ code {
   }
 
   .noise-bg::before {
-    background-image: url("/images/noise.png");
+    background-image: url("/images/generated/noise.png");
     background-repeat: repeat;
     content: "";
     filter: grayscale(1) contrast(var(--noise-contrast, 1.15));

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BlogArticle } from "../../modules/content/runtime/types/blog-article";
+import type { BlogArticle } from "../../shared/types/article";
 
 const route = useRoute();
 
@@ -8,9 +8,21 @@ const slug = computed(() => {
   return Array.isArray(value) ? value.filter(Boolean).join("/") : value;
 });
 
-const { data: page } = await useFetch<BlogArticle>(
+const { data: page, error } = await useFetch<BlogArticle>(
   () => `/api/articles/${slug.value}`,
 );
+
+// Propagate API failures to the shared error page, including SPA navigation.
+if (error.value || !page.value) {
+  throw createError({
+    statusCode: error.value?.statusCode || 404,
+    statusMessage:
+      error.value?.statusCode === 404 || !error.value
+        ? "Article not found"
+        : "Unable to load article",
+    fatal: true,
+  });
+}
 
 const isExternal = computed(() => Boolean(page.value?.external_url));
 const isDraft = computed(() => Boolean(page.value?.draft));
@@ -83,7 +95,7 @@ useHead(() => ({
       : isExternal.value
         ? { name: "robots", content: "noindex,follow" }
         : undefined,
-  ].filter(Boolean) as any,
+  ].filter((meta): meta is { name: string; content: string } => Boolean(meta)),
   script: jsonLd.value
     ? [
         {
@@ -98,15 +110,19 @@ useHead(() => ({
 <template>
   <div v-if="page" class="container min-h-screen pt-9">
     <div
-      class="mb-11 space-y-7 bg-black/40 px-8 py-7 text-white"
+      class="text-foreground mb-11 space-y-7 bg-white/40 px-8 py-7 dark:bg-black/40"
     >
       <div class="space-y-3">
         <!-- title -->
         <div class="flex">
           <template v-if="page.cover_image || page.img">
             <img
-              class="mr-5 h-16 border-2 border-black"
+              class="mr-5 h-16 w-16 shrink-0 border-2 border-black object-cover"
               :src="page.cover_image || page.img"
+              alt=""
+              width="64"
+              height="64"
+              decoding="async"
             />
           </template>
 
@@ -116,7 +132,9 @@ useHead(() => ({
         </div>
 
         <!-- Post metadata -->
-        <div class="flex items-center gap-3 text-sm text-gray-300">
+        <div
+          class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300"
+        >
           <NuxtTime
             :datetime="page.date"
             class="whitespace-nowrap tabular-nums"
@@ -134,14 +152,14 @@ useHead(() => ({
         v-if="page.external_url"
         class="flex items-center justify-between gap-5 rounded border border-orange-500/30 bg-orange-500/10 p-3"
       >
-        <div class="text-sm text-gray-200">
+        <div class="text-sm text-gray-700 dark:text-gray-200">
           The original version of this article can be found on the
 
           <a
             :href="page.external_url"
             target="_blank"
             rel="noopener noreferrer"
-            class="font-semibold text-orange-300"
+            class="font-semibold text-orange-700 dark:text-orange-300"
           >
             {{ externalSite(page) }}
           </a>
@@ -153,7 +171,7 @@ useHead(() => ({
         - Remove maximum width of prose content: https://github.com/tailwindlabs/tailwindcss-typography#overriding-max-width
       -->
       <article
-        class="prose prose-headings:text-white prose-h2:mt-5 prose-h2:mb-3 prose-h3:mt-5 prose-h3:mb-3 prose-h3:text-orange-100 prose-p:my-3 prose-a:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-200 prose-blockquote:text-gray-400 prose-strong:text-gray-100 prose-code:text-white prose-pre:bg-black/70 prose-li:my-0 max-w-[1024px] text-gray-300"
+        class="prose dark:prose-invert prose-headings:text-foreground prose-h2:mt-5 prose-h2:mb-3 prose-h3:mt-5 prose-h3:mb-3 prose-h3:text-orange-900 dark:prose-h3:text-orange-100 prose-p:my-3 prose-a:font-bold prose-a:text-orange-700 dark:prose-a:text-orange-400 prose-a:no-underline hover:prose-a:text-orange-900 dark:hover:prose-a:text-orange-200 prose-pre:bg-black/70 prose-li:my-0 max-w-[1024px] text-gray-700 dark:text-gray-300"
       >
         <MarkdownDocument v-if="page?.document" :value="page.document" />
       </article>

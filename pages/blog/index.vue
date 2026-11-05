@@ -13,9 +13,9 @@ const visibleArticles = computed(() => articles.value);
 </script>
 
 <template>
-  <section class="min-h-screen py-3 text-white">
-    <div class="container space-y-9">
-      <h1 class="font-pixelify text-3xl font-bold text-white">Blog</h1>
+  <section class="text-foreground min-h-screen py-3">
+    <div class="container space-y-3">
+      <h1 class="font-pixelify text-foreground text-3xl font-bold">Blog</h1>
       <div class="space-y-5">
         <div class="grid gap-5">
           <BlogArticleCard

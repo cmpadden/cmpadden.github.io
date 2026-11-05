@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const menu = ref<HTMLDetailsElement | null>(null);
+const route = useRoute();
+const isActive = (path: string) =>
+  route.path.replace(/\/$/, "") === path.replace(/\/$/, "");
 
 const closeMenu = () => {
   menu.value?.removeAttribute("open");
@@ -28,12 +31,15 @@ onBeforeUnmount(() => {
         <div class="flex items-center space-x-3">
           <details ref="menu" class="relative z-50 inline-block text-left">
             <summary
+              aria-label="Toggle navigation"
               class="transform list-none align-middle text-white transition-all duration-300 ease-in-out hover:scale-110 hover:cursor-pointer hover:text-orange-500 active:scale-95 [&::-webkit-details-marker]:hidden"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
+                stroke="currentColor"
+                stroke-width="0.6"
                 class="size-5"
               >
                 <path
@@ -55,7 +61,7 @@ onBeforeUnmount(() => {
                   @click="closeMenu"
                   :class="[
                     'text-gray-700 hover:bg-orange-500/50 hover:text-white dark:text-white',
-                    $route.path === '/' ? 'bg-orange-500' : '',
+                    isActive('/') ? 'bg-orange-500' : '',
                     'group flex w-full items-center px-3 py-3 text-sm',
                   ]"
                 >
@@ -75,11 +81,11 @@ onBeforeUnmount(() => {
                 </NuxtLink>
 
                 <NuxtLink
-                  to="/blog"
+                  to="/blog/"
                   @click="closeMenu"
                   :class="[
                     'text-gray-700 hover:bg-orange-500/50 hover:text-white dark:text-white',
-                    $route.path === '/blog' ? 'bg-orange-500' : '',
+                    isActive('/blog/') ? 'bg-orange-500' : '',
                     'group flex w-full items-center px-3 py-3 text-sm',
                   ]"
                 >
@@ -101,11 +107,11 @@ onBeforeUnmount(() => {
                 </NuxtLink>
 
                 <NuxtLink
-                  to="/experiments"
+                  to="/experiments/"
                   @click="closeMenu"
                   :class="[
                     'text-gray-700 hover:bg-orange-500/50 hover:text-white dark:text-white',
-                    $route.path === '/experiments' ? 'bg-orange-500' : '',
+                    isActive('/experiments/') ? 'bg-orange-500' : '',
                     'group flex w-full items-center px-3 py-3 text-sm',
                   ]"
                 >
@@ -127,11 +133,11 @@ onBeforeUnmount(() => {
                 </NuxtLink>
 
                 <NuxtLink
-                  to="/talks"
+                  to="/talks/"
                   @click="closeMenu"
                   :class="[
                     'text-gray-700 hover:bg-orange-500/50 hover:text-white dark:text-white',
-                    $route.path === '/talks' ? 'bg-orange-500' : '',
+                    isActive('/talks/') ? 'bg-orange-500' : '',
                     'group flex w-full items-center px-3 py-3 text-sm',
                   ]"
                 >

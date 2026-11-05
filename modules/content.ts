@@ -1,5 +1,3 @@
-import { readdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
 import {
   addServerScanDir,
   addServerTemplate,
@@ -9,27 +7,8 @@ import {
 import { parseMarkdown } from "comark";
 import highlight from "comark/plugins/highlight";
 import tokyoNight from "shiki/themes/tokyo-night.mjs";
-import matter from "gray-matter";
-import { z } from "zod";
-import type { BlogArticle } from "./content/runtime/types/blog-article";
-
-const frontmatterSchema = z.object({
-  title: z.string().optional(),
-  description: z.string().optional(),
-  date: z.coerce.date(),
-  tags: z.array(z.string()),
-  categories: z.array(z.string()),
-  cover_image: z.string().optional(),
-  img: z.string().optional(),
-  external_url: z.string().url().optional(),
-  external_site: z.string().optional(),
-  canonical_url: z.string().url().optional(),
-  draft: z.boolean().optional(),
-});
-
-function slugFromFilePath(filePath: string) {
-  return filePath.split("/").pop()?.replace(/\.md$/, "") || "";
-}
+import type { BlogArticle } from "../shared/types/article";
+import { loadArticleSources } from "./content/manifest";
 
 function readingTimeMinutes(body: string) {
   const text = body
@@ -58,13 +37,12 @@ function excerptFromBody(body: string) {
     .trim();
 }
 
-async function parseArticle(
-  filePath: string,
-  rawMarkdown: string,
-): Promise<BlogArticle> {
-  const slug = slugFromFilePath(filePath);
-  const { data, content } = matter(rawMarkdown);
-  const frontmatter = frontmatterSchema.parse(data);
+async function parseArticle({
+  slug,
+  path,
+  frontmatter,
+  content,
+}: ReturnType<typeof loadArticleSources>[number]): Promise<BlogArticle> {
   const document = await parseMarkdown(content.trim(), {
     plugins: [
       highlight({
@@ -80,7 +58,7 @@ async function parseArticle(
     ...frontmatter,
     _id: `content:blog:${slug}`,
     slug,
-    path: `/blog/${slug}`,
+    path,
     document,
     excerpt: excerptFromBody(content),
     readingTimeMinutes: readingTimeMinutes(content),
@@ -88,19 +66,9 @@ async function parseArticle(
   };
 }
 
-async function loadArticles(rootDir: string) {
-  const blogContentDir = join(rootDir, "content", "blog");
-  const articles = await Promise.all(
-    readdirSync(blogContentDir)
-      .filter((fileName) => fileName.endsWith(".md"))
-      .map((fileName) => {
-        const filePath = join(blogContentDir, fileName);
-        return parseArticle(filePath, readFileSync(filePath, "utf8"));
-      }),
-  );
-
-  return articles.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+async function loadArticles(rootDir: string, previewDrafts: boolean) {
+  return Promise.all(
+    loadArticleSources(rootDir, previewDrafts).map(parseArticle),
   );
 }
 
@@ -114,11 +82,18 @@ export default defineNuxtModule({
     addServerTemplate({
       filename: "#content/articles",
       async getContents() {
-        const articles = await loadArticles(nuxt.options.rootDir);
+        const previewDrafts =
+          nuxt.options.dev && process.env.NUXT_PREVIEW_DRAFTS === "1";
+        const articles = await loadArticles(
+          nuxt.options.rootDir,
+          previewDrafts,
+        );
 
         return `const articles = ${JSON.stringify(articles, null, 2)}
 
-const articleSummaries = articles.map(({ document, ...article }) => article)
+const articleSummaries = articles.map(({ _id, path, title, date, external_url, external_site, draft }) => ({
+  _id, path, title, date, external_url, external_site, draft
+}))
 
 export function getAllBlogArticles(options = {}) {
   if (options.includeDrafts) {

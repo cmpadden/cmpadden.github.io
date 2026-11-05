@@ -6,5 +6,8 @@ node_modules
 .output
 .env
 dist
+public/images/generated
+playwright-report
+test-results
 
 .data/content/contents.sqlite

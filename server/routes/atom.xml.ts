@@ -1,13 +1,14 @@
 import { Feed } from "feed";
 import { getAllBlogArticles } from "#content/articles";
-import { SITE_NAME, SITE_ORIGIN } from "~/utils/seo";
+import { SITE_NAME, SITE_ORIGIN, absoluteUrl } from "../../shared/site";
 
 const BASE_URL = SITE_ORIGIN;
 const AUTHOR_NAME = SITE_NAME;
 
 export default defineEventHandler(async (event) => {
+  setHeader(event, "Content-Type", "application/atom+xml; charset=utf-8");
   const feed = new Feed({
-    title: "cmpadden.github.io",
+    title: `${SITE_NAME}'s Blog`,
     description: "Colton Padden's Personal Blog",
     id: BASE_URL,
     link: BASE_URL,
@@ -18,7 +19,7 @@ export default defineEventHandler(async (event) => {
     updated: new Date(),
     generator: "Nuxt static site generation + Feed for Node.js",
     feedLinks: {
-      atom: `${BASE_URL}/atom`,
+      atom: absoluteUrl("/atom.xml"),
     },
     author: {
       name: AUTHOR_NAME,
@@ -29,9 +30,7 @@ export default defineEventHandler(async (event) => {
 
   articles.forEach((article) => {
     const isExternal = Boolean(article.external_url);
-    const link = isExternal
-      ? article.external_url
-      : `${BASE_URL}${article.path}`;
+    const link = isExternal ? article.external_url : absoluteUrl(article.path);
     const id = link;
     const imagePath = article.cover_image || article.img;
 
