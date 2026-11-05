@@ -13,6 +13,66 @@ async function navigate(page: Page, path: string) {
   }, path);
 }
 
+for (const colorScheme of ["light", "dark"] as const) {
+  test(`menu icon contrasts with both layouts in ${colorScheme} mode`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ colorScheme });
+    for (const route of ["/", "/talks/", "/experiments/midi/"]) {
+      await page.goto(route);
+      const menu = page.getByLabel("Toggle navigation");
+      await expect(menu).toBeVisible();
+      const contrast = await menu.evaluate((element) => {
+        const context = document.createElement("canvas").getContext("2d")!;
+        const luminance = (color: string) => {
+          context.clearRect(0, 0, 1, 1);
+          context.fillStyle = color;
+          context.fillRect(0, 0, 1, 1);
+          const channels = [...context.getImageData(0, 0, 1, 1).data]
+            .slice(0, 3)
+            .map((value) => {
+              const channel = value / 255;
+              return channel <= 0.04045
+                ? channel / 12.92
+                : ((channel + 0.055) / 1.055) ** 2.4;
+            });
+          return (
+            channels[0]! * 0.2126 +
+            channels[1]! * 0.7152 +
+            channels[2]! * 0.0722
+          );
+        };
+        let surface: Element | null = element;
+        let background = "rgb(255, 255, 255)";
+        while (surface) {
+          const color = getComputedStyle(surface).backgroundColor;
+          if (color !== "rgba(0, 0, 0, 0)" && color !== "transparent") {
+            background = color;
+            break;
+          }
+          surface = surface.parentElement;
+        }
+        const foreground = luminance(
+          getComputedStyle(element.querySelector("svg")!).fill,
+        );
+        const backdrop = luminance(background);
+        return (
+          (Math.max(foreground, backdrop) + 0.05) /
+          (Math.min(foreground, backdrop) + 0.05)
+        );
+      });
+      expect(
+        contrast,
+        `${route} menu contrast in ${colorScheme} mode`,
+      ).toBeGreaterThanOrEqual(4.5);
+      await menu.click();
+      await expect(
+        page.getByRole("navigation", { name: "Primary navigation" }),
+      ).toBeVisible();
+    }
+  });
+}
+
 test("normal navigation resets document scroll; back and anchors restore it", async ({
   page,
 }) => {

@@ -32,7 +32,7 @@ onBeforeUnmount(() => {
           <details ref="menu" class="relative z-50 inline-block text-left">
             <summary
               aria-label="Toggle navigation"
-              class="transform list-none align-middle text-white transition-all duration-300 ease-in-out hover:scale-110 hover:cursor-pointer hover:text-orange-500 active:scale-95 [&::-webkit-details-marker]:hidden"
+              class="transform list-none align-middle text-gray-700 transition-all duration-300 ease-in-out hover:scale-110 hover:cursor-pointer hover:text-orange-500 active:scale-95 dark:text-white [&::-webkit-details-marker]:hidden"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
