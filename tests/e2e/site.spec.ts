@@ -73,6 +73,30 @@ for (const colorScheme of ["light", "dark"] as const) {
   });
 }
 
+test("document disables vertical overscroll without trapping normal scrolling", async ({
+  page,
+}) => {
+  for (const route of ["/", "/experiments/midi/"]) {
+    await page.goto(route);
+    await expect(page.locator("html")).toHaveCSS(
+      "overscroll-behavior-y",
+      "none",
+    );
+    await expect(page.locator("body")).toHaveCSS(
+      "overscroll-behavior-y",
+      "none",
+    );
+  }
+  await page.goto("/");
+  await page.mouse.move(180, 400);
+  await page.mouse.wheel(0, -2000);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  await page.mouse.wheel(0, 500);
+  await expect
+    .poll(() => page.evaluate(() => window.scrollY))
+    .toBeGreaterThan(0);
+});
+
 test("normal navigation resets document scroll; back and anchors restore it", async ({
   page,
 }) => {
