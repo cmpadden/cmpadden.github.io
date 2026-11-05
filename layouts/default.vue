@@ -1,7 +1,7 @@
 <template>
   <div class="site-frame bg-gradient-to-b from-orange-600 to-red-600 p-3">
     <main
-      class="site-noise-surface noise-bg min-h-[calc(100dvh-24px)] bg-white dark:bg-black"
+      class="site-noise-surface noise-bg min-h-[calc(100dvh-24px)] bg-white [--noise-opacity:0.08] dark:bg-black dark:[--noise-opacity:0.28]"
     >
       <Header />
       <slot />

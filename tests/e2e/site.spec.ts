@@ -14,6 +14,23 @@ async function navigate(page: Page, path: string) {
 }
 
 for (const colorScheme of ["light", "dark"] as const) {
+  test(`page texture stays subtle in ${colorScheme} mode`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme });
+    await page.goto("/");
+    const surface = page.locator(".site-noise-surface");
+    await expect(surface).toHaveCSS(
+      "background-color",
+      colorScheme === "light" ? "rgb(255, 255, 255)" : "rgb(0, 0, 0)",
+    );
+    await expect
+      .poll(() =>
+        surface.evaluate(
+          (element) => getComputedStyle(element, "::before").opacity,
+        ),
+      )
+      .toBe(colorScheme === "light" ? "0.08" : "0.28");
+  });
+
   test(`menu icon contrasts with both layouts in ${colorScheme} mode`, async ({
     page,
   }) => {
