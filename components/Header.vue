@@ -24,7 +24,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <nav class="site-header sticky top-0 z-40">
+  <nav class="site-header sticky top-3 z-40">
     <div class="container pt-5">
       <div class="flex items-center text-gray-700 dark:text-gray-200">
         <div class="flex-1" />
