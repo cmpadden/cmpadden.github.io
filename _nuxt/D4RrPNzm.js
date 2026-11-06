@@ -1,0 +1,1 @@
+var e=e=>new Intl.DateTimeFormat(`en-US`,{timeZone:`UTC`,month:`short`,day:`2-digit`,year:`numeric`}).format(new Date(e));export{e as t};
