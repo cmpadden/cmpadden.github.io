@@ -8,15 +8,6 @@ withDefaults(
   }>(),
   { showDate: false },
 );
-
-const formatDate = (date: string) => {
-  return new Intl.DateTimeFormat("en-US", {
-    timeZone: "UTC",
-    year: "numeric",
-    month: "short",
-    day: "2-digit",
-  }).format(new Date(date));
-};
 </script>
 
 <template>
