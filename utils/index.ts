@@ -1,11 +1,8 @@
-// Warning! This utility was created before becoming aware of <NuxtTime>.
-//
-// Date formatting can cause hydration issues due to the difference locale on server and client.
-// See: https://www.leopold.is/blog/nuxt-hydration-issues-and-dates/
-export const formatDate = function (date: string | number | Date) {
-  return new Date(date).toLocaleDateString("en-US", {
+/** Keep displayed dates identical during SSR and browser hydration. */
+export const formatDate = (date: string | number | Date) =>
+  new Intl.DateTimeFormat("en-US", {
+    timeZone: "UTC",
     month: "short",
     day: "2-digit",
     year: "numeric",
-  });
-};
+  }).format(new Date(date));

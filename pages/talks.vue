@@ -11,44 +11,44 @@ usePageSeo({
 
 const talks = [
   {
-    title: "Data Outpost 2026",
-    subtitle: "Building an analytics agent with eve",
+    title: "Building an analytics agent with eve",
+    event: "Data Outpost 2026",
     date: new Date("2026-11-04"),
     href_slides: "/slides/data-outpost-2026.pdf",
   },
   {
-    title: "NY Stripe Developer Meetup",
-    subtitle:
+    title:
       "The eve Framework: Agentic payments and building a shopping assistant",
+    event: "NY Stripe Developer Meetup",
     date: new Date("2026-10-22"),
     href_slides: "/slides/stripe-developer-meetup-ny-2026.pdf",
   },
   {
-    title: "All Things Open 2025",
-    subtitle: "Enabling community education with a little help from AI",
+    title: "Enabling community education with a little help from AI",
+    event: "All Things Open 2025",
     date: new Date("2025-10-14"),
     href_slides: "/slides/ato-2025.pdf",
     href_video: "https://youtu.be/7Yz6i5YIytA?si=VY7uPOtRPau8Luok",
   },
   {
-    title: "MDS Fest 3.0",
-    subtitle: "Abstractions: Enabling Data Teams Through Reduced Complexity",
+    title: "Abstractions: Enabling Data Teams Through Reduced Complexity",
+    event: "MDS Fest 3.0",
     date: new Date("2025-05-05"),
     href_slides: "/slides/abstractions.pdf",
     href_video:
       "https://www.secoda.co/mds-fest-3-0/abstractions-enabling-data-teams-through-reduced-complexity",
   },
   {
-    title: "Dagster Deep Dive",
-    subtitle: "Building Breakthrough AI Applications with Not Diamond",
+    title: "Building Breakthrough AI Applications with Not Diamond",
+    event: "Dagster Deep Dive",
     date: new Date("2025-02-11"),
     href_slides:
       "https://github.com/dagster-io/talks/blob/main/slides/deep-dive-not-diamond.pdf",
     href_video: "https://www.youtube.com/watch?v=iwAhzS4EMkw",
   },
   {
-    title: "Dagster Deep Dive",
-    subtitle: "Shifting Left and Moving Forward with MotherDuck",
+    title: "Shifting Left and Moving Forward with MotherDuck",
+    event: "Dagster Deep Dive",
     date: new Date("2025-01-15"),
     href_slides:
       "https://github.com/dagster-io/talks/blob/88651b705102e0558908e333495b4c21451310ca/slides/deep-dive-motherduck-atproto-demo.pdf",
@@ -57,24 +57,24 @@ const talks = [
     href_video: "https://youtu.be/z3trqkKPbsI?feature=shared",
   },
   {
-    title: "Dagster Deep Dive",
-    subtitle: "Orchestrating ML Workloads with Dagster & Modal",
+    title: "Orchestrating ML Workloads with Dagster & Modal",
+    event: "Dagster Deep Dive",
     date: new Date("2024-09-24"),
     href_slides:
       "https://github.com/dagster-io/talks/blob/main/slides/deep-dive-dagster-modal-demo.pdf",
     href_code: "https://github.com/dagster-io/dagster-modal-demo",
   },
   {
-    title: "Dagster Deep Dive",
-    subtitle: "Data Quality: Building Reliable Data Platforms",
+    title: "Data Quality: Building Reliable Data Platforms",
+    event: "Dagster Deep Dive",
     date: new Date("2024-08-06"),
     href_slides:
       "https://github.com/dagster-io/talks/blob/main/slides/deep-dive-data-quality.pdf",
     href_video: "https://www.youtube.com/watch?v=vT0sSKEPE3A",
   },
   {
-    title: "MotherDuck and Dagster",
-    subtitle: "From local development to production",
+    title: "From local development to production",
+    event: "MotherDuck and Dagster",
     date: new Date("2024-04-18"),
     href_slides:
       "https://github.com/dagster-io/talks/blob/main/slides/motherduck-dagster-evidence-hybrid-compute.pdf",
@@ -83,8 +83,8 @@ const talks = [
       "https://github.com/dagster-io/talks/tree/main/motherduck-dagster-hybrid-compute",
   },
   {
-    title: "Dagster Deep Dive",
-    subtitle: "Configurations and Resources",
+    title: "Configurations and Resources",
+    event: "Dagster Deep Dive",
     date: new Date("2024-03-05"),
     href_slides:
       "https://github.com/dagster-io/talks/blob/main/slides/02-deep-dive-resources.pdf",
@@ -94,34 +94,23 @@ const talks = [
   },
 ];
 
-const formatDate = (date) => {
-  const parts = new Intl.DateTimeFormat("en", {
-    timeZone: "UTC",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).formatToParts(date);
-  const values = Object.fromEntries(
-    parts
-      .filter((part) => part.type !== "literal")
-      .map((part) => [part.type, part.value]),
-  );
-
-  return `${values.year}-${values.month}-${values.day}`;
-};
+const resources = [
+  { key: "href_slides", label: "slides" },
+  { key: "href_video", label: "video" },
+  { key: "href_code", label: "source" },
+];
 
 // todo - self host slides
-// todo - modal slides preview
 </script>
 
 <template>
-  <div class="text-foreground container font-mono">
-    <h1 class="my-7 text-2xl font-extrabold">Talks</h1>
+  <div class="text-foreground container py-3">
+    <h1 class="font-pixelify mb-5 text-3xl font-bold">Talks</h1>
     <div class="grid gap-y-7">
       <div
         v-for="(talk, ix) in talks"
         :key="ix"
-        class="grid grid-cols-1 gap-3 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-1"
+        class="grid grid-cols-1 gap-1 sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:gap-5"
       >
         <time
           :datetime="talk.date.toISOString()"
@@ -129,38 +118,30 @@ const formatDate = (date) => {
         >
           {{ formatDate(talk.date) }}
         </time>
-        <div class="flex-col space-y-3">
-          <div class="text-foreground">
-            {{ talk.title }}
+        <div class="min-w-0 space-y-1">
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <h2 class="text-lg font-semibold md:text-xl">
+              {{ talk.title }}
+            </h2>
+            <div class="flex flex-wrap items-center gap-1.5">
+              <a
+                v-for="resource in resources.filter(({ key }) => talk[key])"
+                :key="resource.key"
+                :href="talk[resource.key]"
+                :aria-label="`${resource.label} for ${talk.title} (opens in a new tab)`"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex min-h-6 items-center gap-1 font-mono text-xs font-medium tracking-wide text-gray-600 uppercase transition-colors hover:text-orange-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 dark:text-gray-300 dark:hover:text-orange-400"
+              >
+                <span class="text-orange-500" aria-hidden="true">[</span>
+                {{ resource.label }}
+                <span class="text-orange-500" aria-hidden="true">]</span>
+              </a>
+            </div>
           </div>
-          <div>
-            {{ talk.subtitle }}
-          </div>
-          <div class="flex flex-wrap gap-x-3 gap-y-1">
-            <a
-              v-if="talk.href_slides"
-              class="text-xs text-gray-400 uppercase hover:cursor-pointer hover:text-orange-500"
-              :href="talk.href_slides"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              [slide_deck]
-            </a>
-            <a
-              v-if="talk.href_video"
-              class="text-xs text-gray-400 uppercase hover:cursor-pointer hover:text-orange-500"
-              :href="talk.href_video"
-            >
-              [video]
-            </a>
-            <a
-              v-if="talk.href_code"
-              class="text-xs text-gray-400 uppercase hover:cursor-pointer hover:text-orange-500"
-              :href="talk.href_code"
-            >
-              [source_code]
-            </a>
-          </div>
+          <p class="font-mono text-base text-gray-600 dark:text-gray-400">
+            {{ talk.event }}
+          </p>
         </div>
       </div>
     </div>
