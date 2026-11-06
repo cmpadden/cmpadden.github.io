@@ -7,7 +7,6 @@ usePageSeo({
   title,
   description,
   path: "/experiments",
-  image: "/images/previews/conway.webp",
 });
 </script>
 

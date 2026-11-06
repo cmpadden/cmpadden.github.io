@@ -34,6 +34,8 @@ pnpm preview
 
 Build, generate, and dev automatically create responsive image derivatives in `public/images/generated/` (ignored by Git). GitHub Pages deploys `.output/public`; it does not run a Nitro server. Legacy `/articles/…` and `/atom/` URLs therefore have generated HTML redirects as well as Nitro HTTP redirects. The feed is `/atom.xml` so static hosting serves it as XML. Robots and sitemap are generated from shared site metadata.
 
+Section social images are also generated under `public/images/generated/og/`. They reuse the home image's frame and texture with labels such as `colton.foo | talks`. `SOCIAL_IMAGE_SECTIONS` in `shared/site.ts` controls the variants; nested pages inherit their section's image unless they supply an explicit cover. The home image stays unchanged. The generator uses the bundled DejaVu Sans Mono Bold font (license in `assets/fonts/LICENSE_DEJAVU`) rendered as SVG paths, so local and CI builds do not depend on installed system fonts.
+
 ## Validation
 
 ```bash

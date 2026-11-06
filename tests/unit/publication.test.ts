@@ -19,6 +19,7 @@ import {
   canonicalPath,
   PAGE_ROUTES,
   SITE_ORIGIN,
+  socialImagePath,
 } from "../../shared/site";
 import { articleDescription, pageTitle, imageUrl } from "../../utils/seo";
 
@@ -41,6 +42,29 @@ test("canonical URLs use the production origin and static-host slash conventions
   );
   assert.equal(canonicalPath("blog?q=1#heading"), "/blog/?q=1#heading");
   assert.ok(PAGE_ROUTES.every((route) => canonicalPath(route) === route));
+});
+
+test("social images follow page sections without replacing explicit covers", () => {
+  assert.equal(socialImagePath("/"), "/images/og-index.webp");
+  assert.equal(socialImagePath("/unknown/"), "/images/og-index.webp");
+  for (const section of ["about", "blog", "experiments", "talks"]) {
+    const expected = `/images/generated/og/${section}.webp`;
+    assert.equal(socialImagePath(`/${section}`), expected);
+    assert.equal(socialImagePath(`/${section}/?q=1#anchor`), expected);
+    assert.equal(socialImagePath(`/${section}/nested/`), expected);
+    assert.equal(
+      imageUrl(undefined, `/${section}/`),
+      `https://colton.foo${expected}`,
+    );
+  }
+  assert.equal(
+    imageUrl("/images/custom-cover.jpg", "/blog/article/"),
+    "https://colton.foo/images/custom-cover.jpg",
+  );
+  assert.equal(
+    imageUrl("https://example.com/cover.png", "/blog/article/"),
+    "https://example.com/cover.png",
+  );
 });
 
 test("publication policy excludes drafts before parsing or serializing their bodies", () => {

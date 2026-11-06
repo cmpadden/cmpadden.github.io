@@ -3,21 +3,10 @@ const pageSeoTitle = "Talks";
 const pageSeoDescription =
   "Talks, slide decks, videos, and demos from Colton Padden on data engineering, AI applications, Dagster, and developer education.";
 
-useSeoMeta({
-  title: pageTitle(pageSeoTitle),
+usePageSeo({
+  title: pageSeoTitle,
   description: pageSeoDescription,
-  ogTitle: pageTitle(pageSeoTitle),
-  ogDescription: pageSeoDescription,
-  ogImage: imageUrl(),
-  ogUrl: absoluteUrl("/talks"),
-  twitterCard: "summary_large_image",
-  twitterTitle: pageTitle(pageSeoTitle),
-  twitterDescription: pageSeoDescription,
-  twitterImage: imageUrl(),
-});
-
-useHead({
-  link: [{ rel: "canonical", href: absoluteUrl("/talks") }],
+  path: "/talks",
 });
 
 const talks = [

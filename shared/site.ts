@@ -1,6 +1,20 @@
 // Public route metadata shared by rendering, feeds, sitemap, and build tooling.
 export const SITE_ORIGIN = "https://colton.foo";
 export const SITE_NAME = "Colton Padden";
+export const DEFAULT_SOCIAL_IMAGE = "/images/og-index.webp";
+export const SOCIAL_IMAGE_SECTIONS = [
+  "about",
+  "blog",
+  "experiments",
+  "talks",
+] as const;
+
+export const socialImagePath = (path = "/") => {
+  const section = path.split(/[?#]/)[0]?.split("/").filter(Boolean)[0];
+  return SOCIAL_IMAGE_SECTIONS.some((name) => name === section)
+    ? `/images/generated/og/${section}.webp`
+    : DEFAULT_SOCIAL_IMAGE;
+};
 export const PAGE_ROUTES = [
   "/",
   "/about/",

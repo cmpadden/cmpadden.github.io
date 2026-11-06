@@ -3,7 +3,13 @@ import { test } from "node:test";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { loadArticleSources } from "../../modules/content/manifest";
-import { PAGE_ROUTES, absoluteUrl } from "../../shared/site";
+import {
+  PAGE_ROUTES,
+  SOCIAL_IMAGE_SECTIONS,
+  absoluteUrl,
+  socialImagePath,
+} from "../../shared/site";
+import sharp from "sharp";
 
 const output = ".output/public";
 const read = (path: string) => readFileSync(join(output, path), "utf8");
@@ -22,6 +28,37 @@ test("all public routes and published articles have HTML and current canonicals"
       !html.includes('rel="canonical" href="https://cmpadden.github.io'),
       path,
     );
+  }
+});
+
+test("static social images match page sections and preserve article covers", async () => {
+  const assertImages = (html: string, image: string, path: string) => {
+    assert.ok(html.includes(`property="og:image" content="${image}"`), path);
+    assert.ok(html.includes(`name="twitter:image" content="${image}"`), path);
+  };
+  for (const path of PAGE_ROUTES) {
+    assertImages(
+      read(`${path}/index.html`),
+      absoluteUrl(socialImagePath(path)),
+      path,
+    );
+  }
+  for (const article of loadArticleSources(process.cwd())) {
+    const { cover_image, img } = article.frontmatter;
+    const image = cover_image || img || socialImagePath(article.path);
+    assertImages(
+      read(`${article.path}/index.html`),
+      absoluteUrl(image),
+      article.path,
+    );
+  }
+  for (const section of SOCIAL_IMAGE_SECTIONS) {
+    const path = join(output, socialImagePath(`/${section}/`));
+    const metadata = await sharp(path).metadata();
+    assert.equal(metadata.format, "webp");
+    assert.equal(metadata.width, 1200);
+    assert.equal(metadata.height, 630);
+    assert.ok(statSync(path).size < 400_000, section);
   }
 });
 
