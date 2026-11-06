@@ -1,15 +1,15 @@
 export { SITE_ORIGIN, SITE_NAME, absoluteUrl } from "#shared/site";
-import { absoluteUrl, SITE_NAME } from "#shared/site";
+import { absoluteUrl, SITE_NAME, socialImagePath } from "#shared/site";
+export { DEFAULT_SOCIAL_IMAGE } from "#shared/site";
 export const DEFAULT_TITLE = "colton :: blog ∧ experiments";
 export const DEFAULT_DESCRIPTION =
   "Technical writing, projects, and browser experiments by Colton Padden.";
-export const DEFAULT_SOCIAL_IMAGE = "/images/og-index.webp";
 
 export const pageTitle = (title?: string) =>
   title && title !== DEFAULT_TITLE ? `${title} | ${SITE_NAME}` : DEFAULT_TITLE;
 
-export const imageUrl = (path?: string) =>
-  absoluteUrl(path || DEFAULT_SOCIAL_IMAGE);
+export const imageUrl = (path?: string, pagePath = "/") =>
+  absoluteUrl(path || socialImagePath(pagePath));
 
 const truncateDescription = (value: string) => {
   const normalized = value.replace(/\s+/g, " ").trim();

@@ -13,7 +13,7 @@ export function usePageSeo({
   image,
 }: PageSeoOptions) {
   const fullTitle = pageTitle(title);
-  const socialImage = imageUrl(image);
+  const socialImage = imageUrl(image, path);
   const canonical = absoluteUrl(path);
 
   useSeoMeta({

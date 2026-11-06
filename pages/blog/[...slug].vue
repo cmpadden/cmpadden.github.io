@@ -36,7 +36,7 @@ const canonical = computed(() => {
   );
 });
 const socialImage = computed(() =>
-  imageUrl(page.value?.cover_image || page.value?.img),
+  imageUrl(page.value?.cover_image || page.value?.img, route.path),
 );
 const publishedDate = computed(() =>
   page.value?.date ? new Date(page.value.date).toISOString() : undefined,
