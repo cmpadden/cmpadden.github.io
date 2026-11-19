@@ -22,6 +22,7 @@ const talks = [
     event: "NY Stripe Developer Meetup",
     date: new Date("2026-10-22"),
     href_slides: "/slides/stripe-developer-meetup-ny-2026.pdf",
+    href_video: "https://www.youtube.com/watch?v=K6HMKNECgqk",
   },
   {
     title: "Enabling community education with a little help from AI",
